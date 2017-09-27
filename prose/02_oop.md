@@ -6,7 +6,7 @@ A primary goal of **object-oriented programming** is to make it possible to writ
 
 A **class** is a data type.  In python *type* and *class* are (mostly) synonymous.  An **object** is an **instance** of a class.  For example, python has a `list` class.  If I make a list called `mylist`.  Then, `mylist` is an object of type `list`.  
 
-```python {id:"j32a915x"}
+```python {cmd=true id="j32a915x"}
 mylist = []
 print(type(mylist))
 print(isinstance(mylist, list))
@@ -15,7 +15,7 @@ print(isinstance(mylist, str))
 
 There are all kinds of classes built into python.  Some you might not expect.
 
-```python {id:"j32a89ox"}
+```python {cmd=true id="j32a89ox"}
 def foo():
     return 0
 
@@ -24,7 +24,7 @@ print(type(foo))
 
 For the advanced students, here is a more exotic example called a generator.  In python you can `yield` instead of `return`.  If so, the result will be something called a generator and not a function.  This powerful idea shows up a lot in python, but we won't really be able to get our head around it until we understand how classes are able to package up data and code.  
 
-```python {id:"j32a5vrk"}
+```python {cmd=true id="j32a5vrk"}
 def mygenerator(n):
     for i in range(n):
         yield i
@@ -37,7 +37,7 @@ print(type(mygenerator(5)))
 
 One of the first ways that we learn about to combine multiple pieces of information into a single object is in calculus or linear algebra, with the introduction of vectors.  We can think of a 2-dimensional vector as a pair of numbers.  If we are trying to write some code that works with 2-dimensional vectors, we could just use tuples.  It's not too hard to define some basic functions that work with vectors.
 
-```python {id:"j32a9p9s"}
+```python {cmd=true id="j32a9p9s"}
 u = (3,4)
 v = (3,6)
 
@@ -64,7 +64,7 @@ print(isvertical(subtract(v, u)))
 
 This could be fine if that's all we wanted to do, but as we fill out the code, things will start to get messier.  For example, suppose we want to make sure that the inputs to these functions really are tuples that contain two numbers.  We might add some code to every method to check for this error or recover otherwise, but this is not great, because we really just want to operate on vectors.  Moreover, we might want to `add` other types of things besides vectors.  This would probably require us to make the add function much more complicated, or rename it something more descriptive such as `vectoradd`.
 
-```python {id:"j32aaa83"}
+```python {cmd=true id="j32aaa83"}
 class Vector:
     def __init__(self, x, y):
         self.x = x
@@ -85,7 +85,7 @@ The `__init__` method is called a **initializer**.  Methods like this one that s
 
 We will use another magic method to implement addition.
 
-```python {id:"j32aaotj"}
+```python {cmd=true id="j32aaotj"}
 class Vector:
     def __init__(self, x, y):
         self.x = x
@@ -109,7 +109,7 @@ That output is pretty weird.  It's telling me that u + v is a vector object at s
 
 In the example below, I added an `__str__` method as well as some type checking on the inputs.  The result will guarantee that a vector has two floats as coordinates.
 
-```python {id:"j32abjfi"}
+```python {cmd=true id="j32abjfi"}
 class Vector:
     def __init__(self, x, y):
         try:

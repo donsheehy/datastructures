@@ -13,7 +13,7 @@ Here is an implementation.  *(Notice the relationship to Euclid's GCD algorithm)
 
 ## A Greedy Algorithm
 
-```python {id:"j32act34"}
+```python {cmd=true id:"j32act34"}
 def greedyMC(coinvalueList, change):
     coinvalueList.sort()
     coinvalueList.reverse()
@@ -39,7 +39,7 @@ Let's try recursion instead.
 
 ## A Recursive Algorithm
 
-```python {id:"j32ad4km"}
+```python {cmd=true id:"j32ad4km"}
 def recMC(coinValueList, change):
    minCoins = change
    if change in coinValueList:
@@ -62,7 +62,7 @@ Don't forget to pass along the dictionary of known results when making recursive
 
 ## A Memoized Version
 
-```python {id:"j32adxkx"}
+```python {cmd=true id:"j32adxkx"}
 def memoMC(coinValueList, change, knownResults):
     minCoins = change
     if change in coinValueList:
@@ -100,7 +100,7 @@ In each step, the next best answer can be found by trying each coin, subtracting
 Finally, we can repackage this into a dynamic programming algorithm.
 The idea is to explicitly fill in the table of all values, using previously computed values to compute new values.
 
-```python {id:"j32akg27"}
+```python {cmd=true id:"j32akg27"}
 def dpMakeChange(coinValueList, change):
     # Create a list to store the answers to the subproblems
     minCoins = [None]*(change + 1)

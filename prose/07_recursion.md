@@ -17,7 +17,7 @@ Our objectives for this chapter are three-fold:
 
 Here is an example of a recursive function.
 
-```python {id:"j32gqq5q"}
+```python {cmd=true id:"j32gqq5q"}
 def f(k):
     if k > 0:
         return f(k-1) + k
@@ -76,7 +76,7 @@ This limit is usually around 1000.
 To think clearly about recursion, it helps to have an idea of how recursion works on a real computer.
 It is easiest to first understand how all function calls work and then it should be clear that there is no technical difference in making a recursive function call compared to any other recursive function call.
 
-```python {id:"j32h294n"}
+```python {cmd=true id:"j32h294n"}
 def f(k):
     var = k ** 2
     return g(k+1) + var
@@ -110,7 +110,7 @@ a(340)
 Here is a classic example of a recursively defined function.
 It was originally named for Leonardo Fibonacci who studied it in the context of predicting the growth of rabbit populations.
 
-```python {id:"j32h6rso"}
+```python {cmd=true id:"j32h6rso"}
 def fib(k):
     if k in [0,1]: return k
     return fib(k-1) + fib(k-2)
@@ -125,7 +125,7 @@ This is a case that we will encounter many times in this course.
 Once we embrace recursion as a way to think about breaking problems into smaller pieces, we may find very short recursive algorithms, but for one reason or another, we may want to rewrite them without recursion.
 Here's a version that uses a loop instead.
 
-```python {id:"j32hgrm1"}
+```python {cmd=true id:"j32hgrm1"}
 def fib(k):
     a, b = 0,1
     for i in range(k):
@@ -179,7 +179,7 @@ We can just do the division directly rather than repeatedly subtracting the smal
 The result is a slight change to the base case and replacing the subtraction with the modulus operation.
 Here is the revised code.
 
-```python {id:"j32hniri"}
+```python {cmd=true id:"j32hniri"}
 def gcd(a, b):
     if a > b:
         a, b = b, a

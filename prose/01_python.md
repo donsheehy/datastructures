@@ -30,7 +30,7 @@ Every variable has a **type**.  The type determines what you can do with the var
 
 Technically, there is a difference between a variable and the **object** it represents.  In our common speech, this distinction gets lost because the variable is usually acting as the *name* of the object.  There are some times when it's useful to be clear about the difference, in particular when copying objects.  You might want to try some examples of copying objects from one variable to another.  Does changing one of them affect the other?
 
-```python {id:"j4htmm25"}
+```python {cmd=true id:"j4htmm25"}
 x = 5
 y = 3.2
 z = True
@@ -43,7 +43,7 @@ In python, you cannot change the type of an object.
 You can reassign a variable to point to different object of a different type, but that's not the same thing.
 There are several functions that may seem to be changing the types of objects, but they are really just creating a new object from the old.
 
-```python {id:"j4htp29r"}
+```python {cmd=true id:"j4htp29r"}
 x = 2
 print("x =", x)
 print("float(x) =", float(x))
@@ -56,7 +56,7 @@ print("Now, x has type", type(x))
 
 You can do more elaborate things as well.
 
-```python {id:"j4htrk52"}
+```python {cmd=true id:"j4htrk52"}
 numstring = "3.1415926"
 y = float(numstring)
 print("y has type", type(y))
@@ -110,7 +110,7 @@ print(L)
 
 **Tuples** are also ordered sequences of objects, but unlike lists, the objects cannot be changed and it is not possible to append to the end.  We say that tuples are **immutable** whereas lists are not.  Strings are also immutable.
 
-```python {id:"j4htlbaj"}
+```python {cmd=true id:"j4htlbaj"}
 t = (1, 2, "skip a few", 99, 100)
 print(type(t))
 print(t)
