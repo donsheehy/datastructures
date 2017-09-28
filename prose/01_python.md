@@ -8,17 +8,20 @@ Therefore, it will be assumed that certain concepts are already familiar to them
 
 ## Sequence, Selection, and Iteration
 
-A recurring theme in this course is the process of moving from thinking about code to writing code.  We will try to shape the way we think about programs, the way we write programs, and how we go between the two in *both* directions.  That is, we want to develop four inter-related skills:
-have facility with both direct manipulation of code as well as high-level description of programs  A nice model for thinking about (imperative) programming is called Sequence-Selection-Iteration.  It refers to:
+A recurring theme in this course is the process of moving from *thinking about* code to *writing* code.  We will try to shape the way we think about programs, the way we write programs, and how we go between the two in *both* directions.  That is, we want to have facility with both direct manipulation of code as well as high-level description of programs.  
+A nice model for thinking about (imperative) programming is called Sequence-Selection-Iteration.  It refers to:
 1. **Sequence**: Performing operations one at a time in a specified order.
 2. **Selection**: Using conditional statements such as `if` to select which operations to execute.
 3. **Iteration**: Repeating some operations using loops or recursion.
 
-In any given programming language, there are usually several mechanisms for selection and iteration, while sequencing is just the default behavior.  In fact, you usually have to have special constructions in a language to do something other than performing the given operations in the given order.
+In any given programming language, there are usually several mechanisms for selection and iteration, while sequencing is just the default behavior.  
+In fact, you usually have to have special constructions in a language to do something other than performing the given operations in the given order.
 
 ## Variables, Types,  and State
 
-Imagine you are trying to work out some elaborate math problem without a computer.  It helps to have paper.  You write things down, so that you can use them later.  It's the same in programming.  It often happens that you compute something and want to keep it until later when you will use it.  We often refer to stored information as **state**.  
+Imagine you are trying to work out some elaborate math problem without a computer.  
+It helps to have paper.
+You write things down, so that you can use them later.  It's the same in programming.  It often happens that you compute something and want to keep it until later when you will use it.  We often refer to stored information as **state**.  
 
 We store information in **variables**.  In Python, a variable is created by an **assignment** statement.  That is a statement of the form:
 
