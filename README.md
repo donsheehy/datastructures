@@ -1,4 +1,8 @@
-# Overview
+# A Course in Data Structures and Object-Oriented Design
+
+## by Don Sheehy
+
+## Overview
 
 *This book is designed to cover a lot of ground quickly, without taking shortcuts.*
 

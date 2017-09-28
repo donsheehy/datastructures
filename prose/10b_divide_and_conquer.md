@@ -19,7 +19,7 @@ Now, our goal is to write a faster sorting algorithm.
 It usually consists of 3 (plus one) parts.
 The first part is to **divide** the problem into 2 or more pieces.
 The second part is the **conquer** step, where one solves the problem on the pieces.
-The thirst part is the **combine** step where one combines the solutions on the parts into a solution on the whole.
+The third part is the **combine** step where one combines the solutions on the parts into a solution on the whole.
 
 The description of these parts leads pretty directly to recursive algorithms, i.e. using recursion for the conquer part.
 The other part that appears in many such algorithms is a **base case**, as one might expect in a recursive algorithm.
