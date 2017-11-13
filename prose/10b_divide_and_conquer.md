@@ -69,7 +69,7 @@ In its wonderfulness, python allows you to assign into a slice the same way you 
 
 We could also use some more logic in the loop to avoid this last step, though I have found students disagree as to which approach is simpler.
 
-```python
+```python {cmd=true}
 def merge(A, B, L):   
     i, j = 0, 0
     while i < len(A) or j < len(B):
