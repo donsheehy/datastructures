@@ -258,7 +258,7 @@ def quickSorted(L):
 
 Let's do an in-place version.  For this, we want to avoid creating new lists and concatenating them at the end.
 
-```python
+```python {cmd=true}
 def quicksort(L, left = 0, right = None):
     if right is None:
         right = len(L)
@@ -293,10 +293,17 @@ def partition(L, left, right):
             L[i], L[j] = L[j], L[i]
 
     # Put the pivot in place.
-    L[pivot], L[i] = L[i], L[pivot]
+    if L[pivot] <= L[i]:
+        L[pivot], L[i] = L[i], L[pivot]
+        pivot = i
 
     # Return the index of the pivot.
-    return i
+    return pivot
+
+# Simple test to see if it works.
+L = [5,2,3,1,4]
+quicksort(L)
+print(L)
 ```
 
 Here is a version without all the comments.

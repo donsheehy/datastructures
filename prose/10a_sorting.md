@@ -142,7 +142,7 @@ There are many ways we could enforce this invariant.  We'll do it by "bubbling" 
 ```python
 def insertionSort(L):
     n = len(L)
-    for i in range(n-1):
+    for i in range(n):
         for j in range(n-i-1, n-1):
             if L[j]>L[j+1]:
                 L[j], L[j+1] = L[j+1], L[j]
@@ -153,7 +153,7 @@ As before, we can make this algorithm go faster if the list is already sorted (o
 ```python
 def insertionSort(L):
     n = len(L)
-    for i in range(n-1):
+    for i in range(n):
         j = n - i - 1
         while j < n - 1 and L[j]>L[j+1]:
             L[j], L[j+1] = L[j+1], L[j]
