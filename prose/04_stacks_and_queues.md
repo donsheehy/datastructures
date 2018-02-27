@@ -39,7 +39,7 @@ We will implement it with a class called `ListStack`.
 Here, we are giving hints about the implementation in the name.
 This is more common in Java programming, but we adopt the convention in the book to help us distinguish between different implementations of the same ADT.
 
-```python
+```python {id="liststack"}
 class ListStack:
     def __init__(self):
         self._L = []
@@ -142,3 +142,65 @@ class ShrinkingQueue(Queue):
 So, it looks like we lost all the benefits of our lazy update, because now we have a `dequeue` method that sometimes takes linear time.  However, we don't do that *every* time.  How expensive is it really?  If we do all our `enqueue` operations first, and then dequeue all our items afterwards, then some items at the end of the list get moved (i.e. copied to a new memory location during the slicing operation) many times.  The first half of the items don't get moved at all.  The next quarter of the list (from $1/2$ to $3/4$) gets moved exactly one time.  The next eighth of the list moves exactly twice.  Of $n$ total items, there are $n/2^i$ items that get moved $i-1$ times.  Thus the total number of moves for $n$ items is at most $n\sum_{i=1}^{\log n} \frac{i-1}{2^i} < n$.  So, "on average",  the cost per item is constant.  
 
 This kind of lazy update is very important.  In fact, it's how python is able to do list pop quickly.  Technically, `pop()` can also take linear time for some calls but on average, the cost is constant per operation.  The same idea makes `append` fast.  In that case, python allocates extra space for the list and every time it fills up, the list is copied to a bigger area, that roughly doubles in size.
+
+## Dealing with errors
+
+Often, we make assumptions about how a class can or ought to be used.
+This is also considered part of the semantics of the class and it affects how we program it.
+We would like to write write error-free code.
+We'd like to make it so that it always works no matter how it gets misused, but sometimes, an error message is the correct behavior.
+
+In python we **raise an error** the way one might throw an egg.
+Either someone gently catches it or it crashes.
+Depending on the situation, either might be the right thing to do.
+
+In the case of a stack, it is never correct usage to `pop` from an empty stack.
+Thus, it makes sense that someone using our `Stack` class should have their program crash and see an error message if they attempt to call `pop` when there are no items left on the stack.
+In the list implementation above, this does happen:
+
+```python {cmd=true id="liststackerror" continue="liststack"}
+s = ListStack()
+s.push(5)
+s.pop()
+s.pop()
+```
+
+If we look at the error message, it even seems pretty good.
+It says we tried to `pop from empty list`.
+But if you look at the code, you might ask, "What list?"
+We know how the `ListStack` class is implemented, and the name even gives a hint at its implementation, so we might guess what's going on, but the user does have to search up the stack trace a little to see the line of their own code that caused the problem.
+We could catch the exception in our `pop` method and raise a different error so the source of the problem is more obviously the user's code.
+Otherwise, the stack trace reports the error in our code.
+Then, a user, might have to try to understand our class in order to backtrack to understand what they did wrong in their code.
+Instead, give them an error that explains exactly what happened.
+
+```python {cmd=true id="anotherstackerror" continue="liststack"}
+class AnotherStack(ListStack):
+    def pop(self):
+        try:
+            return self._L.pop()
+        except IndexError:
+            raise RuntimeError("pop from empty stack")
+
+s = AnotherStack()
+s.push(5)
+s.pop()
+s.pop()
+```
+
+Now, we still both exceptions, which is generally good.
+We don't want to to hide errors, but in this case, the error is definitely not in the pop method, so we can suppress the first exception with by raising our exception `from None` as follows. (This idiom is explained in PEP 409).
+
+```python {cmd=true id="anotherstackerror" continue="liststack"}
+class AnotherStack(ListStack):
+    def pop(self):
+        try:
+            return self._L.pop()
+        except IndexError:
+            raise RuntimeError("pop from empty stack") from None
+
+s = AnotherStack()
+s.push(5)
+s.pop()
+s.pop()
+```

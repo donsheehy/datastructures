@@ -105,7 +105,7 @@ for n in [50, 100, 200, 400, 800, 1600, 3200]:
 
 Let's try to make our code faster.
 Simple improvements can be made by eliminating situations where we are doing unnecessary or redundant work.
-In the `duplicates1` function, we are comparing each pair of elements twice because bot `i` and `j` range over all $n$ indices.
+In the `duplicates1` function, we are comparing each pair of elements twice because both `i` and `j` range over all $n$ indices.
 We can eliminate this using a standard trick of only letting `j` range up to `i`.
 Here is what the code would look like.
 
@@ -165,7 +165,7 @@ def duplicates5(L):
 def duplicates6(L):
     s = set()
     for e in L:
-        if e in S:
+        if e in s:
             return True
         s.add(e)
     return False
@@ -178,14 +178,15 @@ def duplicates8(L):
     return any(e in s or s.add(e) for e in L)
 ```
 
-```python {cmd=true continue:"duplicates5", id:"j544qfui"}
+```python {cmd=true continue:"duplicates5", id:"j544qfur"}
 for n in [50, 100, 200, 400, 800, 1600, 3200]:
-    print("Quadratic:", end="")
+    print("Quadratic: ", end="")
     timetrials(duplicates3, n)
-    print("Sorting:", end="")
+    print("Sorting:   ", end="")
     timetrials(duplicates5, n)
-    print("Sets:", end="")
+    print("Sets:      ", end="")
     timetrials(duplicates7, n)
+    print('---------------------------')
 ```
 
 
@@ -260,7 +261,7 @@ it suffices to observe that you can add the numbers in pairs, matching $i$ with 
 There are $k/2$ such pairs and each adds up to $k+1$.
 Let's use this formula to rewrite our `sumk` function and time it.
 
-```python {cmd=true continue:"timetrials",id:"j5439nl1"}
+```python {cmd=true continue:"timetrials2",id:"j5439nl1"}
 import time
 
 def sumk2(k):

@@ -64,7 +64,7 @@ We won't get many opportunities to do such proofs in this class, but it's worth 
 Here are some basic rules that you should try to follow to make sure your recursive algorithms terminate.
 
   1. Have a base case.  If every function call makes another recursive call, you will never terminate.
-  2. Recursive calls should move towards teh base case.  This usually means that the recursive calls are made on "smaller" subproblems.  Here, "smaller" can mean different things.
+  2. Recursive calls should move towards the base case.  This usually means that the recursive calls are made on "smaller" subproblems.  Here, "smaller" can mean different things.
 
 It's not hard to write a recursive function that never stops *in theory*.
 However, in practice, so-called infinite recursion is pretty quickly discovered with a `RecursionError`.
@@ -74,7 +74,7 @@ This limit is usually around 1000.
 ## The Function Call Stack
 
 To think clearly about recursion, it helps to have an idea of how recursion works on a real computer.
-It is easiest to first understand how all function calls work and then it should be clear that there is no technical difference in making a recursive function call compared to any other recursive function call.
+It is easiest to first understand how all function calls work and then it should be clear that there is no technical difference in making a recursive function call compared to any other function call.
 
 ```python {cmd=true id:"j32h294n"}
 def f(k):
@@ -146,7 +146,10 @@ Each of these four function calls will make two more function calls each.
 We can draw them out in a tree.
 Notice, that already, we have multiple calls to `fib(4)` as well as to `fib(3)`.
 We might as well ask, how many times will we call the same function with the same value?
-If we compute `fib(k)`, the answer, interestingly enough is the
+If we compute `fib(k)`, the answer, interestingly enough is related to the Fibonacci numbers themselves.
+Let $T(k)$ denote the number of calls to `fib` when computing `fib(k)`.
+It's easy to see that $T(k) = T(k-1) + T(k-2) + 1$.
+In this case, the result is nearly exactly the Fibonacci numbers ($T(1) = 1$, $T(2) = 2$, $T(3) = 4$, $T(4) = 7$, ...).  In each case, the value of $T$ is one less than a Fibonacci number.  Thus, the running time of `fib` will grow like the Fibonacci numbers, or equivalently, it will grow like ideal rabbit families, exponentially.  The $k$th Fibonacci number is about $\phi^k$, where $\phi = \frac{1+\sqrt{5}}{2}\sim1.618$ is known as the Golden Ratio.
 
 ## Euclid's Algorithm
 
@@ -191,3 +194,11 @@ print("GCD of 12 and 513 is", gcd(12, 513))
 print("GCD of 19 and 513 is", gcd(19, 513))
 print("GCD of 19 and 515 is", gcd(515 ,19))
 ```
+
+Incidentally, if `a` and `b` are allowed to be arbitrary numbers, you might try find examples where the gcd algorithm gets caught in an infinite recursion.  In this way, you might discover the irrational numbers.  If `a` and `b` are rational, then the algorithm is also guaranteed to terminate.
+
+If you wanted to find an example that was as bad as possible, you might try to find a pair `(a,b)` such that after one iteration, you get the pair `(b-a, a)` where the ratio of the numbers is the same.  Then, you can check that this will continue and therefore, you'll never get closer to that base case.  But is that possible?  Is there a pair of numbers with this property?  The answer is yes.  One could use $a = 1$ and $b = \phi$, the Golden Ratio.
+
+## Removing Recursion
+
+In the Fibonacci example, we got a big improvement
