@@ -81,6 +81,19 @@ def merge(A, B, L):
             j = j + 1
 ```
 
+<!-- The same can be done without indices if one is comfortable removing elements from the input lists.
+
+```python
+def merge(A, B, L):
+    C = []
+    while A or B:
+        if not B or (A and A[-1] > B[-1]):
+            C.append(A.pop())
+        else:
+            C.append(B.pop())
+    L[:] = reversed(C)
+``` -->
+
 The complex `if` statement above relies heavily on something called **short-circuited** evaluation of boolean expressions.
 If we have a boolean operation like `or`, and the first operand is `True`, then we don't have to evaluate the second operand to find out that the overall result will be `True`.
 Using this fact, python will not even evaluate the second operand.
@@ -123,7 +136,7 @@ and an **Iterator** is a object that has an `__iter__` method and a `__next__` m
 These magic methods are called *from the outside* as `iter(my_iterable)` and `next(my_iterator)`.
 They are most commonly used by the `for` keyword either in for loops or in **generator expressions** as in comprehensions.
 
-```python
+```python {cmd=true}
 class SimpleIterator:
     def __init__(self):
         self._count = 0
@@ -202,7 +215,6 @@ def merge(A, B):
             yield next(b)
         else:
             yield next(a)
-
 ```
 
 This iterator looks very different from our previous one.

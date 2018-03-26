@@ -121,7 +121,7 @@ We'll add the same kind of functionality to our Mapping ADT.  So, the **extended
 
   - `values` - return an iterator over the values in the dictionary.
 
-  - `items` - return an iterator over the key-value paris (as tuples).
+  - `items` - return an iterator over the key-value pairs (as tuples).
 
 It is very important to recall from the very beginning of the course that the `dict` class is a **non-sequential collection**.  That is, there is no significance to the ordering of the items and furthermore, you should never assume to know anything about the ordering of the pairs.  You should not even assume that the ordering will be consistent between two iterations of the same `dict`.  This same warning goes for the mappings we will implement and we'll see that the ability to rearrange the order of how they are stored is the secret behind the mysteriously fast running times.  However, this first implementation will have the items in a fixed order because we are using a `list` to store them.
 
@@ -206,9 +206,9 @@ class HashMappingSimple:
 
 Let's look more closely at this code.  It seems quite simple, but it hides some mysteries.
 
-First, the initializer creates a list of 100 ListMaps.  These are called the buckets. If the keys get spread evenly between the buckets then this will be about 100 times faster!
+First, the initializer creates a list of 100 ListMaps.  These are called the buckets. If the keys get spread evenly between the buckets then this will be about 100 times faster!  If two keys are placed in the same bucket, this is called a **collision**.
 
-The `__getitem__` and `__setitem__` methods call the `_bucket` method to get one of these buckets for the given key and then just use that ListMap's get and set methods.  So, the idea is just to have several list maps instead of one and then you just need a quick way to decide which to use.  The hash function, returns an integer based on the value of the given key.  
+The `__getitem__` and `__setitem__` methods call the `_bucket` method to get one of these buckets for the given key and then just use that ListMap's get and set methods.  So, the idea is just to have several list maps instead of one and then you just need a quick way to decide which to use.  The `hash` function, returns an integer based on the value of the given key.  The collisions will depend on the hash function.
 
 The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not much more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  Here is the code.
 
@@ -314,7 +314,7 @@ class Mapping:
         return "{%s}" % (", ".join([str(e) for e in self]))
 ```
 
-There is a lot here, but notice that there are really only four methods that a subclass has to implement: `get`, `put`, `__len__`, and a method called `_entryiter` that iterates through the entries.  This last method is private because the use of this class does not need to access `Entry` objects.  They have the Mapping ADT methods to provide access to the data.  This is why the `Entry` class is an inner class (defined inside the `Mapping` class).
+There is a lot here, but notice that there are really only four methods that a subclass has to implement: `get`, `put`, `__len__`, and a method called `_entryiter` that iterates through the entries.  This last method is private because the user of this class does not need to access `Entry` objects.  They have the Mapping ADT methods to provide access to the data.  This is why the `Entry` class is an inner class (defined inside the `Mapping` class).
 
 Now, the `ListMapping` can be rewritten as follows.
 
@@ -344,7 +344,7 @@ class ListMapping(Mapping):
         return None
 
     def _entryiter(self):
-        return (e for e in self._entries)
+        return iter(self._entries)
 
     def __len__(self):
         return len(self._entries)
