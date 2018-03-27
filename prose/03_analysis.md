@@ -368,8 +368,8 @@ Below, let $n_A$ be the size of set `A` and let $n_B$ be the size of set `B`.
 | Add a new item            | `A.add(newitem)` | $1$ |
 | Delete an item            | `A.delete(item)` | $1$ |
 | Union                     | <code>A &#124; B</code>   | $n_A + n_B$ |
-| Intersection              | `A & B`   | $n_A + n_B$ |
-| Set differences           | `A - B`   | $n_B$ |
+| Intersection              | `A & B`   | $\min\{n_A, n_B\}$ |
+| Set differences           | `A - B`   | $n_A$ |
 | Symmetric Difference      | `A ^ B`   | $n_A + n_B$ |
 
 
