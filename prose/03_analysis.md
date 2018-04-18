@@ -62,7 +62,7 @@ A basic question that we will ask again and again is the following?
 The simplest answer to this question comes from simply running the program and measuring how long it takes.
 We could do this as follows.
 
-```python {cmd=true continue:"duplicates1", id:"j543h66u"}
+```python {cmd:true, continue:"duplicates1", id:"j543h66u"}
 import time
 
 for i in range(5):

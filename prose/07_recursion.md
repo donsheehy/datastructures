@@ -199,6 +199,6 @@ Incidentally, if `a` and `b` are allowed to be arbitrary numbers, you might try 
 
 If you wanted to find an example that was as bad as possible, you might try to find a pair `(a,b)` such that after one iteration, you get the pair `(b-a, a)` where the ratio of the numbers is the same.  Then, you can check that this will continue and therefore, you'll never get closer to that base case.  But is that possible?  Is there a pair of numbers with this property?  The answer is yes.  One could use $a = 1$ and $b = \phi$, the Golden Ratio.
 
-## Removing Recursion
+<!-- ## Removing Recursion
 
-In the Fibonacci example, we got a big improvement
+In the Fibonacci example, we got a big improvement -->

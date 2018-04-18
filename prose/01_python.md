@@ -106,7 +106,7 @@ L.append(400)
 print(L)
 ```
 
-```
+```python
 <class 'list'>
 [1, 2, 3, 400]
 ```
@@ -127,7 +127,8 @@ Dictionaries are also known as maps,  **mappings**, or hash tables.  We will go 
 
 A dictionary doesn't have a fixed order.
 
-```pythond = dict()
+```python
+d = dict()
 d[2] = "two"
 d[5] = "five"
 d["pi"] = 3.1415926

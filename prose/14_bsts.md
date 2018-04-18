@@ -21,10 +21,10 @@ A **sorted mapping** stores a collection of key-value pairs (*with comparable ke
 
 A tree is called a **binary tree** if every node has at most two children.
 We will continue to assume that we are working with ordered trees and so we call the children `left` and `right`.
-We say that a binary tree is a **binary search tree** if for every node `n`, all the keys in the subtree `n.left` are less than the key at `n` and all the keys in the subtree `n.right` are greater than the key of `n`.  This ordering property, also known as **the BST property** is what makes a binary search tree different from any other kind of binary tree.
+We say that a binary tree is a **binary search tree** if for every node `x`, all the keys in the subtree `x.left` are less than the key at `x` and all the keys in the subtree `x.right` are greater than the key of `x`.  This ordering property, also known as **the BST property** is what makes a binary search tree different from any other kind of binary tree.
 
 The BST property is related to a new kind of tree traversal, that was not possible with other trees.
-Recall that previously we saw preorder and postoder traversal of trees.
+Recall that previously we saw preorder and postorder traversal of trees.
 These traversals visit all the nodes of the tree.
 The preorder traversal visits the root of each subtree prior to visiting any nodes in the children.  The postorder traversal visits all the nodes in the children prior to visiting the root.  The new traversal we introduce here is called **inorder traversal** and it visits all the nodes in the left child prior to visiting the root and then visits all the nodes in the right child after visiting the root.  This order results in a traversal of the nodes *in sorted order according to the ordering of the keys*.
 

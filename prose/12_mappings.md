@@ -162,8 +162,11 @@ class ListMapping:
     def __len__(self):
         return len(self._entries)
 
-    def __contains__(self, key):
-        return (self._entry(key) is not None)
+    def __contains__(self, key):    
+        if self._entry(key) is None:
+            raise KeyError
+        else:
+            return True
 
     def __iter__(self):
       return (e.key for e in self._entries)
@@ -302,7 +305,11 @@ class Mapping:
         return ((e.key, e.value) for e in self._entryiter())
 
     def __contains__(self, key):
-        return (self.get(key) is not None)
+        try:
+            self.get(key)
+        except KeyError:
+            return False
+        return True
 
     def __getitem__(self, key):
         return self.get(key)

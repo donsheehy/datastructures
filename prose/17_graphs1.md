@@ -93,7 +93,7 @@ It should not be necessary to go through all the edges, just to find the ones in
 
 An alternative approach is to store a set with each vertex and have this set contain all the neighbors of that vertex.  This allows for fast access to the neighbors.  In fact, it means that we don't have to store the edges explicitly at all.
 
-```python
+```python {cmd=true, id:'adjacencysetgraph'}
 class AdjacencySetGraph:
     def __init__(self, V, E):
         self._V = set()
@@ -119,6 +119,15 @@ class AdjacencySetGraph:
     def nbrs(self, v):
         return iter(self._nbrs[v])
 ```
+
+```python {cmd=true, continue:"adjacencysetgraph"}
+G = AdjacencySetGraph({1,2,3}, {(1,2),(2,1),(1,3)})
+print("neighbors of 1:", list(G.nbrs(1)))
+print("neighbors of 2:", list(G.nbrs(2)))
+print("neighbors of 3:", list(G.nbrs(3)))
+```
+
+Let's do a very simple example to make sure it works as we expect it to.
 
 One design decision that may seem rather strange is that we do not have a class for vertices or edges.
 As of now, we are exploiting the **polymorphism** of python, which allows us to use any (hashable) type for the vertex set.
@@ -172,3 +181,53 @@ For an undirected graph, if $u$ is connected to $v$, then $v$ is connected to $u
 In such graphs, we can partition the vertices into subsets called **connected components** that are all pairwise connected.  
 
 For a directed graph, two vertices $u$ and $v$ are **strongly connected** if $u$ is connected to $v$ *and also* $v$ is connected to $u$.
+
+Let's consider a simple method to test of two vertices are connected.
+We will add it to our `AdjacencySetGraph` class.  As a first exercise, we could try to work recursively.  The idea is simple: in the base case, see if you are trying to get from a vertex to itself.  Otherwise, it suffices to check if any of the neighbors of the first vertex are connected to the last vertex.
+
+```python {cmd:true, continue:"adjacencysetgraph", id:"connected1"}
+    def connected(self, a, b):
+        if a == b: return True
+        return any(self.connected(nbr, b) for nbr in self.nbrs(a))
+```
+Can you guess what will go wrong?
+Here's an example.
+
+```python {cmd:true, continue:'connected1'}
+G = AdjacencySetGraph({1,2,3}, {(1,2), (2,3)})
+assert(G.connected(1,2))
+assert(G.connected(1,3))
+assert(not G.connected(3,1))
+print("First graph is okay.")
+
+H = AdjacencySetGraph({1,2,3}, {(1,2), (2,1), (2,3)})
+try:
+    H.connected(1,3)
+except RecursionError:
+    print("There was too much recursion!")
+```
+
+It's clear that if the graph has any cycles, we can't check connectivity this way.  To deal with cycles, we can keep a set of visited vertices.  Recall that this is called memoization.
+
+```python {cmd:true, continue:"adjacencysetgraph", id:"connected2"}
+    def connected(self, a, b):
+        return self._connected(a, b, set())
+
+    def _connected(self, a, b, visited):
+        if a in visited: return False
+        if a == b: return True
+        visited.add(a)
+        return any(self._connected(nbr, b, visited) for nbr in self.nbrs(a))
+```
+
+Now, we can try again and see what happens.
+
+```python {cmd:true, continue:'connected2'}
+H = AdjacencySetGraph({1,2,3}, {(1,2), (2,1), (2,3)})
+try:
+    assert(H.connected(1,2))
+    assert(H.connected(1,3))
+except RecursionError:
+    print('There was too much recursion!')
+print('It works now!')
+```

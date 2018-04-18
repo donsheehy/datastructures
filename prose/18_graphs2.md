@@ -67,6 +67,7 @@ It's possible to modify our `dfs` code to provide not only the set of connected 
 The idea is to store a dictionary that maps vertices to the previous vertex in the path from the starting vertex.
 This is really encoding a tree as a dictionary that maps nodes to their parent.
 The root is the starting vertex.
+
 It differs from the trees we've seen previously in that it naturally goes up the tree from the leaves to the root rather than the reverse.
 The resulting tree is called the **depth-first search tree**.
 It requires only a small change to generate it.
@@ -88,7 +89,7 @@ def _dfs(self, v, tree):
 ## Removing the Recursion
 
 The `dfs` code above uses recursion to keep track of previous vertices, so that we can backtrack (by `return`ing) when we reach a vertex from which we can't move forward.
-To remove the recursion, we just need to replace the call stack with our own stack.
+To remove the recursion, we replace the function call stack with our own stack.
 This is not just an academic exercise.
 By removing the recursion, we will reveal the structure of the algorithm in a way that will allow us to generalize it to other algorithms.
 Here's the code.
@@ -191,7 +192,20 @@ To find an algorithm for this problem, we start by trying to describe which edge
 That is, we should think about the object we want to construct first, and only then can we think about *how* to construct it.
 We employed a similar strategy when discussing sorting algorithms.
 In that case, we first tried to write a function that would test for correct output.
-We won't go that far now, but we will ask, "How would we know if we had the minimum spanning tree?""
+We won't go that far now, but we will ask, "How would we know if we had the minimum spanning tree?"
+
+One thing that would certainly be true about the minimum spanning tree is that if we removed an edge (resulting in two trees), we couldn't find a lighter weight edge connecting these two trees.
+Otehrwise, that would be a spanning tree of lower weight.
+
+Something even a little more general is true.
+If we split the vertices into any two sets $A$ and $B$, the lowest weight edge with one end in $A$ and the other end in $B$ must be in the MST.
+Suppose for contradiction that this edge is not in the MST.
+Then, we could add that edge and form a cycle, which would have another edge spanning $A$ and $B$.
+That edge could then be removed, leaving us with a lighter spanning tree.
+This is a contradiction, because we assumed that we started with the MST.
+
+So, in light of our previous graph algorithms, we can try to always add the lightest edge from the visited vertices to an unvisited vertex.
+This can easily be encoded in a priority queue.
 
 ```python
 def prim(self, v):
@@ -249,4 +263,3 @@ def dijkstra2(self, v):
 
 An important difference with our DFS/BFS code is that the main data structure now stores vertices, not edges.
 Also, we don't have to check if we've already visited a vertex, because if we have already visited it, we won't find an edge to relax (vertices are visited in order of their distance to the source).
-The tree is updated
