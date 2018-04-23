@@ -90,6 +90,7 @@ def _dfs(self, v, tree):
 
 The `dfs` code above uses recursion to keep track of previous vertices, so that we can backtrack (by `return`ing) when we reach a vertex from which we can't move forward.
 To remove the recursion, we replace the function call stack with our own stack.
+
 This is not just an academic exercise.
 By removing the recursion, we will reveal the structure of the algorithm in a way that will allow us to generalize it to other algorithms.
 Here's the code.
@@ -118,7 +119,7 @@ def bfs(self, v):
     tovisit = Queue([(None, v)])
     while tovisit:
         a,b = tovisit.dequeue()
-        if b is not in tree:
+        if b not in tree:
             tree[b] = a
             for n in self.nbrs(b):
                 tovisit.enqueue((b,n))
@@ -213,7 +214,7 @@ def prim(self, v):
     tovisit = PriorityQueue([(None, v)])
     while tovisit:
         a,b = tovisit.removemin()
-        if b is not in tree:
+        if b not in tree:
             tree[b] = a
             for n in self.nbrs(b):
                 tovisit.add((b,n), self.wt(b,n))
@@ -243,7 +244,7 @@ The distances to the source are stored in a dictionary `D` that maps vertices to
 If we find that `D[n] > D[u] + G.wt(u,n)`, then it would be a shorter path to `n` if we just took the shortest path from the source to `u` and appended the edge `(u,n)`.  In that case, we set `D[n] = D[u] + G.wt(u,n)` and update the priority queue.
 *Note that we had this algorithm in mind when we added `reducepriority` to our Priority Queue ADT.*
 
-Heres's the code.
+Here's the code.
 
 ```python
 def dijkstra2(self, v):
