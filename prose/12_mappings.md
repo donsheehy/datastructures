@@ -164,7 +164,7 @@ class ListMapping:
 
     def __contains__(self, key):    
         if self._entry(key) is None:
-            raise KeyError
+            return False
         else:
             return True
 
@@ -224,7 +224,7 @@ class HashMap:
 
     def __setitem__(self, key, value):
         m = self._bucket(key)
-        if not key in m:
+        if key not in m:
             self._length += 1
         m[key] = value
 
