@@ -39,7 +39,7 @@ We will implement it with a class called `ListStack`.
 Here, we are giving hints about the implementation in the name.
 This is more common in Java programming, but we adopt the convention in the book to help us distinguish between different implementations of the same ADT.
 
-```python {id="liststack"}
+```python {cmd=true id="liststack"}
 class ListStack:
     def __init__(self):
         self._L = []
@@ -188,7 +188,7 @@ s.pop()
 s.pop()
 ```
 
-Now, we still both exceptions, which is generally good.
+Now, we still get both exceptions, which is generally good.
 We don't want to to hide errors, but in this case, the error is definitely not in the pop method, so we can suppress the first exception with by raising our exception `from None` as follows. (This idiom is explained in PEP 409).
 
 ```python {cmd=true id="anotherstackerror" continue="liststack"}

@@ -170,13 +170,13 @@ def dijkstra(self, v):
     tree = {}
     D = {v: 0}
     tovisit = PriorityQueue()
-    for u in self.nbrs(v):
-        tovisit.add((v, u), self.wt(v, u))
+    tovisit.insert((None,v), 0)
     while tovisit:
         a,b = tovisit.removemin()
         if b not in tree:
             tree[b] = a
-            D[b] = D[a] + self.wt(a,b)
+            if a is not None:
+                D[b] = D[a] + self.wt(a,b)
             for n in self.nbrs(b):
                 tovisit.add((b,n), D[b] + self.wt(b,n))
     return tree, D
@@ -211,7 +211,8 @@ This can easily be encoded in a priority queue.
 ```python
 def prim(self, v):
     tree = {}
-    tovisit = PriorityQueue([(None, v)])
+    tovisit = PriorityQueue()
+    tovisit.insert((None, v), 0)
     while tovisit:
         a,b = tovisit.removemin()
         if b not in tree:
@@ -223,8 +224,6 @@ def prim(self, v):
 
 
 ## An optimization for Priority-First search
-
-
 
 The implementation above, although correct, is not technically Dijkstra's Algorithm, but it's close.
 By trying to improve its asymptotic running time, we'll get to the real Dijkstra's Algorithm.

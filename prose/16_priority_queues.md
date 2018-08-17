@@ -114,7 +114,7 @@ For a node at index `i`, its left child will be at index `2 * i + 1` and the rig
 
 We will maintain the invariant that after each operation, the list of entries is heap-ordered.  To insert a new node, we append it to the list and then repeated swap it with its parent until it is heap-ordered.  This updating step will be called `_upheap` and is similar to the inner loop of an insertion sort.  However, unlike insertion sort, it only does at most $O(\log n)$ swap operations (each one reduces the index by half).
 
-Similarly, there is a `_downheap` operation that will repeated swap an entry with its child until it's heap-ordered.  This operation is useful
+Similarly, there is a `_downheap` operation that will repeatedly swap an entry with its child until it's heap-ordered.  This operation is useful in the next section for building a heap from scratch.
 
 ```python
 class HeapPQ:
@@ -253,6 +253,7 @@ class PriorityQueue:
         L = self._entries
         item = L[0].item
         self._swap(0, len(L) - 1)
+        del self._itemmap[item]
         L.pop()
         self._downheap(0)
         return item

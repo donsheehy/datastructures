@@ -17,7 +17,7 @@ Our objectives for this chapter are three-fold:
 
 Here is an example of a recursive function.
 
-```python {cmd=true id:"j32gqq5q"}
+```python {cmd=true, id="j32gqq5q"}
 def f(k):
     if k > 0:
         return f(k-1) + k
