@@ -89,7 +89,7 @@ We could hope to do better with a linked list.
 However, right now, we have no way to add to or remove from the end of the linked list.
 Here is an inefficient, though simple and correct way to do it.
 
-```python
+```python {cmd=true}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -112,11 +112,11 @@ class LinkedList:
         return item
 
     def removelast(self):
-        if self._head is self._tail:
+        if self._head.link is None:
             return self.removefirst()
         else:
             currentnode = self._head
-            while.currentnode.link.link is not None:
+            while currentnode.link.link is not None:
                 currentnode = currentnode.link
             currentnode.link = None
             return currentnode.data
@@ -132,11 +132,11 @@ This traversal approach is not very efficient.
 For a list of length $n$, we would need $O(n)$ time to find the end.
 
 A different approach might be to store the last node (or **tail**) of the list so we don't have to search for it when we need it.
-This requires a bit of overhead to make sure it always has the correct node.
+This requires a bit of overhead to make sure it always stores the correct node.
 Most of the special cases happen when there is only one item in the list.
-We will be able to use this to get some improvement for `addlast`.
+We will be able to use this to get some improvement for `addlast`, because we will be able to jump right to the end without traversing.  We will also be able to clean up the code for `removelast` a little by eliminating the `link.link` stuff and instead just check if we reached the tail.
 
-```python
+```python {cmd=true}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -300,7 +300,7 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-Now that we have another implementation, we might be tempted to just copy and paste the old test, changning the references from `ListQueue` to `LinkedQueue`.
+Now that we have another implementation, we might be tempted to just copy and paste the old tests, changing the references from `ListQueue` to `LinkedQueue`.
 That is a lot of code duplication and code duplication leads to problems.
 For example, suppose we realize that our code has issues if we try to `dequeue` from an empty queue.
 If we decide on the right behavior, we will enforce it with a test.
@@ -311,7 +311,8 @@ This is a standard situation where inheritance is called for.
 We wanted to copy a bunch of methods to be included in two different classes (`TestListQueue` and `TestLinkedQueue`).
 Instead we want them to *share* the methods.
 So, we **refactor** the code, by **extracting a superclass**.
-Our new class will be called `TestQueue` and both `TestListQueue` and `TestLinkedQueue` will extend it.
+Our new class will be called `TestQueue`.
+Both `TestListQueue` and `TestLinkedQueue` will extend `TestQueue.
 Remember extending means inheriting from.
 
 ```python
@@ -405,7 +406,7 @@ The only thing to remember is that the golden rule of inheritance should still b
 
 ## Design Patterns:  The Wrapper Pattern
 
-This week, we saw several different implementations of the Queue ADT.
+In the last two chapters, we saw several different implementations of the Queue ADT.
 The main ones, `LinkedQueue` and `ListQueue` were very simple.
 In both cases, we used **composition**, the class stored an object of another class, and then **delegates** most of the operations to the other class.
 These are examples of something called the **Wrapper Pattern**.

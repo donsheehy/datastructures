@@ -88,7 +88,7 @@ def g(k):
 print(f(3))
 ```
 
-The following code gives a `RecursionError` even though none of the functions call themselves.
+The following code gives a `RecursionError` even though none of the functions call themselves directly.
 The error is really just signaling that the call stack reached its limit.
 
 ```python
@@ -104,6 +104,18 @@ def c(k):
 
 a(340)
 ```
+
+An interesting recursive example con be constructed by creating two lists, each one containing the other.
+
+```python {cmd=true}
+A = [2]
+B = [2]
+A.append(A)
+B.append(B)
+A == B
+```
+
+In this case, the recursive function is `list.__eq__`, the method that compares two lists when you use `==`.  It compares the list by checking if the elements are equal.  The lists `A` and `B` each have length 2.  The first elements match.  The second element of each list is another list.  To compare them, there is another call to `list.__eq__`.  This is a repeat of the first call and the process repeats until the recursion limit is reached.
 
 ## The Fibonacci Sequence
 

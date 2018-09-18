@@ -5,7 +5,6 @@
 The `for` loop is a powerful tool for working with lists, tuples, sets, strings, and dictionaries.
 It is the basic way that we loop over a collection.
 
-
 ```python {cmd=true}
 class MyCollection:
     def __iter__(self):
@@ -14,7 +13,6 @@ class MyCollection:
 
 print(list(enumerate(MyCollection(), start=10)))
 ```
-
 
 ```python {cmd=true}
 def mymax(S):

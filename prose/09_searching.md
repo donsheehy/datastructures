@@ -82,12 +82,12 @@ It does require a little more thought to see why it's correct and why it runs in
 
 ## The Sorted List ADT
 
-  - **add(item)** - adds `item` to the sorted list.
-  - **remove(item)** - removes the first occurrence of `item` from the sorted list. Raise a `ValueError` if the `item` is not present.
-  - **\_\_getitem\_\_(index)** - returns the item with the given `index` in the sorted list.  This is also known as **selection**.
-  - **\_\_contains\_\_(item)** - returns true if there is an item of the sorted list equal to `item`.
-  - **\_\_iter\_\_** - returns an iterator over the sorted list that yields the items in sorted order.
-  - **\_\_len\_\_** - returns the length of the sorted list.
+  - `add(item)` - adds `item` to the sorted list.
+  - `remove(item)` - removes the first occurrence of `item` from the sorted list. Raise a `ValueError` if the `item` is not present.
+  - `__getitem__(index)` - returns the item with the given `index` in the sorted list.   This is also known as **selection**.
+  - `__contains__(item)` - returns true if there is an item of the sorted list equal to `item`.
+  - `__iter__` - returns an iterator over the sorted list that yields the items in sorted order.
+  - `__len__` - returns the length of the sorted list.
 
 Here is a very simple implementation of the sorted list ADT.
 

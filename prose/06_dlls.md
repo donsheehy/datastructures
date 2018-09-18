@@ -2,8 +2,8 @@
 
 # Doubly-Linked Lists
 
-In the previous section, we introduced the Deque ADT and we gave two implementations, one using a list and one using a linked list.
-In our implementation, all of the basic operations ran in constant time except `removelast`.
+Previously, we introduced the Deque ADT and we gave two implementations, one using a list and one using a linked list.
+In our linked list implementation, all of the basic operations ran in constant time except `removelast`.
 In this chapter, we're going to introduce a new data structure that allows us to do all the Deque operations in constant time.
 The key idea will be to store two links in each node, one forwards and one backwards so that we can traverse the list in either direction.
 In this **doubly-linked list**, removing from the end will be symmetric to removing from the beginning, with the roles of head and tail reversed.
@@ -152,3 +152,5 @@ while n is not None:
     print(n.data)
     n = n.link
 ```
+
+We have to be a bit careful about the differences between this concatenation operation and concatenation of regular lists.  With the doubly-linked list, the concatenation operation empties the other list.  It does this so that we don’t have multiple doubly-linked lists with the same `ListNode`s.    That would be a problem if we tried to edit just one of the lists, because the changes would be reflected in the other list as well, possibly with disastrous consequences.
