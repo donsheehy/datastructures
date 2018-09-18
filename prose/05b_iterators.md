@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Iterators, Generators, and Comprehensions
 
 The `for` loop is a powerful tool for working with lists, tuples, sets, strings, and dictionaries.

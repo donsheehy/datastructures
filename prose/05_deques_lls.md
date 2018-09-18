@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Deques and Linked Lists
 
 A **deque** (pronounced "deck") is a doubly-ended queue.

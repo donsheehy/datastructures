@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Doubly-Linked Lists
 
 Previously, we introduced the Deque ADT and we gave two implementations, one using a list and one using a linked list.

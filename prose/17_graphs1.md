@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Graphs
 
 The **graph** is a fundamental mathematical object in computer science.  Graphs are used to abstract networks, maps, program control flow, probabilistic models, and even data structures among many other computer science concepts.

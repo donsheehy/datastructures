@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Trees
 
 **Trees** data types are ideal for representing hierarchical structure.

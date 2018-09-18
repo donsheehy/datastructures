@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Object-Oriented Programming
 
 A primary goal of **object-oriented programming** is to make it possible to write code that is close to the way you think about the things your code represents.

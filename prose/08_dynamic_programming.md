@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Dynamic Programming
 
 The term **dynamic programming** refers to an approach to writing algorithms in which a problem is solved using solutions to the same problem on smaller instances.

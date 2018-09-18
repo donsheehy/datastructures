@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Sorting
 
 ## The Quadratic-Time Sorting Algorithms

@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Priority Queues
 
 We're going to discuss a versatile and  fundamental data structure called a **priority queue**.  It will resemble a queue except that items all have a priority and will come out ordered by their priority rather than their order of insertion.

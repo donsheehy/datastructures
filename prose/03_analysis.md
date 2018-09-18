@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Running Time Analysis
 
 Our major goal in programming is to write code that is *correct*, *efficient*, and *readable*.

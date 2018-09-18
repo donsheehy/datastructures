@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Balanced Binary Search Trees
 
 In the previous chapter, we saw how to implement a Mapping using a BST.

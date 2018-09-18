@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Binary Search
 
 Binary search is a classic algorithm.

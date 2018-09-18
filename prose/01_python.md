@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Basic Python
 
 This book is not intended as a first course in programming.
@@ -135,7 +133,7 @@ print(n[2])
 
 ### Lists (`list`)
 
-**Lists** are ordered sequences of objects.  The objects do not have to be the same type.  They are indicated by square brackets and the **elements** of the list are separated by commas.  You can append an item to the end of a list `L` by using the command `L.append(newitem)`. 
+**Lists** are ordered sequences of objects.  The objects do not have to be the same type.  They are indicated by square brackets and the **elements** of the list are separated by commas.  You can append an item to the end of a list `L` by using the command `L.append(newitem)`.
 It is possible to index into a list exactly as we did with strings.
 
 ```python {cmd=true}
@@ -317,7 +315,7 @@ A function also changes the control flow.  In Python, you define a function with
 ```python {cmd=true}
 def foo(x, y):
 	return 8 * x + y
-	
+
 print(foo(2, 1))
 print(foo(“Na”, " batman"))
 ```
@@ -348,7 +346,7 @@ def f(x):
 	return 2 * x + 3
 
 def g(x):
-	return x ** 2 - 1	
+	return x ** 2 - 1
 ```
 
 ```python {cmd=true}
@@ -358,11 +356,11 @@ import twofunctions
 
 def f(x):
 	return x - 1
-	
+
 print(twofunctions.f(1))
 print(f(1))
 print(twofunctions.g(4))
-```	
+```
 
 The `import` brings the module name into the current namespace.  I can then use it to identify the functions from the module.  
 
@@ -386,7 +384,7 @@ Here is how we use the `__name__` attribute to check how the program is being ru
 
 def somefunction():
 	print("Real important stuff here.")
-	
+
 if __name__ == ‘__main__’:
 	somefunction()
 ```
@@ -395,12 +393,8 @@ In the preceding code, the message is printed only when the module is executed a
 
 One caveat is that modules are only executed the first time they are imported.  If, for example, we import the same module twice, it will only be executed once.  At that point, the namespace exists and can be accessed for the second one.  This also avoids any infinite loops you might try to construct by having two modules, each of which imports the other.
 
-There are a couple other common variations on the standard `import` statement. 
+There are a couple other common variations on the standard `import` statement.
 
 1. You can `import` just a particular name or collection of names from a module: `from modulename import thethingIwanted`.  This brings the new name `thethingIwanted` into the current namespace.  It doesn’t need to be preceded by `modulename` and a dot.
 2. You can`import` all the names from the module into the current namespace: `from modulename import *`.  If you do this, every name defined in the module will be accessible in the current namespace.  It doesn’t need to be preceded by `modulename` and a dot.  Although easy to write and fast for many things, this is generally frowned upon as you often won’t know exactly what names you are importing when you do this.
 3. You can rename module after importing it: `import numpy as np`.  This allows you to use a different name to refer to the objects of the module.  In this example, I can write `np.array` instead of `numpy.array`.  The most common reason to do this is to have a shorter name.  The other, more fundamental use is to avoid naming conflicts.
-
-
-
-

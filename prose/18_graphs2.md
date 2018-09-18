@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Graph Search
 
 Now that we have a vocabulary for dealing with graphs, we can revisit some previous topics.

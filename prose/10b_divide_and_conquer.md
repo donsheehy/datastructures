@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Sorting with Divide and Conquer
 
 Previously, we saw some simple quadratic algorithms for sorting.

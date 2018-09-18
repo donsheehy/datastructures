@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Mappings and Hash Tables
 
 A **mapping** is an association between two sets of things.

@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Recursion
 
 Recursion is an important idea across computer science.

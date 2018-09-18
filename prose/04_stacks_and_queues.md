@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Stacks and Queues
 
 ## Abstract Data Types
@@ -195,4 +193,3 @@ s.push(5)
 s.pop()
 s.pop()
 ```
-

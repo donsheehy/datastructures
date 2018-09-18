@@ -1,5 +1,3 @@
-<p style="page-break-after:always;"></p>
-
 # Binary Search Trees
 
 Let's start with an ADT.  A **SortedMapping** is a mapping data type for which the keys are comparable.
