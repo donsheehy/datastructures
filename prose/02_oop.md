@@ -1,35 +1,42 @@
 # Object-Oriented Programming
 
+```python {cmd hide output="none" id="type02"}
+# This is a hack to allow html escape the output of the type function.
+import builtins
+def type(x):
+    return "&lt;" + str(builtins.type(x))[1:-1] + "&gt;"
+```
+
 A primary goal of **object-oriented programming** is to make it possible to write code that is close to the way you think about the things your code represents.
 This will make it easier to reason about the code and think through its correctness.
 
 A **class** is a data type.  In python *type* and *class* are (mostly) synonymous.  An **object** is an **instance** of a class.  For example, python has a `list` class.  If I make a list called `mylist`.  Then, `mylist` is an object of type `list`.  
 
-```python {cmd=true id="j32a915x"}
+```python {cmd=true id="j32a915x" continue="type02"}
 mylist = []
-print(str(type(mylist))[1:-1])
+print(type(mylist))
 print(isinstance(mylist, list))
 print(isinstance(mylist, str))
 ```
 
 There are all kinds of classes built into python.  Some you might not expect.
 
-```python {cmd=true id="j32a89ox"}
+```python {cmd=true id="j32a89ox" continue="type02"}
 def foo():
     return 0
 
-print(str(type(foo))[1:-1])
+print(type(foo))
 ```
 
 For the advanced students, here is a more exotic example called a generator.  In python you can `yield` instead of `return`.  If so, the result will be something called a generator and not a function.  This powerful idea shows up a lot in python, but we won't really be able to get our head around it until we understand how classes are able to package up data and code.  
 
-```python {cmd=true id="j32a5vrk"}
+```python {cmd=true id="j32a5vrk" continue="type02"}
 def mygenerator(n):
     for i in range(n):
         yield i
 
-print(str(type(mygenerator))[1:-1])
-print(str(type(mygenerator(5)))[1:-1])
+print(type(mygenerator))
+print(type(mygenerator(5)))
 ```
 
 ## A simple example

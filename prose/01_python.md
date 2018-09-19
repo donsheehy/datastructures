@@ -1,5 +1,12 @@
 # Basic Python
 
+```python {cmd hide output="none" id="type"}
+# This is a hack to allow html escape the output of the type function.
+import builtins
+def type(x):
+    return "&lt;" + str(builtins.type(x))[1:-1] + "&gt;"
+```
+
 This book is not intended as a first course in programming.
 It will be assumed that the reader has some experience with programming.
 Therefore, it will be assumed that certain concepts are already familiar to them, the most basic of which is a mental model for programming that is sometimes called *Sequence, Selection, and Iteration*.
@@ -49,7 +56,7 @@ Every object has a **type**.  The type often determines what you can do with the
 
 The difference between a variable and the **object** it represents can get lost in our common speech because the variable is usually acting as the *name* of the object.  There are some times when it's useful to be clear about the difference, in particular when copying objects.  You might want to try some examples of copying objects from one variable to another.  Does changing one of them affect the other?
 
-```python {cmd=true id:"j4htmm25"}
+```python {cmd=true id:"j4htmm25" continue="type"}
 x = 5
 y = 3.2
 z = True
@@ -63,9 +70,9 @@ It’s identity cannot change.  It can be used to see if two objects are actuall
 For example, consider the following code.
 
 ```python {cmd=true}
-x = 123456789
+x = [1, 2, 3]
 y = x
-z = 123456789
+z = [1, 2, 3]
 
 print(x is y)
 print(x is z)
@@ -73,11 +80,11 @@ print(x == z)
 ````
 
 An object cannot change its identity.
-In python, you also cannot change the type of an object.
+In Python, you also cannot change the type of an object.
 You can reassign a variable to point to different object of a different type, but that's not the same thing.
 There are several functions that may seem to be changing the types of objects, but they are really just creating a new object from the old.
 
-```python {cmd=true id="j4htp29r"}
+```python {cmd=true id="j4htp29r" continue="type"}
 x = 2
 print("x =", x)
 print("float(x) =", float(x))
@@ -90,7 +97,7 @@ print("Now, x has type", type(x))
 
 You can do more elaborate things as well.
 
-```python {cmd=true id:"j4htrk52"}
+```python {cmd=true id:"j4htrk52" continue="type"}
 numstring = "3.1415926"
 y = float(numstring)
 print("y has type", type(y))
@@ -120,7 +127,7 @@ The next five most important types in Python are strings, lists, tuples, diction
 
 **Strings** are sequences of characters and can be used to store text of all kinds.  Note that you can **concatenate** strings to create a new string using the plus sign.  You can also access individual characters using square brackets and an **index**.  The name of the class for strings is `str`.  You can often turn other objects into strings.
 
-```python {cmd=true}
+```python {cmd=true continue="type"}
 s = "Hello, "
 t = "World."
 u = s + t
@@ -136,18 +143,18 @@ print(n[2])
 **Lists** are ordered sequences of objects.  The objects do not have to be the same type.  They are indicated by square brackets and the **elements** of the list are separated by commas.  You can append an item to the end of a list `L` by using the command `L.append(newitem)`.
 It is possible to index into a list exactly as we did with strings.
 
-```python {cmd=true}
+```python {cmd=true continue="type"}
 L = [1,2,3]
-print(str(type(L))[1:-1])
+print(type(L))
 L.append(400)
 print(L)
 ```
 
 ### Tuples (`tuple`)
 
-**Tuples** are also ordered sequences of objects, but unlike lists, they are immutable.  You can access the items but you can’t change what items are in the tuple after you create it.  
+**Tuples** are also ordered sequences of objects, but unlike lists, they are immutable.  You can access the items but you can’t change what items are in the tuple after you create it.  For example, trying to `append` raises an exception.
 
-```python {cmd=true id:"j4htlbaj"}
+```python {cmd=true id:"j4htlbaj" continue="type"}
 t = (1, 2, "skip a few", 99, 100)
 print(type(t))
 print(t)
@@ -178,7 +185,7 @@ print(d["pi"])
 
 Be careful that empty braces `{}` indicates an empty dictionary and not an empty set.  Here is an example of a newly created set.  Some items are added.  Notice that the duplicates have no effect on the value as its printed.
 
-```python {cmd=true}
+```python {cmd=true continue="type"}
 s = {2,1}
 print(type(s))
 s.add(3)
@@ -385,7 +392,7 @@ Here is how we use the `__name__` attribute to check how the program is being ru
 def somefunction():
 	print("Real important stuff here.")
 
-if __name__ == ‘__main__’:
+if __name__ == '__main__':
 	somefunction()
 ```
 
