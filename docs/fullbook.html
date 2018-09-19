@@ -19,196 +19,169 @@
 
       <style> 
       /**
- * prism.js Github theme based on GitHub's theme.
- * @author Sam Clarke
+ * Darcula theme
+ *
+ * Adapted from a theme based on:
+ * IntelliJ Darcula Theme (https://github.com/bulenkov/Darcula)
+ *
+ * @author Alexandre Paradis <service.paradis@gmail.com>
+ * @version 1.0
  */
+
 code[class*="language-"],
 pre[class*="language-"] {
-  color: #333;
-  background: none;
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.4;
+	color: #a9b7c6;
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	line-height: 1.5;
 
-  -moz-tab-size: 8;
-  -o-tab-size: 8;
-  tab-size: 8;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
 
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    color: inherit;
+    background: rgba(33,66,131,.85);
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    color: inherit;
+    background: rgba(33,66,131,.85);
 }
 
 /* Code blocks */
 pre[class*="language-"] {
-  padding: .8em;
-  overflow: auto;
-  /* border: 1px solid #ddd; */
-  border-radius: 3px;
-  /* background: #fff; */
-  background: #f5f5f5;
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #2b2b2b;
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-  padding: .1em;
-  border-radius: .3em;
-  white-space: normal;
-  background: #f5f5f5;
+	padding: .1em;
+	border-radius: .3em;
 }
 
 .token.comment,
-.token.blockquote {
-  color: #969896;
-}
-
+.token.prolog,
 .token.cdata {
-  color: #183691;
+	color: #808080;
 }
 
-.token.doctype,
-.token.punctuation,
-.token.variable,
-.token.macro.property {
-  color: #333;
+.token.delimiter,
+.token.boolean,
+.token.keyword,
+.token.selector,
+.token.important,
+.token.atrule {
+	color: #cc7832;
 }
 
 .token.operator,
-.token.important,
-.token.keyword,
-.token.rule,
-.token.builtin {
-  color: #a71d5d;
-}
-
-.token.string,
-.token.url,
-.token.regex,
-.token.attr-value {
-  color: #183691;
-}
-
-.token.property,
-.token.number,
-.token.boolean,
-.token.entity,
-.token.atrule,
-.token.constant,
-.token.symbol,
-.token.command,
-.token.code {
-  color: #0086b3;
+.token.punctuation,
+.token.attr-name {
+    color: #a9b7c6;
 }
 
 .token.tag,
-.token.selector,
-.token.prolog {
-  color: #63a35c;
+.token.tag .punctuation,
+.token.doctype,
+.token.builtin {
+    color: #e8bf6a;
 }
 
-.token.function,
-.token.namespace,
-.token.pseudo-element,
-.token.class,
-.token.class-name,
-.token.pseudo-class,
-.token.id,
-.token.url-reference .token.variable,
-.token.attr-name {
-  color: #795da3;
+.token.entity,
+.token.number,
+.token.symbol {
+    color: #6897bb;
 }
 
-.token.entity {
-  cursor: help;
+.token.property,
+.token.constant,
+.token.variable {
+    color: #9876aa;
 }
 
-.token.title,
-.token.title .token.punctuation {
-  font-weight: bold;
-  color: #1d3e81;
+.token.string,
+.token.char {
+	color: #6a8759;
 }
 
-.token.list {
-  color: #ed6a43;
+.token.attr-value,
+.token.attr-value .punctuation {
+    color: #a5c261;
+}
+.token.attr-value .punctuation:first-child {
+    color: #a9b7c6;
 }
 
-.token.inserted {
-  background-color: #eaffea;
-  color: #55a532;
+.token.url {
+	color: #287bde;
+	text-decoration: underline;
 }
 
-.token.deleted {
-  background-color: #ffecec;
-  color: #bd2c00;
+.token.function {
+	color: #ffc66d;
+}
+
+.token.regex {
+    background: #364135;
 }
 
 .token.bold {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .token.italic {
-  font-style: italic;
+	font-style: italic;
 }
 
-
-/* JSON */
-.language-json .token.property {
-  color: #183691;
+.token.inserted {
+    background: #294436;
 }
 
-.language-markup .token.tag .token.punctuation {
-  color: #333;
+.token.deleted {
+    background: #484a4a;
 }
 
-/* CSS */
-code.language-css,
-.language-css .token.function {
-  color: #0086b3;
+/*code.language-css .token.punctuation {
+	color: #cc7832;
+}*/
+
+code.language-css .token.property,
+code.language-css .token.property + .token.punctuation {
+	color: #a9b7c6;
 }
 
-/* YAML */
-.language-yaml .token.atrule {
-  color: #63a35c;
+code.language-css .token.id {
+	color: #ffc66d;
 }
 
-code.language-yaml {
-  color: #183691;
-}
-
-/* Ruby */
-.language-ruby .token.function {
-  color: #333;
-}
-
-/* Markdown */
-.language-markdown .token.url {
-  color: #795da3;
-}
-
-/* Makefile */
-.language-makefile .token.symbol {
-  color: #795da3;
-}
-
-.language-makefile .token.variable {
-  color: #183691;
-}
-
-.language-makefile .token.builtin {
-  color: #0086b3;
-}
-
-/* Bash */
-.language-bash .token.keyword {
-  color: #0086b3;
+code.language-css .token.selector > .token.class,
+code.language-css .token.selector > .token.attribute,
+code.language-css .token.selector > .token.pseudo-class,
+code.language-css .token.selector > .token.pseudo-element {
+	color: #ffc66d;
 }html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
  
-      </style>
+      </service.paradis@gmail.com></style>
     </head>
     <body for="html-export">
       <div class="mume markdown-preview   ">
@@ -608,7 +581,7 @@ t<span class="token punctuation">.</span>append<span class="token punctuation">(
 (1, 2, 'skip a few', 99, 100)
 100
 Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/zk4yoto70_code_chunk.py", line 10, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/jcnvn7d52_code_chunk.py", line 10, in <module>
     t.append(101)
 AttributeError: 'tuple' object has no attribute 'append'
 </module></pre></div></div><h3 class="mume-header" id="dictionaries-dict">Dictionaries (<code>dict</code>)</h3>
@@ -623,7 +596,7 @@ d<span class="token punctuation">[</span><span class="token string">"pi"</span><
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">[</span><span class="token string">"pi"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">{'pi': 3.1415926, 2: 'two', 5: 'five'}
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">{2: 'two', 5: 'five', 'pi': 3.1415926}
 3.1415926
 </pre></div></div><h3 class="mume-header" id="sets-set">Sets (<code>set</code>)</h3>
 
@@ -897,7 +870,7 @@ u <span class="token operator">=</span> Vector<span class="token punctuation">(<
 v <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>u <span class="token operator">+</span> v<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text"><__main__.Vector object="" at="" 0x103081048="">
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text"><__main__.Vector object="" at="" 0x103981080="">
 </__main__.Vector></pre></div></div><p>That output is pretty weird.  It's telling me that u + v is a vector object at some memory address, but doesn't tell me what vector it is.  We need to implement <code>__str__</code> in order to print the vector nicely.  This magic method is called by the print function to convert its parameters into a string.  It is not obvious how a string ought to be printed for a given class.  We have to specify it ourselves.</p>
 <p>In the example below, I added a <code>__str__</code> method as well as some type checking on the inputs.  The result will guarantee that a vector has two floats as coordinates.</p>
 <div class="code-chunk" data-id="j32abjfi" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=27, cmd=true id=&amp;amp;quot;j32abjfi&amp;amp;quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
@@ -1079,7 +1052,7 @@ L<span class="token punctuation">.</span>append<span class="token punctuation">(
     <span class="token keyword">assert</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span>
     y <span class="token operator">=</span> Doubler<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">)</span>
     <span class="token keyword">assert</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/7e1480ty0_code_chunk.py", line 8
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/zo9j8s50g_code_chunk.py", line 8
     if __name__ == ‘__main__’:
                             ^
 SyntaxError: invalid character in identifier
@@ -1108,7 +1081,7 @@ Tests are run by calling the <code>unittest.main</code> function.</p>
         self<span class="token punctuation">.</span>assertEquals<span class="token punctuation">(</span>d<span class="token punctuation">.</span>name<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ‘Thursday’<span class="token punctuation">)</span>		
 
 unittest<span class="token punctuation">.</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/vghlix1zk_code_chunk.py", line 6
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/nwk1llbw1_code_chunk.py", line 6
     d = DayOfTheWeek(‘F’)
                        ^
 SyntaxError: invalid character in identifier
@@ -1134,7 +1107,7 @@ SyntaxError: invalid character in identifier
 <div class="code-chunk" data-id="code-chunk-id-35" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=35, cmd=true}" class="language-python">avg1 <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>L1<span class="token punctuation">)</span><span class="token operator">/</span><span class="token builtin">len</span><span class="token punctuation">(</span>L1<span class="token punctuation">)</span>
 avg2 <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>L2<span class="token punctuation">)</span><span class="token operator">/</span><span class="token builtin">len</span><span class="token punctuation">(</span>L2<span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/9gq4dmw6t_code_chunk.py", line 1, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/p8ef8qym4_code_chunk.py", line 1, in <module>
     avg1 = sum(L1)/len(L1)
 NameError: name 'L1' is not defined
 </module></pre></div></div><p>Then, it is observed that there should be some default behavior for empty lists so (a test is added and) the code is updated as follows.</p>
@@ -1149,7 +1122,7 @@ NameError: name 'L1' is not defined
 <span class="token keyword">else</span><span class="token punctuation">:</span>
     avg2 <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>L2<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L2<span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/t8qbis6u4_code_chunk.py", line 1, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/iizkugytj_code_chunk.py", line 1, in <module>
     if len(L1) == 0:
 NameError: name 'L1' is not defined
 </module></pre></div></div><p><strong>Refactored Code:</strong></p>
@@ -1162,7 +1135,7 @@ NameError: name 'L1' is not defined
 avg1 <span class="token operator">=</span> avg<span class="token punctuation">(</span>L1<span class="token punctuation">)</span>
 avg2 <span class="token operator">=</span> avg<span class="token punctuation">(</span>L2<span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/suup2o710_code_chunk.py", line 7, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/l8q3o895s_code_chunk.py", line 7, in <module>
     avg1 = avg(L1)
 NameError: name 'L1' is not defined
 </module></pre></div></div><p>In the refactored code, the details of the <code>avg</code> function are not duplicated.  If we want to later modify how the code handles empty lists, we will only have to change it in one place.</p>
@@ -1271,7 +1244,7 @@ It's not surprising to see that the average time goes up as the length <span cla
 <div class="code-chunk" data-id="code-chunk-id-40" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=41, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;,id:&amp;amp;quot;j543zqs2&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates1<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/6ad9iu4vi_code_chunk.py", line 2, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/c254so1wl_code_chunk.py", line 2, in <module>
     timetrials(duplicates1, n)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>Let's try to make our code faster.
@@ -1289,7 +1262,7 @@ Here is what the code would look like.</p>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-42" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=43, cmd=true continue:&amp;amp;quot;duplicates2&amp;amp;quot;, id:&amp;amp;quot;j544j8r7&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates2<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/66bmms6xs_code_chunk.py", line 2, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/uw8w8csd1_code_chunk.py", line 2, in <module>
     timetrials(duplicates2, n)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>There is a python shortcut the kind of loop used in <code>duplicates2</code>.
@@ -1302,7 +1275,7 @@ This can be very handy.</p>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-44" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=45, cmd=true continue:&amp;amp;quot;duplicates3&amp;amp;quot;, id:&amp;amp;quot;j544qfui&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates3<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/cuhs4s8ch_code_chunk.py", line 2, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/ikif24d6v_code_chunk.py", line 2, in <module>
     timetrials(duplicates3, n)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>This last optimization reduces the number of lines of code and may be desirable for code readability, but it doesn't improve the speed.</p>
@@ -1344,7 +1317,7 @@ If there are duplicates, they will be adjacent after sorting.</p>
     timetrials<span class="token punctuation">(</span>duplicates7<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'---------------------------'</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Quadratic: Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/44064s4ve_code_chunk.py", line 3, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/wf8u8hvia_code_chunk.py", line 3, in <module>
     timetrials(duplicates3, n)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>Some key ideas:
@@ -1370,7 +1343,7 @@ Sometimes, the gap between two pieces of code will increase as the input size gr
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-49" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=50, cmd=true continue:&amp;amp;quot;sumk1&amp;amp;quot;,id:&amp;amp;quot;j54378j3&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Sum: %d, time taken: %f"</span> <span class="token operator">%</span> sumk<span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/28iwb8o52_code_chunk.py", line 2, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/9qq49ezxo_code_chunk.py", line 2, in <module>
     print("Sum: %d, time taken: %f" % sumk(10000))
 NameError: name 'sumk' is not defined
 </module></pre></div></div><p>Notice that we see some variation in the time required.
@@ -1388,7 +1361,7 @@ timetrials<span class="token punctuation">(</span>sumk<span class="token punctua
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">1000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">10000000</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/suowf0m8i_code_chunk.py", line 1, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/kizk7ot7z_code_chunk.py", line 1, in <module>
     timetrials(sumk, 10000)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>Seeing the times for different values of <code>k</code> reveals a rather unsuprising pattern.
@@ -1418,7 +1391,7 @@ timetrials<span class="token punctuation">(</span>sumk2<span class="token punctu
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">10000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">100000000</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/bwnqdzbnm_code_chunk.py", line 9, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/9fyluhtgn_code_chunk.py", line 9, in <module>
     timetrials(sumk2, 10000)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>This is much much faster.
@@ -1873,9 +1846,9 @@ s<span class="token punctuation">.</span>push<span class="token punctuation">(</
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/gjd2tba7l_code_chunk.py", line 24, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/2jt5itqjc_code_chunk.py", line 24, in <module>
     s.pop()
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/gjd2tba7l_code_chunk.py", line 9, in pop
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/2jt5itqjc_code_chunk.py", line 9, in pop
     return self._L.pop()
 IndexError: pop from empty list
 </module></pre></div></div><p>If we look at the error message, it even seems pretty good.
@@ -1898,16 +1871,16 @@ s<span class="token punctuation">.</span>push<span class="token punctuation">(</
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/5szjhpxun_code_chunk.py", line 24, in pop
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/xa2ed0uri_code_chunk.py", line 24, in pop
     return self._L.pop()
 IndexError: pop from empty list
 
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/5szjhpxun_code_chunk.py", line 31, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/xa2ed0uri_code_chunk.py", line 31, in <module>
     s.pop()
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/5szjhpxun_code_chunk.py", line 26, in pop
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/xa2ed0uri_code_chunk.py", line 26, in pop
     raise RuntimeError("pop from empty stack")
 RuntimeError: pop from empty stack
 </module></pre></div></div><p style="page-break-after:always;"></p>
@@ -2063,7 +2036,7 @@ We will be able to use this to get some improvement for <code>addlast</code>, be
             self<span class="token punctuation">.</span>_tail<span class="token punctuation">.</span>link <span class="token operator">=</span> <span class="token boolean">None</span>
             <span class="token keyword">return</span> item
 
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/w8d90em23_code_chunk.py", line 28
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/jw207x6dx_code_chunk.py", line 28
     while.currentnode.link is not self._tail:
          ^
 SyntaxError: invalid syntax
@@ -2363,7 +2336,7 @@ We will just need to consider those cases where the nodes <code>before</code> or
 
     <span class="token keyword">def</span> <span class="token function">addlast</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_addbetween<span class="token punctuation">(</span>item<span class="token punctuation">,</span> self<span class="token punctuation">.</span>_tail<span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/r1jxxebsu_code_chunk.py", line 1
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/jrz0iw3qo_code_chunk.py", line 1
     def _addbetween(self, item, before, after):
     ^
 IndentationError: unexpected indent
@@ -2388,7 +2361,7 @@ It includes a little logic to detect if the head or tail or both change with the
 
     <span class="token keyword">def</span> <span class="token function">removelast</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_remove<span class="token punctuation">(</span>self<span class="token punctuation">.</span>_tail<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/hy4pn3tue_code_chunk.py", line 1
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/wwlyjf4ro_code_chunk.py", line 1
     def _remove(self, node):
     ^
 IndentationError: unexpected indent
@@ -2436,7 +2409,7 @@ n <span class="token operator">=</span> L<span class="token punctuation">.</span
 <span class="token keyword">while</span> n <span class="token keyword">is</span> <span class="token operator">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
     n <span class="token operator">=</span> n<span class="token punctuation">.</span>link
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/9d7gwvbia_code_chunk.py", line 2
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/eh54a2hj5_code_chunk.py", line 2
     def __iadd__(self, other):
     ^
 IndentationError: unexpected indent
@@ -2540,7 +2513,7 @@ A<span class="token punctuation">.</span>append<span class="token punctuation">(
 B<span class="token punctuation">.</span>append<span class="token punctuation">(</span>B<span class="token punctuation">)</span>
 A <span class="token operator">==</span> B
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/z89r6zkrb_code_chunk.py", line 5, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/kh30cu1vy_code_chunk.py", line 5, in <module>
     A == B
 RecursionError: maximum recursion depth exceeded in comparison
 </module></pre></div></div><p>In this case, the recursive function is <code>list.__eq__</code>, the method that compares two lists when you use <code>==</code>.  It compares the list by checking if the elements are equal.  The lists <code>A</code> and <code>B</code> each have length 2.  The first elements match.  The second element of each list is another list.  To compare them, there is another call to <code>list.__eq__</code>.  This is a repeat of the first call and the process repeats until the recursion limit is reached.</p>
@@ -4969,7 +4942,7 @@ It should not be necessary to go through all the edges, just to find the ones in
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"neighbors of 2:"</span><span class="token punctuation">,</span> <span class="token builtin">list</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"neighbors of 3:"</span><span class="token punctuation">,</span> <span class="token builtin">list</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/j8b3u99nl_code_chunk.py", line 1, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/25w2kt1m7_code_chunk.py", line 1, in <module>
     G = AdjacencySetGraph({1,2,3}, {(1,2),(2,1),(1,3)})
 NameError: name 'AdjacencySetGraph' is not defined
 </module></pre></div></div><p>Let's do a very simple example to make sure it works as we expect it to.</p>
