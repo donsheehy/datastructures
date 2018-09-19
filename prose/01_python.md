@@ -283,19 +283,19 @@ An `if` statement in its simplest form evaluates an expression and tries to inte
 
 ```python {cmd=true}
 if 3 + 3 < 7:
-	print("This should be printed.")
+    print("This should be printed.")
 
 if 2 ** 8 != 256:
-	print("This should not be executed.")
+    print("This should not be printed.")
 ```
 
 An `if` statement can also include an `else` clause.  This is a second block of code that executes if the predicate evaluates to `False`.
 
 ```python {cmd=true}
 if False:
-	print("This is bad.")
+    print("This is bad.")
 else:
-	print("This will print.")
+    print("This will print.")
 ```
 
 A `while` loop also has a predicate.  It is evaluated at the top of a block of code.  If it evaluates to `True`, then the block is executed and then it repeats.  The repetition continues until the predicate evaluate to `False` or until the code reaches a `break` statement.
@@ -303,8 +303,8 @@ A `while` loop also has a predicate.  It is evaluated at the top of a block of c
 ```python {cmd=true}
 x = 1
 while x < 128:
-	print(x)
-	x = x * 2
+    print(x)
+    x = x * 2
 ```
 
 A `try` block is the way to catch and recover from errors while a program is running.  If you have some code that may cause an error, but you don’t want it to crash your program, you can put the code in a `try` block.  Then, you can *catch* the error (also known as an **exception**) and deal with it.  A simple example might be a case where you want to convert some number to a `float`.  Many types of objects can be converted to `float`, but many cannot.  If we simply try to do the conversion and it works, everything is fine.  Otherwise, if there is a `ValueError`, we can do something else instead.  
@@ -312,29 +312,29 @@ A `try` block is the way to catch and recover from errors while a program is run
 ```python {cmd=true}
 x = "not a number"
 try:
-	f = float(x)
+    f = float(x)
 except ValueError:
-	print("You can’t do that!")
+    print("You can’t do that!")
 ```
 
 A function also changes the control flow.  In Python, you define a function with the `def` keyword.  This keyword creates an object to store the block of code.  The parameters for the function are listed in parentheses after the function name.  The `return` statement causes the control flow to revert back to where the function was called and determines the value of the function call.  
 
 ```python {cmd=true}
 def foo(x, y):
-	return 8 * x + y
+    return 8 * x + y
 
 print(foo(2, 1))
-print(foo(“Na”, " batman"))
+print(foo("Na", " batman"))
 ```
 
 Notice that there is no requirement that we specify the types of objects a function expects for its arguments.  This is very convenient, because it means that we can use the same function to operate on different types of objects (as in the example above).  If we define a function twice, even if we change the parameters, the first will be overwritten by the second.  This is exactly the same as assigning to a variable twice.  The name of a function is just a name; it refers to an object (the function).  Functions can be treated like any other object.
 
 ```python {cmd=true}
-Def foo(x):
-	return x + 2
+def foo(x):
+    return x + 2
 
 def bar(somefunction):
-	return somefunction(4)
+    return somefunction(4)
 
 print(bar(foo))
 somevariable = foo
@@ -347,26 +347,26 @@ As we start to write more complex programs, it starts to make sense to break up 
 
 For example, suppose we have the following files.
 
-```python {cmd=true}
+```python {cmd=true id="twofunctions"}
 # File: twofunctions.py
+
 def f(x):
-	return 2 * x + 3
+    return 2 * x + 3
 
 def g(x):
-	return x ** 2 - 1
+    return x ** 2 - 1
 ```
 
-```python {cmd=true}
+```python
 # File: theimporter.py
-
 import twofunctions
 
 def f(x):
-	return x - 1
+    return x - 1
 
-print(twofunctions.f(1))
-print(f(1))
-print(twofunctions.g(4))
+print(twofunctions.f(1)) # Will print 5
+print(f(1))              # Will print 0
+print(twofunctions.g(4)) # Will print 15
 ```
 
 The `import` brings the module name into the current namespace.  I can then use it to identify the functions from the module.  
@@ -378,11 +378,11 @@ There is very little magic in an import.  In some sense, it’s just telling the
 print("The name of this module is", __name__)
 ```
 
-```python {cmd=true}
+```python
 # File: theimporter.py
 
 import mymodule
-print("Notice that it printed something different that time?")
+print("Notice that it will print something different when imported?")
 ```
 
 Here is how we use the `__name__` attribute to check how the program is being run.
@@ -390,10 +390,10 @@ Here is how we use the `__name__` attribute to check how the program is being ru
 ```python {cmd=true}
 
 def somefunction():
-	print("Real important stuff here.")
+    print("Real important stuff here.")
 
 if __name__ == '__main__':
-	somefunction()
+    somefunction()
 ```
 
 In the preceding code, the message is printed only when the module is executed as a script.  It is not printed (i.e. the `somefunction` function is not called) if the module is being imported.  This is a very common python idiom.

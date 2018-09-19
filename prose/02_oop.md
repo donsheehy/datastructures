@@ -148,23 +148,22 @@ The word **encapsulation** has two different, but related, meanings.  The first 
 
 The second meaning of encapsulation emphasizes the boundary between the inside and the outside of the class, specifying what is visible to the users of a class.  Often this means partitioning the attributes into **public** and **private**.  In Python, there is no formal mechanism to keep one from accessing attributes of a class from outside that class.  So, in a sense, everything is public.  However, there is a convention to make it clear what *ought* to be kept private.  Any attribute that starts with an underscore is considered private.  Think of it like someone’s unlocked diary.  You can read it, but you shouldn’t.
 
-```python
+```python {cmd id="diary"}
 class Diary:
-	def __init__(self, title):
-		self.title = title
-		self._entries = []
+    def __init__(self, title):
+        self.title = title
+        self._entries = []
 
-	def addentry(self, entry):
-		if entry != self._lastentry():
-			self._entries.append(entry)
+    def addentry(self, entry):
+        self._entries.append(entry)
 
-	def _lastentry(self):
-		return self._entries[-1]
+    def _lastentry(self):
+        return self._entries[-1]
 ```
 
 In the example above, the `addentry` method is public.  Anyone can add an entry.  However, the `_lastentry` method is private.  One should not call this method from outside of the `Diary` class. (Again, you can, but you shouldn’t.)  The `title` is also public, but the list `_entries` is private.  The collection of all public attributes (in this case, `addentry` and `title`) constitute the **public interface** of the class.  This is what a user of the class should interact with.  For example, one can use the class above as follows.
 
-```python
+```python {cmd continue="diary"}
 mydiary = Diary("Don’t read this!!!")
 mydiary.addentry("It was a good day.")
 print("The diary is called ", mydiary.title)
@@ -178,60 +177,60 @@ Whenever we talk about the types of things in our everyday life, it’s possible
 
 Consider this example from a geometry program.
 
-```python
+```python {cmd}
 class Triangle:
-	def __init__(self, points):
-		self._sides = 3
-		self._points = list(points)
-		if len(self._points) != 3:
-			raise ValueError("Wrong number of points.")
+    def __init__(self, points):
+        self._sides = 3
+        self._points = list(points)
+        if len(self._points) != 3:
+            raise ValueError("Wrong number of points.")
 
-	def sides(self):
-		return 3
+    def sides(self):
+        return 3
 
-	def __str__(self):
-		return "I’m a triangle."
+    def __str__(self):
+        return "I’m a triangle."
 
 class Square:
-	def __init__(self, points):
-		self._sides = 4
-		self._points = list(points)
-		if len(self._points) != 4:
-			raise ValueError("Wrong number of points.")
+    def __init__(self, points):
+        self._sides = 4
+        self._points = list(points)
+        if len(self._points) != 4:
+            raise ValueError("Wrong number of points.")
 
-	def sides(self):
-		return 4
+    def sides(self):
+        return 4
 
-	def __str__(self):
-		return "I’m so square."
+    def __str__(self):
+        return "I’m so square."
 ```
 
 These are obviously, very closely related classes.  One can make another class for which these two classes are **subclasses**.  Then, anything common between the two classes can be put into the larger class or **superclass**.
 
 ```python
 class Polygon:
-	def __init__(self, sides, points):
-		self._sides = sides
-		self._points = list(points)
-		if len(self._points) != self._sides:
-			raise ValueError("Wrong number of points.")		
+    def __init__(self, sides, points):
+        self._sides = sides
+        self._points = list(points)
+        if len(self._points) != self._sides:
+            raise ValueError("Wrong number of points.")		
 
-	def sides(self):
-		return self._sides
+    def sides(self):
+        return self._sides
 
 class Triangle(Polygon):
-	def __init__(self, points):
-		Polygon.__init__(self, 3, points)
+    def __init__(self, points):
+        Polygon.__init__(self, 3, points)
 
-	def __str__(self):
-		return "I’m a triangle."
+    def __str__(self):
+        return "I’m a triangle."
 
 class Square(Polygon):
-	def __init__(self, points):
-		Polygon.__init__(self, 4, points)
+    def __init__(self, points):
+        Polygon.__init__(self, 4, points)
 
-	def __str__(self):
-		return "I’m so square."
+    def __str__(self):
+        return "I’m so square."
 ```
 
 Notice that the class definitions of `Triangle` and `Square` now indicate the `Polygon` class in parentheses.  This is called **inheritance**.  The `Triangle` class **inherits from** (or **extends**) the `Polygon` class.  The **superclass** `Polyon` and the **subclasses** are `Triangle` and `Square`.  When we call a method on an object, if that method is not defined in the class of that object, Python will look for the method in the superclass.   This search for the correct function to call is called the **method resolution order**.   If a method from the superclass is redefined in the subclass, then calling the method on an instance of the subclass calls the subclass method instead.
@@ -254,15 +253,15 @@ Inheritance is considered a staple of object-oriented programming, and it’s im
 
 ```python
 class PolygonCollection:
-	def __init__(self):
-		self._triangles = []
-		self._squares = []
+    def __init__(self):
+        self._triangles = []
+        self._squares = []
 
-	def add(self, polygon):
-		if polygon.sides() == 3:
-			self._triangles.append(polygon)
-		if polygon.sides() == 4:
-			self._squares.append(polygon)
+    def add(self, polygon):
+        if polygon.sides() == 3:
+            self._triangles.append(polygon)
+        if polygon.sides() == 4:
+            self._squares.append(polygon)
 ```
 
 Notice that the `add` method would work equally well with either version of the `Triangle` and `Square` classes defined previously.  In fact, we could pass it any object that has a method called `sides`.  We didn’t *need* inheritance in order to treat Triangles and squares as special cases of the same object.  Sometimes, inheritance is the right way to combine classes so they can be treated as a single class, but in Python, it’s not as necessary as it is in other languages.
@@ -283,14 +282,14 @@ Consider the case where we want a class to behave like a `list`.  For example, w
 
 ```python {cmd=true, id="MyLimitedList"}
 class MyLimitedList:
-	def __init__(self):
-		self._L = []
+    def __init__(self):
+        self._L = []
 
-	def append(self, item):
-		self._L.append(item)
+    def append(self, item):
+        self._L.append(item)
 
-	def __getitem__(self, index):
-		return self._L[index]
+    def __getitem__(self, index):
+        return self._L[index]
 ```
 
 Here, the magic method `__getitem__` will allow us to use the square bracket notation with our class.  As with other magic methods, we don’t call it directly.

@@ -1,35 +1,35 @@
 # Testing
 
 Python is an interpreted language.  This gives it a great deal of flexibility, such as duck typing.  However, this can also lead to different types of common bugs.  For example, if you pass a `float` to a function that really should only receive  an `int`, Python won’t stop you, but it might lead to unexpected behavior.  In general, we have to run the code to get an error, but not all bugs will generate errors.  Towards the goal of writing correct code, we use tests to determine two things:
- 
+
 
 1. **Does it work?**  That is, does the code do what it’s supposed to do?
 2. **Does it still work?** Can you be confident that the changes you made haven’t caused other part of the code to break?
- 
+
 ## Writing Tests
 
-Testing your code means writing more code that checks that the behavior matches your expectations. This is important: 
+Testing your code means writing more code that checks that the behavior matches your expectations. This is important:
 
-> Test  behavior, not implementation. 
+> Test  behavior, not implementation.
 
 You have some idea of what code is supposed to do.  You run the code.  Did it do what you expected?  How about some other inputs?  In the simplest case, you could simply add some code to the bottom of the module.  
 
 ```python {cmd=true}
 class Doubler:
-	def __init__(self, n):
-		self._n = 2 * n
-		
-	def n(self):
-		return self._n
-		
+    def __init__(self, n):
+        self._n = 2 * n
+
+    def n(self):
+        return self._n
+
 if __name__ == ‘__main__’:
-	x = Doubler(5)
-	assert(x.n() == 10)
-	y = Doubler(-4)
-	assert(y.n() == -8)
+    x = Doubler(5)
+    assert(x.n() == 10)
+    y = Doubler(-4)
+    assert(y.n() == -8)
 ```
 
-The `assert` statement will raise an error if the predicate that follows it is `False`.  Otherwise, the program just continues as usual.  Assertions are much better than just printing because you don’t have to manually check to see that it printed what you expected it to print.  Also, people have a tendency to delete old print statements to reduce clutter in their test output.  Deleting tests after they pass is a *very bad idea*.  Your code is going to change, and you will want to know if a change breaks something that *used* to work. 
+The `assert` statement will raise an error if the predicate that follows it is `False`.  Otherwise, the program just continues as usual.  Assertions are much better than just printing because you don’t have to manually check to see that it printed what you expected it to print.  Also, people have a tendency to delete old print statements to reduce clutter in their test output.  Deleting tests after they pass is a *very bad idea*.  Your code is going to change, and you will want to know if a change breaks something that *used* to work.
 
 The line `if __name__ == ‘__main__’:` makes sure that the tests will not run when the module is imported from somewhere else.
 
@@ -54,12 +54,12 @@ import unittest
 from dayoftheweek import DayOfTheWeek
 
 class TestDayOfTheWeek(unittest.TestCase):
-	def testinitwithabbreviation(self):
-		d = DayOfTheWeek(‘F’)
-		self.assertEquals(d.name(), ‘Friday’)
-		
-		d = DayOfTheWeek(‘Th’)
-		self.assertEquals(d.name(), ‘Thursday’)		
+    def testinitwithabbreviation(self):
+        d = DayOfTheWeek(‘F’)
+        self.assertEquals(d.name(), ‘Friday’)
+
+        d = DayOfTheWeek(‘Th’)
+        self.assertEquals(d.name(), ‘Thursday’)		
 
 unittest.main()
 ```
@@ -75,7 +75,7 @@ Writing tests first forces you to do two things:
 1. Decide how you want to be able to use some function.  What should the parameters be?  What should it return?
 2. Write only the code that you need.  If there is code that doesn’t support some desired behavior with tests, then you don’t need to write it.
 
-The TDD mantra is **Red-Green-Refactor**.  It refers to three phases of the testing process. 
+The TDD mantra is **Red-Green-Refactor**.  It refers to three phases of the testing process.
 
 - **Red:** The tests fail.  They better!  You haven’t written the code yet!
 - **Green:** You get the tests to pass by changing the code.
@@ -94,30 +94,30 @@ avg1 = sum(L1)/len(L1)
 avg2 = sum(L2)/len(L2)
 ```
 
-Then, it is observed that there should be some default behavior for empty lists so (a test is added and) the code is updated as follows. 
+Then, it is observed that there should be some default behavior for empty lists so (a test is added and) the code is updated as follows.
 
 **Updated Code Before Refactoring:**
 
 ```python {cmd=true}
 if len(L1) == 0:
-	avg1 = 0
+    avg1 = 0
 else:
-	avg1 = sum(L1) / len(L1)
+    avg1 = sum(L1) / len(L1)
 
 if len(L2) == 0:
-	avg2 = 0
+    avg2 = 0
 else:
-	avg2 = sum(L2) / len(L2)
+    avg2 = sum(L2) / len(L2)
 ```
 
 **Refactored Code:**
 
 ```python {cmd=true}
 def avg(L):
-	if len(L) == 0:
-		return 0
-	else:
-		return sum(L) / len(L)
+    if len(L) == 0:
+        return 0
+    else:
+        return sum(L) / len(L)
 
 avg1 = avg(L1)
 avg2 = avg(L2)
@@ -131,7 +131,7 @@ The refactored code is also easier to read.
 
 Step away from the computer.  Think about the problem you are trying to solve.  Think about the methods you are writing.  Ask yourself, *"What should happen when I run this code?"*. Also ask yourself, *"How do I want to use this code?"*
 
-- Write tests that use the code the way it ought to be used. 
+- Write tests that use the code the way it ought to be used.
 - Then write tests that use the code incorrectly to test that your code *fails gracefully*.  Does it give clear error messages?
 - Test the *edge cases*, those tricky cases that may rarely come up.  Try to break your own code.
 - Turn bugs into tests.  A bug or an incorrect behavior can reappear after you fix it.  You want to catch it when it does.  Sometimes you notice a bug when a different test fails.  Write a specific test to reveal the bug, then fix it.
@@ -141,7 +141,7 @@ Step away from the computer.  Think about the problem you are trying to solve.  
 
 In object-oriented design, we divide the code into classes.  These classes have certain relationships sometimes induced by inheritance or composition.  The classes have public methods.  We call these public methods the **interface** to the class.
 
-To start a design, we look at the problem and identify nouns (classes) and verbs (methods).  In our description, we express what *should* happen.  Often these expectations are expressed in "if...then" language, i.e., "if I call this method with these parameters, then this will happen.". A unit test will encode this expectation.  It will check that the actual behavior of the code matches teh expected behavior.
+To start a design, we look at the problem and identify nouns (classes) and verbs (methods).  In our description, we express what *should* happen.  Often these expectations are expressed in "if...then" language, i.e., "if I call this method with these parameters, then this will happen.". A unit test will encode this expectation.  It will check that the actual behavior of the code matches the expected behavior.
 
 When writing a class, it helps focus our attention and reduce the number fo things to think about if we assume each class works the way it is supposed to.  We try to make this true by testing each class individually.  Then, when we compose classes into more complex classes, we can have more confidence that any errors we find are in the new class and not somewhere lurking in the previously written classes.  
 
