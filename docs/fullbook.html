@@ -18,25 +18,24 @@
       
 
       <style> 
-      /**
- * Darcula theme
- *
- * Adapted from a theme based on:
- * IntelliJ Darcula Theme (https://github.com/bulenkov/Darcula)
- *
- * @author Alexandre Paradis <service.paradis@gmail.com>
- * @version 1.0
+      /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+abap+actionscript+ada+apacheconf+apl+applescript+asciidoc+aspnet+autoit+autohotkey+bash+basic+batch+c+brainfuck+bro+bison+csharp+cpp+coffeescript+ruby+css-extras+d+dart+django+diff+docker+eiffel+elixir+erlang+fsharp+fortran+gherkin+git+glsl+go+graphql+groovy+haml+handlebars+haskell+haxe+http+icon+inform7+ini+j+jade+java+jolie+json+julia+keyman+kotlin+latex+less+livescript+lolcode+lua+makefile+markdown+matlab+mel+mizar+monkey+nasm+nginx+nim+nix+nsis+objectivec+ocaml+oz+parigp+parser+pascal+perl+php+php-extras+powershell+processing+prolog+properties+protobuf+puppet+pure+python+q+qore+r+jsx+reason+rest+rip+roboconf+crystal+rust+sas+sass+scss+scala+scheme+smalltalk+smarty+sql+stylus+swift+tcl+textile+twig+typescript+vbnet+verilog+vhdl+vim+wiki+xojo+yaml */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
  */
 
 code[class*="language-"],
 pre[class*="language-"] {
-	color: #a9b7c6;
-	font-family: Consolas, Monaco, 'Andale Mono', monospace;
-	direction: ltr;
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
 	word-break: normal;
+	word-wrap: normal;
 	line-height: 1.5;
 
 	-moz-tab-size: 4;
@@ -51,14 +50,21 @@ pre[class*="language-"] {
 
 pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
 code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
-    color: inherit;
-    background: rgba(33,66,131,.85);
+	text-shadow: none;
+	background: #b3d4fc;
 }
 
 pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
 code[class*="language-"]::selection, code[class*="language-"] ::selection {
-    color: inherit;
-    background: rgba(33,66,131,.85);
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
 }
 
 /* Code blocks */
@@ -70,118 +76,88 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-	background: #2b2b2b;
+	background: #f5f2f0;
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
 	padding: .1em;
 	border-radius: .3em;
+	white-space: normal;
 }
 
 .token.comment,
 .token.prolog,
-.token.cdata {
-	color: #808080;
-}
-
-.token.delimiter,
-.token.boolean,
-.token.keyword,
-.token.selector,
-.token.important,
-.token.atrule {
-	color: #cc7832;
-}
-
-.token.operator,
-.token.punctuation,
-.token.attr-name {
-    color: #a9b7c6;
-}
-
-.token.tag,
-.token.tag .punctuation,
 .token.doctype,
-.token.builtin {
-    color: #e8bf6a;
+.token.cdata {
+	color: slategray;
 }
 
-.token.entity,
-.token.number,
-.token.symbol {
-    color: #6897bb;
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
 }
 
 .token.property,
+.token.tag,
+.token.boolean,
+.token.number,
 .token.constant,
-.token.variable {
-    color: #9876aa;
+.token.symbol,
+.token.deleted {
+	color: #905;
 }
 
+.token.selector,
+.token.attr-name,
 .token.string,
-.token.char {
-	color: #6a8759;
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
 }
 
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
 .token.attr-value,
-.token.attr-value .punctuation {
-    color: #a5c261;
-}
-.token.attr-value .punctuation:first-child {
-    color: #a9b7c6;
-}
-
-.token.url {
-	color: #287bde;
-	text-decoration: underline;
+.token.keyword {
+	color: #07a;
 }
 
 .token.function {
-	color: #ffc66d;
+	color: #DD4A68;
 }
 
-.token.regex {
-    background: #364135;
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
 }
 
+.token.important,
 .token.bold {
 	font-weight: bold;
 }
-
 .token.italic {
 	font-style: italic;
 }
 
-.token.inserted {
-    background: #294436;
-}
-
-.token.deleted {
-    background: #484a4a;
-}
-
-/*code.language-css .token.punctuation {
-	color: #cc7832;
-}*/
-
-code.language-css .token.property,
-code.language-css .token.property + .token.punctuation {
-	color: #a9b7c6;
-}
-
-code.language-css .token.id {
-	color: #ffc66d;
-}
-
-code.language-css .token.selector > .token.class,
-code.language-css .token.selector > .token.attribute,
-code.language-css .token.selector > .token.pseudo-class,
-code.language-css .token.selector > .token.pseudo-element {
-	color: #ffc66d;
+.token.entity {
+	cursor: help;
 }html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
  
-      </service.paradis@gmail.com></style>
+      </style>
     </head>
     <body for="html-export">
       <div class="mume markdown-preview   ">
@@ -581,7 +557,7 @@ t<span class="token punctuation">.</span>append<span class="token punctuation">(
 (1, 2, 'skip a few', 99, 100)
 100
 Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/jcnvn7d52_code_chunk.py", line 10, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/7o6oyj9vb_code_chunk.py", line 10, in <module>
     t.append(101)
 AttributeError: 'tuple' object has no attribute 'append'
 </module></pre></div></div><h3 class="mume-header" id="dictionaries-dict">Dictionaries (<code>dict</code>)</h3>
@@ -596,7 +572,7 @@ d<span class="token punctuation">[</span><span class="token string">"pi"</span><
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">[</span><span class="token string">"pi"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">{2: 'two', 5: 'five', 'pi': 3.1415926}
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">{'pi': 3.1415926, 2: 'two', 5: 'five'}
 3.1415926
 </pre></div></div><h3 class="mume-header" id="sets-set">Sets (<code>set</code>)</h3>
 
@@ -1052,7 +1028,7 @@ L<span class="token punctuation">.</span>append<span class="token punctuation">(
     <span class="token keyword">assert</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span>
     y <span class="token operator">=</span> Doubler<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">)</span>
     <span class="token keyword">assert</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/zo9j8s50g_code_chunk.py", line 8
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/kkz8m0r7c_code_chunk.py", line 8
     if __name__ == ‘__main__’:
                             ^
 SyntaxError: invalid character in identifier
@@ -1081,7 +1057,7 @@ Tests are run by calling the <code>unittest.main</code> function.</p>
         self<span class="token punctuation">.</span>assertEquals<span class="token punctuation">(</span>d<span class="token punctuation">.</span>name<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ‘Thursday’<span class="token punctuation">)</span>		
 
 unittest<span class="token punctuation">.</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/nwk1llbw1_code_chunk.py", line 6
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/a0auhdj6w_code_chunk.py", line 6
     d = DayOfTheWeek(‘F’)
                        ^
 SyntaxError: invalid character in identifier
@@ -1104,15 +1080,11 @@ SyntaxError: invalid character in identifier
 <p><strong>Refactoring</strong> is the process of cleaning up code, most often referring to the process of removing duplication.  Duplication in code, whether it comes from copy-and-paste or just repeating logic can be a source of many errors.  If you duplicate code with a bug, now you have two bugs.  If you find the bug, you will have to find it twice.</p>
 <p>Here is a simple example of refactored code:</p>
 <p><strong>Original Code with Minor Duplication:</strong></p>
-<div class="code-chunk" data-id="code-chunk-id-35" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=35, cmd=true}" class="language-python">avg1 <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>L1<span class="token punctuation">)</span><span class="token operator">/</span><span class="token builtin">len</span><span class="token punctuation">(</span>L1<span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="python" class="language-python">avg1 <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>L1<span class="token punctuation">)</span><span class="token operator">/</span><span class="token builtin">len</span><span class="token punctuation">(</span>L1<span class="token punctuation">)</span>
 avg2 <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>L2<span class="token punctuation">)</span><span class="token operator">/</span><span class="token builtin">len</span><span class="token punctuation">(</span>L2<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/p8ef8qym4_code_chunk.py", line 1, in <module>
-    avg1 = sum(L1)/len(L1)
-NameError: name 'L1' is not defined
-</module></pre></div></div><p>Then, it is observed that there should be some default behavior for empty lists so (a test is added and) the code is updated as follows.</p>
+</pre><p>Then, it is observed that there should be some default behavior for empty lists so (a test is added and) the code is updated as follows.</p>
 <p><strong>Updated Code Before Refactoring:</strong></p>
-<div class="code-chunk" data-id="code-chunk-id-36" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=36, cmd=true}" class="language-python"><span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L1<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L1<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
     avg1 <span class="token operator">=</span> <span class="token number">0</span>
 <span class="token keyword">else</span><span class="token punctuation">:</span>
     avg1 <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>L1<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L1<span class="token punctuation">)</span>
@@ -1121,12 +1093,8 @@ NameError: name 'L1' is not defined
     avg2 <span class="token operator">=</span> <span class="token number">0</span>
 <span class="token keyword">else</span><span class="token punctuation">:</span>
     avg2 <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>L2<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L2<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/iizkugytj_code_chunk.py", line 1, in <module>
-    if len(L1) == 0:
-NameError: name 'L1' is not defined
-</module></pre></div></div><p><strong>Refactored Code:</strong></p>
-<div class="code-chunk" data-id="code-chunk-id-37" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=37, cmd=true}" class="language-python"><span class="token keyword">def</span> <span class="token function">avg</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
+</pre><p><strong>Refactored Code:</strong></p>
+<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">def</span> <span class="token function">avg</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token number">0</span>
     <span class="token keyword">else</span><span class="token punctuation">:</span>
@@ -1134,11 +1102,7 @@ NameError: name 'L1' is not defined
 
 avg1 <span class="token operator">=</span> avg<span class="token punctuation">(</span>L1<span class="token punctuation">)</span>
 avg2 <span class="token operator">=</span> avg<span class="token punctuation">(</span>L2<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/l8q3o895s_code_chunk.py", line 7, in <module>
-    avg1 = avg(L1)
-NameError: name 'L1' is not defined
-</module></pre></div></div><p>In the refactored code, the details of the <code>avg</code> function are not duplicated.  If we want to later modify how the code handles empty lists, we will only have to change it in one place.</p>
+</pre><p>In the refactored code, the details of the <code>avg</code> function are not duplicated.  If we want to later modify how the code handles empty lists, we will only have to change it in one place.</p>
 <p>The refactored code is also easier to read.</p>
 <h2 class="mume-header" id="what-to-test">What to Test</h2>
 
@@ -1199,7 +1163,7 @@ as we proceed.</p>
 <p>To start, let's observe some differences in running time for different functions that do the same thing.
 We might say these functions have the same behavior or the same <strong>semantics</strong>.</p>
 <p>Here is a function that takes a list as input; it returns <code>True</code> if there are any duplicates and <code>False</code> otherwise.</p>
-<div class="code-chunk" data-id="code-chunk-id-38" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=38, cmd=true id:&amp;amp;quot;duplicates1&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">duplicates1</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-35" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=35, cmd=true id:&amp;amp;quot;duplicates1&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">duplicates1</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
     n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -1215,7 +1179,7 @@ We might say these functions have the same behavior or the same <strong>semantic
 </blockquote>
 <p>The simplest answer to this question comes from simply running the program and measuring how long it takes.
 We could do this as follows.</p>
-<pre data-role="codeBlock" data-info="python {code_chunk_offset=39, cmd:true, continue:&amp;amp;quot;duplicates1&amp;amp;quot;, id:&amp;amp;quot;j543h66u&amp;amp;quot;}" class="language-python"><span class="token keyword">import</span> time
+<pre data-role="codeBlock" data-info="python {code_chunk_offset=36, cmd:true, continue:&amp;amp;quot;duplicates1&amp;amp;quot;, id:&amp;amp;quot;j543h66u&amp;amp;quot;}" class="language-python"><span class="token keyword">import</span> time
 
 <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     n <span class="token operator">=</span> <span class="token number">1000</span>
@@ -1230,7 +1194,7 @@ Also, if run on different computers, one could expect to see wildly different re
 For now, let's run the code several times and take the average to smooth them out for a given computer.
 We'll wrap this idea in a general function that takes another function as input, and a length.
 It runs the given function on lists of the given length and averages the time take per run.</p>
-<div class="code-chunk" data-id="code-chunk-id-39" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=40, cmd=true continue:&amp;amp;quot;duplicates1&amp;amp;quot;,id:&amp;amp;quot;timetrials&amp;amp;quot;}" class="language-python"><span class="token keyword">import</span> time
+<div class="code-chunk" data-id="code-chunk-id-36" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=37, cmd=true continue:&amp;amp;quot;duplicates1&amp;amp;quot;,id:&amp;amp;quot;timetrials&amp;amp;quot;}" class="language-python"><span class="token keyword">import</span> time
 
 <span class="token keyword">def</span> <span class="token function">timetrials</span><span class="token punctuation">(</span>func<span class="token punctuation">,</span> n<span class="token punctuation">,</span> trials <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     totaltime <span class="token operator">=</span> <span class="token number">0</span>
@@ -1241,10 +1205,10 @@ It runs the given function on lists of the given length and averages the time ta
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"average =%10.7f for n = %d"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>totaltime<span class="token operator">/</span>trials<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>We can now look at the average running time as the length of the list gets longer.
 It's not surprising to see that the average time goes up as the length <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">n</span></span></span></span> increases.</p>
-<div class="code-chunk" data-id="code-chunk-id-40" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=41, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;,id:&amp;amp;quot;j543zqs2&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-37" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=38, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;,id:&amp;amp;quot;j543zqs2&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates1<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/c254so1wl_code_chunk.py", line 2, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/i9em38tmt_code_chunk.py", line 2, in <module>
     timetrials(duplicates1, n)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>Let's try to make our code faster.
@@ -1252,44 +1216,44 @@ Simple improvements can be made by eliminating situations where we are doing unn
 In the <code>duplicates1</code> function, we are comparing each pair of elements twice because both <code>i</code> and <code>j</code> range over all <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">n</span></span></span></span> indices.
 We can eliminate this using a standard trick of only letting <code>j</code> range up to <code>i</code>.
 Here is what the code would look like.</p>
-<div class="code-chunk" data-id="code-chunk-id-41" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=42, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;, id:&amp;amp;quot;duplicates2&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">duplicates2</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-38" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=39, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;, id:&amp;amp;quot;duplicates2&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">duplicates2</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
     n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">:</span>
             <span class="token keyword">if</span> L<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> L<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
                 <span class="token keyword">return</span> <span class="token boolean">True</span>
     <span class="token keyword">return</span> <span class="token boolean">False</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-42" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=43, cmd=true continue:&amp;amp;quot;duplicates2&amp;amp;quot;, id:&amp;amp;quot;j544j8r7&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-39" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=40, cmd=true continue:&amp;amp;quot;duplicates2&amp;amp;quot;, id:&amp;amp;quot;j544j8r7&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates2<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/uw8w8csd1_code_chunk.py", line 2, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/iruafwc4w_code_chunk.py", line 2, in <module>
     timetrials(duplicates2, n)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>There is a python shortcut the kind of loop used in <code>duplicates2</code>.
 The <code>any</code> function takes an iterable collection of booleans and returns <code>True</code> if any of the booleans are true.
 You can make an iterable collection in an expression in the same way one does for comprehensions.
 This can be very handy.</p>
-<div class="code-chunk" data-id="code-chunk-id-43" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=44, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;,id:&amp;amp;quot;duplicates3&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">duplicates3</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-40" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=41, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;,id:&amp;amp;quot;duplicates3&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">duplicates3</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
     n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span>
     <span class="token keyword">return</span> <span class="token builtin">any</span><span class="token punctuation">(</span>L<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> L<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span> <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-44" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=45, cmd=true continue:&amp;amp;quot;duplicates3&amp;amp;quot;, id:&amp;amp;quot;j544qfui&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-41" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=42, cmd=true continue:&amp;amp;quot;duplicates3&amp;amp;quot;, id:&amp;amp;quot;j544qfui&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates3<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/ikif24d6v_code_chunk.py", line 2, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/qpnepwn9o_code_chunk.py", line 2, in <module>
     timetrials(duplicates3, n)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>This last optimization reduces the number of lines of code and may be desirable for code readability, but it doesn't improve the speed.</p>
 <p>If we want to make a real improvement, we'll need a substantial new idea.
 One possibility is to sort the list and look at adjacent elements in the list.
 If there are duplicates, they will be adjacent after sorting.</p>
-<div class="code-chunk" data-id="code-chunk-id-45" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=46, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;,id:&amp;amp;quot;duplicates4&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">duplicates4</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-42" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=43, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;,id:&amp;amp;quot;duplicates4&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">duplicates4</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
     n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span>
     L<span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> L<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> L<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> <span class="token boolean">True</span>
     <span class="token keyword">return</span> <span class="token boolean">False</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-46" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=47, cmd=true continue:&amp;amp;quot;duplicates3&amp;amp;quot;, id:&amp;amp;quot;duplicates5&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">duplicates5</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-43" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=44, cmd=true continue:&amp;amp;quot;duplicates3&amp;amp;quot;, id:&amp;amp;quot;duplicates5&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">duplicates5</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
     n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span>
     L<span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> <span class="token builtin">any</span><span class="token punctuation">(</span>L<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> L<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -1308,7 +1272,7 @@ If there are duplicates, they will be adjacent after sorting.</p>
 <span class="token keyword">def</span> <span class="token function">duplicates8</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
     s <span class="token operator">=</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> <span class="token builtin">any</span><span class="token punctuation">(</span>e <span class="token keyword">in</span> s <span class="token operator">or</span> s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token keyword">for</span> e <span class="token keyword">in</span> L<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-47" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=48, cmd=true continue:&amp;amp;quot;duplicates5&amp;amp;quot;, id:&amp;amp;quot;j544qfur&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-44" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=45, cmd=true continue:&amp;amp;quot;duplicates5&amp;amp;quot;, id:&amp;amp;quot;j544qfur&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Quadratic: "</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">)</span>
     timetrials<span class="token punctuation">(</span>duplicates3<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Sorting:   "</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">)</span>
@@ -1317,7 +1281,7 @@ If there are duplicates, they will be adjacent after sorting.</p>
     timetrials<span class="token punctuation">(</span>duplicates7<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'---------------------------'</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Quadratic: Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/wf8u8hvia_code_chunk.py", line 3, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/28px0pg4v_code_chunk.py", line 3, in <module>
     timetrials(duplicates3, n)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>Some key ideas:
@@ -1329,7 +1293,7 @@ Sometimes, the gap between two pieces of code will increase as the input size gr
 <h2 class="mume-header" id="example-adding-the-first-k-numbers">Example: Adding the first k numbers.</h2>
 
 <p>Below is a program that adds up the first <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span> positive integers and returns both the sum and time required to do the computation.</p>
-<div class="code-chunk" data-id="code-chunk-id-48" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=49, cmd=true id:&amp;amp;quot;sumk1&amp;amp;quot;}" class="language-python"><span class="token keyword">import</span> time
+<div class="code-chunk" data-id="code-chunk-id-45" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=46, cmd=true id:&amp;amp;quot;sumk1&amp;amp;quot;}" class="language-python"><span class="token keyword">import</span> time
 
 <span class="token keyword">def</span> <span class="token function">sumk</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
     start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -1340,10 +1304,10 @@ Sometimes, the gap between two pieces of code will increase as the input size gr
     end <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
     <span class="token keyword">return</span> total<span class="token punctuation">,</span> end<span class="token operator">-</span>start
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-49" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=50, cmd=true continue:&amp;amp;quot;sumk1&amp;amp;quot;,id:&amp;amp;quot;j54378j3&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-46" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=47, cmd=true continue:&amp;amp;quot;sumk1&amp;amp;quot;,id:&amp;amp;quot;j54378j3&amp;amp;quot;}" class="language-python"><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Sum: %d, time taken: %f"</span> <span class="token operator">%</span> sumk<span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/9qq49ezxo_code_chunk.py", line 2, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/bz262axmk_code_chunk.py", line 2, in <module>
     print("Sum: %d, time taken: %f" % sumk(10000))
 NameError: name 'sumk' is not defined
 </module></pre></div></div><p>Notice that we see some variation in the time required.
@@ -1351,17 +1315,17 @@ This is caused by many factors, but the main one is that the computer is perform
 It is running an operating system and several other programs at the same time.
 Also, if run on different computers, one could expect to see wildly different results based on the speed of the processor and other differences between the computers.
 For now, let's run the code several times and take the average to smooth them out for a given computer.</p>
-<div class="code-chunk" data-id="code-chunk-id-50" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=51, cmd=true continue:&amp;amp;quot;sumk1&amp;amp;quot;,id:&amp;amp;quot;timetrials2&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">timetrials</span><span class="token punctuation">(</span>func<span class="token punctuation">,</span> k<span class="token punctuation">,</span> trials <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-47" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=48, cmd=true continue:&amp;amp;quot;sumk1&amp;amp;quot;,id:&amp;amp;quot;timetrials2&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">timetrials</span><span class="token punctuation">(</span>func<span class="token punctuation">,</span> k<span class="token punctuation">,</span> trials <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     totaltime <span class="token operator">=</span> <span class="token number">0</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>trials<span class="token punctuation">)</span><span class="token punctuation">:</span>
         totaltime <span class="token operator">+=</span> func<span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"average =%10.7f for k = %d"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>totaltime<span class="token operator">/</span>trials<span class="token punctuation">,</span> k<span class="token punctuation">)</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-51" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=52, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;,id:&amp;amp;quot;j5437vpd&amp;amp;quot;}" class="language-python">timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">)</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-48" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=49, cmd=true continue:&amp;amp;quot;timetrials&amp;amp;quot;,id:&amp;amp;quot;j5437vpd&amp;amp;quot;}" class="language-python">timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">100000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">1000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">10000000</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/kizk7ot7z_code_chunk.py", line 1, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/esvepko4r_code_chunk.py", line 1, in <module>
     timetrials(sumk, 10000)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>Seeing the times for different values of <code>k</code> reveals a rather unsuprising pattern.
@@ -1377,7 +1341,7 @@ To prove that</p>
 <p>it suffices to observe that you can add the numbers in pairs, matching <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.65952em;"></span><span class="strut bottom" style="height:0.65952em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">i</span></span></span></span> with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>−</mo><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k-i + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">i</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span></span> starting with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.64444em;vertical-align:0em;"></span><span class="base"><span class="mord">1</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span>.
 There are <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">k/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mord">/</span><span class="mord">2</span></span></span></span> such pairs and each adds up to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span></span>.
 Let's use this formula to rewrite our <code>sumk</code> function and time it.</p>
-<div class="code-chunk" data-id="code-chunk-id-52" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=53, cmd=true continue:&amp;amp;quot;timetrials2&amp;amp;quot;,id:&amp;amp;quot;j5439nl1&amp;amp;quot;}" class="language-python"><span class="token keyword">import</span> time
+<div class="code-chunk" data-id="code-chunk-id-49" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=50, cmd=true continue:&amp;amp;quot;timetrials2&amp;amp;quot;,id:&amp;amp;quot;j5439nl1&amp;amp;quot;}" class="language-python"><span class="token keyword">import</span> time
 
 <span class="token keyword">def</span> <span class="token function">sumk2</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
     start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -1391,7 +1355,7 @@ timetrials<span class="token punctuation">(</span>sumk2<span class="token punctu
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">10000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">100000000</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/9fyluhtgn_code_chunk.py", line 9, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/7rynzmcs7_code_chunk.py", line 9, in <module>
     timetrials(sumk2, 10000)
 NameError: name 'timetrials' is not defined
 </module></pre></div></div><p>This is much much faster.
@@ -1404,7 +1368,7 @@ Along the way, we will develop a vocabulary for comparing the efficiency of algo
 A single line of code can do a lot of stuff.
 Here's a one line function that does all kinds of stuff.
 It creates a list of 200 items and sums all the entries for each of value of i from 0 to k-1 and returns a list of the results.</p>
-<div class="code-chunk" data-id="code-chunk-id-53" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=54, cmd=true id:&amp;amp;quot;j543abkc&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">f001</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-50" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=51, cmd=true id:&amp;amp;quot;j543abkc&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">f001</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">[</span>i<span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">]</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>f001<span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -1740,7 +1704,7 @@ As such, when we implement data structures in python, we will package them as cl
 We will implement it with a class called <code>ListStack</code>.
 Here, we are giving hints about the implementation in the name.
 This is more common in Java programming, but we adopt the convention in the book to help us distinguish between different implementations of the same ADT.</p>
-<div class="code-chunk" data-id="liststack" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=55, cmd=true id=&amp;amp;quot;liststack&amp;amp;quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListStack</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="liststack" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=52, cmd=true id=&amp;amp;quot;liststack&amp;amp;quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListStack</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_L <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
 
@@ -1841,14 +1805,14 @@ Depending on the situation, either might be the right thing to do.</p>
 <p>In the case of a stack, it is never correct usage to <code>pop</code> from an empty stack.
 Thus, it makes sense that someone using our <code>Stack</code> class should have their program crash and see an error message if they attempt to call <code>pop</code> when there are no items left on the stack.
 In the list implementation above, this does happen:</p>
-<div class="code-chunk" data-id="liststackerror" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=56, cmd=true id=&amp;amp;quot;liststackerror&amp;amp;quot; continue=&amp;amp;quot;liststack&amp;amp;quot;}" class="language-python">s <span class="token operator">=</span> ListStack<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<div class="code-chunk" data-id="liststackerror" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=53, cmd=true id=&amp;amp;quot;liststackerror&amp;amp;quot; continue=&amp;amp;quot;liststack&amp;amp;quot;}" class="language-python">s <span class="token operator">=</span> ListStack<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>push<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/2jt5itqjc_code_chunk.py", line 24, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/9d41fqxko_code_chunk.py", line 24, in <module>
     s.pop()
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/2jt5itqjc_code_chunk.py", line 9, in pop
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/9d41fqxko_code_chunk.py", line 9, in pop
     return self._L.pop()
 IndexError: pop from empty list
 </module></pre></div></div><p>If we look at the error message, it even seems pretty good.
@@ -1859,7 +1823,7 @@ We could catch the exception in our <code>pop</code> method and raise a differen
 Otherwise, the stack trace reports the error in our code.
 Then, a user, might have to try to understand our class in order to backtrack to understand what they did wrong in their code.
 Instead, give them an error that explains exactly what happened.</p>
-<div class="code-chunk" data-id="anotherstackerror" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=57, cmd=true id=&amp;amp;quot;anotherstackerror&amp;amp;quot; continue=&amp;amp;quot;liststack&amp;amp;quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">AnotherStack</span><span class="token punctuation">(</span>ListStack<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="anotherstackerror" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=54, cmd=true id=&amp;amp;quot;anotherstackerror&amp;amp;quot; continue=&amp;amp;quot;liststack&amp;amp;quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">AnotherStack</span><span class="token punctuation">(</span>ListStack<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">pop</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">try</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> self<span class="token punctuation">.</span>_L<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -1871,16 +1835,16 @@ s<span class="token punctuation">.</span>push<span class="token punctuation">(</
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/xa2ed0uri_code_chunk.py", line 24, in pop
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/yxyo984pf_code_chunk.py", line 24, in pop
     return self._L.pop()
 IndexError: pop from empty list
 
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/xa2ed0uri_code_chunk.py", line 31, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/yxyo984pf_code_chunk.py", line 31, in <module>
     s.pop()
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/xa2ed0uri_code_chunk.py", line 26, in pop
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/yxyo984pf_code_chunk.py", line 26, in pop
     raise RuntimeError("pop from empty stack")
 RuntimeError: pop from empty stack
 </module></pre></div></div><p style="page-break-after:always;"></p>
@@ -1962,7 +1926,7 @@ This is abstraction (hiding details)!</p>
 We could hope to do better with a linked list.
 However, right now, we have no way to add to or remove from the end of the linked list.
 Here is an inefficient, though simple and correct way to do it.</p>
-<div class="code-chunk" data-id="code-chunk-id-57" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=58, cmd=true}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-54" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=55, cmd=true}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_head <span class="token operator">=</span> <span class="token boolean">None</span>
 
@@ -2002,7 +1966,7 @@ For a list of length <span class="katex"><span class="katex-mathml"><math><seman
 This requires a bit of overhead to make sure it always stores the correct node.
 Most of the special cases happen when there is only one item in the list.
 We will be able to use this to get some improvement for <code>addlast</code>, because we will be able to jump right to the end without traversing.  We will also be able to clean up the code for <code>removelast</code> a little by eliminating the <code>link.link</code> stuff and instead just check if we reached the tail.</p>
-<div class="code-chunk" data-id="code-chunk-id-58" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=59, cmd=true}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-55" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=56, cmd=true}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_head <span class="token operator">=</span> <span class="token boolean">None</span>
         self<span class="token punctuation">.</span>_tail <span class="token operator">=</span> <span class="token boolean">None</span>
@@ -2036,7 +2000,7 @@ We will be able to use this to get some improvement for <code>addlast</code>, be
             self<span class="token punctuation">.</span>_tail<span class="token punctuation">.</span>link <span class="token operator">=</span> <span class="token boolean">None</span>
             <span class="token keyword">return</span> item
 
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/jw207x6dx_code_chunk.py", line 28
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/q9in8dcff_code_chunk.py", line 28
     while.currentnode.link is not self._tail:
          ^
 SyntaxError: invalid syntax
@@ -2280,7 +2244,7 @@ In this <strong>doubly-linked list</strong>, removing from the end will be symme
 <p>When we create a new <code>ListNode</code>, we can specify the nodes before and after so that the appropriate links can be established.
 We want it to always be true that <code>b == a.link</code> if and only if <code>a = b.prev</code> for any two nodes <code>a</code> and <code>b</code>.
 To help ensure this invariant, we set <code>self.prev.link = self</code> and <code>self.link.prev = self</code> unless <code>prev</code> or <code>link</code> respectively are <code>None</code>.</p>
-<div class="code-chunk" data-id="code-chunk-id-59" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=60, cmd=true id:&amp;amp;quot;_doublylinkedlist-0&amp;amp;quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListNode</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-56" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=57, cmd=true id:&amp;amp;quot;_doublylinkedlist-0&amp;amp;quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListNode</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">,</span> prev <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">,</span> link <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
         self<span class="token punctuation">.</span>prev <span class="token operator">=</span> prev
@@ -2292,7 +2256,7 @@ To help ensure this invariant, we set <code>self.prev.link = self</code> and <co
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>First, we'll look at adding items a <code>DoublyLinkedList</code>.
 These operations are very similar to the <code>addfirst</code> operation on a <code>LinkedList</code>.
 One has to do a little more work to update the <code>prev</code> node that was not present in our <code>LinkedList</code>.</p>
-<div class="code-chunk" data-id="code-chunk-id-60" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=61, cmd=true continue:&amp;amp;quot;_doublylinkedlist-0&amp;amp;quot;, id:&amp;amp;quot;_doublylinkedlist-1&amp;amp;quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">DoublyLinkedList</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-57" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=58, cmd=true continue:&amp;amp;quot;_doublylinkedlist-0&amp;amp;quot;, id:&amp;amp;quot;_doublylinkedlist-1&amp;amp;quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">DoublyLinkedList</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_head <span class="token operator">=</span> <span class="token boolean">None</span>
         self<span class="token punctuation">.</span>_tail <span class="token operator">=</span> <span class="token boolean">None</span>
@@ -2323,7 +2287,7 @@ It's clear that there is a lot of shared logic between the two methods.
 We should use this as an opportunity to simplify the code.
 In this case, we might consider the more general problem of adding a node between two other nodes.
 We will just need to consider those cases where the nodes <code>before</code> or <code>after</code> or both are <code>None</code>.</p>
-<div class="code-chunk" data-id="code-chunk-id-61" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=62, cmd=true continue:&amp;amp;quot;_doublylinkedlist-1&amp;amp;quot;, id:&amp;amp;quot;_doublylinkedlist-2&amp;amp;quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">_addbetween</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">,</span> before<span class="token punctuation">,</span> after<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-58" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=59, cmd=true continue:&amp;amp;quot;_doublylinkedlist-1&amp;amp;quot;, id:&amp;amp;quot;_doublylinkedlist-2&amp;amp;quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">_addbetween</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">,</span> before<span class="token punctuation">,</span> after<span class="token punctuation">)</span><span class="token punctuation">:</span>
         node <span class="token operator">=</span> ListNode<span class="token punctuation">(</span>item<span class="token punctuation">,</span> before<span class="token punctuation">,</span> after<span class="token punctuation">)</span>
         <span class="token keyword">if</span> after <span class="token keyword">is</span> self<span class="token punctuation">.</span>_head<span class="token punctuation">:</span>
             self<span class="token punctuation">.</span>_head <span class="token operator">=</span> node
@@ -2336,14 +2300,14 @@ We will just need to consider those cases where the nodes <code>before</code> or
 
     <span class="token keyword">def</span> <span class="token function">addlast</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_addbetween<span class="token punctuation">(</span>item<span class="token punctuation">,</span> self<span class="token punctuation">.</span>_tail<span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/jrz0iw3qo_code_chunk.py", line 1
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/bvfzn9e90_code_chunk.py", line 1
     def _addbetween(self, item, before, after):
     ^
 IndentationError: unexpected indent
 </pre></div></div><p>Symmetry is also apparent in the code to remove an item from either end.
 As with the <code>add</code> methods, we factor out a (private) method that both use to remove a node and return its data.
 It includes a little logic to detect if the head or tail or both change with the removal.</p>
-<div class="code-chunk" data-id="code-chunk-id-62" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=63, cmd=true continue:&amp;amp;quot;_doublylinkedlist-2&amp;amp;quot;, id:&amp;amp;quot;_doublylinkedlist-3&amp;amp;quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">_remove</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-59" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=60, cmd=true continue:&amp;amp;quot;_doublylinkedlist-2&amp;amp;quot;, id:&amp;amp;quot;_doublylinkedlist-3&amp;amp;quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">_remove</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">:</span>
         before<span class="token punctuation">,</span> after <span class="token operator">=</span> node<span class="token punctuation">.</span>prev<span class="token punctuation">,</span> node<span class="token punctuation">.</span>link
         <span class="token keyword">if</span> node <span class="token keyword">is</span> self<span class="token punctuation">.</span>_head<span class="token punctuation">:</span>
             self<span class="token punctuation">.</span>_head <span class="token operator">=</span> after
@@ -2361,7 +2325,7 @@ It includes a little logic to detect if the head or tail or both change with the
 
     <span class="token keyword">def</span> <span class="token function">removelast</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_remove<span class="token punctuation">(</span>self<span class="token punctuation">.</span>_tail<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/wwlyjf4ro_code_chunk.py", line 1
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/qj7umyh4o_code_chunk.py", line 1
     def _remove(self, node):
     ^
 IndentationError: unexpected indent
@@ -2370,7 +2334,7 @@ IndentationError: unexpected indent
 <p>There are several operations that are very fast on doubly linked lists compared to other lists.
 One of the most useful is the ability to concatenate two lists.
 Recall that the plus sign can be used to concatenate two <code>list</code> objects.</p>
-<div class="code-chunk" data-id="code-chunk-id-63" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=64, cmd=true id:&amp;amp;quot;j44w4tnd&amp;amp;quot;}" class="language-python">A <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+<div class="code-chunk" data-id="code-chunk-id-60" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=61, cmd=true id:&amp;amp;quot;j44w4tnd&amp;amp;quot;}" class="language-python">A <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
 B <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span>
 C <span class="token operator">=</span> A <span class="token operator">+</span> B
 <span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span>
@@ -2383,7 +2347,7 @@ C <span class="token operator">=</span> A <span class="token operator">+</span> 
 It takes time proportional to the length of the newly created list <code>C</code> and it doesn't modify the lists <code>A</code> or <code>B</code>.
 For doubly linked lists, we could achieve the same asymptotic running time by incrementally building up a new list.
 However, if we are allowed to modify the lists, the concatenation can be accomplished by pointing the tail of the first list at the head of the second.</p>
-<div class="code-chunk" data-id="code-chunk-id-64" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=65, cmd=true continue:&amp;amp;quot;_doublylinkedlist-3&amp;amp;quot;, id:&amp;amp;quot;_doublylinkedlist-4&amp;amp;quot;}" class="language-python">
+<div class="code-chunk" data-id="code-chunk-id-61" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=62, cmd=true continue:&amp;amp;quot;_doublylinkedlist-3&amp;amp;quot;, id:&amp;amp;quot;_doublylinkedlist-4&amp;amp;quot;}" class="language-python">
     <span class="token keyword">def</span> <span class="token function">__iadd__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> other<span class="token punctuation">.</span>_head <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span> <span class="token keyword">return</span>
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>_head <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
@@ -2409,7 +2373,7 @@ n <span class="token operator">=</span> L<span class="token punctuation">.</span
 <span class="token keyword">while</span> n <span class="token keyword">is</span> <span class="token operator">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
     n <span class="token operator">=</span> n<span class="token punctuation">.</span>link
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/eh54a2hj5_code_chunk.py", line 2
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File "/Users/don/Dropbox/work/research/books/datastructures/docs/gqkc4tdcr_code_chunk.py", line 2
     def __iadd__(self, other):
     ^
 IndentationError: unexpected indent
@@ -2439,7 +2403,7 @@ Our objectives for this chapter are three-fold:</p>
 </li>
 </ol>
 <p>Here is an example of a recursive function.</p>
-<div class="code-chunk" data-id="j32gqq5q" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=66, cmd=true, id=&amp;amp;quot;j32gqq5q&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="j32gqq5q" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=63, cmd=true, id=&amp;amp;quot;j32gqq5q&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> k <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> f<span class="token punctuation">(</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> k
     <span class="token keyword">return</span> <span class="token number">0</span>
@@ -2483,7 +2447,7 @@ This limit is usually around 1000.</p>
 
 <p>To think clearly about recursion, it helps to have an idea of how recursion works on a real computer.
 It is easiest to first understand how all function calls work and then it should be clear that there is no technical difference in making a recursive function call compared to any other function call.</p>
-<div class="code-chunk" data-id="code-chunk-id-66" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=67, cmd=true id:&amp;amp;quot;j32h294n&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-63" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=64, cmd=true id:&amp;amp;quot;j32h294n&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
     var <span class="token operator">=</span> k <span class="token operator">**</span> <span class="token number">2</span>
     <span class="token keyword">return</span> g<span class="token punctuation">(</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> var
 
@@ -2507,13 +2471,13 @@ The error is really just signaling that the call stack reached its limit.</p>
 
 a<span class="token punctuation">(</span><span class="token number">340</span><span class="token punctuation">)</span>
 </pre><p>An interesting recursive example con be constructed by creating two lists, each one containing the other.</p>
-<div class="code-chunk" data-id="code-chunk-id-67" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=68, cmd=true}" class="language-python">A <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+<div class="code-chunk" data-id="code-chunk-id-64" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=65, cmd=true}" class="language-python">A <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
 B <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
 A<span class="token punctuation">.</span>append<span class="token punctuation">(</span>A<span class="token punctuation">)</span>
 B<span class="token punctuation">.</span>append<span class="token punctuation">(</span>B<span class="token punctuation">)</span>
 A <span class="token operator">==</span> B
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/kh30cu1vy_code_chunk.py", line 5, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/y0g274zo9_code_chunk.py", line 5, in <module>
     A == B
 RecursionError: maximum recursion depth exceeded in comparison
 </module></pre></div></div><p>In this case, the recursive function is <code>list.__eq__</code>, the method that compares two lists when you use <code>==</code>.  It compares the list by checking if the elements are equal.  The lists <code>A</code> and <code>B</code> each have length 2.  The first elements match.  The second element of each list is another list.  To compare them, there is another call to <code>list.__eq__</code>.  This is a repeat of the first call and the process repeats until the recursion limit is reached.</p>
@@ -2521,7 +2485,7 @@ RecursionError: maximum recursion depth exceeded in comparison
 
 <p>Here is a classic example of a recursively defined function.
 It was originally named for Leonardo Fibonacci who studied it in the context of predicting the growth of rabbit populations.</p>
-<div class="code-chunk" data-id="code-chunk-id-68" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=69, cmd=true id:&amp;amp;quot;j32h6rso&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">fib</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-65" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=66, cmd=true id:&amp;amp;quot;j32h6rso&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">fib</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> k <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token keyword">return</span> k
     <span class="token keyword">return</span> fib<span class="token punctuation">(</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> fib<span class="token punctuation">(</span>k<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span>
 
@@ -2532,7 +2496,7 @@ For example, I tried to run it for <code>k = 40</code> and gave up on it.</p>
 <p>This is a case that we will encounter many times in this course.
 Once we embrace recursion as a way to think about breaking problems into smaller pieces, we may find very short recursive algorithms, but for one reason or another, we may want to rewrite them without recursion.
 Here's a version that uses a loop instead.</p>
-<div class="code-chunk" data-id="code-chunk-id-69" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=70, cmd=true id:&amp;amp;quot;j32hgrm1&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">fib</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-66" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=67, cmd=true id:&amp;amp;quot;j32hgrm1&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">fib</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
     a<span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
         a<span class="token punctuation">,</span> b <span class="token operator">=</span> b<span class="token punctuation">,</span> a <span class="token operator">+</span> b
@@ -2585,7 +2549,7 @@ Theoretical computer scientists even have a use for iterated logarithms (we call
 <p>We can just do the division directly rather than repeatedly subtracting the smaller from the bigger.
 The result is a slight change to the base case and replacing the subtraction with the modulus operation.
 Here is the revised code.</p>
-<div class="code-chunk" data-id="code-chunk-id-70" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=71, cmd=true id:&amp;amp;quot;j32hniri&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">gcd</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-67" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=68, cmd=true id:&amp;amp;quot;j32hniri&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">gcd</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> a <span class="token operator">></span> b<span class="token punctuation">:</span>
         a<span class="token punctuation">,</span> b <span class="token operator">=</span> b<span class="token punctuation">,</span> a
     <span class="token keyword">if</span> a <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
@@ -2617,7 +2581,7 @@ In that approach, you would simply try to add the largest coin you can until you
 Here is an implementation.  <em>(Notice the relationship to Euclid's GCD algorithm)</em></p>
 <h2 class="mume-header" id="a-greedy-algorithm">A Greedy Algorithm</h2>
 
-<div class="code-chunk" data-id="code-chunk-id-71" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=72, cmd=true id:&amp;amp;quot;j32act34&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">greedyMC</span><span class="token punctuation">(</span>coinvalueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-68" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=69, cmd=true id:&amp;amp;quot;j32act34&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">greedyMC</span><span class="token punctuation">(</span>coinvalueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
     coinvalueList<span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token punctuation">)</span>
     coinvalueList<span class="token punctuation">.</span>reverse<span class="token punctuation">(</span><span class="token punctuation">)</span>
     numcoins <span class="token operator">=</span> <span class="token number">0</span>
@@ -2642,7 +2606,7 @@ The greedy solution does not work here.
 Let's try recursion instead.</p>
 <h2 class="mume-header" id="a-recursive-algorithm">A Recursive Algorithm</h2>
 
-<div class="code-chunk" data-id="code-chunk-id-72" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=73, cmd=true id:&amp;amp;quot;j32ad4km&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">recMC</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-69" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=70, cmd=true id:&amp;amp;quot;j32ad4km&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">recMC</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
    minCoins <span class="token operator">=</span> change
    <span class="token keyword">if</span> change <span class="token keyword">in</span> coinValueList<span class="token punctuation">:</span>
      <span class="token keyword">return</span> <span class="token number">1</span>
@@ -2663,7 +2627,7 @@ This way, we don't repeat work by computing the number of coins for a specific a
 Don't forget to pass along the dictionary of known results when making recursive calls.</p>
 <h2 class="mume-header" id="a-memoized-version">A Memoized Version</h2>
 
-<div class="code-chunk" data-id="code-chunk-id-73" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=74, cmd=true id:&amp;amp;quot;j32adxkx&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">memoMC</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">,</span> knownResults<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-70" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=71, cmd=true id:&amp;amp;quot;j32adxkx&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">memoMC</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">,</span> knownResults<span class="token punctuation">)</span><span class="token punctuation">:</span>
     minCoins <span class="token operator">=</span> change
     <span class="token keyword">if</span> change <span class="token keyword">in</span> coinValueList<span class="token punctuation">:</span>
         knownResults<span class="token punctuation">[</span>change<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
@@ -2698,7 +2662,7 @@ In each step, the next best answer can be found by trying each coin, subtracting
 
 <p>Finally, we can repackage this into a dynamic programming algorithm.
 The idea is to explicitly fill in the table of all values, using previously computed values to compute new values.</p>
-<div class="code-chunk" data-id="code-chunk-id-74" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=75, cmd=true id:&amp;amp;quot;j32akg27&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">dpMakeChange</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-71" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=72, cmd=true id:&amp;amp;quot;j32akg27&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">dpMakeChange</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token comment"># Create a list to store the answers to the subproblems</span>
     minCoins <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token boolean">None</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token punctuation">(</span>change <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
 
@@ -2913,7 +2877,7 @@ Unfortunately, after finding the index, we still need to spend linear time in th
 <p><strong>Given a list <code>L</code>, determine if <code>L</code> is sorted or not.</strong></p>
 </blockquote>
 <p>After a little, thought, you will probably come up with some code that looks like the following.</p>
-<div class="code-chunk" data-id="code-chunk-id-75" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=76, cmd=true id:&amp;amp;quot;j2uqamrd&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">is_sorted</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-72" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=73, cmd=true id:&amp;amp;quot;j2uqamrd&amp;amp;quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">is_sorted</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> L<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">></span>L<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> <span class="token boolean">False</span>
@@ -3134,7 +3098,7 @@ The right side of the assignment is concatenating the remaining elements from th
 Then, this list is assigned into a slice.
 In its wonderfulness, python allows you to assign into a slice the same way you would assign into an index.</p>
 <p>We could also use some more logic in the loop to avoid this last step, though I have found students disagree as to which approach is simpler.</p>
-<div class="code-chunk" data-id="code-chunk-id-76" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=77, cmd=true}" class="language-python"><span class="token keyword">def</span> <span class="token function">merge</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">,</span> L<span class="token punctuation">)</span><span class="token punctuation">:</span>   
+<div class="code-chunk" data-id="code-chunk-id-73" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=74, cmd=true}" class="language-python"><span class="token keyword">def</span> <span class="token function">merge</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">,</span> L<span class="token punctuation">)</span><span class="token punctuation">:</span>   
     i<span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span>
     <span class="token keyword">while</span> i <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span> <span class="token operator">or</span> j <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> j <span class="token operator">==</span> <span class="token builtin">len</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span> <span class="token operator">or</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span> <span class="token operator">and</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> B<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -3176,7 +3140,7 @@ We'll use this problem as an example to motivate some deeper study into iterator
 and an <strong>Iterator</strong> is a object that has an <code>__iter__</code> method and a <code>__next__</code> method.
 These magic methods are called <em>from the outside</em> as <code>iter(my_iterable)</code> and <code>next(my_iterator)</code>.
 They are most commonly used by the <code>for</code> keyword either in for loops or in <strong>generator expressions</strong> as in comprehensions.</p>
-<div class="code-chunk" data-id="code-chunk-id-77" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=78, cmd=true}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">SimpleIterator</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-74" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=75, cmd=true}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">SimpleIterator</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_count <span class="token operator">=</span> <span class="token number">0</span>
 
@@ -3298,7 +3262,7 @@ In <code>quicksort</code>, the harder step is the dividing.</p>
     <span class="token comment"># Combine</span>
     <span class="token keyword">return</span> A <span class="token operator">+</span> ET <span class="token operator">+</span> B
 </pre><p>Let's do an in-place version.  For this, we want to avoid creating new lists and concatenating them at the end.</p>
-<div class="code-chunk" data-id="code-chunk-id-78" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=79, cmd=true}" class="language-python"><span class="token keyword">def</span> <span class="token function">quicksort</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> right <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-75" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=76, cmd=true}" class="language-python"><span class="token keyword">def</span> <span class="token function">quicksort</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> right <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> right <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
         right <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span>
 
@@ -3584,7 +3548,7 @@ mapput<span class="token punctuation">(</span>m<span class="token punctuation">,
 
 <p>As with any collection, we might want some other methods such as <code>__len__</code>, <code>__contains__</code>, or various iterators.</p>
 <p>The standard behavior for iterators in dictionaries is to iterate over the keys.  Alternative iterators are provided to iterate over the values or to iterate over the key-value pairs as tuples.  For a <code>dict</code> object this is done as follows.</p>
-<div class="code-chunk" data-id="code-chunk-id-79" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=80, cmd=true id:&amp;amp;quot;jfs3jg8&amp;amp;quot;}" class="language-python">d <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'key1'</span><span class="token punctuation">:</span> <span class="token string">'value1'</span><span class="token punctuation">,</span> <span class="token string">'key2'</span><span class="token punctuation">:</span> <span class="token string">'value2'</span><span class="token punctuation">}</span>
+<div class="code-chunk" data-id="code-chunk-id-76" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=77, cmd=true id:&amp;amp;quot;jfs3jg8&amp;amp;quot;}" class="language-python">d <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'key1'</span><span class="token punctuation">:</span> <span class="token string">'value1'</span><span class="token punctuation">,</span> <span class="token string">'key2'</span><span class="token punctuation">:</span> <span class="token string">'value2'</span><span class="token punctuation">}</span>
 
 <span class="token keyword">for</span> k <span class="token keyword">in</span> d<span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span>
@@ -3594,12 +3558,12 @@ mapput<span class="token punctuation">(</span>m<span class="token punctuation">,
 
 <span class="token keyword">for</span> k<span class="token punctuation">,</span> v <span class="token keyword">in</span> d<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span> v<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">key1
-key2
-value1
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">key2
+key1
 value2
-key1 value1
+value1
 key2 value2
+key1 value1
 </pre></div></div><p>We'll add the same kind of functionality to our Mapping ADT.  So, the <strong>extended Mapping ADT</strong> includes the following methods (with get and put renamed for python magic).</p>
 <ul>
 <li>
@@ -4913,7 +4877,7 @@ We also change the <code>nbrs</code> method to work with unordered pairs (sets).
 <p>The major problem with previous implementation is that it's very slow to enumerate the neighbors of a vertex.
 It should not be necessary to go through all the edges, just to find the ones incident to a given vertex.</p>
 <p>An alternative approach is to store a set with each vertex and have this set contain all the neighbors of that vertex.  This allows for fast access to the neighbors.  In fact, it means that we don't have to store the edges explicitly at all.</p>
-<div class="code-chunk" data-id="code-chunk-id-80" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=81, cmd=true, id:&amp;amp;#x27;adjacencysetgraph&amp;amp;#x27;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">AdjacencySetGraph</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-77" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=78, cmd=true, id:&amp;amp;#x27;adjacencysetgraph&amp;amp;#x27;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">AdjacencySetGraph</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> V<span class="token punctuation">,</span> E<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_V <span class="token operator">=</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>_nbrs <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
@@ -4937,12 +4901,12 @@ It should not be necessary to go through all the edges, just to find the ones in
 
     <span class="token keyword">def</span> <span class="token function">nbrs</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token builtin">iter</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>_nbrs<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-81" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=82, cmd=true, continue:&amp;amp;quot;adjacencysetgraph&amp;amp;quot;}" class="language-python">G <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-78" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=79, cmd=true, continue:&amp;amp;quot;adjacencysetgraph&amp;amp;quot;}" class="language-python">G <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"neighbors of 1:"</span><span class="token punctuation">,</span> <span class="token builtin">list</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"neighbors of 2:"</span><span class="token punctuation">,</span> <span class="token builtin">list</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"neighbors of 3:"</span><span class="token punctuation">,</span> <span class="token builtin">list</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>▶︎</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File "/Users/don/Dropbox/work/research/books/datastructures/docs/25w2kt1m7_code_chunk.py", line 1, in <module>
+  File "/Users/don/Dropbox/work/research/books/datastructures/docs/obso70o1r_code_chunk.py", line 1, in <module>
     G = AdjacencySetGraph({1,2,3}, {(1,2),(2,1),(1,3)})
 NameError: name 'AdjacencySetGraph' is not defined
 </module></pre></div></div><p>Let's do a very simple example to make sure it works as we expect it to.</p>
@@ -4987,12 +4951,12 @@ In such graphs, we can partition the vertices into subsets called <strong>connec
 <p>For a directed graph, two vertices <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">u</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">v</span></span></span></span> are <strong>strongly connected</strong> if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">u</span></span></span></span> is connected to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">v</span></span></span></span> <em>and also</em> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">v</span></span></span></span> is connected to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">u</span></span></span></span>.</p>
 <p>Let's consider a simple method to test of two vertices are connected.
 We will add it to our <code>AdjacencySetGraph</code> class.  As a first exercise, we could try to work recursively.  The idea is simple: in the base case, see if you are trying to get from a vertex to itself.  Otherwise, it suffices to check if any of the neighbors of the first vertex are connected to the last vertex.</p>
-<pre data-role="codeBlock" data-info="python {code_chunk_offset=83, cmd:true, continue:&amp;amp;quot;adjacencysetgraph&amp;amp;quot;, id:&amp;amp;quot;connected1&amp;amp;quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">connected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<pre data-role="codeBlock" data-info="python {code_chunk_offset=80, cmd:true, continue:&amp;amp;quot;adjacencysetgraph&amp;amp;quot;, id:&amp;amp;quot;connected1&amp;amp;quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">connected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> a <span class="token operator">==</span> b<span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token boolean">True</span>
         <span class="token keyword">return</span> <span class="token builtin">any</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>connected<span class="token punctuation">(</span>nbr<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token keyword">for</span> nbr <span class="token keyword">in</span> self<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><p>Can you guess what will go wrong?
 Here's an example.</p>
-<pre data-role="codeBlock" data-info="python {code_chunk_offset=84, cmd:true, continue:&amp;amp;#x27;connected1&amp;amp;#x27;}" class="language-python">G <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="python {code_chunk_offset=81, cmd:true, continue:&amp;amp;#x27;connected1&amp;amp;#x27;}" class="language-python">G <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token keyword">assert</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>connected<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">assert</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>connected<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">assert</span><span class="token punctuation">(</span><span class="token operator">not</span> G<span class="token punctuation">.</span>connected<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -5004,7 +4968,7 @@ H <span class="token operator">=</span> AdjacencySetGraph<span class="token punc
 <span class="token keyword">except</span> RecursionError<span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"There was too much recursion!"</span><span class="token punctuation">)</span>
 </pre><p>It's clear that if the graph has any cycles, we can't check connectivity this way.  To deal with cycles, we can keep a set of visited vertices.  Recall that this is called memoization.</p>
-<pre data-role="codeBlock" data-info="python {code_chunk_offset=85, cmd:true, continue:&amp;amp;quot;adjacencysetgraph&amp;amp;quot;, id:&amp;amp;quot;connected2&amp;amp;quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">connected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<pre data-role="codeBlock" data-info="python {code_chunk_offset=82, cmd:true, continue:&amp;amp;quot;adjacencysetgraph&amp;amp;quot;, id:&amp;amp;quot;connected2&amp;amp;quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">connected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_connected<span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
     <span class="token keyword">def</span> <span class="token function">_connected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> visited<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -5013,7 +4977,7 @@ H <span class="token operator">=</span> AdjacencySetGraph<span class="token punc
         visited<span class="token punctuation">.</span>add<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
         <span class="token keyword">return</span> <span class="token builtin">any</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>_connected<span class="token punctuation">(</span>nbr<span class="token punctuation">,</span> b<span class="token punctuation">,</span> visited<span class="token punctuation">)</span> <span class="token keyword">for</span> nbr <span class="token keyword">in</span> self<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><p>Now, we can try again and see what happens.</p>
-<pre data-role="codeBlock" data-info="python {code_chunk_offset=86, cmd:true, continue:&amp;amp;#x27;connected2&amp;amp;#x27;}" class="language-python">H <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="python {code_chunk_offset=83, cmd:true, continue:&amp;amp;#x27;connected2&amp;amp;#x27;}" class="language-python">H <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token keyword">try</span><span class="token punctuation">:</span>
     <span class="token keyword">assert</span><span class="token punctuation">(</span>H<span class="token punctuation">.</span>connected<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token keyword">assert</span><span class="token punctuation">(</span>H<span class="token punctuation">.</span>connected<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>

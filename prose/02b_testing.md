@@ -89,7 +89,7 @@ Here is a simple example of refactored code:
 
 **Original Code with Minor Duplication:**
 
-```python {cmd=true}
+```python
 avg1 = sum(L1)/len(L1)
 avg2 = sum(L2)/len(L2)
 ```
@@ -98,7 +98,7 @@ Then, it is observed that there should be some default behavior for empty lists 
 
 **Updated Code Before Refactoring:**
 
-```python {cmd=true}
+```python
 if len(L1) == 0:
     avg1 = 0
 else:
@@ -112,7 +112,7 @@ else:
 
 **Refactored Code:**
 
-```python {cmd=true}
+```python
 def avg(L):
     if len(L) == 0:
         return 0
