@@ -27,3 +27,5 @@ The *complex* part is that many other concepts including problem solving strateg
 As a result, the book is not meant to be a reference.
 It is meant to be worked through from beginning to end.
 Many topics dear to my heart were left out to make it possible to work through the whole book in a single semester course.
+
+# The full book in pdf and html formats can be found <a href="https://donsheehy.github.io/datastructures/">here</a>.
