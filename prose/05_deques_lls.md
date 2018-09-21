@@ -52,7 +52,7 @@ We will use the usual trick of looking back into our intuitive description above
 In this case, there is the list itself and the nodes.
 Let's write a class for a `ListNode`.
 
-```python
+```python {cmd id="_listnode"}
 class ListNode:
     def __init__(self, data, link = None):
         self.data = data
@@ -87,7 +87,7 @@ We could hope to do better with a linked list.
 However, right now, we have no way to add to or remove from the end of the linked list.
 Here is an inefficient, though simple and correct way to do it.
 
-```python {cmd=true}
+```python {cmd id="linkedlist1" continue="_listnode"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -120,6 +120,18 @@ class LinkedList:
             return currentnode.data
 ```
 
+```python {cmd hide continue="linkedlist1"}
+LL = LinkedList()
+LL.addfirst(3)
+LL.addfirst(5)
+assert(LL.removefirst() == 5)
+LL.addlast(9)
+LL.addlast(13)
+assert(LL.removefirst() == 3)
+assert(LL.removefirst() == 9)
+assert(LL.removelast() == 13)
+```
+
 The new `addlast` method implements a very common pattern in linked lists.
 It starts at the head of the linked list and **traverses** to the end by following the `link`s.
 It uses the convention that the `link` of the last node is `None`.
@@ -134,7 +146,7 @@ This requires a bit of overhead to make sure it always stores the correct node.
 Most of the special cases happen when there is only one item in the list.
 We will be able to use this to get some improvement for `addlast`, because we will be able to jump right to the end without traversing.  We will also be able to clean up the code for `removelast` a little by eliminating the `link.link` stuff and instead just check if we reached the tail.
 
-```python {cmd=true}
+```python {cmd id="linkedlist2" continue="_listnode"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -162,7 +174,7 @@ class LinkedList:
             return self.removefirst()
         else:
             currentnode = self._head
-            while.currentnode.link is not self._tail:
+            while currentnode.link is not self._tail:
                 currentnode = currentnode.link
             item = self._tail.data
             self._tail = currentnode
@@ -170,6 +182,19 @@ class LinkedList:
             return item
 
 ```
+
+```python {cmd hide continue="linkedlist2"}
+LL = LinkedList()
+LL.addfirst(3)
+LL.addfirst(5)
+assert(LL.removefirst() == 5)
+LL.addlast(9)
+LL.addlast(13)
+assert(LL.removefirst() == 3)
+assert(LL.removefirst() == 9)
+assert(LL.removelast() == 13)
+```
+
 
 Now we can implement the Queue ADT with a linked list.
 It will be surprisingly easy.
@@ -195,7 +220,7 @@ To implement the same method on the `LinkedQueue`, we will want **delegate** the
 Let's add the ability to get the length of the linked list.
 We'll do it by storing the length and updating it with each operation.
 
-```python
+```python {cmd id="_linkedlist" continue="_listnode"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -227,7 +252,7 @@ class LinkedList:
             return self.removefirst()
         else:
             currentnode = self._head
-            while.currentnode.link is not self._tail:
+            while currentnode.link is not self._tail:
                 currentnode = currentnode.link
             item = self._tail.data
             self._tail = currentnode
@@ -237,6 +262,18 @@ class LinkedList:
 
     def __len__(self):
         return self._length
+```
+
+```python {cmd hide continue="_linkedlist"}
+LL = LinkedList()
+LL.addfirst(3)
+LL.addfirst(5)
+assert(LL.removefirst() == 5)
+LL.addlast(9)
+LL.addlast(13)
+assert(LL.removefirst() == 3)
+assert(LL.removefirst() == 9)
+assert(LL.removelast() == 13)
 ```
 
 We still have to iterate through the whole list in order to remove from the end.
@@ -392,7 +429,7 @@ if __name__ == '__main__':
 
 The classes, `TestListQueue` and `TestLinkedQueue`, extend both `unittest.TestCase` *and* `TestQueue`.
 This is called **multiple inheritance**.
-In other languages like C++ that support multiple inheritance, it is considered a bad design descision.
+In other languages like C++ that support multiple inheritance, it is considered a bad design decision.
 However, in python, it is appropriate to use it for this kind of **mix in**.
 The only thing to remember is that the golden rule of inheritance should still be observed: **inheritance mean 'is a'**.
 
