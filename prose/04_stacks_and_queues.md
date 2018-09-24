@@ -37,7 +37,7 @@ We will implement it with a class called `ListStack`.
 Here, we are giving hints about the implementation in the name.
 This is more common in Java programming, but we adopt the convention in the book to help us distinguish between different implementations of the same ADT.
 
-```python {cmd=true id="liststack"}
+```python {cmd id="liststack"}
 class ListStack:
     def __init__(self):
         self._L = []
@@ -164,7 +164,7 @@ In the case of a stack, it is never correct usage to `pop` from an empty stack.
 Thus, it makes sense that someone using our `Stack` class should have their program crash and see an error message if they attempt to call `pop` when there are no items left on the stack.
 In the list implementation above, this does happen:
 
-```python {cmd=true id="liststackerror" continue="liststack"}
+```python {cmd id="liststackerror" continue="liststack"}
 s = ListStack()
 s.push(5)
 s.pop()
@@ -180,7 +180,7 @@ Otherwise, the stack trace reports the error in our code.
 Then, a user, might have to try to understand our class in order to backtrack to understand what they did wrong in their code.
 Instead, give them an error that explains exactly what happened.
 
-```python {cmd=true id="anotherstackerror" continue="liststack"}
+```python {cmd id="anotherstackerror" continue="liststack"}
 class AnotherStack(ListStack):
     def pop(self):
         try:

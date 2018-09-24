@@ -14,7 +14,7 @@ Testing your code means writing more code that checks that the behavior matches 
 
 You have some idea of what code is supposed to do.  You run the code.  Did it do what you expected?  How about some other inputs?  In the simplest case, you could simply add some code to the bottom of the module.  
 
-```python {cmd=true}
+```python {cmd}
 class Doubler:
     def __init__(self, n):
         self._n = 2 * n
@@ -49,7 +49,7 @@ Tests are run by calling the `unittest.main` function.
 
 Here is an example that tests a particular behavior of a hypothetical `DayOfTheWeek` class.
 
-```python {cmd=true}
+```python {cmd}
 import unittest
 from dayoftheweek import DayOfTheWeek
 

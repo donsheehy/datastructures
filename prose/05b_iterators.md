@@ -8,20 +8,20 @@ The job of an iterator is to provide sequential access to objects in a collectio
 
 The simplest way to get an iterator object is to call the `iter` method on some collection, such as a list.
 
-```python {cmd=true}
+```python {cmd}
 L = [2,4,6]
 myiterator = iter(L)
 ```
 
 Then, to access the items, you call the `next` function as follows.
 
-```python {cmd=true}
+```python {cmd}
 item = next(myiterator)
 ```
 
 If there are no more items, the `next` function will raise the `StopIteration` exception.
 
-```python {cmd=true}
+```python {cmd}
 emptyiterator = iter([])
 next(emptyiterator)
 ```
@@ -32,7 +32,7 @@ This is all it takes to be iterable or to be an iterator.  We can iterate over b
 
 You can rewrite a `for` loop with a `while` loop as follows.
 
-```python {cmd=true}
+```python {cmd}
 L = [1,1,2,3,5,8]
 
 for f in L:
@@ -53,7 +53,7 @@ Everyone agrees that the `for` loop is much prettier and easier to understand.  
 
 In Python, an iterator is required to also be iterable.  That is, I should be able to call `iter` on an iterator and get an iterator; usually this just gives me back the same iterator.  This is very useful, because it means that there is no problem if I try to loop over an iterator.  The following code works.
 
-```python {cmd=true}
+```python {cmd}
 L = [1,2,3,5,7,11]
 for i in iter(L):
 	print(i)
@@ -61,7 +61,7 @@ for i in iter(L):
 
 You should think of the iterator as a separate object from the object it is iterating over.  It keeps track of where it is in the list.  This is why you can have multiple iterators over the same collection at the same time.
 
-```python {cmd=true}
+```python {cmd}
 L = [3, 5, 8]
 for i in L:
 	for j in L:
@@ -74,7 +74,7 @@ The builtin function `iter` calls the `__iter__` magic method on the object.  Th
  
 A **generator** is an easy way to write your own iterators in Python.  It looks like a function, but it includes one or more `yield` statements.  Because a generator is an iterator, you can imagine that calling `next` should execute the function until the first value is yielded, and then it pauses.  Calling next again will cause the execution to continue from where it left off.  If the function returns, then `StopIteration` will be raised.  
 
-```python {cmd=true}
+```python {cmd}
 def mygen():
 	for i in range(10):
 		yield 2 ** i
@@ -90,7 +90,7 @@ Above we have a simple generator.  It is used in a `for` loop and it is also use
 
 
 
-```python {cmd=true}
+```python {cmd}
 class MyCollection:
     def __iter__(self):
         for i in range(5):
@@ -99,7 +99,7 @@ class MyCollection:
 print(list(enumerate(MyCollection(), start=10)))
 ```
 
-```python {cmd=true}
+```python {cmd}
 def mymax(S):
     items = iter(S)
     max = next(items)
@@ -111,7 +111,7 @@ def mymax(S):
 print(mymax([2,5,1]))
 ```
 
-```python {cmd=true}
+```python {cmd}
 def mysum(S):
     items = iter(S)
     sum = next(items)
@@ -120,7 +120,7 @@ def mysum(S):
     return sum
 ```
 
-```python {cmd=true}
+```python {cmd}
 def up(S, f):
     items = iter(S)
     output = next(items)
@@ -134,7 +134,7 @@ print(up(L, lambda a,b: a if a > b else b))
 print(up(L, lambda a,b: a+b))
 ```
 
-```python {cmd=true}
+```python {cmd}
 def myreduce(f):
     def up(S):
         items = iter(S)
@@ -156,7 +156,7 @@ print(myall(i < 6 for i in L))
 ```
 
 
-```python {cmd=true}
+```python {cmd}
 from itertools import permutations
 print(set(''.join(w) for w in permutations("wow")))
 ```

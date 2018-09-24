@@ -10,7 +10,7 @@ When we create a new `ListNode`, we can specify the nodes before and after so th
 We want it to always be true that `b == a.link` if and only if `a = b.prev` for any two nodes `a` and `b`.
 To help ensure this invariant, we set `self.prev.link = self` and `self.link.prev = self` unless `prev` or `link` respectively are `None`.
 
-```python {cmd=true id="_doublylinkedlist-0"}
+```python {cmd id="_doublylinkedlist-0"}
 class ListNode:
     def __init__(self, data, prev = None, link = None):
         self.data = data
@@ -26,7 +26,7 @@ First, we'll look at adding items a `DoublyLinkedList`.
 These operations are very similar to the `addfirst` operation on a `LinkedList`.
 One has to do a little more work to update the `prev` node that was not present in our `LinkedList`.
 
-```python {cmd=true continue="_doublylinkedlist-0" id="_doublylinkedlist-1"}
+```python {cmd continue="_doublylinkedlist-0" id="_doublylinkedlist-1"}
 class DoublyLinkedList:
     def __init__(self):
         self._head = None
@@ -61,7 +61,7 @@ We should use this as an opportunity to simplify the code.
 In this case, we might consider the more general problem of adding a node between two other nodes.
 We will just need to consider those cases where the nodes `before` or `after` or both are `None`.
 
-```python {cmd=true continue="_doublylinkedlist-1", id="_doublylinkedlist-2"}
+```python {cmd continue="_doublylinkedlist-1", id="_doublylinkedlist-2"}
     def _addbetween(self, item, before, after):
         node = ListNode(item, before, after)
         if after is self._head:
@@ -122,7 +122,7 @@ It takes time proportional to the length of the newly created list `C` and it do
 For doubly linked lists, we could achieve the same asymptotic running time by incrementally building up a new list.
 However, if we are allowed to modify the lists, the concatenation can be accomplished by pointing the tail of the first list at the head of the second.
 
-```python {cmd=true continue="_doublylinkedlist-3", id="_doublylinkedlist-4"}
+```python {cmd continue="_doublylinkedlist-3", id="_doublylinkedlist-4"}
 
     def __iadd__(self, other):
         if other._head is None: return

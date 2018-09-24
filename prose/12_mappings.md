@@ -92,7 +92,7 @@ As with any collection, we might want some other methods such as `__len__`, `__c
 
 The standard behavior for iterators in dictionaries is to iterate over the keys.  Alternative iterators are provided to iterate over the values or to iterate over the key-value pairs as tuples.  For a `dict` object this is done as follows.
 
-```python {cmd=true id:"jfs3jg8"}
+```python {cmd id="jfs3jg8"}
 d = {'key1': 'value1', 'key2': 'value2'}
 
 for k in d:

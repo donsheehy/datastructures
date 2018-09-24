@@ -12,7 +12,7 @@ This will make it easier to reason about the code and think through its correctn
 
 A **class** is a data type.  In python *type* and *class* are (mostly) synonymous.  An **object** is an **instance** of a class.  For example, python has a `list` class.  If I make a list called `mylist`.  Then, `mylist` is an object of type `list`.  
 
-```python {cmd=true id="j32a915x" continue="type02"}
+```python {cmd id="j32a915x" continue="type02"}
 mylist = []
 print(type(mylist))
 print(isinstance(mylist, list))
@@ -21,7 +21,7 @@ print(isinstance(mylist, str))
 
 There are all kinds of classes built into python.  Some you might not expect.
 
-```python {cmd=true id="j32a89ox" continue="type02"}
+```python {cmd id="j32a89ox" continue="type02"}
 def foo():
     return 0
 
@@ -30,7 +30,7 @@ print(type(foo))
 
 For the advanced students, here is a more exotic example called a generator.  In python you can `yield` instead of `return`.  If so, the result will be something called a generator and not a function.  This powerful idea shows up a lot in python, but we won't really be able to get our head around it until we understand how classes are able to package up data and code.  
 
-```python {cmd=true id="j32a5vrk" continue="type02"}
+```python {cmd id="j32a5vrk" continue="type02"}
 def mygenerator(n):
     for i in range(n):
         yield i
@@ -43,7 +43,7 @@ print(type(mygenerator(5)))
 
 One of the first ways that we learn about to combine multiple pieces of information into a single object is in calculus or linear algebra, with the introduction of vectors.  We can think of a 2-dimensional vector as a pair of numbers.  If we are trying to write some code that works with 2-dimensional vectors, we could just use tuples.  It's not too hard to define some basic functions that work with vectors.
 
-```python {cmd=true id="j32a9p9s"}
+```python {cmd id="j32a9p9s"}
 u = (3,4)
 v = (3,6)
 
@@ -70,7 +70,7 @@ print(isvertical(subtract(v, u)))
 
 This could be fine if that's all we wanted to do, but as we fill out the code, things will start to get messier.  For example, suppose we want to make sure that the inputs to these functions really are tuples that contain two numbers.  We might add some code to every method to check for this error or recover otherwise, but this is not great, because we really just want to operate on vectors.  Moreover, we might want to `add` other types of things besides vectors.  This would probably require us to make the add function much more complicated, or rename it something more descriptive such as `vectoradd`.
 
-```python {cmd=true id="j32aaa83"}
+```python {cmd id="j32aaa83"}
 class Vector:
     def __init__(self, x, y):
         self.x = x
@@ -91,7 +91,7 @@ The `__init__` method is called a **initializer**.  Methods like this one that s
 
 We will use another magic method to implement addition.
 
-```python {cmd=true id="j32aaotj"}
+```python {cmd id="j32aaotj"}
 class Vector:
     def __init__(self, x, y):
         self.x = x
@@ -115,7 +115,7 @@ That output is pretty weird.  It's telling me that u + v is a vector object at s
 
 In the example below, I added a `__str__` method as well as some type checking on the inputs.  The result will guarantee that a vector has two floats as coordinates.
 
-```python {cmd=true id="j32abjfi"}
+```python {cmd id="j32abjfi"}
 class Vector:
     def __init__(self, x, y):
         try:
@@ -280,7 +280,7 @@ There are many cases where we want objects of different types to share some func
 
 Consider the case where we want a class to behave like a `list`.  For example, we’d like to be able to append to the list and access items by their index, but we don’t want any of the other list stuff.  In this case, it would be *wrong* to use inheritance.  Instead, we would make our class store a list internally (composition).  Then, the public interface to our class would contain the methods we want while making calls to the stored `list` instance to avoid duplicating the list implementation.  Here is an example.
 
-```python {cmd=true, id="MyLimitedList"}
+```python {cmd, id="MyLimitedList"}
 class MyLimitedList:
     def __init__(self):
         self._L = []
@@ -294,7 +294,7 @@ class MyLimitedList:
 
 Here, the magic method `__getitem__` will allow us to use the square bracket notation with our class.  As with other magic methods, we don’t call it directly.
 
-```python {cmd=true, continue="MyLimitedList"}
+```python {cmd continue="MyLimitedList"}
 L = MyLimitedList()
 L.append(1)
 L.append(10)

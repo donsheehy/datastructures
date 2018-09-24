@@ -56,7 +56,7 @@ Every object has a **type**.  The type often determines what you can do with the
 
 The difference between a variable and the **object** it represents can get lost in our common speech because the variable is usually acting as the *name* of the object.  There are some times when it's useful to be clear about the difference, in particular when copying objects.  You might want to try some examples of copying objects from one variable to another.  Does changing one of them affect the other?
 
-```python {cmd=true id:"j4htmm25" continue="type"}
+```python {cmd id="j4htmm25" continue="type"}
 x = 5
 y = 3.2
 z = True
@@ -69,7 +69,7 @@ You should think of an object as having three things: an *identity*, a *type*, a
 It’s identity cannot change.  It can be used to see if two objects are actually the same object with the `is` keyword.
 For example, consider the following code.
 
-```python {cmd=true}
+```python {cmd}
 x = [1, 2, 3]
 y = x
 z = [1, 2, 3]
@@ -84,7 +84,7 @@ In Python, you also cannot change the type of an object.
 You can reassign a variable to point to different object of a different type, but that's not the same thing.
 There are several functions that may seem to be changing the types of objects, but they are really just creating a new object from the old.
 
-```python {cmd=true id="j4htp29r" continue="type"}
+```python {cmd id="j4htp29r" continue="type"}
 x = 2
 print("x =", x)
 print("float(x) =", float(x))
@@ -97,7 +97,7 @@ print("Now, x has type", type(x))
 
 You can do more elaborate things as well.
 
-```python {cmd=true id:"j4htrk52" continue="type"}
+```python {cmd id="j4htrk52" continue="type"}
 numstring = "3.1415926"
 y = float(numstring)
 print("y has type", type(y))
@@ -127,7 +127,7 @@ The next five most important types in Python are strings, lists, tuples, diction
 
 **Strings** are sequences of characters and can be used to store text of all kinds.  Note that you can **concatenate** strings to create a new string using the plus sign.  You can also access individual characters using square brackets and an **index**.  The name of the class for strings is `str`.  You can often turn other objects into strings.
 
-```python {cmd=true continue="type"}
+```python {cmd continue="type"}
 s = "Hello, "
 t = "World."
 u = s + t
@@ -143,7 +143,7 @@ print(n[2])
 **Lists** are ordered sequences of objects.  The objects do not have to be the same type.  They are indicated by square brackets and the **elements** of the list are separated by commas.  You can append an item to the end of a list `L` by using the command `L.append(newitem)`.
 It is possible to index into a list exactly as we did with strings.
 
-```python {cmd=true continue="type"}
+```python {cmd continue="type"}
 L = [1,2,3]
 print(type(L))
 L.append(400)
@@ -154,7 +154,7 @@ print(L)
 
 **Tuples** are also ordered sequences of objects, but unlike lists, they are immutable.  You can access the items but you can’t change what items are in the tuple after you create it.  For example, trying to `append` raises an exception.
 
-```python {cmd=true id:"j4htlbaj" continue="type"}
+```python {cmd id="j4htlbaj" continue="type"}
 t = (1, 2, "skip a few", 99, 100)
 print(type(t))
 print(t)
@@ -169,7 +169,7 @@ t.append(101)
 Dictionaries are also known as maps,  **mappings**, or hash tables.  We will go deep into how these are constructed later in the course.
 A dictionary doesn't have a fixed order.
 
-```python  {cmd=true}
+```python  {cmd}
 d = dict()
 d[2] = "two"
 d[5] = "five"
@@ -185,7 +185,7 @@ print(d["pi"])
 
 Be careful that empty braces `{}` indicates an empty dictionary and not an empty set.  Here is an example of a newly created set.  Some items are added.  Notice that the duplicates have no effect on the value as its printed.
 
-```python {cmd=true continue="type"}
+```python {cmd continue="type"}
 s = {2,1}
 print(type(s))
 s.add(3)
@@ -219,7 +219,7 @@ For the sequential types (lists, tuples, and strings), you can **slice** a subse
 
 **Important**: slicing a sequence creates a new object.  That means a big slice will do a lot of copying.  It's really easy to write inefficient code this way.
 
-```python {cmd=true}
+```python {cmd}
 a = "a string"
 b = ["my", "second", "favorite", "list"]
 c = (1, 2,3,"tuple")
@@ -281,7 +281,7 @@ The `for` loops from the previous section are classic examples if this.  The oth
 
 An `if` statement in its simplest form evaluates an expression and tries to interpret it as a boolean.  This expression is referred to as a predicate.  If the predicate evaluates to `True`, then a block of code is executed.  Otherwise, the code is not executed.  This is the *selection* of sequence, selection, and iteration.  Here is an example.
 
-```python {cmd=true}
+```python {cmd}
 if 3 + 3 < 7:
     print("This should be printed.")
 
@@ -291,7 +291,7 @@ if 2 ** 8 != 256:
 
 An `if` statement can also include an `else` clause.  This is a second block of code that executes if the predicate evaluates to `False`.
 
-```python {cmd=true}
+```python {cmd}
 if False:
     print("This is bad.")
 else:
@@ -300,7 +300,7 @@ else:
 
 A `while` loop also has a predicate.  It is evaluated at the top of a block of code.  If it evaluates to `True`, then the block is executed and then it repeats.  The repetition continues until the predicate evaluate to `False` or until the code reaches a `break` statement.
 
-```python {cmd=true}
+```python {cmd}
 x = 1
 while x < 128:
     print(x)
@@ -309,7 +309,7 @@ while x < 128:
 
 A `try` block is the way to catch and recover from errors while a program is running.  If you have some code that may cause an error, but you don’t want it to crash your program, you can put the code in a `try` block.  Then, you can *catch* the error (also known as an **exception**) and deal with it.  A simple example might be a case where you want to convert some number to a `float`.  Many types of objects can be converted to `float`, but many cannot.  If we simply try to do the conversion and it works, everything is fine.  Otherwise, if there is a `ValueError`, we can do something else instead.  
 
-```python {cmd=true}
+```python {cmd}
 x = "not a number"
 try:
     f = float(x)
@@ -319,7 +319,7 @@ except ValueError:
 
 A function also changes the control flow.  In Python, you define a function with the `def` keyword.  This keyword creates an object to store the block of code.  The parameters for the function are listed in parentheses after the function name.  The `return` statement causes the control flow to revert back to where the function was called and determines the value of the function call.  
 
-```python {cmd=true}
+```python {cmd}
 def foo(x, y):
     return 8 * x + y
 
@@ -329,7 +329,7 @@ print(foo("Na", " batman"))
 
 Notice that there is no requirement that we specify the types of objects a function expects for its arguments.  This is very convenient, because it means that we can use the same function to operate on different types of objects (as in the example above).  If we define a function twice, even if we change the parameters, the first will be overwritten by the second.  This is exactly the same as assigning to a variable twice.  The name of a function is just a name; it refers to an object (the function).  Functions can be treated like any other object.
 
-```python {cmd=true}
+```python {cmd}
 def foo(x):
     return x + 2
 
@@ -347,7 +347,7 @@ As we start to write more complex programs, it starts to make sense to break up 
 
 For example, suppose we have the following files.
 
-```python {cmd=true id="twofunctions"}
+```python {cmd id="twofunctions"}
 # File: twofunctions.py
 
 def f(x):
@@ -373,7 +373,7 @@ The `import` brings the module name into the current namespace.  I can then use 
 
 There is very little magic in an import.  In some sense, it’s just telling the current program about the results of another program.  Because the import (usually) results in the module being executed, it’s good practice to change the behavior of a script depending on whether it is being run directly, or being run as part of an import.  It is possible to check by looking at the `__name__` attribute of the module.  If you run the module directly (i.e. as a script), then the `__name__` variable is automatically set to `__main__`.  If the module is being imported, the `__name__` defaults to the module name.  This is easily seen from the following experiment.
 
-```python {cmd=true}
+```python {cmd}
 # File: mymodule.py
 print("The name of this module is", __name__)
 ```
@@ -387,7 +387,7 @@ print("Notice that it will print something different when imported?")
 
 Here is how we use the `__name__` attribute to check how the program is being run.
 
-```python {cmd=true}
+```python {cmd}
 
 def somefunction():
     print("Real important stuff here.")

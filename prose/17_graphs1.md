@@ -91,7 +91,7 @@ It should not be necessary to go through all the edges, just to find the ones in
 
 An alternative approach is to store a set with each vertex and have this set contain all the neighbors of that vertex.  This allows for fast access to the neighbors.  In fact, it means that we don't have to store the edges explicitly at all.
 
-```python {cmd=true, id:'adjacencysetgraph'}
+```python {cmd, id='adjacencysetgraph'}
 class AdjacencySetGraph:
     def __init__(self, V, E):
         self._V = set()
@@ -118,7 +118,7 @@ class AdjacencySetGraph:
         return iter(self._nbrs[v])
 ```
 
-```python {cmd=true, continue:"adjacencysetgraph"}
+```python {cmd continue="adjacencysetgraph"}
 G = AdjacencySetGraph({1,2,3}, {(1,2),(2,1),(1,3)})
 print("neighbors of 1:", list(G.nbrs(1)))
 print("neighbors of 2:", list(G.nbrs(2)))
@@ -183,7 +183,7 @@ For a directed graph, two vertices $u$ and $v$ are **strongly connected** if $u$
 Let's consider a simple method to test of two vertices are connected.
 We will add it to our `AdjacencySetGraph` class.  As a first exercise, we could try to work recursively.  The idea is simple: in the base case, see if you are trying to get from a vertex to itself.  Otherwise, it suffices to check if any of the neighbors of the first vertex are connected to the last vertex.
 
-```python {cmd:true, continue:"adjacencysetgraph", id:"connected1"}
+```python {cmd continue="adjacencysetgraph", id="connected1"}
     def connected(self, a, b):
         if a == b: return True
         return any(self.connected(nbr, b) for nbr in self.nbrs(a))
@@ -191,7 +191,7 @@ We will add it to our `AdjacencySetGraph` class.  As a first exercise, we could 
 Can you guess what will go wrong?
 Here's an example.
 
-```python {cmd:true, continue:'connected1'}
+```python {cmd continue='connected1'}
 G = AdjacencySetGraph({1,2,3}, {(1,2), (2,3)})
 assert(G.connected(1,2))
 assert(G.connected(1,3))
@@ -207,7 +207,7 @@ except RecursionError:
 
 It's clear that if the graph has any cycles, we can't check connectivity this way.  To deal with cycles, we can keep a set of visited vertices.  Recall that this is called memoization.
 
-```python {cmd:true, continue:"adjacencysetgraph", id:"connected2"}
+```python {cmd continue="adjacencysetgraph", id="connected2"}
     def connected(self, a, b):
         return self._connected(a, b, set())
 
@@ -220,7 +220,7 @@ It's clear that if the graph has any cycles, we can't check connectivity this wa
 
 Now, we can try again and see what happens.
 
-```python {cmd:true, continue:'connected2'}
+```python {cmd continue='connected2'}
 H = AdjacencySetGraph({1,2,3}, {(1,2), (2,1), (2,3)})
 try:
     assert(H.connected(1,2))

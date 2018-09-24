@@ -37,7 +37,7 @@ def mergeSort(L):
     # Divide!
     mid = len(L) // 2
     A = L[:mid]
-    B = L[mid:]
+    B = L[mid=]
 
     # Conquer!
     mergeSort(A)
@@ -67,7 +67,7 @@ In its wonderfulness, python allows you to assign into a slice the same way you 
 
 We could also use some more logic in the loop to avoid this last step, though I have found students disagree as to which approach is simpler.
 
-```python {cmd=true}
+```python {cmd}
 def merge(A, B, L):   
     i, j = 0, 0
     while i < len(A) or j < len(B):
@@ -134,7 +134,7 @@ and an **Iterator** is a object that has an `__iter__` method and a `__next__` m
 These magic methods are called *from the outside* as `iter(my_iterable)` and `next(my_iterator)`.
 They are most commonly used by the `for` keyword either in for loops or in **generator expressions** as in comprehensions.
 
-```python {cmd=true}
+```python {cmd}
 class SimpleIterator:
     def __init__(self):
         self._count = 0
@@ -268,7 +268,7 @@ def quickSorted(L):
 
 Let's do an in-place version.  For this, we want to avoid creating new lists and concatenating them at the end.
 
-```python {cmd=true}
+```python {cmd}
 def quicksort(L, left = 0, right = None):
     if right is None:
         right = len(L)

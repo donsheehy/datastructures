@@ -8,7 +8,7 @@ Before we dive into particular sorting algorithms, let's first ask an easier que
 
 After a little, thought, you will probably come up with some code that looks like the following.
 
-```python {cmd=true id:"j2uqamrd"}
+```python {cmd id="j2uqamrd"}
 def is_sorted(L):
     for i in range(len(L)-1):
         if L[i]>L[i+1]:

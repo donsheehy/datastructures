@@ -40,7 +40,7 @@ We might say these functions have the same behavior or the same **semantics**.
 
 Here is a function that takes a list as input; it returns `True` if there are any duplicates and `False` otherwise.
 
-```python {cmd=true id:"duplicates1"}
+```python {cmd id="duplicates1"}
 def duplicates1(L):
     n = len(L)
     for i in range(n):
@@ -60,7 +60,7 @@ A basic question that we will ask again and again is the following?
 The simplest answer to this question comes from simply running the program and measuring how long it takes.
 We could do this as follows.
 
-```python {cmd:true, continue:"duplicates1", id:"j543h66u"}
+```python {cmd continue="duplicates1" id="j543h66u"}
 import time
 
 for i in range(5):
@@ -81,7 +81,7 @@ For now, let's run the code several times and take the average to smooth them ou
 We'll wrap this idea in a general function that takes another function as input, and a length.
 It runs the given function on lists of the given length and averages the time take per run.
 
-```python {cmd=true continue:"duplicates1",id:"timetrials"}
+```python {cmd continue="duplicates1" id="timetrials"}
 import time
 
 def timetrials(func, n, trials = 10):
@@ -96,7 +96,7 @@ def timetrials(func, n, trials = 10):
 We can now look at the average running time as the length of the list gets longer.
 It's not surprising to see that the average time goes up as the length $n$ increases.
 
-```python {cmd=true continue:"timetrials",id:"j543zqs2"}
+```python {cmd continue="timetrials" id="j543zqs2"}
 for n in [50, 100, 200, 400, 800, 1600, 3200]:
     timetrials(duplicates1, n)
 ```
@@ -107,7 +107,7 @@ In the `duplicates1` function, we are comparing each pair of elements twice beca
 We can eliminate this using a standard trick of only letting `j` range up to `i`.
 Here is what the code would look like.
 
-```python {cmd=true continue:"timetrials", id:"duplicates2"}
+```python {cmd continue="timetrials", id="duplicates2"}
 def duplicates2(L):
     n = len(L)
     for i in range(1,n):
@@ -117,7 +117,7 @@ def duplicates2(L):
     return False
 ```
 
-```python {cmd=true continue:"duplicates2", id:"j544j8r7"}
+```python {cmd continue="duplicates2", id="j544j8r7"}
 for n in [50, 100, 200, 400, 800, 1600, 3200]:
     timetrials(duplicates2, n)
 ```
@@ -127,13 +127,13 @@ The `any` function takes an iterable collection of booleans and returns `True` i
 You can make an iterable collection in an expression in the same way one does for comprehensions.
 This can be very handy.
 
-```python {cmd=true continue:"timetrials",id:"duplicates3"}
+```python {cmd continue="timetrials" id="duplicates3"}
 def duplicates3(L):
     n = len(L)
     return any(L[i] == L[j] for i in range(1,n) for j in range(i))
 ```
 
-```python {cmd=true continue:"duplicates3", id:"j544qfui"}
+```python {cmd continue="duplicates3", id="j544qfui"}
 for n in [50, 100, 200, 400, 800, 1600, 3200]:
     timetrials(duplicates3, n)
 ```
@@ -144,7 +144,7 @@ If we want to make a real improvement, we'll need a substantial new idea.
 One possibility is to sort the list and look at adjacent elements in the list.
 If there are duplicates, they will be adjacent after sorting.
 
-```python {cmd=true continue:"timetrials",id:"duplicates4"}
+```python {cmd continue="timetrials" id="duplicates4"}
 def duplicates4(L):
     n = len(L)
     L.sort()
@@ -154,7 +154,7 @@ def duplicates4(L):
     return False
 ```
 
-```python {cmd=true continue:"duplicates3", id:"duplicates5"}
+```python {cmd continue="duplicates3", id="duplicates5"}
 def duplicates5(L):
     n = len(L)
     L.sort()
@@ -176,7 +176,7 @@ def duplicates8(L):
     return any(e in s or s.add(e) for e in L)
 ```
 
-```python {cmd=true continue:"duplicates5", id:"j544qfur"}
+```python {cmd continue="duplicates5", id="j544qfur"}
 for n in [50, 100, 200, 400, 800, 1600, 3200]:
     print("Quadratic: ", end="")
     timetrials(duplicates3, n)
@@ -200,7 +200,7 @@ Sometimes, the gap between two pieces of code will increase as the input size gr
 
 Below is a program that adds up the first $k$ positive integers and returns both the sum and time required to do the computation.
 
-```python {cmd=true id:"sumk1"}
+```python {cmd id="sumk1"}
 import time
 
 def sumk(k):
@@ -214,7 +214,7 @@ def sumk(k):
     return total, end-start
 ```
 
-```python {cmd=true continue:"sumk1",id:"j54378j3"}
+```python {cmd continue="sumk1" id="j54378j3"}
 for i in range(5):
     print("Sum: %d, time taken: %f" % sumk(10000))
 ```
@@ -225,7 +225,7 @@ It is running an operating system and several other programs at the same time.
 Also, if run on different computers, one could expect to see wildly different results based on the speed of the processor and other differences between the computers.
 For now, let's run the code several times and take the average to smooth them out for a given computer.
 
-```python {cmd=true continue:"sumk1",id:"timetrials2"}
+```python {cmd continue="sumk1" id="timetrials2"}
 def timetrials(func, k, trials = 10):
     totaltime = 0
     for i in range(trials):
@@ -233,7 +233,7 @@ def timetrials(func, k, trials = 10):
     print("average =%10.7f for k = %d" % (totaltime/trials, k))
 ```
 
-```python {cmd=true continue:"timetrials",id:"j5437vpd"}
+```python {cmd continue="timetrials2" id="j5437vpd"}
 timetrials(sumk, 10000)
 timetrials(sumk, 100000)
 timetrials(sumk, 1000000)
@@ -259,7 +259,7 @@ it suffices to observe that you can add the numbers in pairs, matching $i$ with 
 There are $k/2$ such pairs and each adds up to $k+1$.
 Let's use this formula to rewrite our `sumk` function and time it.
 
-```python {cmd=true continue:"timetrials2",id:"j5439nl1"}
+```python {cmd continue="timetrials2" id="j5439nl1"}
 import time
 
 def sumk2(k):
@@ -289,7 +289,7 @@ A single line of code can do a lot of stuff.
 Here's a one line function that does all kinds of stuff.
 It creates a list of 200 items and sums all the entries for each of value of i from 0 to k-1 and returns a list of the results.
 
-```python {cmd=true id:"j543abkc"}
+```python {cmd id="j543abkc"}
 def f001(k):
     return [sum([i, i + 1] * 100) for i in range(k)]
 
