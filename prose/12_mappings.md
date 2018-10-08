@@ -258,7 +258,7 @@ class HashMap:
 ### Rehashing
 The most interesting part of the code above is the `_double` method.  This is a method that increases the number of buckets.  It's not enough to just append more buckets to the list, because the `_bucket` method that we use to find the right bucket depends on the number of buckets.  When that number changes, we have to reinsert all the items in the mapping so that they can be found when we next `get` them.  
 
-# Factoring Out A Superclass
+## Factoring Out A Superclass
 We have given two different implementations of the same ADT.  There are several methods that we implemented in the `ListMapping` that we will also want in the `HashMapping`.  It makes sense to avoid duplicating common parts of these two (concrete) data structures.  Inheritance provides a nice way to do this.
 
 This is the most common way that inheritance appears in code.  Two classes want to share some code, so we **factor out a superclass** that both can inherit from and share the underlying code.

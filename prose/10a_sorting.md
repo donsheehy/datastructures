@@ -164,7 +164,7 @@ You often see `insertionSort` written in a way that keeps the sorted part of the
 
 Could you write such an insertion sort?  Try it.
 
-# Sorting in Python
+## Sorting in Python
 
 Python has two main functions to sort a list.  They are called `sort()` and `sorted()`.  The difference is that the former sorts the list and the latter returns a new list that is sorted.  Consider the following simple demonstration.
 

@@ -123,7 +123,7 @@ print(dpMakeChange([1,5,10,21,25], 64))
 A major difference between the dynamic programming approach and the memoized recursion approach is that the dynamic program builds the results *from the bottom up*, while the recursive version works top down, starting work on the largest problem first and working down to the smaller problems as needed.
 *Do either of these approaches correspond to the way that you solve programming problems?*
 
-# Another example
+## Another example
 
 In order to see dynamic programming as a general approach to solving problems, we need to see another example.
 As with recursion, the key is to look for smaller problems to solve.
