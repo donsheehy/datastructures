@@ -21,8 +21,8 @@ async function main() {
   console.log("Should be done.");
 
   // chrome (puppeteer) export
-  // await engine.chromeExport({ fileType: "pdf", runAllCodeChunks: true }); // fileType = 'pdf'|'png'|'jpeg'
-  // console.log("PDF export should be done.");
+  await engine.chromeExport({ fileType: "pdf", runAllCodeChunks: true }); // fileType = 'pdf'|'png'|'jpeg'
+  console.log("PDF export should be done.");
 
   return process.exit();
 }
