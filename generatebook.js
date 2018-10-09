@@ -5,7 +5,7 @@ async function main() {
   await mume.init();
 
   const engine = new mume.MarkdownEngine({
-    filePath: "/Users/don/Dropbox/work/research/books/datastructures/docs/fullbook.md",
+    filePath: "./docs/fullbook.md",
     config: {
       previewTheme: "github-light.css",
       // revealjsTheme: "white.css"

@@ -554,7 +554,7 @@ t<span class="token punctuation">.</span>append<span class="token punctuation">(
 (1, 2, &apos;skip a few&apos;, 99, 100)
 100
 Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/z8sbxl7cz_code_chunk.py&quot;, line 10, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/kysxbqtqd_code_chunk.py&quot;, line 10, in <module>
     t.append(101)
 AttributeError: &apos;tuple&apos; object has no attribute &apos;append&apos;
 </module></pre></div></div><h3 class="mume-header" id="dictionaries-dict">Dictionaries (<code>dict</code>)</h3>
@@ -569,7 +569,7 @@ d<span class="token punctuation">[</span><span class="token string">&quot;pi&quo
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">[</span><span class="token string">&quot;pi&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">{&apos;pi&apos;: 3.1415926, 2: &apos;two&apos;, 5: &apos;five&apos;}
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">{2: &apos;two&apos;, &apos;pi&apos;: 3.1415926, 5: &apos;five&apos;}
 3.1415926
 </pre></div></div><h3 class="mume-header" id="sets-set">Sets (<code>set</code>)</h3>
 
@@ -842,7 +842,7 @@ u <span class="token operator">=</span> Vector<span class="token punctuation">(<
 v <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>u <span class="token operator">+</span> v<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">&lt;__main__.Vector object at 0x101e52080&gt;
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">&lt;__main__.Vector object at 0x104172048&gt;
 </pre></div></div><p>That output is pretty weird.  It&apos;s telling me that u + v is a vector object at some memory address, but doesn&apos;t tell me what vector it is.  We need to implement <code>__str__</code> in order to print the vector nicely.  This magic method is called by the print function to convert its parameters into a string.  It is not obvious how a string ought to be printed for a given class.  We have to specify it ourselves.</p>
 <p>In the example below, I added a <code>__str__</code> method as well as some type checking on the inputs.  The result will guarantee that a vector has two floats as coordinates.</p>
 <div class="code-chunk" data-id="j32abjfi" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=27, cmd id=&quot;j32abjfi&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
@@ -1024,7 +1024,7 @@ L<span class="token punctuation">.</span>append<span class="token punctuation">(
     <span class="token keyword">assert</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span>
     y <span class="token operator">=</span> Doubler<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">)</span>
     <span class="token keyword">assert</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/b3zugam4x_code_chunk.py&quot;, line 8
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/8fequzald_code_chunk.py&quot;, line 8
     if __name__ == &#x2018;__main__&#x2019;:
                             ^
 SyntaxError: invalid character in identifier
@@ -1053,7 +1053,7 @@ Tests are run by calling the <code>unittest.main</code> function.</p>
         self<span class="token punctuation">.</span>assertEquals<span class="token punctuation">(</span>d<span class="token punctuation">.</span>name<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> &#x2018;Thursday&#x2019;<span class="token punctuation">)</span>		
 
 unittest<span class="token punctuation">.</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/6ji15btba_code_chunk.py&quot;, line 6
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/v8ftwndxg_code_chunk.py&quot;, line 6
     d = DayOfTheWeek(&#x2018;F&#x2019;)
                        ^
 SyntaxError: invalid character in identifier
@@ -1183,11 +1183,11 @@ We could do this as follows.</p>
     duplicates1<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     timetaken <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Time taken for n = &quot;</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> <span class="token string">&quot;: &quot;</span><span class="token punctuation">,</span> timetaken<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Time taken for n =  1000 :  0.995805025100708
-Time taken for n =  1000 :  0.3598158359527588
-Time taken for n =  1000 :  0.279447078704834
-Time taken for n =  1000 :  0.29572296142578125
-Time taken for n =  1000 :  0.27050304412841797
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Time taken for n =  1000 :  1.1286139488220215
+Time taken for n =  1000 :  0.38937807083129883
+Time taken for n =  1000 :  0.3901710510253906
+Time taken for n =  1000 :  0.4254579544067383
+Time taken for n =  1000 :  0.37536001205444336
 </pre></div></div><p>Notice that we see some variation in the time required.
 This is caused by many factors, but the main one is that the computer is performing many other tasks at the same time.
 It is running an operating system and several other programs at the same time.
@@ -1208,13 +1208,13 @@ It runs the given function on lists of the given length and averages the time ta
 It&apos;s not surprising to see that the average time goes up as the length <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">n</span></span></span></span> increases.</p>
 <div class="code-chunk" data-id="j543zqs2" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=37, cmd continue=&quot;timetrials&quot; id=&quot;j543zqs2&quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates1<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0020721 for n = 50
-average = 0.0719847 for n = 100
-average = 0.4052427 for n = 200
-average = 0.3551665 for n = 400
-average = 0.9571627 for n = 800
-average = 3.5193934 for n = 1600
-average =10.1808256 for n = 3200
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0031737 for n = 50
+average = 0.0120008 for n = 100
+average = 0.3221189 for n = 200
+average = 0.5566677 for n = 400
+average = 1.3830656 for n = 800
+average = 3.7874973 for n = 1600
+average =10.4982491 for n = 3200
 </pre></div></div><p>Let&apos;s try to make our code faster.
 Simple improvements can be made by eliminating situations where we are doing unnecessary or redundant work.
 In the <code>duplicates1</code> function, we are comparing each pair of elements twice because both <code>i</code> and <code>j</code> range over all <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">n</span></span></span></span> indices.
@@ -1229,13 +1229,13 @@ Here is what the code would look like.</p>
     <span class="token keyword">return</span> <span class="token boolean">False</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="j544j8r7" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=39, cmd continue=&quot;duplicates2&quot;, id=&quot;j544j8r7&quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates2<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0008184 for n = 50
-average = 0.0046045 for n = 100
-average = 0.1888090 for n = 200
-average = 0.4350248 for n = 400
-average = 0.4588306 for n = 800
-average = 1.4301031 for n = 1600
-average = 5.1605414 for n = 3200
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0014467 for n = 50
+average = 0.0037943 for n = 100
+average = 0.1134746 for n = 200
+average = 0.4649790 for n = 400
+average = 0.5074632 for n = 800
+average = 1.8680187 for n = 1600
+average = 5.5554228 for n = 3200
 </pre></div></div><p>There is a python shortcut the kind of loop used in <code>duplicates2</code>.
 The <code>any</code> function takes an iterable collection of booleans and returns <code>True</code> if any of the booleans are true.
 You can make an iterable collection in an expression in the same way one does for comprehensions.
@@ -1245,13 +1245,13 @@ This can be very handy.</p>
     <span class="token keyword">return</span> <span class="token builtin">any</span><span class="token punctuation">(</span>L<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> L<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span> <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="j544qfui" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=41, cmd continue=&quot;duplicates3&quot;, id=&quot;j544qfui&quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates3<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0010965 for n = 50
-average = 0.0041452 for n = 100
-average = 0.2559515 for n = 200
-average = 0.3773026 for n = 400
-average = 0.5855564 for n = 800
-average = 2.0012126 for n = 1600
-average = 6.7072228 for n = 3200
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0010928 for n = 50
+average = 0.0041142 for n = 100
+average = 0.4325236 for n = 200
+average = 0.4199970 for n = 400
+average = 0.7332076 for n = 800
+average = 2.3806491 for n = 1600
+average = 6.8670256 for n = 3200
 </pre></div></div><p>This last optimization reduces the number of lines of code and may be desirable for code readability, but it doesn&apos;t improve the speed.</p>
 <p>If we want to make a real improvement, we&apos;ll need a substantial new idea.
 One possibility is to sort the list and look at adjacent elements in the list.
@@ -1290,33 +1290,33 @@ If there are duplicates, they will be adjacent after sorting.</p>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Sets:      &quot;</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
     timetrials<span class="token punctuation">(</span>duplicates7<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&apos;---------------------------&apos;</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Quadratic: average = 0.0011119 for n = 50
-Sorting:   average = 0.0000758 for n = 50
-Sets:      average = 0.0000267 for n = 50
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Quadratic: average = 0.0011215 for n = 50
+Sorting:   average = 0.0000767 for n = 50
+Sets:      average = 0.0000269 for n = 50
 ---------------------------
-Quadratic: average = 0.0040912 for n = 100
-Sorting:   average = 0.0257573 for n = 100
-Sets:      average = 0.0000398 for n = 100
+Quadratic: average = 0.0046097 for n = 100
+Sorting:   average = 0.0001388 for n = 100
+Sets:      average = 0.0000420 for n = 100
 ---------------------------
-Quadratic: average = 0.0894520 for n = 200
-Sorting:   average = 0.0819203 for n = 200
-Sets:      average = 0.0000551 for n = 200
+Quadratic: average = 0.1356168 for n = 200
+Sorting:   average = 0.0002361 for n = 200
+Sets:      average = 0.0000555 for n = 200
 ---------------------------
-Quadratic: average = 0.2663399 for n = 400
-Sorting:   average = 0.0004709 for n = 400
-Sets:      average = 0.0001194 for n = 400
+Quadratic: average = 0.3969085 for n = 400
+Sorting:   average = 0.0014845 for n = 400
+Sets:      average = 0.0001127 for n = 400
 ---------------------------
-Quadratic: average = 0.5821103 for n = 800
-Sorting:   average = 0.0009357 for n = 800
-Sets:      average = 0.0002136 for n = 800
+Quadratic: average = 0.7386439 for n = 800
+Sorting:   average = 0.0010439 for n = 800
+Sets:      average = 0.0002188 for n = 800
 ---------------------------
-Quadratic: average = 1.9845800 for n = 1600
-Sorting:   average = 0.0023624 for n = 1600
-Sets:      average = 0.0005255 for n = 1600
+Quadratic: average = 2.3651714 for n = 1600
+Sorting:   average = 0.0025322 for n = 1600
+Sets:      average = 0.0005424 for n = 1600
 ---------------------------
-Quadratic: average = 6.6946106 for n = 3200
-Sorting:   average = 0.0036667 for n = 3200
-Sets:      average = 0.0008195 for n = 3200
+Quadratic: average = 6.8700247 for n = 3200
+Sorting:   average = 0.0038555 for n = 3200
+Sets:      average = 0.0012127 for n = 3200
 ---------------------------
 </pre></div></div><p>Some key ideas:
 The Data Structures really matter.  The speed of the set membership testing or set construction gives a big improvement.
@@ -1340,11 +1340,11 @@ Sometimes, the gap between two pieces of code will increase as the input size gr
     <span class="token keyword">return</span> total<span class="token punctuation">,</span> end<span class="token operator">-</span>start
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="j54378j3" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=46, cmd continue=&quot;sumk1&quot; id=&quot;j54378j3&quot;}" class="language-python"><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Sum: %d, time taken: %f&quot;</span> <span class="token operator">%</span> sumk<span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Sum: 50005000, time taken: 0.005423
-Sum: 50005000, time taken: 0.000878
-Sum: 50005000, time taken: 0.000869
-Sum: 50005000, time taken: 0.000868
-Sum: 50005000, time taken: 0.000868
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Sum: 50005000, time taken: 0.000938
+Sum: 50005000, time taken: 0.004651
+Sum: 50005000, time taken: 0.000871
+Sum: 50005000, time taken: 0.001374
+Sum: 50005000, time taken: 0.001248
 </pre></div></div><p>Notice that we see some variation in the time required.
 This is caused by many factors, but the main one is that the computer is performing many other tasks at the same time.
 It is running an operating system and several other programs at the same time.
@@ -1359,10 +1359,10 @@ For now, let&apos;s run the code several times and take the average to smooth th
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">100000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">1000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">10000000</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0088354 for k = 10000
-average = 0.0707730 for k = 100000
-average = 0.1865454 for k = 1000000
-average = 1.4043004 for k = 10000000
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0008915 for k = 10000
+average = 0.0793581 for k = 100000
+average = 0.2499237 for k = 1000000
+average = 1.4558781 for k = 10000000
 </pre></div></div><p>Seeing the times for different values of <code>k</code> reveals a rather unsuprising pattern.
 As <code>k</code> goes up by a factor of 10, the time required for <code>sumk</code> also goes up by a factor of <code>10</code>.
 This makes sense, because it has to do about <code>k</code> additions and assignments.
@@ -1389,11 +1389,11 @@ timetrials<span class="token punctuation">(</span>sumk2<span class="token punctu
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">1000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">10000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">100000000</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0000003 for k = 10000
-average = 0.0000004 for k = 100000
-average = 0.0000005 for k = 1000000
-average = 0.0000003 for k = 10000000
-average = 0.0000005 for k = 100000000
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0000006 for k = 10000
+average = 0.0000003 for k = 100000
+average = 0.0000003 for k = 1000000
+average = 0.0000005 for k = 10000000
+average = 0.0000002 for k = 100000000
 </pre></div></div><p>This is much much faster.
 Even as <code>k</code> becomes very large, it doesn&apos;t seem to slow down.</p>
 <h2 class="mume-header" id="modeling-the-running-time-of-a-program">Modeling the Running Time of a Program</h2>
@@ -1846,9 +1846,9 @@ s<span class="token punctuation">.</span>push<span class="token punctuation">(</
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/w9u9xjtde_code_chunk.py&quot;, line 24, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/t82cr65fy_code_chunk.py&quot;, line 24, in <module>
     s.pop()
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/w9u9xjtde_code_chunk.py&quot;, line 9, in pop
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/t82cr65fy_code_chunk.py&quot;, line 9, in pop
     return self._L.pop()
 IndexError: pop from empty list
 </module></pre></div></div><p>If we look at the error message, it even seems pretty good.
@@ -1871,16 +1871,16 @@ s<span class="token punctuation">.</span>push<span class="token punctuation">(</
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/924rewuia_code_chunk.py&quot;, line 24, in pop
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/0x2twryaq_code_chunk.py&quot;, line 24, in pop
     return self._L.pop()
 IndexError: pop from empty list
 
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/924rewuia_code_chunk.py&quot;, line 31, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/0x2twryaq_code_chunk.py&quot;, line 31, in <module>
     s.pop()
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/924rewuia_code_chunk.py&quot;, line 26, in pop
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/0x2twryaq_code_chunk.py&quot;, line 26, in pop
     raise RuntimeError(&quot;pop from empty stack&quot;)
 RuntimeError: pop from empty stack
 </module></pre></div></div><p style="page-break-after:always;"></p>
@@ -2517,7 +2517,7 @@ A<span class="token punctuation">.</span>append<span class="token punctuation">(
 B<span class="token punctuation">.</span>append<span class="token punctuation">(</span>B<span class="token punctuation">)</span>
 A <span class="token operator">==</span> B
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/z2cve7yfg_code_chunk.py&quot;, line 5, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/84n9pjnpq_code_chunk.py&quot;, line 5, in <module>
     A == B
 RecursionError: maximum recursion depth exceeded in comparison
 </module></pre></div></div><p>In this case, the recursive function is <code>list.__eq__</code>, the method that compares two lists when you use <code>==</code>.  It compares the list by checking if the elements are equal.  The lists <code>A</code> and <code>B</code> each have length 2.  The first elements match.  The second element of each list is another list.  To compare them, there is another call to <code>list.__eq__</code>.  This is a repeat of the first call and the process repeats until the recursion limit is reached.</p>

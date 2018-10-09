@@ -151,4 +151,4 @@ while n is not None:
     n = n.link
 ```
 
-We have to be a bit careful about the differences between this concatenation operation and concatenation of regular lists.  With the doubly-linked list, the concatenation operation empties the other list.  It does this so that we don’t have multiple doubly-linked lists with the same `ListNode`s.    That would be a problem if we tried to edit just one of the lists, because the changes would be reflected in the other list as well, possibly with disastrous consequences.
+We have to be a bit careful about the differences between this concatenation operation and concatenation of regular lists.  With the doubly-linked list, concatenation empties the other list.  It does this so that we don’t have multiple doubly-linked lists with the same `ListNode`s.    That would be a problem if we tried to edit just one of the lists, because the changes would be reflected in the other list as well, possibly with disastrous consequences.
