@@ -27,5 +27,7 @@ for i, chapter in enumerate(chapters):
     with open('prose/' + chapter, 'r') as booksection:
         book.append(booksection.read())
 
+fullbookmd = "".join(book)
+
 with open('docs/fullbook.md', 'w') as outfile:
-    outfile.write("".join(book))
+    outfile.write(fullbookmd)

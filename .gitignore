@@ -1,1 +1,5 @@
 node_modules
+__pycache__
+code/__pycache__
+test/__pycache__
+code/figure_generation/__pycache__
