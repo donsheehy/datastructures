@@ -28,7 +28,7 @@ These are the two main operations.  They are what make a mapping, and are genera
 
 Here is a very lightweight method for using a `list` as a mapping.  We start with a little class to store key-value pairs, then give two methods to implement get and put.
 
-```python {cud i’d="trivialmapping"}
+```python {cmd id="_trivialmapping"}
 class Entry:
     def __init__(self, key, value):
         self.key = key
@@ -65,7 +65,7 @@ At this point, it seems that the only advantage of the `dict` structure is that 
 
 First, let's put our new data structure in a class.  This will allow us to encapsulate the underlying list so that users don't accidentally mess it up, for example, by appending to it rather than using `put`.  We'd like to protect users from themselves, especially when there are properties of the structure we want to maintain.  In this case, we want to make sure keys stay unique.
 
-```python
+```python {cmd id="_listmappingsimple"}
 class ListMappingSimple:
     def __init__(self):
         self._entries = []
@@ -92,7 +92,7 @@ As with any collection, we might want some other methods such as `__len__`, `__c
 
 The standard behavior for iterators in dictionaries is to iterate over the keys.  Alternative iterators are provided to iterate over the values or to iterate over the key-value pairs as tuples.  For a `dict` object this is done as follows.
 
-```python {cmd id="jfs3jg8"}
+```python {cmd}
 d = {'key1': 'value1', 'key2': 'value2'}
 
 for k in d:
@@ -123,7 +123,7 @@ We'll add the same kind of functionality to our Mapping ADT.  So, the **extended
 
 It is very important to recall from the very beginning of the course that the `dict` class is a **non-sequential collection**.  That is, there is no significance to the ordering of the items and furthermore, you should never assume to know anything about the ordering of the pairs.  You should not even assume that the ordering will be consistent between two iterations of the same `dict`.  This same warning goes for the mappings we will implement and we'll see that the ability to rearrange the order of how they are stored is the secret behind the mysteriously fast running times.  However, this first implementation will have the items in a fixed order because we are using a `list` to store them.
 
-```python
+```python {cmd id="_listmapping_notDRY"}
 class ListMapping:
     def __init__(self):
         self._entries = []
@@ -187,7 +187,7 @@ For any key `k`,  we want to compute the index of the *right* `ListMapping` for 
 
 This means, we want an integer, i.e. the index into our list of buckets.  A **hash function** takes a key and returns an integer.  Most classes in python implement a method called `__hash__` that does just this.  We can use it to implement a simple mapping scheme that improves on the `ListMapping`.  
 
-```python
+```python {cmd id="_hashmappingsimple"}
 class HashMappingSimple:
     def __init__(self):
         self._size = 100
@@ -215,8 +215,10 @@ The `__getitem__` and `__setitem__` methods call the `_bucket` method to get one
 
 The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  As the number of entries grows, we can periodically increase the number of buckets.  Here is the code.
 
-```python
-class HashMap:
+```python {cmd id="_hashmapping_notDRY"}
+from listmapping import ListMapping
+
+class HashMapping:
     def __init__(self, size = 2):
         self._size = size
         self._buckets = [ListMapping() for i in range(self._size)]
@@ -269,15 +271,17 @@ There are some methods that we expect to be implemented by the subclass.  We can
 
 Here is the code for the superclass.
 
-```python
-class Mapping:
-    class Entry:
-        def __init__(self, key, value):
-            self.key = key
-            self.value = value
+```python {cmd id="_mapping"}
+class Entry:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
 
-        def __str__(self):
-            return "%d: %s" % (self.key, self.value)
+    def __str__(self):
+        return "%d: %s" % (self.key, self.value)
+
+
+class Mapping:
 
     # Child class needs to implement this!
     def get(self, key):
@@ -318,14 +322,16 @@ class Mapping:
         self.put(key, value)
 
     def __str__(self):
-        return "{%s}" % (", ".join([str(e) for e in self]))
+        return "{%s}" % (", ".join([str(e) for e in self._entryiter()]))
 ```
 
 There is a lot here, but notice that there are really only four methods that a subclass has to implement: `get`, `put`, `__len__`, and a method called `_entryiter` that iterates through the entries.  This last method is private because the user of this class does not need to access `Entry` objects.  They have the Mapping ADT methods to provide access to the data.  This is why the `Entry` class is an inner class (defined inside the `Mapping` class).
 
 Now, the `ListMapping` can be rewritten as follows.
 
-```python
+```python {cmd id="_listmapping"}
+from mapping import Mapping, Entry
+
 class ListMapping(Mapping):
     def __init__(self):
         self._entries = []
@@ -361,7 +367,10 @@ All the magic methods as well as the public iterators and string conversion are 
 
 The `HashMapping` class can also be rewritten as follows.
 
-```python
+```python {cmd id="_hashmapping"}
+from mapping import Mapping
+from listmapping import ListMapping
+
 class HashMapping(Mapping):
     def __init__(self, size = 100):
         self._size = size

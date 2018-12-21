@@ -309,6 +309,7 @@ by Don Sheehy
 <li><a href="#the-extended-mapping-adt">The extended Mapping ADT</a></li>
 <li><a href="#its-too-slow">It&apos;s Too Slow!</a>
 <ul>
+<li><a href="#how-many-buckets-should-we-use">How many buckets should we use?</a></li>
 <li><a href="#rehashing">Rehashing</a></li>
 </ul>
 </li>
@@ -554,7 +555,7 @@ t<span class="token punctuation">.</span>append<span class="token punctuation">(
 (1, 2, &apos;skip a few&apos;, 99, 100)
 100
 Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/kysxbqtqd_code_chunk.py&quot;, line 10, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/j1mybaj0d_code_chunk.py&quot;, line 10, in <module>
     t.append(101)
 AttributeError: &apos;tuple&apos; object has no attribute &apos;append&apos;
 </module></pre></div></div><h3 class="mume-header" id="dictionaries-dict">Dictionaries (<code>dict</code>)</h3>
@@ -569,7 +570,7 @@ d<span class="token punctuation">[</span><span class="token string">&quot;pi&quo
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">[</span><span class="token string">&quot;pi&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">{2: &apos;two&apos;, &apos;pi&apos;: 3.1415926, 5: &apos;five&apos;}
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">{2: &apos;two&apos;, 5: &apos;five&apos;, &apos;pi&apos;: 3.1415926}
 3.1415926
 </pre></div></div><h3 class="mume-header" id="sets-set">Sets (<code>set</code>)</h3>
 
@@ -842,7 +843,7 @@ u <span class="token operator">=</span> Vector<span class="token punctuation">(<
 v <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>u <span class="token operator">+</span> v<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">&lt;__main__.Vector object at 0x104172048&gt;
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">&lt;__main__.Vector object at 0x10280ab38&gt;
 </pre></div></div><p>That output is pretty weird.  It&apos;s telling me that u + v is a vector object at some memory address, but doesn&apos;t tell me what vector it is.  We need to implement <code>__str__</code> in order to print the vector nicely.  This magic method is called by the print function to convert its parameters into a string.  It is not obvious how a string ought to be printed for a given class.  We have to specify it ourselves.</p>
 <p>In the example below, I added a <code>__str__</code> method as well as some type checking on the inputs.  The result will guarantee that a vector has two floats as coordinates.</p>
 <div class="code-chunk" data-id="j32abjfi" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=27, cmd id=&quot;j32abjfi&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
@@ -1024,7 +1025,7 @@ L<span class="token punctuation">.</span>append<span class="token punctuation">(
     <span class="token keyword">assert</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span>
     y <span class="token operator">=</span> Doubler<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">)</span>
     <span class="token keyword">assert</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/8fequzald_code_chunk.py&quot;, line 8
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/t3aju8bk6_code_chunk.py&quot;, line 8
     if __name__ == &#x2018;__main__&#x2019;:
                             ^
 SyntaxError: invalid character in identifier
@@ -1053,7 +1054,7 @@ Tests are run by calling the <code>unittest.main</code> function.</p>
         self<span class="token punctuation">.</span>assertEquals<span class="token punctuation">(</span>d<span class="token punctuation">.</span>name<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> &#x2018;Thursday&#x2019;<span class="token punctuation">)</span>		
 
 unittest<span class="token punctuation">.</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/v8ftwndxg_code_chunk.py&quot;, line 6
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/qhmwafrm1_code_chunk.py&quot;, line 6
     d = DayOfTheWeek(&#x2018;F&#x2019;)
                        ^
 SyntaxError: invalid character in identifier
@@ -1183,11 +1184,11 @@ We could do this as follows.</p>
     duplicates1<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     timetaken <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Time taken for n = &quot;</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> <span class="token string">&quot;: &quot;</span><span class="token punctuation">,</span> timetaken<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Time taken for n =  1000 :  1.1286139488220215
-Time taken for n =  1000 :  0.38937807083129883
-Time taken for n =  1000 :  0.3901710510253906
-Time taken for n =  1000 :  0.4254579544067383
-Time taken for n =  1000 :  0.37536001205444336
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Time taken for n =  1000 :  1.3673059940338135
+Time taken for n =  1000 :  0.3359980583190918
+Time taken for n =  1000 :  0.34122419357299805
+Time taken for n =  1000 :  0.26567602157592773
+Time taken for n =  1000 :  0.27738189697265625
 </pre></div></div><p>Notice that we see some variation in the time required.
 This is caused by many factors, but the main one is that the computer is performing many other tasks at the same time.
 It is running an operating system and several other programs at the same time.
@@ -1208,13 +1209,13 @@ It runs the given function on lists of the given length and averages the time ta
 It&apos;s not surprising to see that the average time goes up as the length <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">n</span></span></span></span> increases.</p>
 <div class="code-chunk" data-id="j543zqs2" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=37, cmd continue=&quot;timetrials&quot; id=&quot;j543zqs2&quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates1<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0031737 for n = 50
-average = 0.0120008 for n = 100
-average = 0.3221189 for n = 200
-average = 0.5566677 for n = 400
-average = 1.3830656 for n = 800
-average = 3.7874973 for n = 1600
-average =10.4982491 for n = 3200
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0021179 for n = 50
+average = 0.1408174 for n = 100
+average = 0.3998772 for n = 200
+average = 0.4820044 for n = 400
+average = 1.0292330 for n = 800
+average = 3.5403161 for n = 1600
+average =10.3037705 for n = 3200
 </pre></div></div><p>Let&apos;s try to make our code faster.
 Simple improvements can be made by eliminating situations where we are doing unnecessary or redundant work.
 In the <code>duplicates1</code> function, we are comparing each pair of elements twice because both <code>i</code> and <code>j</code> range over all <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">n</span></span></span></span> indices.
@@ -1229,13 +1230,13 @@ Here is what the code would look like.</p>
     <span class="token keyword">return</span> <span class="token boolean">False</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="j544j8r7" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=39, cmd continue=&quot;duplicates2&quot;, id=&quot;j544j8r7&quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates2<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0014467 for n = 50
-average = 0.0037943 for n = 100
-average = 0.1134746 for n = 200
-average = 0.4649790 for n = 400
-average = 0.5074632 for n = 800
-average = 1.8680187 for n = 1600
-average = 5.5554228 for n = 3200
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0008239 for n = 50
+average = 0.0031356 for n = 100
+average = 0.1203253 for n = 200
+average = 0.6174558 for n = 400
+average = 0.4278401 for n = 800
+average = 1.3978091 for n = 1600
+average = 5.1941123 for n = 3200
 </pre></div></div><p>There is a python shortcut the kind of loop used in <code>duplicates2</code>.
 The <code>any</code> function takes an iterable collection of booleans and returns <code>True</code> if any of the booleans are true.
 You can make an iterable collection in an expression in the same way one does for comprehensions.
@@ -1245,13 +1246,13 @@ This can be very handy.</p>
     <span class="token keyword">return</span> <span class="token builtin">any</span><span class="token punctuation">(</span>L<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> L<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span> <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="j544qfui" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=41, cmd continue=&quot;duplicates3&quot;, id=&quot;j544qfui&quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates3<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0010928 for n = 50
-average = 0.0041142 for n = 100
-average = 0.4325236 for n = 200
-average = 0.4199970 for n = 400
-average = 0.7332076 for n = 800
-average = 2.3806491 for n = 1600
-average = 6.8670256 for n = 3200
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0011306 for n = 50
+average = 0.0042271 for n = 100
+average = 0.2181834 for n = 200
+average = 0.6787103 for n = 400
+average = 0.5672635 for n = 800
+average = 1.9479522 for n = 1600
+average = 6.7545136 for n = 3200
 </pre></div></div><p>This last optimization reduces the number of lines of code and may be desirable for code readability, but it doesn&apos;t improve the speed.</p>
 <p>If we want to make a real improvement, we&apos;ll need a substantial new idea.
 One possibility is to sort the list and look at adjacent elements in the list.
@@ -1290,33 +1291,33 @@ If there are duplicates, they will be adjacent after sorting.</p>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Sets:      &quot;</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
     timetrials<span class="token punctuation">(</span>duplicates7<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&apos;---------------------------&apos;</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Quadratic: average = 0.0011215 for n = 50
-Sorting:   average = 0.0000767 for n = 50
-Sets:      average = 0.0000269 for n = 50
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Quadratic: average = 0.0012516 for n = 50
+Sorting:   average = 0.0000806 for n = 50
+Sets:      average = 0.0000291 for n = 50
 ---------------------------
-Quadratic: average = 0.0046097 for n = 100
-Sorting:   average = 0.0001388 for n = 100
-Sets:      average = 0.0000420 for n = 100
+Quadratic: average = 0.0043031 for n = 100
+Sorting:   average = 0.1106656 for n = 100
+Sets:      average = 0.0000602 for n = 100
 ---------------------------
-Quadratic: average = 0.1356168 for n = 200
-Sorting:   average = 0.0002361 for n = 200
-Sets:      average = 0.0000555 for n = 200
+Quadratic: average = 0.1488596 for n = 200
+Sorting:   average = 0.0002367 for n = 200
+Sets:      average = 0.0000540 for n = 200
 ---------------------------
-Quadratic: average = 0.3969085 for n = 400
-Sorting:   average = 0.0014845 for n = 400
-Sets:      average = 0.0001127 for n = 400
+Quadratic: average = 0.5460417 for n = 400
+Sorting:   average = 0.0004631 for n = 400
+Sets:      average = 0.0001113 for n = 400
 ---------------------------
-Quadratic: average = 0.7386439 for n = 800
-Sorting:   average = 0.0010439 for n = 800
-Sets:      average = 0.0002188 for n = 800
+Quadratic: average = 0.5654826 for n = 800
+Sorting:   average = 0.0009350 for n = 800
+Sets:      average = 0.0002209 for n = 800
 ---------------------------
-Quadratic: average = 2.3651714 for n = 1600
-Sorting:   average = 0.0025322 for n = 1600
-Sets:      average = 0.0005424 for n = 1600
+Quadratic: average = 1.9541031 for n = 1600
+Sorting:   average = 0.0018742 for n = 1600
+Sets:      average = 0.0005195 for n = 1600
 ---------------------------
-Quadratic: average = 6.8700247 for n = 3200
-Sorting:   average = 0.0038555 for n = 3200
-Sets:      average = 0.0012127 for n = 3200
+Quadratic: average = 6.7485678 for n = 3200
+Sorting:   average = 0.0037992 for n = 3200
+Sets:      average = 0.0008782 for n = 3200
 ---------------------------
 </pre></div></div><p>Some key ideas:
 The Data Structures really matter.  The speed of the set membership testing or set construction gives a big improvement.
@@ -1340,11 +1341,11 @@ Sometimes, the gap between two pieces of code will increase as the input size gr
     <span class="token keyword">return</span> total<span class="token punctuation">,</span> end<span class="token operator">-</span>start
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="j54378j3" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=46, cmd continue=&quot;sumk1&quot; id=&quot;j54378j3&quot;}" class="language-python"><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Sum: %d, time taken: %f&quot;</span> <span class="token operator">%</span> sumk<span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Sum: 50005000, time taken: 0.000938
-Sum: 50005000, time taken: 0.004651
-Sum: 50005000, time taken: 0.000871
-Sum: 50005000, time taken: 0.001374
-Sum: 50005000, time taken: 0.001248
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Sum: 50005000, time taken: 0.000861
+Sum: 50005000, time taken: 0.000865
+Sum: 50005000, time taken: 0.000862
+Sum: 50005000, time taken: 0.000865
+Sum: 50005000, time taken: 0.002157
 </pre></div></div><p>Notice that we see some variation in the time required.
 This is caused by many factors, but the main one is that the computer is performing many other tasks at the same time.
 It is running an operating system and several other programs at the same time.
@@ -1359,10 +1360,10 @@ For now, let&apos;s run the code several times and take the average to smooth th
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">100000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">1000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">10000000</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0008915 for k = 10000
-average = 0.0793581 for k = 100000
-average = 0.2499237 for k = 1000000
-average = 1.4558781 for k = 10000000
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0008857 for k = 10000
+average = 0.0971462 for k = 100000
+average = 0.1629889 for k = 1000000
+average = 1.2786705 for k = 10000000
 </pre></div></div><p>Seeing the times for different values of <code>k</code> reveals a rather unsuprising pattern.
 As <code>k</code> goes up by a factor of 10, the time required for <code>sumk</code> also goes up by a factor of <code>10</code>.
 This makes sense, because it has to do about <code>k</code> additions and assignments.
@@ -1390,10 +1391,10 @@ timetrials<span class="token punctuation">(</span>sumk2<span class="token punctu
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">10000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">100000000</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0000006 for k = 10000
-average = 0.0000003 for k = 100000
-average = 0.0000003 for k = 1000000
-average = 0.0000005 for k = 10000000
-average = 0.0000002 for k = 100000000
+average = 0.0000005 for k = 100000
+average = 0.0000005 for k = 1000000
+average = 0.0000003 for k = 10000000
+average = 0.0000004 for k = 100000000
 </pre></div></div><p>This is much much faster.
 Even as <code>k</code> becomes very large, it doesn&apos;t seem to slow down.</p>
 <h2 class="mume-header" id="modeling-the-running-time-of-a-program">Modeling the Running Time of a Program</h2>
@@ -1846,9 +1847,9 @@ s<span class="token punctuation">.</span>push<span class="token punctuation">(</
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/t82cr65fy_code_chunk.py&quot;, line 24, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/gh0i6j9ra_code_chunk.py&quot;, line 24, in <module>
     s.pop()
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/t82cr65fy_code_chunk.py&quot;, line 9, in pop
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/gh0i6j9ra_code_chunk.py&quot;, line 9, in pop
     return self._L.pop()
 IndexError: pop from empty list
 </module></pre></div></div><p>If we look at the error message, it even seems pretty good.
@@ -1871,16 +1872,16 @@ s<span class="token punctuation">.</span>push<span class="token punctuation">(</
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/0x2twryaq_code_chunk.py&quot;, line 24, in pop
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/7y0q0rl4d_code_chunk.py&quot;, line 24, in pop
     return self._L.pop()
 IndexError: pop from empty list
 
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/0x2twryaq_code_chunk.py&quot;, line 31, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/7y0q0rl4d_code_chunk.py&quot;, line 31, in <module>
     s.pop()
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/0x2twryaq_code_chunk.py&quot;, line 26, in pop
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/7y0q0rl4d_code_chunk.py&quot;, line 26, in pop
     raise RuntimeError(&quot;pop from empty stack&quot;)
 RuntimeError: pop from empty stack
 </module></pre></div></div><p style="page-break-after:always;"></p>
@@ -1904,7 +1905,7 @@ Here is the ADT.</p>
 <li><strong>len</strong> - return the number of items in the deque.</li>
 </ul>
 <p>As a start, let&apos;s see what a deque implementation would look like using a list.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListDeque</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_listdeque" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=54, cmd id=&quot;_listdeque&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListDeque</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_L <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
 
@@ -1919,7 +1920,7 @@ Here is the ADT.</p>
 
     <span class="token keyword">def</span> <span class="token function">removelast</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
       <span class="token keyword">return</span> self<span class="token punctuation">.</span>_L<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><p>The code is simple enough, but a couple of operations will start to get slow as the deque gets large.
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>The code is simple enough, but a couple of operations will start to get slow as the deque gets large.
 Inserting and popping at index <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> takes <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span></span></span></span> time.
 This follows from the way lists are stored sequentially in memory.
 There is no way to change the beginning of the list without shifting all the other elements to make room or fill gaps.
@@ -1935,7 +1936,7 @@ Each node stores a reference to the next node in the list.</p>
 <p>We will use the usual trick of looking back into our intuitive description above to find the nouns that will be the types we will need to define.
 In this case, there is the list itself and the nodes.
 Let&apos;s write a class for a <code>ListNode</code>.</p>
-<div class="code-chunk" data-id="_listnode" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=54, cmd id=&quot;_listnode&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListNode</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_linkedlist_00" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=55, cmd id=&quot;_linkedlist_00&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListNode</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">,</span> link <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
         self<span class="token punctuation">.</span>link <span class="token operator">=</span> link
@@ -1945,7 +1946,7 @@ These will behove roughly like the push and pop operations of the stack.
 This first implementation will hide the nodes from the user.
 That is, from a users perspective, they can create a linked list, and they can add and remove nodes, but they don&apos;t have to touch (or even know about) the nodes.
 This is abstraction (hiding details)!</p>
-<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="simplelinkedlist" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=56, cmd id=&quot;simplelinkedlist&quot;, continue=&quot;_linkedlist_00&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_head <span class="token operator">=</span> <span class="token boolean">None</span>
 
@@ -1956,13 +1957,13 @@ This is abstraction (hiding details)!</p>
         item <span class="token operator">=</span> self<span class="token punctuation">.</span>_head<span class="token punctuation">.</span>data
         self<span class="token punctuation">.</span>_head <span class="token operator">=</span> self<span class="token punctuation">.</span>_head<span class="token punctuation">.</span>link
         <span class="token keyword">return</span> item
-</pre><h2 class="mume-header" id="implementing-a-queue-with-a-linkedlist">Implementing a Queue with a LinkedList</h2>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><h2 class="mume-header" id="implementing-a-queue-with-a-linkedlist">Implementing a Queue with a LinkedList</h2>
 
 <p>Recall that even our best list implementation of a Queue required linear time in the worst case for <code>dequeue</code> operations (though constant on average).
 We could hope to do better with a linked list.
 However, right now, we have no way to add to or remove from the end of the linked list.
 Here is an inefficient, though simple and correct way to do it.</p>
-<div class="code-chunk" data-id="linkedlist1" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=55, cmd id=&quot;linkedlist1&quot; continue=&quot;_listnode&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="linkedlist_A" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=57, cmd id=&quot;linkedlist_A&quot; continue=&quot;_linkedlist_00&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_head <span class="token operator">=</span> <span class="token boolean">None</span>
 
@@ -1992,7 +1993,7 @@ Here is an inefficient, though simple and correct way to do it.</p>
                 currentnode <span class="token operator">=</span> currentnode<span class="token punctuation">.</span>link
             currentnode<span class="token punctuation">.</span>link <span class="token operator">=</span> <span class="token boolean">None</span>
             <span class="token keyword">return</span> currentnode<span class="token punctuation">.</span>data
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-57" data-cmd="python"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>The new <code>addlast</code> method implements a very common pattern in linked lists.
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-59" data-cmd="python"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>The new <code>addlast</code> method implements a very common pattern in linked lists.
 It starts at the head of the linked list and <strong>traverses</strong> to the end by following the <code>link</code>s.
 It uses the convention that the <code>link</code> of the last node is <code>None</code>.</p>
 <p>Similarly, <code>removelast</code> traverses the list until it reaches the second to last element.</p>
@@ -2002,7 +2003,7 @@ For a list of length <span class="katex"><span class="katex-mathml"><math><seman
 This requires a bit of overhead to make sure it always stores the correct node.
 Most of the special cases happen when there is only one item in the list.
 We will be able to use this to get some improvement for <code>addlast</code>, because we will be able to jump right to the end without traversing.  We will also be able to clean up the code for <code>removelast</code> a little by eliminating the <code>link.link</code> stuff and instead just check if we reached the tail.</p>
-<div class="code-chunk" data-id="linkedlist2" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=57, cmd id=&quot;linkedlist2&quot; continue=&quot;_listnode&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="linkedlist_B" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=59, cmd id=&quot;linkedlist_B&quot; continue=&quot;_linkedlist_00&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_head <span class="token operator">=</span> <span class="token boolean">None</span>
         self<span class="token punctuation">.</span>_tail <span class="token operator">=</span> <span class="token boolean">None</span>
@@ -2036,9 +2037,11 @@ We will be able to use this to get some improvement for <code>addlast</code>, be
             self<span class="token punctuation">.</span>_tail<span class="token punctuation">.</span>link <span class="token operator">=</span> <span class="token boolean">None</span>
             <span class="token keyword">return</span> item
 
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-59" data-cmd="python"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Now we can implement the Queue ADT with a linked list.
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-61" data-cmd="python"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Now we can implement the Queue ADT with a linked list.
 It will be surprisingly easy.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token comment"># linkedqueue.py</span>
+<div class="code-chunk" data-id="_linkedqueue" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=61, cmd id=&quot;_linkedqueue&quot;}" class="language-python"><span class="token comment"># linkedqueue.py</span>
+<span class="token keyword">from</span> linkedlist <span class="token keyword">import</span> LinkedList
+
 <span class="token keyword">class</span> <span class="token class-name">LinkedQueue</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_L <span class="token operator">=</span> LinkedList<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -2048,13 +2051,13 @@ It will be surprisingly easy.</p>
 
     <span class="token keyword">def</span> <span class="token function">dequeue</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_L<span class="token punctuation">.</span>removefirst<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><h2 class="mume-header" id="storing-the-length">Storing the length</h2>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><h2 class="mume-header" id="storing-the-length">Storing the length</h2>
 
 <p>With our <code>ListQueue</code>, we implemented <code>__len__</code> to give the number of items in the queue.
 To implement the same method on the <code>LinkedQueue</code>, we will want <strong>delegate</strong> the length computation to the <code>LinkedList</code>.</p>
 <p>Let&apos;s add the ability to get the length of the linked list.
 We&apos;ll do it by storing the length and updating it with each operation.</p>
-<div class="code-chunk" data-id="_linkedlist" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=59, cmd id=&quot;_linkedlist&quot; continue=&quot;_listnode&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_linkedlist_01" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=62, cmd id=&quot;_linkedlist_01&quot; continue=&quot;_linkedlist_00&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_head <span class="token operator">=</span> <span class="token boolean">None</span>
         self<span class="token punctuation">.</span>_tail <span class="token operator">=</span> <span class="token boolean">None</span>
@@ -2095,7 +2098,7 @@ We&apos;ll do it by storing the length and updating it with each operation.</p>
 
     <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_length
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-61" data-cmd="python"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>We still have to iterate through the whole list in order to remove from the end.
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-64" data-cmd="python"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>We still have to iterate through the whole list in order to remove from the end.
 It seems very hard to avoid this.
 As a result, our <code>removelast</code> method still takes linear time.
 We won&apos;t fix this until the next chapter and it will require a new idea.
@@ -2159,7 +2162,7 @@ We wanted to copy a bunch of methods to be included in two different classes (<c
 Instead we want them to <em>share</em> the methods.
 So, we <strong>refactor</strong> the code, by <strong>extracting a superclass</strong>.
 Our new class will be called <code>TestQueue</code>.
-Both <code>TestListQueue</code> and <code>TestLinkedQueue</code> will extend `TestQueue.
+Both <code>TestListQueue</code> and <code>TestLinkedQueue</code> will extend <code>TestQueue</code>.
 Remember extending means inheriting from.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python"><span class="token comment"># testqueue.py</span>
 <span class="token keyword">class</span> <span class="token class-name">TestQueue</span><span class="token punctuation">:</span>
@@ -2276,7 +2279,7 @@ In this <strong>doubly-linked list</strong>, removing from the end will be symme
 <p>When we create a new <code>ListNode</code>, we can specify the nodes before and after so that the appropriate links can be established.
 We want it to always be true that <code>b == a.link</code> if and only if <code>a = b.prev</code> for any two nodes <code>a</code> and <code>b</code>.
 To help ensure this invariant, we set <code>self.prev.link = self</code> and <code>self.link.prev = self</code> unless <code>prev</code> or <code>link</code> respectively are <code>None</code>.</p>
-<div class="code-chunk" data-id="_doublylinkedlist-0" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=61, cmd id=&quot;_doublylinkedlist-0&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListNode</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_doublylinkedlist_00" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=64, cmd id=&quot;_doublylinkedlist_00&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListNode</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">,</span> prev <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">,</span> link <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
         self<span class="token punctuation">.</span>prev <span class="token operator">=</span> prev
@@ -2288,7 +2291,7 @@ To help ensure this invariant, we set <code>self.prev.link = self</code> and <co
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>First, we&apos;ll look at adding items a <code>DoublyLinkedList</code>.
 These operations are very similar to the <code>addfirst</code> operation on a <code>LinkedList</code>.
 One has to do a little more work to update the <code>prev</code> node that was not present in our <code>LinkedList</code>.</p>
-<div class="code-chunk" data-id="_doublylinkedlist-1" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=62, cmd continue=&quot;_doublylinkedlist-0&quot; id=&quot;_doublylinkedlist-1&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">DoublyLinkedList</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_doublylinkedlist_01" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=65, cmd continue=&quot;_doublylinkedlist_00&quot; id=&quot;_doublylinkedlist_01&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">DoublyLinkedList</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_head <span class="token operator">=</span> <span class="token boolean">None</span>
         self<span class="token punctuation">.</span>_tail <span class="token operator">=</span> <span class="token boolean">None</span>
@@ -2319,7 +2322,7 @@ It&apos;s clear that there is a lot of shared logic between the two methods.
 We should use this as an opportunity to simplify the code.
 In this case, we might consider the more general problem of adding a node between two other nodes.
 We will just need to consider those cases where the nodes <code>before</code> or <code>after</code> or both are <code>None</code>.</p>
-<div class="code-chunk" data-id="_doublylinkedlist-2" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=63, cmd continue=&quot;_doublylinkedlist-1&quot;, id=&quot;_doublylinkedlist-2&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">_addbetween</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">,</span> before<span class="token punctuation">,</span> after<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_doublylinkedlist_02" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=66, cmd continue=&quot;_doublylinkedlist_01&quot;, id=&quot;_doublylinkedlist_02&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">_addbetween</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">,</span> before<span class="token punctuation">,</span> after<span class="token punctuation">)</span><span class="token punctuation">:</span>
         node <span class="token operator">=</span> ListNode<span class="token punctuation">(</span>item<span class="token punctuation">,</span> before<span class="token punctuation">,</span> after<span class="token punctuation">)</span>
         <span class="token keyword">if</span> after <span class="token keyword">is</span> self<span class="token punctuation">.</span>_head<span class="token punctuation">:</span>
             self<span class="token punctuation">.</span>_head <span class="token operator">=</span> node
@@ -2335,7 +2338,7 @@ We will just need to consider those cases where the nodes <code>before</code> or
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Symmetry is also apparent in the code to remove an item from either end.
 As with the <code>add</code> methods, we factor out a (private) method that both use to remove a node and return its data.
 It includes a little logic to detect if the head or tail or both change with the removal.</p>
-<div class="code-chunk" data-id="_doublylinkedlist-3" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=64, cmd continue=&quot;_doublylinkedlist-2&quot;, id=&quot;_doublylinkedlist-3&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">_remove</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_doublylinkedlist_03" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=67, cmd continue=&quot;_doublylinkedlist_02&quot;, id=&quot;_doublylinkedlist_03&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">_remove</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">:</span>
         before<span class="token punctuation">,</span> after <span class="token operator">=</span> node<span class="token punctuation">.</span>prev<span class="token punctuation">,</span> node<span class="token punctuation">.</span>link
         <span class="token keyword">if</span> node <span class="token keyword">is</span> self<span class="token punctuation">.</span>_head<span class="token punctuation">:</span>
             self<span class="token punctuation">.</span>_head <span class="token operator">=</span> after
@@ -2358,7 +2361,7 @@ It includes a little logic to detect if the head or tail or both change with the
 <p>There are several operations that are very fast on doubly linked lists compared to other lists.
 One of the most useful is the ability to concatenate two lists.
 Recall that the plus sign can be used to concatenate two <code>list</code> objects.</p>
-<div class="code-chunk" data-id="j44w4tnd" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=65, cmd id=&quot;j44w4tnd&quot;}" class="language-python">A <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+<div class="code-chunk" data-id="j44w4tnd" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=68, cmd id=&quot;j44w4tnd&quot;}" class="language-python">A <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
 B <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span>
 C <span class="token operator">=</span> A <span class="token operator">+</span> B
 <span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span>
@@ -2371,7 +2374,7 @@ C <span class="token operator">=</span> A <span class="token operator">+</span> 
 It takes time proportional to the length of the newly created list <code>C</code> and it doesn&apos;t modify the lists <code>A</code> or <code>B</code>.
 For doubly linked lists, we could achieve the same asymptotic running time by incrementally building up a new list.
 However, if we are allowed to modify the lists, the concatenation can be accomplished by pointing the tail of the first list at the head of the second.</p>
-<div class="code-chunk" data-id="_doublylinkedlist-4" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=66, cmd continue=&quot;_doublylinkedlist-3&quot;, id=&quot;_doublylinkedlist-4&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">__iadd__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_doublylinkedlist_04" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=69, cmd continue=&quot;_doublylinkedlist_03&quot;, id=&quot;_doublylinkedlist_04&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">__iadd__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> other<span class="token punctuation">.</span>_head <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span> <span class="token keyword">return</span>
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>_head <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
             self<span class="token punctuation">.</span>_head <span class="token operator">=</span> other<span class="token punctuation">.</span>_head
@@ -2384,8 +2387,7 @@ However, if we are allowed to modify the lists, the concatenation can be accompl
         <span class="token comment"># Clean up the other list.</span>
         other<span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token keyword">return</span> self
-
-L <span class="token operator">=</span> DoublyLinkedList<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-71" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=70, cmd continue=&quot;_doublylinkedlist_04&quot;}" class="language-python">L <span class="token operator">=</span> DoublyLinkedList<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">[</span>L<span class="token punctuation">.</span>addlast<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 B <span class="token operator">=</span> DoublyLinkedList<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">[</span>B<span class="token punctuation">.</span>addlast<span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">11</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
@@ -2394,30 +2396,9 @@ L <span class="token operator">+=</span> B
 
 n <span class="token operator">=</span> L<span class="token punctuation">.</span>_head
 <span class="token keyword">while</span> n <span class="token keyword">is</span> <span class="token operator">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>data<span class="token punctuation">,</span> end <span class="token operator">=</span> <span class="token string">&apos; &apos;</span><span class="token punctuation">)</span>
     n <span class="token operator">=</span> n<span class="token punctuation">.</span>link
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">0
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-</pre></div></div><p>We have to be a bit careful about the differences between this concatenation operation and concatenation of regular lists.  With the doubly-linked list, the concatenation operation empties the other list.  It does this so that we don&#x2019;t have multiple doubly-linked lists with the same <code>ListNode</code>s.    That would be a problem if we tried to edit just one of the lists, because the changes would be reflected in the other list as well, possibly with disastrous consequences.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 </pre></div></div><p>We have to be a bit careful about the differences between this concatenation operation and concatenation of regular lists.  With the doubly-linked list, concatenation empties the other list.  It does this so that we don&#x2019;t have multiple doubly-linked lists with the same <code>ListNode</code>s.    That would be a problem if we tried to edit just one of the lists, because the changes would be reflected in the other list as well, possibly with disastrous consequences.</p>
 <p style="page-break-after:always;"></p>
     <a name="chapter_08" href=""></a>
     <p style="font-size:80pt;color:#d0d0d0;font-weight:bold">
@@ -2487,7 +2468,7 @@ This limit is usually around 1000.</p>
 
 <p>To think clearly about recursion, it helps to have an idea of how recursion works on a real computer.
 It is easiest to first understand how all function calls work and then it should be clear that there is no technical difference in making a recursive function call compared to any other function call.</p>
-<div class="code-chunk" data-id="j32h294n" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=67, cmd id=&quot;j32h294n&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="j32h294n" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=71, cmd id=&quot;j32h294n&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
     var <span class="token operator">=</span> k <span class="token operator">**</span> <span class="token number">2</span>
     <span class="token keyword">return</span> g<span class="token punctuation">(</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> var
 
@@ -2511,13 +2492,13 @@ The error is really just signaling that the call stack reached its limit.</p>
 
 a<span class="token punctuation">(</span><span class="token number">340</span><span class="token punctuation">)</span>
 </pre><p>An interesting recursive example con be constructed by creating two lists, each one containing the other.</p>
-<div class="code-chunk" data-id="code-chunk-id-70" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=68, cmd}" class="language-python">A <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+<div class="code-chunk" data-id="code-chunk-id-74" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=72, cmd}" class="language-python">A <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
 B <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
 A<span class="token punctuation">.</span>append<span class="token punctuation">(</span>A<span class="token punctuation">)</span>
 B<span class="token punctuation">.</span>append<span class="token punctuation">(</span>B<span class="token punctuation">)</span>
 A <span class="token operator">==</span> B
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/84n9pjnpq_code_chunk.py&quot;, line 5, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/ao7xyifw0_code_chunk.py&quot;, line 5, in <module>
     A == B
 RecursionError: maximum recursion depth exceeded in comparison
 </module></pre></div></div><p>In this case, the recursive function is <code>list.__eq__</code>, the method that compares two lists when you use <code>==</code>.  It compares the list by checking if the elements are equal.  The lists <code>A</code> and <code>B</code> each have length 2.  The first elements match.  The second element of each list is another list.  To compare them, there is another call to <code>list.__eq__</code>.  This is a repeat of the first call and the process repeats until the recursion limit is reached.</p>
@@ -2525,7 +2506,7 @@ RecursionError: maximum recursion depth exceeded in comparison
 
 <p>Here is a classic example of a recursively defined function.
 It was originally named for Leonardo Fibonacci who studied it in the context of predicting the growth of rabbit populations.</p>
-<div class="code-chunk" data-id="j32h6rso" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=69, cmd id=&quot;j32h6rso&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">fib</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="j32h6rso" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=73, cmd id=&quot;j32h6rso&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">fib</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> k <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token keyword">return</span> k
     <span class="token keyword">return</span> fib<span class="token punctuation">(</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> fib<span class="token punctuation">(</span>k<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span>
 
@@ -2536,7 +2517,7 @@ For example, I tried to run it for <code>k = 40</code> and gave up on it.</p>
 <p>This is a case that we will encounter many times in this course.
 Once we embrace recursion as a way to think about breaking problems into smaller pieces, we may find very short recursive algorithms, but for one reason or another, we may want to rewrite them without recursion.
 Here&apos;s a version that uses a loop instead.</p>
-<div class="code-chunk" data-id="j32hgrm1" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=70, cmd id=&quot;j32hgrm1&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">fib</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="j32hgrm1" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=74, cmd id=&quot;j32hgrm1&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">fib</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
     a<span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
         a<span class="token punctuation">,</span> b <span class="token operator">=</span> b<span class="token punctuation">,</span> a <span class="token operator">+</span> b
@@ -2589,7 +2570,7 @@ Theoretical computer scientists even have a use for iterated logarithms (we call
 <p>We can just do the division directly rather than repeatedly subtracting the smaller from the bigger.
 The result is a slight change to the base case and replacing the subtraction with the modulus operation.
 Here is the revised code.</p>
-<div class="code-chunk" data-id="j32hniri" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=71, cmd id=&quot;j32hniri&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">gcd</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="j32hniri" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=75, cmd id=&quot;j32hniri&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">gcd</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> a <span class="token operator">&gt;</span> b<span class="token punctuation">:</span>
         a<span class="token punctuation">,</span> b <span class="token operator">=</span> b<span class="token punctuation">,</span> a
     <span class="token keyword">if</span> a <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
@@ -2621,7 +2602,7 @@ In that approach, you would simply try to add the largest coin you can until you
 Here is an implementation.  <em>(Notice the relationship to Euclid&apos;s GCD algorithm)</em></p>
 <h2 class="mume-header" id="a-greedy-algorithm">A Greedy Algorithm</h2>
 
-<div class="code-chunk" data-id="j32act34" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=72, cmd id=&quot;j32act34&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">greedyMC</span><span class="token punctuation">(</span>coinvalueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="j32act34" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=76, cmd id=&quot;j32act34&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">greedyMC</span><span class="token punctuation">(</span>coinvalueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
     coinvalueList<span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token punctuation">)</span>
     coinvalueList<span class="token punctuation">.</span>reverse<span class="token punctuation">(</span><span class="token punctuation">)</span>
     numcoins <span class="token operator">=</span> <span class="token number">0</span>
@@ -2646,7 +2627,7 @@ The greedy solution does not work here.
 Let&apos;s try recursion instead.</p>
 <h2 class="mume-header" id="a-recursive-algorithm">A Recursive Algorithm</h2>
 
-<div class="code-chunk" data-id="j32ad4km" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=73, cmd id=&quot;j32ad4km&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">recMC</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="j32ad4km" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=77, cmd id=&quot;j32ad4km&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">recMC</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
    minCoins <span class="token operator">=</span> change
    <span class="token keyword">if</span> change <span class="token keyword">in</span> coinValueList<span class="token punctuation">:</span>
      <span class="token keyword">return</span> <span class="token number">1</span>
@@ -2667,7 +2648,7 @@ This way, we don&apos;t repeat work by computing the number of coins for a speci
 Don&apos;t forget to pass along the dictionary of known results when making recursive calls.</p>
 <h2 class="mume-header" id="a-memoized-version">A Memoized Version</h2>
 
-<div class="code-chunk" data-id="j32adxkx" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=74, cmd id=&quot;j32adxkx&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">memoMC</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">,</span> knownResults<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="j32adxkx" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=78, cmd id=&quot;j32adxkx&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">memoMC</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">,</span> knownResults<span class="token punctuation">)</span><span class="token punctuation">:</span>
     minCoins <span class="token operator">=</span> change
     <span class="token keyword">if</span> change <span class="token keyword">in</span> coinValueList<span class="token punctuation">:</span>
         knownResults<span class="token punctuation">[</span>change<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
@@ -2702,7 +2683,7 @@ In each step, the next best answer can be found by trying each coin, subtracting
 
 <p>Finally, we can repackage this into a dynamic programming algorithm.
 The idea is to explicitly fill in the table of all values, using previously computed values to compute new values.</p>
-<div class="code-chunk" data-id="j32akg27" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=75, cmd id=&quot;j32akg27&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">dpMakeChange</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="j32akg27" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=79, cmd id=&quot;j32akg27&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">dpMakeChange</span><span class="token punctuation">(</span>coinValueList<span class="token punctuation">,</span> change<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token comment"># Create a list to store the answers to the subproblems</span>
     minCoins <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token boolean">None</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token punctuation">(</span>change <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
 
@@ -2917,7 +2898,7 @@ Unfortunately, after finding the index, we still need to spend linear time in th
 <p><strong>Given a list <code>L</code>, determine if <code>L</code> is sorted or not.</strong></p>
 </blockquote>
 <p>After a little, thought, you will probably come up with some code that looks like the following.</p>
-<div class="code-chunk" data-id="j2uqamrd" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=76, cmd id=&quot;j2uqamrd&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">is_sorted</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="j2uqamrd" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=80, cmd id=&quot;j2uqamrd&quot;}" class="language-python"><span class="token keyword">def</span> <span class="token function">is_sorted</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> L<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">&gt;</span>L<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> <span class="token boolean">False</span>
@@ -3138,7 +3119,7 @@ The right side of the assignment is concatenating the remaining elements from th
 Then, this list is assigned into a slice.
 In its wonderfulness, python allows you to assign into a slice the same way you would assign into an index.</p>
 <p>We could also use some more logic in the loop to avoid this last step, though I have found students disagree as to which approach is simpler.</p>
-<div class="code-chunk" data-id="code-chunk-id-79" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=77, cmd}" class="language-python"><span class="token keyword">def</span> <span class="token function">merge</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">,</span> L<span class="token punctuation">)</span><span class="token punctuation">:</span>   
+<div class="code-chunk" data-id="code-chunk-id-83" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=81, cmd}" class="language-python"><span class="token keyword">def</span> <span class="token function">merge</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">,</span> L<span class="token punctuation">)</span><span class="token punctuation">:</span>   
     i<span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span>
     <span class="token keyword">while</span> i <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span> <span class="token operator">or</span> j <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> j <span class="token operator">==</span> <span class="token builtin">len</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span> <span class="token operator">or</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span> <span class="token operator">and</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> B<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -3180,7 +3161,7 @@ We&apos;ll use this problem as an example to motivate some deeper study into ite
 and an <strong>Iterator</strong> is a object that has an <code>__iter__</code> method and a <code>__next__</code> method.
 These magic methods are called <em>from the outside</em> as <code>iter(my_iterable)</code> and <code>next(my_iterator)</code>.
 They are most commonly used by the <code>for</code> keyword either in for loops or in <strong>generator expressions</strong> as in comprehensions.</p>
-<div class="code-chunk" data-id="code-chunk-id-80" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=78, cmd}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">SimpleIterator</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-84" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=82, cmd}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">SimpleIterator</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_count <span class="token operator">=</span> <span class="token number">0</span>
 
@@ -3302,7 +3283,7 @@ In <code>quicksort</code>, the harder step is the dividing.</p>
     <span class="token comment"># Combine</span>
     <span class="token keyword">return</span> A <span class="token operator">+</span> ET <span class="token operator">+</span> B
 </pre><p>Let&apos;s do an in-place version.  For this, we want to avoid creating new lists and concatenating them at the end.</p>
-<div class="code-chunk" data-id="code-chunk-id-81" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=79, cmd}" class="language-python"><span class="token keyword">def</span> <span class="token function">quicksort</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> right <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-85" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=83, cmd}" class="language-python"><span class="token keyword">def</span> <span class="token function">quicksort</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> right <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> right <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
         right <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span>
 
@@ -3510,10 +3491,12 @@ Will we be stuck with a chicken and egg situation?</p>
     <hr>
 <h1 class="mume-header" id="mappings-and-hash-tables">Mappings and Hash Tables</h1>
 
-<p>A <strong>mapping</strong> is an association between two sets of things.
-The standard built-in data type in python for mappings is the dictionary (<code>dict</code>).
+<p>A <strong>mapping</strong> is an association between two sets of things.  It associates a value to a key.  We  refer to these associated pairs as <strong>key-value pairs</strong>.
+Keys must be unique, so that there can only be one value associated with a given key.</p>
+<p>The standard built-in data type in python for mappings is the dictionary (<code>dict</code>).
 This kind of mapping is used by python itself to associate names of variables (strings) with objects.
-We usually refer to these associated pairs as <strong>key-value pairs</strong>.</p>
+In the notation for dictionaries, we would write <code>d[some_key] = some_value</code>.
+This either creates a new key-value pair if <code>some_key</code> was not already in the dictionary, or it overwrites the existing pair with key <code>some_key</code>.</p>
 <p>Not all programming languages come with a built-in data type for mappings.
 We&apos;re going to pretend for a short time that we don&apos;t have a python dictionary available to us and go through the process of implementing one ourselves.  This will allow us to resolve one of the major unsolved mysteries from earlier in the course:</p>
 <blockquote>
@@ -3521,7 +3504,7 @@ We&apos;re going to pretend for a short time that we don&apos;t have a python di
 </blockquote>
 <h2 class="mume-header" id="the-mapping-adt">The Mapping ADT</h2>
 
-<p>A <strong>mapping</strong> is a collection of key-value pairs such that the keys are unique (i.e. no two pairs share a key).
+<p>A <strong>mapping</strong> is a collection of key-value pairs such that the keys are unique (i.e. no two pairs have the same key).
 It supports the following methods.</p>
 <ul>
 <li>
@@ -3531,11 +3514,11 @@ It supports the following methods.</p>
 <p><strong><code>put(k, v)</code></strong> - Add the key-value pair <code>(k,v)</code> to the mapping.</p>
 </li>
 </ul>
-<p>These are the two main operations.  They are what make a mapping, and are generally implemented as <code>__getitem__</code> and <code>__setitem__</code> in python in order to support the familiar square bracket notation.  We will put off anything more elaborate for now.</p>
+<p>These are the two main operations.  They are what make a mapping, and are generally implemented as <code>__getitem__</code> and <code>__setitem__</code> in python in order to support the familiar square bracket notation.  We will put off anything more elaborate for now.  When we get into some implementations, we will put some other conditions on the keys.</p>
 <h2 class="mume-header" id="a-minimal-implementation">A minimal implementation</h2>
 
 <p>Here is a very lightweight method for using a <code>list</code> as a mapping.  We start with a little class to store key-value pairs, then give two methods to implement get and put.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">Entry</span><span class="token punctuation">:</span>
+<pre data-role="codeBlock" data-info="python {cud i&#x2019;d=&quot;trivialmapping&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">Entry</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>key <span class="token operator">=</span> key
         self<span class="token punctuation">.</span>value <span class="token operator">=</span> value
@@ -3555,15 +3538,19 @@ It supports the following methods.</p>
         <span class="token keyword">if</span> e<span class="token punctuation">.</span>key <span class="token operator">==</span> key<span class="token punctuation">:</span>
             <span class="token keyword">return</span> e<span class="token punctuation">.</span>value
     <span class="token keyword">raise</span> KeyError
-</pre><pre data-role="codeBlock" data-info="python" class="language-python">m <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre><div class="code-chunk" data-id="code-chunk-id-86" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=84, cmd continue=&quot;trivialmapping&quot;}" class="language-python">m <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
 mapput<span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">&apos;five&apos;</span><span class="token punctuation">)</span>
 mapput<span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&apos;one&apos;</span><span class="token punctuation">)</span>
 mapput<span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token string">&apos;thirteen&apos;</span><span class="token punctuation">)</span>
 mapput<span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">&apos;four&apos;</span><span class="token punctuation">)</span>
 <span class="token keyword">assert</span><span class="token punctuation">(</span>mapget<span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&apos;one&apos;</span><span class="token punctuation">)</span>
 <span class="token keyword">assert</span><span class="token punctuation">(</span>mapget<span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&apos;four&apos;</span><span class="token punctuation">)</span>
-</pre><p>At this point, it seems that the only advantage of the <code>dict</code> structure is that it provides some useful syntax for adding and getting entries.  There are some other advantages, but we&apos;ll only reveal them by trying to build a map ourselves.</p>
-<p>But first, let&apos;s put our new data structure in a class.  This will allow us to encapsulate the underlying list so that users don&apos;t accidentally mess it up, for example, by appending to it rather than using <code>put</code>.  We&apos;d like to protect users from themselves, especially when there are properties of the structure we want to maintain.  In this case, we want to make sure keys stay unique.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/crtdsy1tk_code_chunk.py&quot;, line 2, in <module>
+    mapput(m, 4, &apos;five&apos;)
+NameError: name &apos;mapput&apos; is not defined
+</module></pre></div></div><p>At this point, it seems that the only advantage of the <code>dict</code> structure is that it provides some useful syntax for adding and getting entries.  There are some other advantages, but we&apos;ll only reveal them by trying to build a map ourselves.</p>
+<p>First, let&apos;s put our new data structure in a class.  This will allow us to encapsulate the underlying list so that users don&apos;t accidentally mess it up, for example, by appending to it rather than using <code>put</code>.  We&apos;d like to protect users from themselves, especially when there are properties of the structure we want to maintain.  In this case, we want to make sure keys stay unique.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListMappingSimple</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_entries <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
@@ -3575,20 +3562,17 @@ mapput<span class="token punctuation">(</span>m<span class="token punctuation">,
                 <span class="token keyword">return</span>
         self<span class="token punctuation">.</span>_entries<span class="token punctuation">.</span>append<span class="token punctuation">(</span>Entry<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">,</span> default <span class="token operator">=</span> <span class="token string">&quot;NotARealDefaultValue&quot;</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">for</span> e <span class="token keyword">in</span> self<span class="token punctuation">.</span>_entries<span class="token punctuation">:</span>
             <span class="token keyword">if</span> e<span class="token punctuation">.</span>key <span class="token operator">==</span> key<span class="token punctuation">:</span>
                 <span class="token keyword">return</span> e<span class="token punctuation">.</span>value
-        <span class="token keyword">if</span> default <span class="token operator">==</span> <span class="token string">&quot;NotARealDefaultValue&quot;</span><span class="token punctuation">:</span>
-            <span class="token keyword">raise</span> KeyError
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> default
-</pre><p>This is an okay start.  It support <code>get</code> and <code>put</code> and that&apos;s maybe enough to be a mapping, but we&apos;d like several more interesting methods to really put such a structure to use.  Let&apos;s extend the ADT with more features.</p>
+        <span class="token keyword">raise</span> KeyError
+</pre><p>This is an okay start.  It supports <code>get</code> and <code>put</code> and that&apos;s enough to be a mapping, but we&apos;d like several more interesting methods to really put such a structure to use.  Let&apos;s extend the ADT with more features.</p>
 <h2 class="mume-header" id="the-extended-mapping-adt">The extended Mapping ADT</h2>
 
 <p>As with any collection, we might want some other methods such as <code>__len__</code>, <code>__contains__</code>, or various iterators.</p>
 <p>The standard behavior for iterators in dictionaries is to iterate over the keys.  Alternative iterators are provided to iterate over the values or to iterate over the key-value pairs as tuples.  For a <code>dict</code> object this is done as follows.</p>
-<div class="code-chunk" data-id="jfs3jg8" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=80, cmd id=&quot;jfs3jg8&quot;}" class="language-python">d <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&apos;key1&apos;</span><span class="token punctuation">:</span> <span class="token string">&apos;value1&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;key2&apos;</span><span class="token punctuation">:</span> <span class="token string">&apos;value2&apos;</span><span class="token punctuation">}</span>
+<div class="code-chunk" data-id="jfs3jg8" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=85, cmd id=&quot;jfs3jg8&quot;}" class="language-python">d <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&apos;key1&apos;</span><span class="token punctuation">:</span> <span class="token string">&apos;value1&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;key2&apos;</span><span class="token punctuation">:</span> <span class="token string">&apos;value2&apos;</span><span class="token punctuation">}</span>
 
 <span class="token keyword">for</span> k <span class="token keyword">in</span> d<span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span>
@@ -3598,12 +3582,12 @@ mapput<span class="token punctuation">(</span>m<span class="token punctuation">,
 
 <span class="token keyword">for</span> k<span class="token punctuation">,</span> v <span class="token keyword">in</span> d<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span> v<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">key1
-key2
-value1
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">key2
+key1
 value2
-key1 value1
+value1
 key2 value2
+key1 value1
 </pre></div></div><p>We&apos;ll add the same kind of functionality to our Mapping ADT.  So, the <strong>extended Mapping ADT</strong> includes the following methods (with get and put renamed for python magic).</p>
 <ul>
 <li>
@@ -3684,8 +3668,8 @@ key2 value2
 
 <p>Our goal is to to get the same kind of constant-time operations as in the <code>dict</code> class.  Right now, we are very far from that.  Currently, we need linear time to get put, and check membership.  To do better, we&apos;re going to need a new idea.  The <code>ListMapping</code> takes linear time because it has to iterate through the list.  We could make this faster if we had many short lists instead of one large list.  Then, we just need to have a quick way of knowing which short list to search or update.</p>
 <p>We&apos;re going to store a list of <code>ListMappings</code>.
-For any key <code>k</code>,  we want to compute the index of the <em>right</em> <code>ListMapping</code> for <code>k</code>.  We often call these <code>ListMapping</code>s <em>buckets</em>.  This term goes back to the idea that you can quickly group items into buckets.</p>
-<p>This means, we want an integer.  A <strong>hash function</strong> takes a key and computes an integer.  Most classes in python implement a method called <code>__hash__</code> that does just this.  We can use it to implement a simple mapping scheme that improves on the <code>ListMapping</code>.</p>
+For any key <code>k</code>,  we want to compute the index of the <em>right</em> <code>ListMapping</code> for <code>k</code>.  We often call these <code>ListMapping</code>s <em>buckets</em>.  This term goes back to the idea that you can quickly group items into buckets.  Then, when looking for something in a bucket, you can check all the items in there assuming there aren&#x2019;t too many.</p>
+<p>This means, we want an integer, i.e. the index into our list of buckets.  A <strong>hash function</strong> takes a key and returns an integer.  Most classes in python implement a method called <code>__hash__</code> that does just this.  We can use it to implement a simple mapping scheme that improves on the <code>ListMapping</code>.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">HashMappingSimple</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_size <span class="token operator">=</span> <span class="token number">100</span>
@@ -3703,10 +3687,12 @@ For any key <code>k</code>,  we want to compute the index of the <em>right</em> 
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_buckets<span class="token punctuation">[</span><span class="token builtin">hash</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>_size<span class="token punctuation">]</span>
 </pre><p>Let&apos;s look more closely at this code.  It seems quite simple, but it hides some mysteries.</p>
 <p>First, the initializer creates a list of 100 ListMaps.  These are called the buckets. If the keys get spread evenly between the buckets then this will be about 100 times faster!  If two keys are placed in the same bucket, this is called a <strong>collision</strong>.</p>
-<p>The <code>__getitem__</code> and <code>__setitem__</code> methods call the <code>_bucket</code> method to get one of these buckets for the given key and then just use that ListMap&apos;s get and set methods.  So, the idea is just to have several list maps instead of one and then you just need a quick way to decide which to use.  The <code>hash</code> function, returns an integer based on the value of the given key.  The collisions will depend on the hash function.</p>
-<p>The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not much more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement <code>__len__</code> and also grow the number of buckets as needed.  Here is the code.</p>
+<p>The <code>__getitem__</code> and <code>__setitem__</code> methods call the <code>_bucket</code> method to get one of these buckets for the given key and then just use that ListMap&apos;s get and put methods.  So, the idea is just to have several list maps instead of one and then you just need a quick way to decide which to use.  The <code>hash</code> function returns an integer based on the value of the given key.  The collisions will depend on the hash function.</p>
+<h3 class="mume-header" id="how-many-buckets-should-we-use">How many buckets should we use?</h3>
+
+<p>The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement <code>__len__</code> and also grow the number of buckets as needed.  As the number of entries grows, we can periodically increase the number of buckets.  Here is the code.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">HashMap</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> size <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> size <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_size <span class="token operator">=</span> size
         self<span class="token punctuation">.</span>_buckets <span class="token operator">=</span> <span class="token punctuation">[</span>ListMapping<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>_size<span class="token punctuation">)</span><span class="token punctuation">]</span>
         self<span class="token punctuation">.</span>_length <span class="token operator">=</span> <span class="token number">0</span>
@@ -3729,7 +3715,7 @@ For any key <code>k</code>,  we want to compute the index of the <em>right</em> 
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_buckets<span class="token punctuation">[</span><span class="token builtin">hash</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>_size<span class="token punctuation">]</span>
 
     <span class="token keyword">def</span> <span class="token function">_double</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment"># Save the old buckets.</span>
+        <span class="token comment"># Save a reference to the old buckets.</span>
         oldbuckets <span class="token operator">=</span> self<span class="token punctuation">.</span>_buckets
         <span class="token comment"># Double the size.</span>
         self<span class="token punctuation">.</span>_size <span class="token operator">*=</span> <span class="token number">2</span>
@@ -3834,7 +3820,7 @@ For any key <code>k</code>,  we want to compute the index of the <em>right</em> 
     <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>_entries<span class="token punctuation">)</span>
 </pre><p>All the magic methods as well as the public iterators and string conversion are handled by the superclass.  The subclass only has the parts that are specific to this implementation.</p>
-<p>The <code>HashMapping</code> class can also be rewritten this was as follows.</p>
+<p>The <code>HashMapping</code> class can also be rewritten as follows.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">HashMapping</span><span class="token punctuation">(</span>Mapping<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> size <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_size <span class="token operator">=</span> size
@@ -3842,17 +3828,17 @@ For any key <code>k</code>,  we want to compute the index of the <em>right</em> 
         self<span class="token punctuation">.</span>_length <span class="token operator">=</span> <span class="token number">0</span>
 
     <span class="token keyword">def</span> <span class="token function">_entryiter</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>e <span class="token keyword">for</span> b <span class="token keyword">in</span> self<span class="token punctuation">.</span>_buckets <span class="token keyword">for</span> e <span class="token keyword">in</span> b<span class="token punctuation">.</span>_entryiter<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>e <span class="token keyword">for</span> bucket <span class="token keyword">in</span> self<span class="token punctuation">.</span>_buckets <span class="token keyword">for</span> e <span class="token keyword">in</span> bucket<span class="token punctuation">.</span>_entryiter<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
     <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        b <span class="token operator">=</span> self<span class="token punctuation">.</span>_bucket<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> b<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+        bucket <span class="token operator">=</span> self<span class="token punctuation">.</span>_bucket<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> bucket<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
 
     <span class="token keyword">def</span> <span class="token function">put</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        b <span class="token operator">=</span> self<span class="token punctuation">.</span>_bucket<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> key <span class="token operator">not</span> <span class="token keyword">in</span> b<span class="token punctuation">:</span>
+        bucket <span class="token operator">=</span> self<span class="token punctuation">.</span>_bucket<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> key <span class="token operator">not</span> <span class="token keyword">in</span> bucket<span class="token punctuation">:</span>
             self<span class="token punctuation">.</span>_length <span class="token operator">+=</span> <span class="token number">1</span>
-        b<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value
+        bucket<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value
 
         <span class="token comment"># Check if we need more buckets.</span>
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>_length <span class="token operator">&gt;</span> self<span class="token punctuation">.</span>_size<span class="token punctuation">:</span>
@@ -3945,27 +3931,28 @@ Let&apos;s package this into a class that allows us to write code that is as clo
         iterator <span class="token operator">=</span> <span class="token builtin">iter</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token builtin">next</span><span class="token punctuation">(</span>iterator<span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>children <span class="token operator">=</span> <span class="token punctuation">[</span>Tree<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token keyword">for</span> c <span class="token keyword">in</span> iterator<span class="token punctuation">]</span>
-</pre><p>The initializer takes a <em>list of lists</em> representation of a tree as input.  A <code>Tree</code> object has two attributes, <code>data</code> stores data associated with a node and <code>children</code> stores a lists a child <code>Tree</code> objects.
+</pre><p>The initializer takes a <em>list of lists</em> representation of a tree as input.  A <code>Tree</code> object has two attributes, <code>data</code> stores data associated with a node and <code>children</code> stores a list of <code>Tree</code> objects.
 The recursive aspect of this tree is clear from the way the children are generated as <code>Tree</code>&apos;s.</p>
 <p>Let&apos;s add our print function to the class.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">def</span> <span class="token function">printtree</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
     <span class="token keyword">for</span> child <span class="token keyword">in</span> self<span class="token punctuation">.</span>children<span class="token punctuation">:</span>
         child<span class="token punctuation">.</span>printtree<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><p>This is the most common pattern for algorithms that operated on trees.
+</pre><p>This is the most common pattern for algorithms that operate on trees.
 It has two parts; one part operates on the data and the other part applies the function recursively on the children.
 Here is another example of the same pattern.
 Let&apos;s check if two trees are equal in the sense of having the same shape and data.  We use the <code>__eq__</code> method so this method will be used when we use <code>==</code> to check equality between <code>Tree</code>&apos;s.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">def</span> <span class="token function">__eq__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> self<span class="token punctuation">.</span>data <span class="token operator">==</span> other<span class="token punctuation">.</span>data <span class="token operator">and</span> self<span class="token punctuation">.</span>children <span class="token operator">==</span> other<span class="token punctuation">.</span>children
-</pre><p>Here, it is less obvious that we are doing recursion, but we are because <code>self.children</code> and <code>other.children</code> are lists and list equality is determined by testing the equality of the items.  In our case, the items in the <code>.children</code> lists are <code>Tree</code>&apos;s, so our <code>__eq__</code> method will be invoked for each one.</p>
+</pre><p>Here, it is less obvious that we are doing recursion, but we are because <code>self.children</code> and <code>other.children</code> are lists and list equality is determined by testing the equality of the items.  In this case, the items in the  lists are <code>Tree</code>&apos;s, so our <code>__eq__</code> method will be invoked for each one.</p>
 <p>Here&apos;s another example.  Let&apos;s write a function that computes the height of the tree.  We can do this by computing the height of the subtrees and return one more than the max of those.  If there are no children, the height is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">def</span> <span class="token function">height</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>children<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token number">0</span>
     <span class="token keyword">else</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token builtin">max</span><span class="token punctuation">(</span>child<span class="token punctuation">.</span>height<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> child <span class="token keyword">in</span> self<span class="token punctuation">.</span>children<span class="token punctuation">)</span>
-</pre><h2 class="mume-header" id="tree-traversal">Tree Traversal</h2>
+</pre><p><em>Hopefully, you are getting the hang of these generator expressions.</em></p>
+<h2 class="mume-header" id="tree-traversal">Tree Traversal</h2>
 
 <p>Previously, all the collections we stored were either sequential (i.e., <code>list</code>, <code>tuple</code>, and <code>str</code>) or non-sequential (i.e., <code>dict</code> and <code>set</code>).  The tree structure seems to lie somewhere between the two.
 There is some structure, but it&apos;s not linear.
@@ -3984,7 +3971,7 @@ We could also print the nodes in a postorder traversal as follows.</p>
 </pre><p>It is only a slight change in the code, but it results in a different output.</p>
 <h2 class="mume-header" id="if-you-want-to-get-fancy">If you want to get fancy...</h2>
 
-<p>It was considered a great achievement in python to be able to do this kind of traversal with a generator.  Recall that a generator is an iterator defined using a method that yields instead of returning.  Recursive generators seem a little mysterious, especially at first.  However, if you break down this code and walk through it by hand, it will help you have a better understanding of how generators work.</p>
+<p>It was considered a great achievement in python to be able to do this kind of traversal with a generator.  Recursive generators seem a little mysterious, especially at first.  However, if you break down this code and walk through it by hand, it will help you have a better understanding of how generators work.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">def</span> <span class="token function">preorder</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">yield</span> self<span class="token punctuation">.</span>data
     <span class="token keyword">for</span> child <span class="token keyword">in</span> self<span class="token punctuation">.</span>children<span class="token punctuation">:</span>
@@ -4005,6 +3992,20 @@ If one calls this method on a tree, each value yielded is passed all the way fro
 Thus, the total running time is proportional to the sum of the depths of all the nodes in the tree.
 For a degenerate tree (i.e. a single path), this is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> time.
 For a perfectly balanced binary tree, this is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mi>log</mi><mo>&#x2061;</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathit">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathit">n</span><span class="mclose">)</span></span></span></span> time.</p>
+<p>Using recursion and the call stack make the tree traversal code substantially simpler than if we had to keep track of everything manually.
+It would not be enough to store just the stack of nodes in the path from your current node up to the root. You would also have to keep track of your place in the iteration of the children of each of those nodes.  Remember that it is the job of an iterator object to keep track of where it is in the iteration. Thus, we can just push the iterators for the children onto the stack too.</p>
+<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">def</span> <span class="token function">_postorder</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	node<span class="token punctuation">,</span> childiter <span class="token operator">=</span> self<span class="token punctuation">,</span> <span class="token builtin">iter</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>children<span class="token punctuation">)</span>
+	stack <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>node<span class="token punctuation">,</span> childiter<span class="token punctuation">)</span><span class="token punctuation">]</span>
+	<span class="token keyword">while</span> stack<span class="token punctuation">:</span>
+		node<span class="token punctuation">,</span> childiter <span class="token operator">=</span> stack<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+		<span class="token keyword">try</span><span class="token punctuation">:</span>
+			child <span class="token operator">=</span> <span class="token builtin">next</span><span class="token punctuation">(</span>childiter<span class="token punctuation">)</span>
+			stack<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> <span class="token builtin">iter</span><span class="token punctuation">(</span>child<span class="token punctuation">.</span>children<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+		<span class="token keyword">except</span> StopIteration<span class="token punctuation">:</span>
+			<span class="token keyword">yield</span> node
+			stack<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>					
+</pre><p>In the above code, I don&#x2019;t love the fact that I am reassigning <code>node</code> and <code>childiter</code> at every iteration of the loop.  Can you fix that so that it still works?</p>
 <p style="page-break-after:always;"></p>
     <a name="chapter_16" href=""></a>
     <p style="font-size:80pt;color:#d0d0d0;font-weight:bold">
@@ -4049,7 +4050,9 @@ As we have already written an abstract class for packaging up a lot of the magic
 We will maintain a convention that the operations on the <code>BSTNode</code> class will operate on and return other <code>BSTNode</code> objects when appropriate, whereas the <code>BSTMapping</code> class will abstract away the existence of the nodes for the user, only returning keys and values.</p>
 <p>Here is just the minimum requirements to be a <code>Mapping</code>.
 It&apos;s a top down implementation, so it delegates all the real work to the <code>BSTNode</code> class.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">BSTMapping</span><span class="token punctuation">(</span>Mapping<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_bstmapping_00" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=86, cmd id=&quot;_bstmapping_00&quot;}" class="language-python"><span class="token keyword">from</span> mapping <span class="token keyword">import</span> Mapping
+
+<span class="token keyword">class</span> <span class="token class-name">BSTMapping</span><span class="token punctuation">(</span>Mapping<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_root <span class="token operator">=</span> <span class="token boolean">None</span>
 
@@ -4086,10 +4089,11 @@ It&apos;s a top down implementation, so it delegates all the real work to the <c
 
     <span class="token keyword">def</span> <span class="token function">__delitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
-</pre><p>The code above gives us almost everything we need.  There are a couple of mysterious lines to pay attention to.  One is the line in the <code>put</code> method that updates the root.  We will use this convention extensively.  As methods may rearrange the tree structure, such methods return the node that ought to be the new root of the subtree.  The same pattern appears in the <code>remove</code> function.</p>
+
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>The code above gives us almost everything we need.  There are a couple of mysterious lines to pay attention to.  One is the line in the <code>put</code> method that updates the root.  We will use this convention extensively.  As methods may rearrange the tree structure, such methods return the node that ought to be the new root of the subtree.  The same pattern appears in the <code>remove</code> function.</p>
 <p>One other construct we haven&apos;t seen before is the <code>yield from</code> operation in the iterator.  This takes an iterable and iterates over it, yielding each item.  So, <code>yield from self._root</code> is the same as <code>for item in iter(self._root): yield item</code>.  It implies that our <code>BSTNode</code> class will have to be iterable.</p>
 <p>Let&apos;s see how these methods are implemented.  We start with the initializer and some handy other methods.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">BSTNode</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_bstmapping_01" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python  {code_chunk_offset=87, cmd id=&quot;_bstmapping_01&quot; continue=&quot;_bstmapping_00&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">BSTNode</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>key <span class="token operator">=</span> key
         self<span class="token punctuation">.</span>value <span class="token operator">=</span> value
@@ -4099,8 +4103,8 @@ It&apos;s a top down implementation, so it delegates all the real work to the <c
 
     <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_length
-</pre><p>The <code>get</code> method uses binary search to find the desired key.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python">    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>The <code>get</code> method uses binary search to find the desired key.</p>
+<div class="code-chunk" data-id="_bstmapping_02" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python  {code_chunk_offset=88, cmd id=&quot;_bstmapping_02&quot; continue=&quot;_bstmapping_01&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> key <span class="token operator">==</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
             <span class="token keyword">return</span> self
         <span class="token keyword">elif</span> key <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>key <span class="token operator">and</span> self<span class="token punctuation">.</span>left<span class="token punctuation">:</span>
@@ -4109,55 +4113,55 @@ It&apos;s a top down implementation, so it delegates all the real work to the <c
             <span class="token keyword">return</span> self<span class="token punctuation">.</span>right<span class="token punctuation">.</span>get<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
         <span class="token keyword">else</span><span class="token punctuation">:</span>
             <span class="token keyword">raise</span> KeyError
-</pre><p>Notice that we are using <code>self.left</code> and <code>self.right</code> as booleans.
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Notice that we are using <code>self.left</code> and <code>self.right</code> as booleans.
 This works because <code>None</code> evaluates to <code>False</code> and <code>BSTNode</code>&apos;s always evaluate to <code>True</code>.
 We could have implemented <code>__bool__</code> to make this work, but it suffices to implement <code>__len__</code>.  Objects that have a <code>__len__</code> method are <code>True</code> if and only if the length is greater than <code>0</code>.  This is the default way to check if a container is empty.  So, for example, it&apos;s fine to write <code>while L: L.pop()</code> and it will never try to pop from an empty list.  In our case, it will allow us to write <code>if self.left</code> to check if there is a left child rather than writing <code>if self.left is not None</code>.</p>
 <p>Next, we implement <code>put</code>.  It will work by first doing a binary search in the tree.  If it finds the key already in the tree, it overwrites the value (keys in a mapping are unique).  Otherwise, when it gets to the bottom of the tree, it adds a new node.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python">  <span class="token keyword">def</span> <span class="token function">put</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
-      <span class="token keyword">if</span> key <span class="token operator">==</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
-          self<span class="token punctuation">.</span>value <span class="token operator">=</span> value
-      <span class="token keyword">elif</span> key <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
-          <span class="token keyword">if</span> self<span class="token punctuation">.</span>left<span class="token punctuation">:</span>
-              self<span class="token punctuation">.</span>left<span class="token punctuation">.</span>put<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
-          <span class="token keyword">else</span><span class="token punctuation">:</span>
-              self<span class="token punctuation">.</span>left <span class="token operator">=</span> BSTNode<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
-      <span class="token keyword">elif</span> key <span class="token operator">&gt;</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
-          <span class="token keyword">if</span> self<span class="token punctuation">.</span>right<span class="token punctuation">:</span>
-              self<span class="token punctuation">.</span>right<span class="token punctuation">.</span>put<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
-          <span class="token keyword">else</span><span class="token punctuation">:</span>
-              self<span class="token punctuation">.</span>right <span class="token operator">=</span> BSTNode<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
-      self<span class="token punctuation">.</span>_updatelength<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<div class="code-chunk" data-id="_bstmapping_03" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python  {code_chunk_offset=89, cmd id=&quot;_bstmapping_03&quot; continue=&quot;_bstmapping_02&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">put</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> key <span class="token operator">==</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>value <span class="token operator">=</span> value
+        <span class="token keyword">elif</span> key <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> self<span class="token punctuation">.</span>left<span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>left<span class="token punctuation">.</span>put<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>left <span class="token operator">=</span> BSTNode<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> key <span class="token operator">&gt;</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> self<span class="token punctuation">.</span>right<span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>right<span class="token punctuation">.</span>put<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>right <span class="token operator">=</span> BSTNode<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>_updatelength<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 
     <span class="token keyword">def</span> <span class="token function">_updatelength</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         len_left <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>left<span class="token punctuation">)</span> <span class="token keyword">if</span> self<span class="token punctuation">.</span>left <span class="token keyword">else</span> <span class="token number">0</span>
         len_right <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>right<span class="token punctuation">)</span> <span class="token keyword">if</span> self<span class="token punctuation">.</span>right <span class="token keyword">else</span> <span class="token number">0</span>
-        self<span class="token punctuation">.</span>_length <span class="token number">1</span> <span class="token operator">+</span> len_left <span class="token operator">+</span> len_right
-</pre><p>The <code>put</code> method also keeps track of the length, i.e. the number of entries in each subtree.</p>
+        self<span class="token punctuation">.</span>_length <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> len_left <span class="token operator">+</span> len_right
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>The <code>put</code> method also keeps track of the length, i.e. the number of entries in each subtree.</p>
 <h3 class="mume-header" id="the-floor-function">The <code>floor</code> function</h3>
 
 <p>The <code>floor</code> function is just a slightly fancier version of <code>get</code>.
 It also does a binary search, but it has different behavior when the key is not found, depending on whether the last search was to the left or to the right.  Starting from any node, if we search to the right and the result is <code>None</code>, then we return the the node itself.
 If we search to the left and the result is <code>None</code>, we also return <code>None</code>.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python">    <span class="token keyword">def</span> <span class="token function">floor</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_bstmapping_04" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python  {code_chunk_offset=90, cmd id=&quot;_bstmapping_04&quot; continue=&quot;_bstmapping_03&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">floor</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> key <span class="token operator">==</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
             <span class="token keyword">return</span> self
         <span class="token keyword">elif</span> key <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
             <span class="token keyword">return</span> self<span class="token punctuation">.</span>left<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token keyword">if</span> self<span class="token punctuation">.</span>left <span class="token keyword">else</span> <span class="token boolean">None</span>
         <span class="token keyword">elif</span> key <span class="token operator">&gt;</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
             <span class="token keyword">return</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>right<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token operator">or</span> self<span class="token punctuation">)</span> <span class="token keyword">if</span> self<span class="token punctuation">.</span>right <span class="token keyword">else</span> self
-</pre><p>To parse the expressions above, it&apos;s helpful to remember that boolean operations on objects can evaluate to objects.  In particular <code>False or myobject</code> evaluates to <code>myobject</code>.  Use the python interactive shell to try out some other examples and to see how <code>and</code> behaves.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>To parse the expressions above, it&apos;s helpful to remember that boolean operations on objects can evaluate to objects.  In particular <code>False or myobject</code> evaluates to <code>myobject</code>.  Use the python interactive shell to try out some other examples and to see how <code>and</code> behaves.</p>
 <h3 class="mume-header" id="iteration">Iteration</h3>
 
 <p>As mentioned above, binary search trees support inorder traversal.  The result of an inorder traversal is that the nodes are yielded <em>in the order of their keys</em>.</p>
 <p>Here is an inorder iterator for a binary search tree implemented using recursive generators.  This will be fine in most cases.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python">    <span class="token keyword">def</span> <span class="token function">__iter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="_bstmapping_05" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python  {code_chunk_offset=91, cmd id=&quot;_bstmapping_05&quot; continue=&quot;_bstmapping_04&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">__iter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>left<span class="token punctuation">:</span>
             <span class="token keyword">yield</span> <span class="token keyword">from</span> self<span class="token punctuation">.</span>left
         <span class="token keyword">yield</span> self
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>right<span class="token punctuation">:</span>
             <span class="token keyword">yield</span> <span class="token keyword">from</span> self<span class="token punctuation">.</span>right
-</pre><h2 class="mume-header" id="removal">Removal</h2>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><h2 class="mume-header" id="removal">Removal</h2>
 
 <p>To implement removal in a binary search tree, we&apos;ll use a standard algorithmic problem solving approach.
 We&apos;ll start by thinking about how to handle the easiest possible cases.
@@ -4236,7 +4240,7 @@ For example, if we want to rotate the left child of a node <code>parent</code> t
 We make sure to also update the lengths after each rotation.
 The main difference with our previous code is that now, all methods that can change the tree structure are combined with assignments.
 It is assumed that only <code>put</code> and <code>remove</code> will rearrange the tree, and so <code>get</code> and <code>floor</code> will keep the tree structure as is.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">from</span> mapping <span class="token keyword">import</span> Mapping<span class="token punctuation">,</span> Entry
+<div class="code-chunk" data-id="code-chunk-id-94" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=92, cmd}" class="language-python"><span class="token keyword">from</span> mapping <span class="token keyword">import</span> Mapping<span class="token punctuation">,</span> Entry
 
 
 <span class="token keyword">class</span> <span class="token class-name">BSTNode</span><span class="token punctuation">:</span>
@@ -4385,7 +4389,11 @@ It is assumed that only <code>put</code> and <code>remove</code> will rearrange 
 
     <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token builtin">str</span><span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>preorder<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</pre><h3 class="mume-header" id="forward-compatibility-of-factories">Forward Compatibility of Factories</h3>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/y83uok42j_code_chunk.py&quot;, line 1, in <module>
+    from mapping import Mapping, Entry
+ImportError: cannot import name &apos;Entry&apos;
+</module></pre></div></div><h3 class="mume-header" id="forward-compatibility-of-factories">Forward Compatibility of Factories</h3>
 
 <p>We are looking into the future a little with this code.
 In particular, we want this class to be easily extendable.
@@ -4649,14 +4657,14 @@ So, the <code>SplayTreeNode.get</code> method will return the new root of the su
 </pre><p>Although this code will work, there are a couple design decisions that are not great. First, there is something we might call <em>magical indices</em>.
 As the data are stored as tuples, we have to use an index to pull out the priority or the item as needed.  This is an undocumented convention.  Someone reading the code would have to read the insert code to understand the <code>findmin</code> code. Also, there is some duplication in the use of <code>min</code> with the same <code>key</code> lambda expression for both <code>removemin</code> and <code>findmin</code>. These shortcomings can be our motivation to go back and clean it up, i.e. <strong>refactor</strong> it.</p>
 <p>We&apos;ll make a class that stores the entries, each will have an <code>item</code> and a <code>priority</code> as attributes. We&apos;ll make the entries comparable by implementing <code>__lt__</code> and thus the comparison of entries will always just compare their priorities.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">Entry</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="entry" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=93, cmd id=&quot;entry&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">Entry</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">,</span> priority<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>priority <span class="token operator">=</span> priority
         self<span class="token punctuation">.</span>item <span class="token operator">=</span> item
 
     <span class="token keyword">def</span> <span class="token function">__lt__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>priority <span class="token operator">&lt;</span> other<span class="token punctuation">.</span>priority
-</pre><p>Now, we can rewrite the list version of the priority queue.  It&apos;s almost the same as before, except, that by using the <code>Entry</code> class, the code is more explicit about the types of objects, and hopefully, easier to read and understand.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Now, we can rewrite the list version of the priority queue.  It&apos;s almost the same as before, except, that by using the <code>Entry</code> class, the code is more explicit about the types of objects, and hopefully, easier to read and understand.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">UnsortedListPQ</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>_entries <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
@@ -4768,7 +4776,7 @@ pairs <span class="token operator">=</span> <span class="token punctuation">[</s
 <p>There is another &quot;standard&quot; operation on priority queues.  It&apos;s called <code>reducepriority</code>.  It does what it says, reducing the priority of an entry.  This is very simple to implement in our current code if the index of the entry to change is known.  It would suffice to change the priority of the entry and call <code>_upheap</code> on that index.</p>
 <p>However, the usual way to reduce the priority is to specify the item and its new priority.  This requires that we can find the index of an item.  We&apos;ll do this by storing a dictionary that maps items to indices.  We&apos;ll have to update this dictionary every time we rearrange the items.  To make sure this happens correctly, we will add a method for swapping entries and use this whenever we make a swap.</p>
 <p>The full code including the <code>_heapify</code> method is given below.  This full version of the priority queue will be very useful for some graph algorithms that we will see soon.</p>
-<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token keyword">class</span> <span class="token class-name">PriorityQueue</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="code-chunk-id-96" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=94, cmd continue=&quot;entry&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">PriorityQueue</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> entries <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         entries <span class="token operator">=</span> entries <span class="token operator">or</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
         self<span class="token punctuation">.</span>_entries <span class="token operator">=</span> <span class="token punctuation">[</span>Entry<span class="token punctuation">(</span>i<span class="token punctuation">,</span> p<span class="token punctuation">)</span> <span class="token keyword">for</span> i<span class="token punctuation">,</span> p <span class="token keyword">in</span> entries<span class="token punctuation">]</span>
@@ -4835,9 +4843,10 @@ pairs <span class="token operator">=</span> <span class="token punctuation">[</s
 
     <span class="token keyword">def</span> <span class="token function">_heapify</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>_entries<span class="token punctuation">)</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>_downheap<span class="token punctuation">(</span>n <span class="token operator">-</span> i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
-</pre><p style="page-break-after:always;"></p>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">reversed</span><span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>_downheap<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p style="page-break-after:always;"></p>
     <a name="chapter_19" href=""></a>
     <p style="font-size:80pt;color:#d0d0d0;font-weight:bold">
     Chapter 19
@@ -4941,7 +4950,7 @@ It should not be necessary to go through all the edges, just to find the ones in
 
     <span class="token keyword">def</span> <span class="token function">nbrs</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token builtin">iter</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>_nbrs<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-84" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=81, cmd continue=&quot;adjacencysetgraph&quot;}" class="language-python">G <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-98" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=95, cmd continue=&quot;adjacencysetgraph&quot;}" class="language-python">G <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;neighbors of 1:&quot;</span><span class="token punctuation">,</span> <span class="token builtin">list</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;neighbors of 2:&quot;</span><span class="token punctuation">,</span> <span class="token builtin">list</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;neighbors of 3:&quot;</span><span class="token punctuation">,</span> <span class="token builtin">list</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -4990,12 +4999,12 @@ In such graphs, we can partition the vertices into subsets called <strong>connec
 <p>For a directed graph, two vertices <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">u</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.03588em;">v</span></span></span></span> are <strong>strongly connected</strong> if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">u</span></span></span></span> is connected to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.03588em;">v</span></span></span></span> <em>and also</em> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.03588em;">v</span></span></span></span> is connected to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">u</span></span></span></span>.</p>
 <p>Let&apos;s consider a simple method to test of two vertices are connected.
 We will add it to our <code>AdjacencySetGraph</code> class.  As a first exercise, we could try to work recursively.  The idea is simple: in the base case, see if you are trying to get from a vertex to itself.  Otherwise, it suffices to check if any of the neighbors of the first vertex are connected to the last vertex.</p>
-<div class="code-chunk" data-id="connected1" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=82, cmd continue=&quot;adjacencysetgraph&quot;, id=&quot;connected1&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">connected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="connected1" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=96, cmd continue=&quot;adjacencysetgraph&quot;, id=&quot;connected1&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">connected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> a <span class="token operator">==</span> b<span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token boolean">True</span>
         <span class="token keyword">return</span> <span class="token builtin">any</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>connected<span class="token punctuation">(</span>nbr<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token keyword">for</span> nbr <span class="token keyword">in</span> self<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Can you guess what will go wrong?
 Here&apos;s an example.</p>
-<div class="code-chunk" data-id="code-chunk-id-86" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=83, cmd continue=&apos;connected1&apos;}" class="language-python">G <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<div class="code-chunk" data-id="code-chunk-id-100" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=97, cmd continue=&apos;connected1&apos;}" class="language-python">G <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token keyword">assert</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>connected<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">assert</span><span class="token punctuation">(</span>G<span class="token punctuation">.</span>connected<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">assert</span><span class="token punctuation">(</span><span class="token operator">not</span> G<span class="token punctuation">.</span>connected<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -5009,7 +5018,7 @@ H <span class="token operator">=</span> AdjacencySetGraph<span class="token punc
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">First graph is okay.
 There was too much recursion!
 </pre></div></div><p>It&apos;s clear that if the graph has any cycles, we can&apos;t check connectivity this way.  To deal with cycles, we can keep a set of visited vertices.  Recall that this is called memoization.</p>
-<div class="code-chunk" data-id="connected2" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=84, cmd continue=&quot;adjacencysetgraph&quot;, id=&quot;connected2&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">connected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<div class="code-chunk" data-id="connected2" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=98, cmd continue=&quot;adjacencysetgraph&quot;, id=&quot;connected2&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">connected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_connected<span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
     <span class="token keyword">def</span> <span class="token function">_connected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> visited<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -5018,7 +5027,7 @@ There was too much recursion!
         visited<span class="token punctuation">.</span>add<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
         <span class="token keyword">return</span> <span class="token builtin">any</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>_connected<span class="token punctuation">(</span>nbr<span class="token punctuation">,</span> b<span class="token punctuation">,</span> visited<span class="token punctuation">)</span> <span class="token keyword">for</span> nbr <span class="token keyword">in</span> self<span class="token punctuation">.</span>nbrs<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Now, we can try again and see what happens.</p>
-<div class="code-chunk" data-id="code-chunk-id-88" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=85, cmd continue=&apos;connected2&apos;}" class="language-python">H <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<div class="code-chunk" data-id="code-chunk-id-102" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=99, cmd continue=&apos;connected2&apos;}" class="language-python">H <span class="token operator">=</span> AdjacencySetGraph<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token keyword">try</span><span class="token punctuation">:</span>
     <span class="token keyword">assert</span><span class="token punctuation">(</span>H<span class="token punctuation">.</span>connected<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token keyword">assert</span><span class="token punctuation">(</span>H<span class="token punctuation">.</span>connected<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -5384,6 +5393,7 @@ Also, we don&apos;t have to check if we&apos;ve already visited a vertex, becaus
 <li><a href="#the-extended-mapping-adt">The extended Mapping ADT</a></li>
 <li><a href="#its-too-slow">It&apos;s Too Slow!</a>
 <ul>
+<li><a href="#how-many-buckets-should-we-use">How many buckets should we use?</a></li>
 <li><a href="#rehashing">Rehashing</a></li>
 </ul>
 </li>
