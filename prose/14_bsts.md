@@ -37,7 +37,9 @@ We will maintain a convention that the operations on the `BSTNode` class will op
 Here is just the minimum requirements to be a `Mapping`.
 It's a top down implementation, so it delegates all the real work to the `BSTNode` class.
 
-```python
+```python {cmd id="_bstmapping_00"}
+from mapping import Mapping
+
 class BSTMapping(Mapping):
     def __init__(self):
         self._root = None
@@ -75,6 +77,7 @@ class BSTMapping(Mapping):
 
     def __delitem__(self, key):
         self.remove(key)
+
 ```
 
 The code above gives us almost everything we need.  There are a couple of mysterious lines to pay attention to.  One is the line in the `put` method that updates the root.  We will use this convention extensively.  As methods may rearrange the tree structure, such methods return the node that ought to be the new root of the subtree.  The same pattern appears in the `remove` function.
@@ -83,7 +86,7 @@ One other construct we haven't seen before is the `yield from` operation in the 
 
 Let's see how these methods are implemented.  We start with the initializer and some handy other methods.
 
-```python
+```python  {cmd id="_bstmapping_01" continue="_bstmapping_00"}
 class BSTNode:
     def __init__(self, key, value):
         self.key = key
@@ -98,7 +101,7 @@ class BSTNode:
 
 The `get` method uses binary search to find the desired key.
 
-```python
+```python  {cmd id="_bstmapping_02" continue="_bstmapping_01"}
     def get(self, key):
         if key == self.key:
             return self
@@ -116,27 +119,27 @@ We could have implemented `__bool__` to make this work, but it suffices to imple
 
 Next, we implement `put`.  It will work by first doing a binary search in the tree.  If it finds the key already in the tree, it overwrites the value (keys in a mapping are unique).  Otherwise, when it gets to the bottom of the tree, it adds a new node.  
 
-```python
-  def put(self, key, value):
-      if key == self.key:
-          self.value = value
-      elif key < self.key:
-          if self.left:
-              self.left.put(key, value)
-          else:
-              self.left = BSTNode(key, value)
-      elif key > self.key:
-          if self.right:
-              self.right.put(key, value)
-          else:
-              self.right = BSTNode(key, value)
-      self._updatelength()
+```python  {cmd id="_bstmapping_03" continue="_bstmapping_02"}
+    def put(self, key, value):
+        if key == self.key:
+            self.value = value
+        elif key < self.key:
+            if self.left:
+                self.left.put(key, value)
+            else:
+                self.left = BSTNode(key, value)
+        elif key > self.key:
+            if self.right:
+                self.right.put(key, value)
+            else:
+                self.right = BSTNode(key, value)
+        self._updatelength()
 
 
     def _updatelength(self):
         len_left = len(self.left) if self.left else 0
         len_right = len(self.right) if self.right else 0
-        self._length 1 + len_left + len_right
+        self._length = 1 + len_left + len_right
 ```
 
 The `put` method also keeps track of the length, i.e. the number of entries in each subtree.
@@ -147,7 +150,7 @@ The `floor` function is just a slightly fancier version of `get`.
 It also does a binary search, but it has different behavior when the key is not found, depending on whether the last search was to the left or to the right.  Starting from any node, if we search to the right and the result is `None`, then we return the the node itself.
 If we search to the left and the result is `None`, we also return `None`.
 
-```python
+```python  {cmd id="_bstmapping_04" continue="_bstmapping_03"}
     def floor(self, key):
         if key == self.key:
             return self
@@ -165,7 +168,7 @@ As mentioned above, binary search trees support inorder traversal.  The result o
 
 Here is an inorder iterator for a binary search tree implemented using recursive generators.  This will be fine in most cases.
 
-```python
+```python  {cmd id="_bstmapping_05" continue="_bstmapping_04"}
     def __iter__(self):
         if self.left:
             yield from self.left

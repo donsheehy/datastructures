@@ -1,9 +1,12 @@
 # Mappings and Hash Tables
 
-A **mapping** is an association between two sets of things.
+A **mapping** is an association between two sets of things.  It associates a value to a key.  We  refer to these associated pairs as **key-value pairs**.
+Keys must be unique, so that there can only be one value associated with a given key.
+
 The standard built-in data type in python for mappings is the dictionary (`dict`).
 This kind of mapping is used by python itself to associate names of variables (strings) with objects.
-We usually refer to these associated pairs as **key-value pairs**.
+In the notation for dictionaries, we would write `d[some_key] = some_value`.
+This either creates a new key-value pair if `some_key` was not already in the dictionary, or it overwrites the existing pair with key `some_key`.
 
 Not all programming languages come with a built-in data type for mappings.
 We're going to pretend for a short time that we don't have a python dictionary available to us and go through the process of implementing one ourselves.  This will allow us to resolve one of the major unsolved mysteries from earlier in the course:
@@ -12,20 +15,20 @@ We're going to pretend for a short time that we don't have a python dictionary a
 
 ## The Mapping ADT
 
-A **mapping** is a collection of key-value pairs such that the keys are unique (i.e. no two pairs share a key).
+A **mapping** is a collection of key-value pairs such that the keys are unique (i.e. no two pairs have the same key).
 It supports the following methods.
 
   - **`get(k)`** - return the value associate to the key `k`.  Usually an error (`KeyError`) is raised if the given key is not present.
 
   - **`put(k, v)`** - Add the key-value pair `(k,v)` to the mapping.
 
-These are the two main operations.  They are what make a mapping, and are generally implemented as `__getitem__` and `__setitem__` in python in order to support the familiar square bracket notation.  We will put off anything more elaborate for now.
+These are the two main operations.  They are what make a mapping, and are generally implemented as `__getitem__` and `__setitem__` in python in order to support the familiar square bracket notation.  We will put off anything more elaborate for now.  When we get into some implementations, we will put some other conditions on the keys.
 
 ## A minimal implementation
 
 Here is a very lightweight method for using a `list` as a mapping.  We start with a little class to store key-value pairs, then give two methods to implement get and put.
 
-```python
+```python {cud i’d="trivialmapping"}
 class Entry:
     def __init__(self, key, value):
         self.key = key
@@ -48,7 +51,7 @@ def mapget(L, key):
     raise KeyError
 ```
 
-```python
+```python {cmd continue="trivialmapping"}
 m = []
 mapput(m, 4, 'five')
 mapput(m, 1, 'one')
@@ -60,7 +63,7 @@ assert(mapget(m, 4) == 'four')
 
 At this point, it seems that the only advantage of the `dict` structure is that it provides some useful syntax for adding and getting entries.  There are some other advantages, but we'll only reveal them by trying to build a map ourselves.
 
-But first, let's put our new data structure in a class.  This will allow us to encapsulate the underlying list so that users don't accidentally mess it up, for example, by appending to it rather than using `put`.  We'd like to protect users from themselves, especially when there are properties of the structure we want to maintain.  In this case, we want to make sure keys stay unique.
+First, let's put our new data structure in a class.  This will allow us to encapsulate the underlying list so that users don't accidentally mess it up, for example, by appending to it rather than using `put`.  We'd like to protect users from themselves, especially when there are properties of the structure we want to maintain.  In this case, we want to make sure keys stay unique.
 
 ```python
 class ListMappingSimple:
@@ -74,17 +77,14 @@ class ListMappingSimple:
                 return
         self._entries.append(Entry(key, value))
 
-    def get(self, key, default = "NotARealDefaultValue"):
+    def get(self, key):
         for e in self._entries:
             if e.key == key:
                 return e.value
-        if default == "NotARealDefaultValue":
-            raise KeyError
-        else:
-            return default
+        raise KeyError
 ```
 
-This is an okay start.  It support `get` and `put` and that's maybe enough to be a mapping, but we'd like several more interesting methods to really put such a structure to use.  Let's extend the ADT with more features.
+This is an okay start.  It supports `get` and `put` and that's enough to be a mapping, but we'd like several more interesting methods to really put such a structure to use.  Let's extend the ADT with more features.
 
 ## The extended Mapping ADT
 
@@ -183,9 +183,9 @@ Note that I took the opportunity to factor out some duplication in the `get` and
 Our goal is to to get the same kind of constant-time operations as in the `dict` class.  Right now, we are very far from that.  Currently, we need linear time to get put, and check membership.  To do better, we're going to need a new idea.  The `ListMapping` takes linear time because it has to iterate through the list.  We could make this faster if we had many short lists instead of one large list.  Then, we just need to have a quick way of knowing which short list to search or update.  
 
 We're going to store a list of `ListMappings`.
-For any key `k`,  we want to compute the index of the *right* `ListMapping` for `k`.  We often call these `ListMapping`s *buckets*.  This term goes back to the idea that you can quickly group items into buckets.
+For any key `k`,  we want to compute the index of the *right* `ListMapping` for `k`.  We often call these `ListMapping`s *buckets*.  This term goes back to the idea that you can quickly group items into buckets.  Then, when looking for something in a bucket, you can check all the items in there assuming there aren’t too many.
 
-This means, we want an integer.  A **hash function** takes a key and computes an integer.  Most classes in python implement a method called `__hash__` that does just this.  We can use it to implement a simple mapping scheme that improves on the `ListMapping`.  
+This means, we want an integer, i.e. the index into our list of buckets.  A **hash function** takes a key and returns an integer.  Most classes in python implement a method called `__hash__` that does just this.  We can use it to implement a simple mapping scheme that improves on the `ListMapping`.  
 
 ```python
 class HashMappingSimple:
@@ -209,13 +209,15 @@ Let's look more closely at this code.  It seems quite simple, but it hides some 
 
 First, the initializer creates a list of 100 ListMaps.  These are called the buckets. If the keys get spread evenly between the buckets then this will be about 100 times faster!  If two keys are placed in the same bucket, this is called a **collision**.
 
-The `__getitem__` and `__setitem__` methods call the `_bucket` method to get one of these buckets for the given key and then just use that ListMap's get and set methods.  So, the idea is just to have several list maps instead of one and then you just need a quick way to decide which to use.  The `hash` function, returns an integer based on the value of the given key.  The collisions will depend on the hash function.
+The `__getitem__` and `__setitem__` methods call the `_bucket` method to get one of these buckets for the given key and then just use that ListMap's get and put methods.  So, the idea is just to have several list maps instead of one and then you just need a quick way to decide which to use.  The `hash` function returns an integer based on the value of the given key.  The collisions will depend on the hash function.
 
-The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not much more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  Here is the code.
+### How many buckets should we use?
+
+The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  As the number of entries grows, we can periodically increase the number of buckets.  Here is the code.
 
 ```python
 class HashMap:
-    def __init__(self, size = 100):
+    def __init__(self, size = 2):
         self._size = size
         self._buckets = [ListMapping() for i in range(self._size)]
         self._length = 0
@@ -238,7 +240,7 @@ class HashMap:
         return self._buckets[hash(key) % self._size]
 
     def _double(self):
-        # Save the old buckets.
+        # Save a reference to the old buckets.
         oldbuckets = self._buckets
         # Double the size.
         self._size *= 2
@@ -357,7 +359,7 @@ class ListMapping(Mapping):
 
 All the magic methods as well as the public iterators and string conversion are handled by the superclass.  The subclass only has the parts that are specific to this implementation.
 
-The `HashMapping` class can also be rewritten this was as follows.
+The `HashMapping` class can also be rewritten as follows.
 
 ```python
 class HashMapping(Mapping):
@@ -367,17 +369,17 @@ class HashMapping(Mapping):
         self._length = 0
 
     def _entryiter(self):
-        return (e for b in self._buckets for e in b._entryiter())
+        return (e for bucket in self._buckets for e in bucket._entryiter())
 
     def get(self, key):
-        b = self._bucket(key)
-        return b[key]
+        bucket = self._bucket(key)
+        return bucket[key]
 
     def put(self, key, value):
-        b = self._bucket(key)
-        if key not in b:
+        bucket = self._bucket(key)
+        if key not in bucket:
             self._length += 1
-        b[key] = value
+        bucket[key] = value
 
         # Check if we need more buckets.
         if self._length > self._size:

@@ -40,7 +40,7 @@ We make sure to also update the lengths after each rotation.
 The main difference with our previous code is that now, all methods that can change the tree structure are combined with assignments.
 It is assumed that only `put` and `remove` will rearrange the tree, and so `get` and `floor` will keep the tree structure as is.
 
-```python
+```python {cmd}
 from mapping import Mapping, Entry
 
 

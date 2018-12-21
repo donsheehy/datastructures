@@ -15,7 +15,7 @@ Here is the ADT.
 
 As a start, let's see what a deque implementation would look like using a list.
 
-```python
+```python {cmd id="_listdeque"}
 class ListDeque:
     def __init__(self):
         self._L = []
@@ -52,7 +52,7 @@ We will use the usual trick of looking back into our intuitive description above
 In this case, there is the list itself and the nodes.
 Let's write a class for a `ListNode`.
 
-```python {cmd id="_listnode"}
+```python {cmd id="_linkedlist_00"}
 class ListNode:
     def __init__(self, data, link = None):
         self.data = data
@@ -66,7 +66,7 @@ This first implementation will hide the nodes from the user.
 That is, from a users perspective, they can create a linked list, and they can add and remove nodes, but they don't have to touch (or even know about) the nodes.
 This is abstraction (hiding details)!
 
-```python
+```python {cmd id="simplelinkedlist", continue="_linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -87,7 +87,7 @@ We could hope to do better with a linked list.
 However, right now, we have no way to add to or remove from the end of the linked list.
 Here is an inefficient, though simple and correct way to do it.
 
-```python {cmd id="linkedlist1" continue="_listnode"}
+```python {cmd id="linkedlist_A" continue="_linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -120,7 +120,7 @@ class LinkedList:
             return currentnode.data
 ```
 
-```python {cmd hide continue="linkedlist1"}
+```python {cmd hide continue="linkedlist_A"}
 LL = LinkedList()
 LL.addfirst(3)
 LL.addfirst(5)
@@ -146,7 +146,7 @@ This requires a bit of overhead to make sure it always stores the correct node.
 Most of the special cases happen when there is only one item in the list.
 We will be able to use this to get some improvement for `addlast`, because we will be able to jump right to the end without traversing.  We will also be able to clean up the code for `removelast` a little by eliminating the `link.link` stuff and instead just check if we reached the tail.
 
-```python {cmd id="linkedlist2" continue="_listnode"}
+```python {cmd id="linkedlist_B" continue="_linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -183,7 +183,7 @@ class LinkedList:
 
 ```
 
-```python {cmd hide continue="linkedlist2"}
+```python {cmd hide continue="linkedlist_B"}
 LL = LinkedList()
 LL.addfirst(3)
 LL.addfirst(5)
@@ -199,8 +199,10 @@ assert(LL.removelast() == 13)
 Now we can implement the Queue ADT with a linked list.
 It will be surprisingly easy.
 
-```python
+```python {cmd id="_linkedqueue"}
 # linkedqueue.py
+from linkedlist import LinkedList
+
 class LinkedQueue:
     def __init__(self):
         self._L = LinkedList()
@@ -220,7 +222,7 @@ To implement the same method on the `LinkedQueue`, we will want **delegate** the
 Let's add the ability to get the length of the linked list.
 We'll do it by storing the length and updating it with each operation.
 
-```python {cmd id="_linkedlist" continue="_listnode"}
+```python {cmd id="_linkedlist_01" continue="_linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -264,7 +266,7 @@ class LinkedList:
         return self._length
 ```
 
-```python {cmd hide continue="_linkedlist"}
+```python {cmd hide continue="_linkedlist_01"}
 LL = LinkedList()
 LL.addfirst(3)
 LL.addfirst(5)
@@ -347,7 +349,7 @@ We wanted to copy a bunch of methods to be included in two different classes (`T
 Instead we want them to *share* the methods.
 So, we **refactor** the code, by **extracting a superclass**.
 Our new class will be called `TestQueue`.
-Both `TestListQueue` and `TestLinkedQueue` will extend `TestQueue.
+Both `TestListQueue` and `TestLinkedQueue` will extend `TestQueue`.
 Remember extending means inheriting from.
 
 ```python

@@ -83,15 +83,3 @@ class DoublyLinkedList:
         other.__init__()
         return self
 
-L = DoublyLinkedList()
-[L.addlast(i) for i in range(11)]
-B = DoublyLinkedList()
-[B.addlast(i+11) for i in range(10)]
-
-L += B
-
-n = L._head
-while n is not None:
-    print(n.data)
-    n = n.link
-

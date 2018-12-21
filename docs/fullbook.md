@@ -1670,7 +1670,7 @@ Here is the ADT.
 
 As a start, let's see what a deque implementation would look like using a list.
 
-```python
+```python {cmd id="_listdeque"}
 class ListDeque:
     def __init__(self):
         self._L = []
@@ -1707,7 +1707,7 @@ We will use the usual trick of looking back into our intuitive description above
 In this case, there is the list itself and the nodes.
 Let's write a class for a `ListNode`.
 
-```python {cmd id="_listnode"}
+```python {cmd id="_linkedlist_00"}
 class ListNode:
     def __init__(self, data, link = None):
         self.data = data
@@ -1721,7 +1721,7 @@ This first implementation will hide the nodes from the user.
 That is, from a users perspective, they can create a linked list, and they can add and remove nodes, but they don't have to touch (or even know about) the nodes.
 This is abstraction (hiding details)!
 
-```python
+```python {cmd id="simplelinkedlist", continue="_linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -1742,7 +1742,7 @@ We could hope to do better with a linked list.
 However, right now, we have no way to add to or remove from the end of the linked list.
 Here is an inefficient, though simple and correct way to do it.
 
-```python {cmd id="linkedlist1" continue="_listnode"}
+```python {cmd id="linkedlist_A" continue="_linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -1775,7 +1775,7 @@ class LinkedList:
             return currentnode.data
 ```
 
-```python {cmd hide continue="linkedlist1"}
+```python {cmd hide continue="linkedlist_A"}
 LL = LinkedList()
 LL.addfirst(3)
 LL.addfirst(5)
@@ -1801,7 +1801,7 @@ This requires a bit of overhead to make sure it always stores the correct node.
 Most of the special cases happen when there is only one item in the list.
 We will be able to use this to get some improvement for `addlast`, because we will be able to jump right to the end without traversing.  We will also be able to clean up the code for `removelast` a little by eliminating the `link.link` stuff and instead just check if we reached the tail.
 
-```python {cmd id="linkedlist2" continue="_listnode"}
+```python {cmd id="linkedlist_B" continue="_linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -1838,7 +1838,7 @@ class LinkedList:
 
 ```
 
-```python {cmd hide continue="linkedlist2"}
+```python {cmd hide continue="linkedlist_B"}
 LL = LinkedList()
 LL.addfirst(3)
 LL.addfirst(5)
@@ -1854,8 +1854,10 @@ assert(LL.removelast() == 13)
 Now we can implement the Queue ADT with a linked list.
 It will be surprisingly easy.
 
-```python
+```python {cmd id="_linkedqueue"}
 # linkedqueue.py
+from linkedlist import LinkedList
+
 class LinkedQueue:
     def __init__(self):
         self._L = LinkedList()
@@ -1875,7 +1877,7 @@ To implement the same method on the `LinkedQueue`, we will want **delegate** the
 Let's add the ability to get the length of the linked list.
 We'll do it by storing the length and updating it with each operation.
 
-```python {cmd id="_linkedlist" continue="_listnode"}
+```python {cmd id="_linkedlist_01" continue="_linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -1919,7 +1921,7 @@ class LinkedList:
         return self._length
 ```
 
-```python {cmd hide continue="_linkedlist"}
+```python {cmd hide continue="_linkedlist_01"}
 LL = LinkedList()
 LL.addfirst(3)
 LL.addfirst(5)
@@ -2002,7 +2004,7 @@ We wanted to copy a bunch of methods to be included in two different classes (`T
 Instead we want them to *share* the methods.
 So, we **refactor** the code, by **extracting a superclass**.
 Our new class will be called `TestQueue`.
-Both `TestListQueue` and `TestLinkedQueue` will extend `TestQueue.
+Both `TestListQueue` and `TestLinkedQueue` will extend `TestQueue`.
 Remember extending means inheriting from.
 
 ```python
@@ -2133,7 +2135,7 @@ When we create a new `ListNode`, we can specify the nodes before and after so th
 We want it to always be true that `b == a.link` if and only if `a = b.prev` for any two nodes `a` and `b`.
 To help ensure this invariant, we set `self.prev.link = self` and `self.link.prev = self` unless `prev` or `link` respectively are `None`.
 
-```python {cmd id="_doublylinkedlist-0"}
+```python {cmd id="_doublylinkedlist_00"}
 class ListNode:
     def __init__(self, data, prev = None, link = None):
         self.data = data
@@ -2149,7 +2151,7 @@ First, we'll look at adding items a `DoublyLinkedList`.
 These operations are very similar to the `addfirst` operation on a `LinkedList`.
 One has to do a little more work to update the `prev` node that was not present in our `LinkedList`.
 
-```python {cmd continue="_doublylinkedlist-0" id="_doublylinkedlist-1"}
+```python {cmd continue="_doublylinkedlist_00" id="_doublylinkedlist_01"}
 class DoublyLinkedList:
     def __init__(self):
         self._head = None
@@ -2184,7 +2186,7 @@ We should use this as an opportunity to simplify the code.
 In this case, we might consider the more general problem of adding a node between two other nodes.
 We will just need to consider those cases where the nodes `before` or `after` or both are `None`.
 
-```python {cmd continue="_doublylinkedlist-1", id="_doublylinkedlist-2"}
+```python {cmd continue="_doublylinkedlist_01", id="_doublylinkedlist_02"}
     def _addbetween(self, item, before, after):
         node = ListNode(item, before, after)
         if after is self._head:
@@ -2204,7 +2206,7 @@ Symmetry is also apparent in the code to remove an item from either end.
 As with the `add` methods, we factor out a (private) method that both use to remove a node and return its data.
 It includes a little logic to detect if the head or tail or both change with the removal.
 
-```python {cmd continue="_doublylinkedlist-2", id="_doublylinkedlist-3"}
+```python {cmd continue="_doublylinkedlist_02", id="_doublylinkedlist_03"}
     def _remove(self, node):
         before, after = node.prev, node.link
         if node is self._head:
@@ -2245,7 +2247,7 @@ It takes time proportional to the length of the newly created list `C` and it do
 For doubly linked lists, we could achieve the same asymptotic running time by incrementally building up a new list.
 However, if we are allowed to modify the lists, the concatenation can be accomplished by pointing the tail of the first list at the head of the second.
 
-```python {cmd continue="_doublylinkedlist-3", id="_doublylinkedlist-4"}
+```python {cmd continue="_doublylinkedlist_03", id="_doublylinkedlist_04"}
 
     def __iadd__(self, other):
         if other._head is None: return
@@ -2260,7 +2262,9 @@ However, if we are allowed to modify the lists, the concatenation can be accompl
         # Clean up the other list.
         other.__init__()
         return self
+```
 
+```python {cmd continue="_doublylinkedlist_04"}
 L = DoublyLinkedList()
 [L.addlast(i) for i in range(11)]
 B = DoublyLinkedList()
@@ -2270,7 +2274,7 @@ L += B
 
 n = L._head
 while n is not None:
-    print(n.data)
+    print(n.data, end = ' ')
     n = n.link
 ```
 
@@ -3644,10 +3648,13 @@ The algorithm is sometimes called the *median of medians* algorithm.  You can fi
 
 # Mappings and Hash Tables
 
-A **mapping** is an association between two sets of things.
+A **mapping** is an association between two sets of things.  It associates a value to a key.  We  refer to these associated pairs as **key-value pairs**.
+Keys must be unique, so that there can only be one value associated with a given key.
+
 The standard built-in data type in python for mappings is the dictionary (`dict`).
 This kind of mapping is used by python itself to associate names of variables (strings) with objects.
-We usually refer to these associated pairs as **key-value pairs**.
+In the notation for dictionaries, we would write `d[some_key] = some_value`.
+This either creates a new key-value pair if `some_key` was not already in the dictionary, or it overwrites the existing pair with key `some_key`.
 
 Not all programming languages come with a built-in data type for mappings.
 We're going to pretend for a short time that we don't have a python dictionary available to us and go through the process of implementing one ourselves.  This will allow us to resolve one of the major unsolved mysteries from earlier in the course:
@@ -3656,20 +3663,20 @@ We're going to pretend for a short time that we don't have a python dictionary a
 
 ## The Mapping ADT
 
-A **mapping** is a collection of key-value pairs such that the keys are unique (i.e. no two pairs share a key).
+A **mapping** is a collection of key-value pairs such that the keys are unique (i.e. no two pairs have the same key).
 It supports the following methods.
 
   - **`get(k)`** - return the value associate to the key `k`.  Usually an error (`KeyError`) is raised if the given key is not present.
 
   - **`put(k, v)`** - Add the key-value pair `(k,v)` to the mapping.
 
-These are the two main operations.  They are what make a mapping, and are generally implemented as `__getitem__` and `__setitem__` in python in order to support the familiar square bracket notation.  We will put off anything more elaborate for now.
+These are the two main operations.  They are what make a mapping, and are generally implemented as `__getitem__` and `__setitem__` in python in order to support the familiar square bracket notation.  We will put off anything more elaborate for now.  When we get into some implementations, we will put some other conditions on the keys.
 
 ## A minimal implementation
 
 Here is a very lightweight method for using a `list` as a mapping.  We start with a little class to store key-value pairs, then give two methods to implement get and put.
 
-```python
+```python {cud i’d="trivialmapping"}
 class Entry:
     def __init__(self, key, value):
         self.key = key
@@ -3692,7 +3699,7 @@ def mapget(L, key):
     raise KeyError
 ```
 
-```python
+```python {cmd continue="trivialmapping"}
 m = []
 mapput(m, 4, 'five')
 mapput(m, 1, 'one')
@@ -3704,7 +3711,7 @@ assert(mapget(m, 4) == 'four')
 
 At this point, it seems that the only advantage of the `dict` structure is that it provides some useful syntax for adding and getting entries.  There are some other advantages, but we'll only reveal them by trying to build a map ourselves.
 
-But first, let's put our new data structure in a class.  This will allow us to encapsulate the underlying list so that users don't accidentally mess it up, for example, by appending to it rather than using `put`.  We'd like to protect users from themselves, especially when there are properties of the structure we want to maintain.  In this case, we want to make sure keys stay unique.
+First, let's put our new data structure in a class.  This will allow us to encapsulate the underlying list so that users don't accidentally mess it up, for example, by appending to it rather than using `put`.  We'd like to protect users from themselves, especially when there are properties of the structure we want to maintain.  In this case, we want to make sure keys stay unique.
 
 ```python
 class ListMappingSimple:
@@ -3718,17 +3725,14 @@ class ListMappingSimple:
                 return
         self._entries.append(Entry(key, value))
 
-    def get(self, key, default = "NotARealDefaultValue"):
+    def get(self, key):
         for e in self._entries:
             if e.key == key:
                 return e.value
-        if default == "NotARealDefaultValue":
-            raise KeyError
-        else:
-            return default
+        raise KeyError
 ```
 
-This is an okay start.  It support `get` and `put` and that's maybe enough to be a mapping, but we'd like several more interesting methods to really put such a structure to use.  Let's extend the ADT with more features.
+This is an okay start.  It supports `get` and `put` and that's enough to be a mapping, but we'd like several more interesting methods to really put such a structure to use.  Let's extend the ADT with more features.
 
 ## The extended Mapping ADT
 
@@ -3827,9 +3831,9 @@ Note that I took the opportunity to factor out some duplication in the `get` and
 Our goal is to to get the same kind of constant-time operations as in the `dict` class.  Right now, we are very far from that.  Currently, we need linear time to get put, and check membership.  To do better, we're going to need a new idea.  The `ListMapping` takes linear time because it has to iterate through the list.  We could make this faster if we had many short lists instead of one large list.  Then, we just need to have a quick way of knowing which short list to search or update.  
 
 We're going to store a list of `ListMappings`.
-For any key `k`,  we want to compute the index of the *right* `ListMapping` for `k`.  We often call these `ListMapping`s *buckets*.  This term goes back to the idea that you can quickly group items into buckets.
+For any key `k`,  we want to compute the index of the *right* `ListMapping` for `k`.  We often call these `ListMapping`s *buckets*.  This term goes back to the idea that you can quickly group items into buckets.  Then, when looking for something in a bucket, you can check all the items in there assuming there aren’t too many.
 
-This means, we want an integer.  A **hash function** takes a key and computes an integer.  Most classes in python implement a method called `__hash__` that does just this.  We can use it to implement a simple mapping scheme that improves on the `ListMapping`.  
+This means, we want an integer, i.e. the index into our list of buckets.  A **hash function** takes a key and returns an integer.  Most classes in python implement a method called `__hash__` that does just this.  We can use it to implement a simple mapping scheme that improves on the `ListMapping`.  
 
 ```python
 class HashMappingSimple:
@@ -3853,13 +3857,15 @@ Let's look more closely at this code.  It seems quite simple, but it hides some 
 
 First, the initializer creates a list of 100 ListMaps.  These are called the buckets. If the keys get spread evenly between the buckets then this will be about 100 times faster!  If two keys are placed in the same bucket, this is called a **collision**.
 
-The `__getitem__` and `__setitem__` methods call the `_bucket` method to get one of these buckets for the given key and then just use that ListMap's get and set methods.  So, the idea is just to have several list maps instead of one and then you just need a quick way to decide which to use.  The `hash` function, returns an integer based on the value of the given key.  The collisions will depend on the hash function.
+The `__getitem__` and `__setitem__` methods call the `_bucket` method to get one of these buckets for the given key and then just use that ListMap's get and put methods.  So, the idea is just to have several list maps instead of one and then you just need a quick way to decide which to use.  The `hash` function returns an integer based on the value of the given key.  The collisions will depend on the hash function.
 
-The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not much more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  Here is the code.
+### How many buckets should we use?
+
+The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  As the number of entries grows, we can periodically increase the number of buckets.  Here is the code.
 
 ```python
 class HashMap:
-    def __init__(self, size = 100):
+    def __init__(self, size = 2):
         self._size = size
         self._buckets = [ListMapping() for i in range(self._size)]
         self._length = 0
@@ -3882,7 +3888,7 @@ class HashMap:
         return self._buckets[hash(key) % self._size]
 
     def _double(self):
-        # Save the old buckets.
+        # Save a reference to the old buckets.
         oldbuckets = self._buckets
         # Double the size.
         self._size *= 2
@@ -4001,7 +4007,7 @@ class ListMapping(Mapping):
 
 All the magic methods as well as the public iterators and string conversion are handled by the superclass.  The subclass only has the parts that are specific to this implementation.
 
-The `HashMapping` class can also be rewritten this was as follows.
+The `HashMapping` class can also be rewritten as follows.
 
 ```python
 class HashMapping(Mapping):
@@ -4011,17 +4017,17 @@ class HashMapping(Mapping):
         self._length = 0
 
     def _entryiter(self):
-        return (e for b in self._buckets for e in b._entryiter())
+        return (e for bucket in self._buckets for e in bucket._entryiter())
 
     def get(self, key):
-        b = self._bucket(key)
-        return b[key]
+        bucket = self._bucket(key)
+        return bucket[key]
 
     def put(self, key, value):
-        b = self._bucket(key)
-        if key not in b:
+        bucket = self._bucket(key)
+        if key not in bucket:
             self._length += 1
-        b[key] = value
+        bucket[key] = value
 
         # Check if we need more buckets.
         if self._length > self._size:
@@ -4144,7 +4150,7 @@ class Tree:
         self.children = [Tree(c) for c in iterator]
 ```
 
-The initializer takes a *list of lists* representation of a tree as input.  A `Tree` object has two attributes, `data` stores data associated with a node and `children` stores a lists a child `Tree` objects.
+The initializer takes a *list of lists* representation of a tree as input.  A `Tree` object has two attributes, `data` stores data associated with a node and `children` stores a list of `Tree` objects.
 The recursive aspect of this tree is clear from the way the children are generated as `Tree`'s.
 
 Let's add our print function to the class.
@@ -4156,7 +4162,7 @@ def printtree(self):
         child.printtree()
 ```
 
-This is the most common pattern for algorithms that operated on trees.
+This is the most common pattern for algorithms that operate on trees.
 It has two parts; one part operates on the data and the other part applies the function recursively on the children.
 Here is another example of the same pattern.
 Let's check if two trees are equal in the sense of having the same shape and data.  We use the `__eq__` method so this method will be used when we use `==` to check equality between `Tree`'s.
@@ -4166,7 +4172,7 @@ def __eq__(self, other):
     return self.data == other.data and self.children == other.children
 ```
 
-Here, it is less obvious that we are doing recursion, but we are because `self.children` and `other.children` are lists and list equality is determined by testing the equality of the items.  In our case, the items in the `.children` lists are `Tree`'s, so our `__eq__` method will be invoked for each one.
+Here, it is less obvious that we are doing recursion, but we are because `self.children` and `other.children` are lists and list equality is determined by testing the equality of the items.  In this case, the items in the  lists are `Tree`'s, so our `__eq__` method will be invoked for each one.
 
 Here's another example.  Let's write a function that computes the height of the tree.  We can do this by computing the height of the subtrees and return one more than the max of those.  If there are no children, the height is $0$.
 
@@ -4177,6 +4183,8 @@ def height(self):
     else:
         return 1 + max(child.height() for child in self.children)
 ```
+
+*Hopefully, you are getting the hang of these generator expressions.*
 
 ## Tree Traversal
 
@@ -4203,7 +4211,7 @@ It is only a slight change in the code, but it results in a different output.
 
 ## If you want to get fancy...
 
-It was considered a great achievement in python to be able to do this kind of traversal with a generator.  Recall that a generator is an iterator defined using a method that yields instead of returning.  Recursive generators seem a little mysterious, especially at first.  However, if you break down this code and walk through it by hand, it will help you have a better understanding of how generators work.
+It was considered a great achievement in python to be able to do this kind of traversal with a generator.  Recursive generators seem a little mysterious, especially at first.  However, if you break down this code and walk through it by hand, it will help you have a better understanding of how generators work.
 
 ```python
 def preorder(self):
@@ -4232,6 +4240,26 @@ If one calls this method on a tree, each value yielded is passed all the way fro
 Thus, the total running time is proportional to the sum of the depths of all the nodes in the tree.
 For a degenerate tree (i.e. a single path), this is $O(n^2)$ time.
 For a perfectly balanced binary tree, this is $O(n \log n)$ time.
+
+Using recursion and the call stack make the tree traversal code substantially simpler than if we had to keep track of everything manually.
+It would not be enough to store just the stack of nodes in the path from your current node up to the root. You would also have to keep track of your place in the iteration of the children of each of those nodes.  Remember that it is the job of an iterator object to keep track of where it is in the iteration. Thus, we can just push the iterators for the children onto the stack too.
+
+```python
+def _postorder(self):
+	node, childiter = self, iter(self.children)
+	stack = [(node, childiter)]
+	while stack:
+		node, childiter = stack[-1]
+		try:
+			child = next(childiter)
+			stack.append((child, iter(child.children)))
+		except StopIteration:
+			yield node
+			stack.pop()					
+```
+
+In the above code, I don’t love the fact that I am reassigning `node` and `childiter` at every iteration of the loop.  Can you fix that so that it still works?
+
 <p style="page-break-after:always;"></p>
     <a name="chapter_16"></a>
     <p style="font-size:80pt;color:#d0d0d0;font-weight:bold">
@@ -4278,7 +4306,9 @@ We will maintain a convention that the operations on the `BSTNode` class will op
 Here is just the minimum requirements to be a `Mapping`.
 It's a top down implementation, so it delegates all the real work to the `BSTNode` class.
 
-```python
+```python {cmd id="_bstmapping_00"}
+from mapping import Mapping
+
 class BSTMapping(Mapping):
     def __init__(self):
         self._root = None
@@ -4316,6 +4346,7 @@ class BSTMapping(Mapping):
 
     def __delitem__(self, key):
         self.remove(key)
+
 ```
 
 The code above gives us almost everything we need.  There are a couple of mysterious lines to pay attention to.  One is the line in the `put` method that updates the root.  We will use this convention extensively.  As methods may rearrange the tree structure, such methods return the node that ought to be the new root of the subtree.  The same pattern appears in the `remove` function.
@@ -4324,7 +4355,7 @@ One other construct we haven't seen before is the `yield from` operation in the 
 
 Let's see how these methods are implemented.  We start with the initializer and some handy other methods.
 
-```python
+```python  {cmd id="_bstmapping_01" continue="_bstmapping_00"}
 class BSTNode:
     def __init__(self, key, value):
         self.key = key
@@ -4339,7 +4370,7 @@ class BSTNode:
 
 The `get` method uses binary search to find the desired key.
 
-```python
+```python  {cmd id="_bstmapping_02" continue="_bstmapping_01"}
     def get(self, key):
         if key == self.key:
             return self
@@ -4357,27 +4388,27 @@ We could have implemented `__bool__` to make this work, but it suffices to imple
 
 Next, we implement `put`.  It will work by first doing a binary search in the tree.  If it finds the key already in the tree, it overwrites the value (keys in a mapping are unique).  Otherwise, when it gets to the bottom of the tree, it adds a new node.  
 
-```python
-  def put(self, key, value):
-      if key == self.key:
-          self.value = value
-      elif key < self.key:
-          if self.left:
-              self.left.put(key, value)
-          else:
-              self.left = BSTNode(key, value)
-      elif key > self.key:
-          if self.right:
-              self.right.put(key, value)
-          else:
-              self.right = BSTNode(key, value)
-      self._updatelength()
+```python  {cmd id="_bstmapping_03" continue="_bstmapping_02"}
+    def put(self, key, value):
+        if key == self.key:
+            self.value = value
+        elif key < self.key:
+            if self.left:
+                self.left.put(key, value)
+            else:
+                self.left = BSTNode(key, value)
+        elif key > self.key:
+            if self.right:
+                self.right.put(key, value)
+            else:
+                self.right = BSTNode(key, value)
+        self._updatelength()
 
 
     def _updatelength(self):
         len_left = len(self.left) if self.left else 0
         len_right = len(self.right) if self.right else 0
-        self._length 1 + len_left + len_right
+        self._length = 1 + len_left + len_right
 ```
 
 The `put` method also keeps track of the length, i.e. the number of entries in each subtree.
@@ -4388,7 +4419,7 @@ The `floor` function is just a slightly fancier version of `get`.
 It also does a binary search, but it has different behavior when the key is not found, depending on whether the last search was to the left or to the right.  Starting from any node, if we search to the right and the result is `None`, then we return the the node itself.
 If we search to the left and the result is `None`, we also return `None`.
 
-```python
+```python  {cmd id="_bstmapping_04" continue="_bstmapping_03"}
     def floor(self, key):
         if key == self.key:
             return self
@@ -4406,7 +4437,7 @@ As mentioned above, binary search trees support inorder traversal.  The result o
 
 Here is an inorder iterator for a binary search tree implemented using recursive generators.  This will be fine in most cases.
 
-```python
+```python  {cmd id="_bstmapping_05" continue="_bstmapping_04"}
     def __iter__(self):
         if self.left:
             yield from self.left
@@ -4515,7 +4546,7 @@ We make sure to also update the lengths after each rotation.
 The main difference with our previous code is that now, all methods that can change the tree structure are combined with assignments.
 It is assumed that only `put` and `remove` will rearrange the tree, and so `get` and `floor` will keep the tree structure as is.
 
-```python
+```python {cmd}
 from mapping import Mapping, Entry
 
 
@@ -4962,7 +4993,7 @@ As the data are stored as tuples, we have to use an index to pull out the priori
 
 We'll make a class that stores the entries, each will have an `item` and a `priority` as attributes. We'll make the entries comparable by implementing `__lt__` and thus the comparison of entries will always just compare their priorities.
 
-```python
+```python {cmd id="entry"}
 class Entry:
     def __init__(self, item, priority):
         self.priority = priority
@@ -5124,7 +5155,7 @@ However, the usual way to reduce the priority is to specify the item and its new
 
 The full code including the `_heapify` method is given below.  This full version of the priority queue will be very useful for some graph algorithms that we will see soon.
 
-```python
+```python {cmd continue="entry"}
 class PriorityQueue:
     def __init__(self, entries = None):
         entries = entries or []
@@ -5192,9 +5223,10 @@ class PriorityQueue:
 
     def _heapify(self):
         n = len(self._entries)
-        for i in range(n):
-            self._downheap(n - i - 1)
-```
+        for i in reversed(range(n)):
+            self._downheap(i)
+
+``` 
 <p style="page-break-after:always;"></p>
     <a name="chapter_19"></a>
     <p style="font-size:80pt;color:#d0d0d0;font-weight:bold">

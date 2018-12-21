@@ -93,7 +93,7 @@ class Tree:
         self.children = [Tree(c) for c in iterator]
 ```
 
-The initializer takes a *list of lists* representation of a tree as input.  A `Tree` object has two attributes, `data` stores data associated with a node and `children` stores a lists a child `Tree` objects.
+The initializer takes a *list of lists* representation of a tree as input.  A `Tree` object has two attributes, `data` stores data associated with a node and `children` stores a list of `Tree` objects.
 The recursive aspect of this tree is clear from the way the children are generated as `Tree`'s.
 
 Let's add our print function to the class.
@@ -105,7 +105,7 @@ def printtree(self):
         child.printtree()
 ```
 
-This is the most common pattern for algorithms that operated on trees.
+This is the most common pattern for algorithms that operate on trees.
 It has two parts; one part operates on the data and the other part applies the function recursively on the children.
 Here is another example of the same pattern.
 Let's check if two trees are equal in the sense of having the same shape and data.  We use the `__eq__` method so this method will be used when we use `==` to check equality between `Tree`'s.
@@ -115,7 +115,7 @@ def __eq__(self, other):
     return self.data == other.data and self.children == other.children
 ```
 
-Here, it is less obvious that we are doing recursion, but we are because `self.children` and `other.children` are lists and list equality is determined by testing the equality of the items.  In our case, the items in the `.children` lists are `Tree`'s, so our `__eq__` method will be invoked for each one.
+Here, it is less obvious that we are doing recursion, but we are because `self.children` and `other.children` are lists and list equality is determined by testing the equality of the items.  In this case, the items in the  lists are `Tree`'s, so our `__eq__` method will be invoked for each one.
 
 Here's another example.  Let's write a function that computes the height of the tree.  We can do this by computing the height of the subtrees and return one more than the max of those.  If there are no children, the height is $0$.
 
@@ -126,6 +126,8 @@ def height(self):
     else:
         return 1 + max(child.height() for child in self.children)
 ```
+
+*Hopefully, you are getting the hang of these generator expressions.*
 
 ## Tree Traversal
 
@@ -152,7 +154,7 @@ It is only a slight change in the code, but it results in a different output.
 
 ## If you want to get fancy...
 
-It was considered a great achievement in python to be able to do this kind of traversal with a generator.  Recall that a generator is an iterator defined using a method that yields instead of returning.  Recursive generators seem a little mysterious, especially at first.  However, if you break down this code and walk through it by hand, it will help you have a better understanding of how generators work.
+It was considered a great achievement in python to be able to do this kind of traversal with a generator.  Recursive generators seem a little mysterious, especially at first.  However, if you break down this code and walk through it by hand, it will help you have a better understanding of how generators work.
 
 ```python
 def preorder(self):
@@ -181,3 +183,23 @@ If one calls this method on a tree, each value yielded is passed all the way fro
 Thus, the total running time is proportional to the sum of the depths of all the nodes in the tree.
 For a degenerate tree (i.e. a single path), this is $O(n^2)$ time.
 For a perfectly balanced binary tree, this is $O(n \log n)$ time.
+
+Using recursion and the call stack make the tree traversal code substantially simpler than if we had to keep track of everything manually.
+It would not be enough to store just the stack of nodes in the path from your current node up to the root. You would also have to keep track of your place in the iteration of the children of each of those nodes.  Remember that it is the job of an iterator object to keep track of where it is in the iteration. Thus, we can just push the iterators for the children onto the stack too.
+
+```python
+def _postorder(self):
+	node, childiter = self, iter(self.children)
+	stack = [(node, childiter)]
+	while stack:
+		node, childiter = stack[-1]
+		try:
+			child = next(childiter)
+			stack.append((child, iter(child.children)))
+		except StopIteration:
+			yield node
+			stack.pop()					
+```
+
+In the above code, I don’t love the fact that I am reassigning `node` and `childiter` at every iteration of the loop.  Can you fix that so that it still works?
+

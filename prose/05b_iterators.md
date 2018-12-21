@@ -8,30 +8,30 @@ The simplest way to make a `list` is to just write out the elements inside squar
 L = [1, 2, 4, 8, 16]
 ```
 
-This is called a **list literal**.  There are many cases, where we want to create a list, where we know exactly what items we want to put in the list.
+This is called a **list literal**.  Often, we want to create a list and we know exactly what items we want to put in it.
 However, even in some of these situations, it might not be so nice to write out all the elements.  In the example above, we have the first five powers of two, but what if we needed a list of the first 1000 powers of two.  We might build it up with a for loop.
 
 ```python {cmd=true}
 L = []
 for i in range(1000):
-	L.append(2 ** 1)
+    L.append(2 ** 1)
 ```
 
 That’s easy enough, but there is an easier syntax for doing this.  It’s called a **list comprehension**.  It looks a little like a for loop inside square brackets:
 
-```python {cmd=true}
+```python {cmd}
 L = [2 ** i for i in range(1000)]
 ```
 
 This is a very common idiom used in all kinds of programs.  You can do comprehensions with other types of collections too.  For example the following **set comprehension** is equivalent to a for loop construction as follows.
 
-```python {cmd=true}
+```python {cmd}
 S = {(i, i + 1) for i in [4, 5, 6]}
 print(S)
 
 S = set()
 for i in [4, 5, 6]:
-	S.add((i, i + 1))
+    S.add((i, i + 1))
 print(S)
 ```
 
@@ -45,12 +45,12 @@ More complicated comprehensions are possible.  If you want to have nested loops,
 L = [(i + j + 2) for i in range(5) for j in range(5)]
 print(L)
 
-% is equivalent to
+# ... is equivalent to ...
 
 L = []
 for i in range(5):
-	for j in range(5):
-		L.append(i + j + 2)
+    for j in range(5):
+        L.append(i + j + 2)
 print(L)
 ```
 
@@ -95,17 +95,17 @@ When you use these collections in a `for` loop, the first thing Python does is c
 L = [1,1,2,3,5,8]
 
 for f in L:
-	print(f)
+    print(f)
 
 # is equivalent to
 
 myiterator = iter(L)
 while True:
-	try:
-		f = next(myiterator)
-	except StopIteration:
-		break
-	print(f)
+    try:
+        f = next(myiterator)
+    except StopIteration:
+        break
+    print(f)
 ```
 
 Everyone agrees that the `for` loop is much prettier and easier to understand.  However, the `while` loop version doesn’t hide anything (or at least not as much).  You should never write a `while` loop like the one above, but you should understand it.  That is how you’ll know what is really happening in a `for` loop and someday it will help you track down a bug.  It’s also how you would understand the running time of a `for` loop.
@@ -115,7 +115,7 @@ In Python, an iterator is required to also be iterable.  That is, I should be ab
 ```python {cmd}
 L = [1,2,3,5,7,11]
 for i in iter(L):
-	print(i)
+    print(i)
 ```
 
 You should think of the iterator as a separate object from the object it is iterating over.  It keeps track of where it is in the list.  This is why you can have multiple iterators over the same collection at the same time.
@@ -123,26 +123,26 @@ You should think of the iterator as a separate object from the object it is iter
 ```python {cmd}
 L = [3, 5, 8]
 for i in L:
-	for j in L:
-		print(i, j)
+    for j in L:
+        print(i, j)
 ```
 
 The builtin function `iter` calls the `__iter__` magic method on the object.  The builtin function `next` calls the `__next__` method.  So, you can create your own iterators objects and your own iterable objects by implementing these methods.  We’ll see examples a little later.
 
 ## Generators
- 
+
 A **generator** is an easy way to write your own iterators in Python.  It looks like a function, but it includes one or more `yield` statements.  When called, it will return an object of type generator.  A generator is  an iterator, i.e. you can call `next` and `iter` on it.  This also mean you can loop over it.
 
 Because a generator is an iterator, you can imagine that calling `next` should execute the function until the first value is yielded, and then it pauses.  Calling next again will cause the execution to continue from where it left off.  If the function returns, then `StopIteration` will be raised.  
 
 ```python {cmd}
 def mygen(k):
-	for i in range(k):
-		yield 2 ** i
-		
+    for i in range(k):
+        yield 2 ** i
+
 for poweroftwo in mygen(4):
-	print(poweroftwo)
-	
+    print(poweroftwo)
+
 myiterator = mygen(8)
 print(next(myiterator))
 print(next(myiterator))
@@ -153,7 +153,7 @@ Above we have a simple generator.  It is used in a `for` loop and it is also use
 
 ## Generator Expressions and Comprehensions
 
-It very often happens that we want to create our 
+It very often happens that we want to create our
 
 ```python {cmd}
 class MyCollection:

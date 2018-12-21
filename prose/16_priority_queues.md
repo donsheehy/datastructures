@@ -40,7 +40,7 @@ As the data are stored as tuples, we have to use an index to pull out the priori
 
 We'll make a class that stores the entries, each will have an `item` and a `priority` as attributes. We'll make the entries comparable by implementing `__lt__` and thus the comparison of entries will always just compare their priorities.
 
-```python
+```python {cmd id="entry"}
 class Entry:
     def __init__(self, item, priority):
         self.priority = priority
@@ -202,7 +202,7 @@ However, the usual way to reduce the priority is to specify the item and its new
 
 The full code including the `_heapify` method is given below.  This full version of the priority queue will be very useful for some graph algorithms that we will see soon.
 
-```python
+```python {cmd continue="entry"}
 class PriorityQueue:
     def __init__(self, entries = None):
         entries = entries or []
@@ -270,6 +270,7 @@ class PriorityQueue:
 
     def _heapify(self):
         n = len(self._entries)
-        for i in range(n):
-            self._downheap(n - i - 1)
-```
+        for i in reversed(range(n)):
+            self._downheap(i)
+
+``` 
