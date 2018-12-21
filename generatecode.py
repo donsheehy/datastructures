@@ -39,7 +39,7 @@ with open('docs/fullbook.md', 'r') as booklines:
         elif line[:3] == '```':
             chunking = False
         elif chunking:
-                currentchunk.addline(line)
+            currentchunk.addline(line)
 
 chunks.sort(key = Chunk.name)
 tangled = {}
