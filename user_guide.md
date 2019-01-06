@@ -58,3 +58,9 @@ To pull the code out of the book into separate `.py` files, you will need to run
 
 Currently, the book is light on figures.
 I am working to integrate a system where data structures are drawn inline using svgs that get integrated directly into the resulting html.
+
+You may need to install the svgwrite package.
+
+```
+$ pip install svgwrite
+```

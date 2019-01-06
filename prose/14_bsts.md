@@ -21,10 +21,23 @@ A tree is called a **binary tree** if every node has at most two children.
 We will continue to assume that we are working with ordered trees and so we call the children `left` and `right`.
 We say that a binary tree is a **binary search tree** if for every node `x`, all the keys in the subtree `x.left` are less than the key at `x` and all the keys in the subtree `x.right` are greater than the key of `x`.  This ordering property, also known as **the BST property** is what makes a binary search tree different from any other kind of binary tree.
 
+```python {cmd output="html" hide}
+from drawtrees import draw
+from bstmapping import BSTMapping
+
+T = BSTMapping()
+for i in [3,1,0,2,5,4,6]:
+    T[i] = None
+draw(T, 150)
+```
+
 The BST property is related to a new kind of tree traversal, that was not possible with other trees.
-Recall that previously we saw preorder and postorder traversal of trees.
+Previously we saw *preorder* and *postorder* traversal of trees.
 These traversals visit all the nodes of the tree.
-The preorder traversal visits the root of each subtree prior to visiting any nodes in the children.  The postorder traversal visits all the nodes in the children prior to visiting the root.  The new traversal we introduce here is called **inorder traversal** and it visits all the nodes in the left child prior to visiting the root and then visits all the nodes in the right child after visiting the root.  This order results in a traversal of the nodes *in sorted order according to the ordering of the keys*.
+The preorder traversal visits the root of each subtree before to visiting any of its descendants.
+The postorder traversal visits all the descendants before visiting the root.
+The new traversal we introduce here is called **inorder traversal** and it visits all the nodes in the left child prior to visiting the root and then visits all the nodes in the right child after visiting the root.
+This order results in a traversal of the nodes *in sorted order according to the ordering of the keys*.
 
 ## A Minimal implementation
 
@@ -199,13 +212,13 @@ So, the removal will restore the BST property.
 
 Here is the code to do the swapping and a simple recursive method to find the rightmost node in a subtree.
 
-```python
-def _swapwith(self, other):
-    self.key, other.key = other.key, self.key
-    self.value, other.value = other.value, self.value
+```python {cmd id="_bstmapping_06" continue="_bstmapping_05"}
+    def _swapwith(self, other):
+        self.key, other.key = other.key, self.key
+        self.value, other.value = other.value, self.value
 
-def maxnode(self):
-    return self.right.maxnode() if self.right else self
+    def maxnode(self):
+        return self.right.maxnode() if self.right else self
 ```
 
 Now, we are ready to implement `remove`.
@@ -213,18 +226,47 @@ As mentioned above, it does a recursive binary search to find the node.
 When it finds the desired key, it swaps it into place and makes another recursive call.
 This swapping step will happen only once and the total running time is linear in the height of the tree.
 
-```python
-def remove(self, key):
-    if key == self.key:
-        if self.left is None: return self.right
-        if self.right is None: return self.left
-        self._swapwith(self.left.maxnode())
-        self.left = self.left.remove(key)
-    elif key < self.key and self.left:
-        self.left = self.left.remove(key)
-    elif key > self.key and self.right:
-        self.right = self.right.remove(key)
-    else: raise KeyError
-    self.updatelength()
-    return self
+```python cmd id="_bstmapping_07" continue="_bstmapping_06"}
+    def remove(self, key):
+        if key == self.key:
+            if self.left is None: return self.right
+            if self.right is None: return self.left
+            self._swapwith(self.left.maxnode())
+            self.left = self.left.remove(key)
+        elif key < self.key and self.left:
+            self.left = self.left.remove(key)
+        elif key > self.key and self.right:
+            self.right = self.right.remove(key)
+        else: raise KeyError
+        self._updatelength()
+        return self
+```
+
+```python {cmd id="removal_example1"}
+from drawtrees import draw
+from bstmapping import BSTMapping
+
+T = BSTMapping()
+for i in [3,2,1,6,4,5,9,8,10]:
+    T[i] = None
+```
+
+```python {cmd continue="removal_example1" output="html"}
+draw(T)
+```
+
+```python {cmd id="removal_example2" continue="removal_example1" output="html"}
+T.remove(6)
+```
+
+```python {cmd continue="removal_example2" output="html"}
+draw(T)
+```
+
+```python {cmd id="removal_example3" continue="removal_example2" output="html"}
+T.remove(3)
+```
+
+```python {cmd continue="removal_example3" output="html"}
+draw(T)
 ```

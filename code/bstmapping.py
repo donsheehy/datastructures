@@ -96,3 +96,24 @@ class BSTNode:
         if self.right:
             yield from self.right
 
+    def _swapwith(self, other):
+        self.key, other.key = other.key, self.key
+        self.value, other.value = other.value, self.value
+
+    def maxnode(self):
+        return self.right.maxnode() if self.right else self
+
+    def remove(self, key):
+        if key == self.key:
+            if self.left is None: return self.right
+            if self.right is None: return self.left
+            self._swapwith(self.left.maxnode())
+            self.left = self.left.remove(key)
+        elif key < self.key and self.left:
+            self.left = self.left.remove(key)
+        elif key > self.key and self.right:
+            self.right = self.right.remove(key)
+        else: raise KeyError
+        self._updatelength()
+        return self
+
