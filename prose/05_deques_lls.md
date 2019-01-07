@@ -30,7 +30,10 @@ class ListDeque:
         return self._L.pop(0)
 
     def removelast(self):
-      return self._L.pop()
+        return self._L.pop()
+
+    def __len__(self):
+        return len(self._L)
 ```
 
 The code is simple enough, but a couple of operations will start to get slow as the deque gets large.
@@ -212,6 +215,9 @@ class LinkedQueue:
 
     def dequeue(self):
         return self._L.removefirst()
+
+    def __len__(self):
+        return len(self._L)
 ```
 
 ## Storing the length
@@ -294,7 +300,7 @@ In fact, we probably want to test both implementations with the same tests.
 
 If we rename our first Queue implementations `ListQueue`, we might have had the following tests for it.
 
-```python
+```python {cmd}
 import unittest
 from listqueue import ListQueue
 
@@ -352,7 +358,7 @@ Our new class will be called `TestQueue`.
 Both `TestListQueue` and `TestLinkedQueue` will extend `TestQueue`.
 Remember extending means inheriting from.
 
-```python
+```python {cmd id="_testqueue"}
 # testqueue.py
 class TestQueue:
     def newQueue():
@@ -401,7 +407,7 @@ There is another *important difference* between the `TestQueue` class and our ol
 It just defines some methods that will be **mixed into** `TestListQueue` and `TestLinkedQueue`.
 Here are our new test files.
 
-```python
+```python {cmd}
 # testlistqueue.py
 import unittest
 from testqueue import TestQueue
@@ -415,7 +421,7 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-```python
+```python {cmd}
 # testlinkedqueue.py
 import unittest
 from testqueue import TestQueue

@@ -12,5 +12,8 @@ class ListDeque:
         return self._L.pop(0)
 
     def removelast(self):
-      return self._L.pop()
+        return self._L.pop()
+
+    def __len__(self):
+        return len(self._L)
 

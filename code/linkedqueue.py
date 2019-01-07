@@ -11,3 +11,6 @@ class LinkedQueue:
     def dequeue(self):
         return self._L.removefirst()
 
+    def __len__(self):
+        return len(self._L)
+
