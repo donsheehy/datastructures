@@ -555,7 +555,7 @@ t<span class="token punctuation">.</span>append<span class="token punctuation">(
 (1, 2, &apos;skip a few&apos;, 99, 100)
 100
 Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/3jxccrx61_code_chunk.py&quot;, line 10, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/jjxyva9b5_code_chunk.py&quot;, line 10, in <module>
     t.append(101)
 AttributeError: &apos;tuple&apos; object has no attribute &apos;append&apos;
 </module></pre></div></div><h3 class="mume-header" id="dictionaries-dict">Dictionaries (<code>dict</code>)</h3>
@@ -843,7 +843,7 @@ u <span class="token operator">=</span> Vector<span class="token punctuation">(<
 v <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>u <span class="token operator">+</span> v<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">&lt;__main__.Vector object at 0x102a72048&gt;
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">&lt;__main__.Vector object at 0x102a85198&gt;
 </pre></div></div><p>That output is pretty weird.  It&apos;s telling me that u + v is a vector object at some memory address, but doesn&apos;t tell me what vector it is.  We need to implement <code>__str__</code> in order to print the vector nicely.  This magic method is called by the print function to convert its parameters into a string.  It is not obvious how a string ought to be printed for a given class.  We have to specify it ourselves.</p>
 <p>In the example below, I added a <code>__str__</code> method as well as some type checking on the inputs.  The result will guarantee that a vector has two floats as coordinates.</p>
 <div class="code-chunk" data-id="j32abjfi" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=27, cmd id=&quot;j32abjfi&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
@@ -1025,7 +1025,7 @@ L<span class="token punctuation">.</span>append<span class="token punctuation">(
     <span class="token keyword">assert</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span>
     y <span class="token operator">=</span> Doubler<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">)</span>
     <span class="token keyword">assert</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/6pk566wnq_code_chunk.py&quot;, line 8
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/rufliftxf_code_chunk.py&quot;, line 8
     if __name__ == &#x2018;__main__&#x2019;:
                             ^
 SyntaxError: invalid character in identifier
@@ -1054,7 +1054,7 @@ Tests are run by calling the <code>unittest.main</code> function.</p>
         self<span class="token punctuation">.</span>assertEquals<span class="token punctuation">(</span>d<span class="token punctuation">.</span>name<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> &#x2018;Thursday&#x2019;<span class="token punctuation">)</span>		
 
 unittest<span class="token punctuation">.</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/6h1yrb7rs_code_chunk.py&quot;, line 6
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/hp4mawhzh_code_chunk.py&quot;, line 6
     d = DayOfTheWeek(&#x2018;F&#x2019;)
                        ^
 SyntaxError: invalid character in identifier
@@ -1184,11 +1184,11 @@ We could do this as follows.</p>
     duplicates1<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     timetaken <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Time taken for n = &quot;</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> <span class="token string">&quot;: &quot;</span><span class="token punctuation">,</span> timetaken<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Time taken for n =  1000 :  1.7148950099945068
-Time taken for n =  1000 :  0.35521888732910156
-Time taken for n =  1000 :  0.34157490730285645
-Time taken for n =  1000 :  0.40624189376831055
-Time taken for n =  1000 :  0.3273899555206299
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Time taken for n =  1000 :  1.7717039585113525
+Time taken for n =  1000 :  0.47743988037109375
+Time taken for n =  1000 :  0.3462519645690918
+Time taken for n =  1000 :  0.3173360824584961
+Time taken for n =  1000 :  0.3170750141143799
 </pre></div></div><p>Notice that we see some variation in the time required.
 This is caused by many factors, but the main one is that the computer is performing many other tasks at the same time.
 It is running an operating system and several other programs at the same time.
@@ -1209,13 +1209,13 @@ It runs the given function on lists of the given length and averages the time ta
 It&apos;s not surprising to see that the average time goes up as the length <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">n</span></span></span></span> increases.</p>
 <div class="code-chunk" data-id="j543zqs2" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=37, cmd continue=&quot;timetrials&quot; id=&quot;j543zqs2&quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates1<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0024573 for n = 50
-average = 0.0089850 for n = 100
-average = 0.5383404 for n = 200
-average = 0.8187740 for n = 400
-average = 1.2070444 for n = 800
-average = 4.0425439 for n = 1600
-average =11.2041047 for n = 3200
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0020065 for n = 50
+average = 0.1211208 for n = 100
+average = 0.4810525 for n = 200
+average = 0.9498060 for n = 400
+average = 1.1234371 for n = 800
+average = 3.5028498 for n = 1600
+average =10.0986131 for n = 3200
 </pre></div></div><p>Let&apos;s try to make our code faster.
 Simple improvements can be made by eliminating situations where we are doing unnecessary or redundant work.
 In the <code>duplicates1</code> function, we are comparing each pair of elements twice because both <code>i</code> and <code>j</code> range over all <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">n</span></span></span></span> indices.
@@ -1230,13 +1230,13 @@ Here is what the code would look like.</p>
     <span class="token keyword">return</span> <span class="token boolean">False</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="j544j8r7" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=39, cmd continue=&quot;duplicates2&quot;, id=&quot;j544j8r7&quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates2<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0008296 for n = 50
-average = 0.0030673 for n = 100
-average = 0.2550135 for n = 200
-average = 0.6014900 for n = 400
-average = 0.6182335 for n = 800
-average = 1.7910528 for n = 1600
-average = 5.6920053 for n = 3200
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0008247 for n = 50
+average = 0.0030712 for n = 100
+average = 0.2498336 for n = 200
+average = 0.6732796 for n = 400
+average = 0.6693708 for n = 800
+average = 1.5299758 for n = 1600
+average = 5.1567119 for n = 3200
 </pre></div></div><p>There is a python shortcut the kind of loop used in <code>duplicates2</code>.
 The <code>any</code> function takes an iterable collection of booleans and returns <code>True</code> if any of the booleans are true.
 You can make an iterable collection in an expression in the same way one does for comprehensions.
@@ -1246,13 +1246,13 @@ This can be very handy.</p>
     <span class="token keyword">return</span> <span class="token builtin">any</span><span class="token punctuation">(</span>L<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> L<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span> <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="j544qfui" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=41, cmd continue=&quot;duplicates3&quot;, id=&quot;j544qfui&quot;}" class="language-python"><span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">1600</span><span class="token punctuation">,</span> <span class="token number">3200</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     timetrials<span class="token punctuation">(</span>duplicates3<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0011625 for n = 50
-average = 0.0042194 for n = 100
-average = 0.2348824 for n = 200
-average = 0.7777460 for n = 400
-average = 0.6568655 for n = 800
-average = 2.4321463 for n = 1600
-average = 7.2150223 for n = 3200
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0023371 for n = 50
+average = 0.0089831 for n = 100
+average = 0.2115126 for n = 200
+average = 0.8615371 for n = 400
+average = 0.7187668 for n = 800
+average = 1.9469438 for n = 1600
+average = 6.7047010 for n = 3200
 </pre></div></div><p>This last optimization reduces the number of lines of code and may be desirable for code readability, but it doesn&apos;t improve the speed.</p>
 <p>If we want to make a real improvement, we&apos;ll need a substantial new idea.
 One possibility is to sort the list and look at adjacent elements in the list.
@@ -1291,33 +1291,33 @@ If there are duplicates, they will be adjacent after sorting.</p>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Sets:      &quot;</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
     timetrials<span class="token punctuation">(</span>duplicates7<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&apos;---------------------------&apos;</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Quadratic: average = 0.0010979 for n = 50
-Sorting:   average = 0.0000765 for n = 50
-Sets:      average = 0.0000280 for n = 50
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Quadratic: average = 0.0011229 for n = 50
+Sorting:   average = 0.0000876 for n = 50
+Sets:      average = 0.0000289 for n = 50
 ---------------------------
-Quadratic: average = 0.0054620 for n = 100
-Sorting:   average = 0.1366762 for n = 100
-Sets:      average = 0.0000398 for n = 100
+Quadratic: average = 0.0041420 for n = 100
+Sorting:   average = 0.0611706 for n = 100
+Sets:      average = 0.0000410 for n = 100
 ---------------------------
-Quadratic: average = 0.1179129 for n = 200
-Sorting:   average = 0.0004420 for n = 200
-Sets:      average = 0.0000655 for n = 200
+Quadratic: average = 0.1606727 for n = 200
+Sorting:   average = 0.0002402 for n = 200
+Sets:      average = 0.0152924 for n = 200
 ---------------------------
-Quadratic: average = 0.7552905 for n = 400
-Sorting:   average = 0.0004696 for n = 400
-Sets:      average = 0.0001094 for n = 400
+Quadratic: average = 0.5879622 for n = 400
+Sorting:   average = 0.0006479 for n = 400
+Sets:      average = 0.0002951 for n = 400
 ---------------------------
-Quadratic: average = 0.6677936 for n = 800
-Sorting:   average = 0.0009437 for n = 800
-Sets:      average = 0.0002075 for n = 800
+Quadratic: average = 0.6853413 for n = 800
+Sorting:   average = 0.0012094 for n = 800
+Sets:      average = 0.0002229 for n = 800
 ---------------------------
-Quadratic: average = 2.3182335 for n = 1600
-Sorting:   average = 0.0050828 for n = 1600
-Sets:      average = 0.0005569 for n = 1600
+Quadratic: average = 1.9449178 for n = 1600
+Sorting:   average = 0.0045656 for n = 1600
+Sets:      average = 0.0005585 for n = 1600
 ---------------------------
-Quadratic: average = 7.2169745 for n = 3200
-Sorting:   average = 0.0039379 for n = 3200
-Sets:      average = 0.0008638 for n = 3200
+Quadratic: average = 6.6592216 for n = 3200
+Sorting:   average = 0.0036855 for n = 3200
+Sets:      average = 0.0008224 for n = 3200
 ---------------------------
 </pre></div></div><p>Some key ideas:
 The Data Structures really matter.  The speed of the set membership testing or set construction gives a big improvement.
@@ -1341,11 +1341,11 @@ Sometimes, the gap between two pieces of code will increase as the input size gr
     <span class="token keyword">return</span> total<span class="token punctuation">,</span> end<span class="token operator">-</span>start
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="j54378j3" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=46, cmd continue=&quot;sumk1&quot; id=&quot;j54378j3&quot;}" class="language-python"><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Sum: %d, time taken: %f&quot;</span> <span class="token operator">%</span> sumk<span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Sum: 50005000, time taken: 0.000861
-Sum: 50005000, time taken: 0.000863
-Sum: 50005000, time taken: 0.000896
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Sum: 50005000, time taken: 0.000935
+Sum: 50005000, time taken: 0.000858
 Sum: 50005000, time taken: 0.000864
-Sum: 50005000, time taken: 0.000857
+Sum: 50005000, time taken: 0.000870
+Sum: 50005000, time taken: 0.000866
 </pre></div></div><p>Notice that we see some variation in the time required.
 This is caused by many factors, but the main one is that the computer is performing many other tasks at the same time.
 It is running an operating system and several other programs at the same time.
@@ -1360,10 +1360,10 @@ For now, let&apos;s run the code several times and take the average to smooth th
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">100000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">1000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk<span class="token punctuation">,</span> <span class="token number">10000000</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0008761 for k = 10000
-average = 0.1209615 for k = 100000
-average = 0.2262447 for k = 1000000
-average = 1.5471457 for k = 10000000
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0009603 for k = 10000
+average = 0.1271771 for k = 100000
+average = 0.2058038 for k = 1000000
+average = 1.2668859 for k = 10000000
 </pre></div></div><p>Seeing the times for different values of <code>k</code> reveals a rather unsuprising pattern.
 As <code>k</code> goes up by a factor of 10, the time required for <code>sumk</code> also goes up by a factor of <code>10</code>.
 This makes sense, because it has to do about <code>k</code> additions and assignments.
@@ -1390,11 +1390,11 @@ timetrials<span class="token punctuation">(</span>sumk2<span class="token punctu
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">1000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">10000000</span><span class="token punctuation">)</span>
 timetrials<span class="token punctuation">(</span>sumk2<span class="token punctuation">,</span> <span class="token number">100000000</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0000004 for k = 10000
-average = 0.0000003 for k = 100000
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">average = 0.0000007 for k = 10000
+average = 0.0000005 for k = 100000
 average = 0.0000005 for k = 1000000
 average = 0.0000003 for k = 10000000
-average = 0.0000004 for k = 100000000
+average = 0.0000005 for k = 100000000
 </pre></div></div><p>This is much much faster.
 Even as <code>k</code> becomes very large, it doesn&apos;t seem to slow down.</p>
 <h2 class="mume-header" id="modeling-the-running-time-of-a-program">Modeling the Running Time of a Program</h2>
@@ -1847,9 +1847,9 @@ s<span class="token punctuation">.</span>push<span class="token punctuation">(</
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/oijkfuqkd_code_chunk.py&quot;, line 24, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/js2jdlkfk_code_chunk.py&quot;, line 24, in <module>
     s.pop()
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/oijkfuqkd_code_chunk.py&quot;, line 9, in pop
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/js2jdlkfk_code_chunk.py&quot;, line 9, in pop
     return self._L.pop()
 IndexError: pop from empty list
 </module></pre></div></div><p>If we look at the error message, it even seems pretty good.
@@ -1872,16 +1872,16 @@ s<span class="token punctuation">.</span>push<span class="token punctuation">(</
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 s<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/irigucnis_code_chunk.py&quot;, line 24, in pop
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/dah9cxr8r_code_chunk.py&quot;, line 24, in pop
     return self._L.pop()
 IndexError: pop from empty list
 
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/irigucnis_code_chunk.py&quot;, line 31, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/dah9cxr8r_code_chunk.py&quot;, line 31, in <module>
     s.pop()
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/irigucnis_code_chunk.py&quot;, line 26, in pop
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/dah9cxr8r_code_chunk.py&quot;, line 26, in pop
     raise RuntimeError(&quot;pop from empty stack&quot;)
 RuntimeError: pop from empty stack
 </module></pre></div></div><p style="page-break-after:always;"></p>
@@ -2051,11 +2051,7 @@ It will be surprisingly easy.</p>
 
     <span class="token keyword">def</span> <span class="token function">dequeue</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_L<span class="token punctuation">.</span>removefirst<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/0qvhty6l9_code_chunk.py&quot;, line 2, in <module>
-    from linkedlist import LinkedList
-ImportError: No module named &apos;linkedlist&apos;
-</module></pre></div></div><h2 class="mume-header" id="storing-the-length">Storing the length</h2>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><h2 class="mume-header" id="storing-the-length">Storing the length</h2>
 
 <p>With our <code>ListQueue</code>, we implemented <code>__len__</code> to give the number of items in the queue.
 To implement the same method on the <code>LinkedQueue</code>, we will want <strong>delegate</strong> the length computation to the <code>LinkedList</code>.</p>
@@ -2502,7 +2498,7 @@ A<span class="token punctuation">.</span>append<span class="token punctuation">(
 B<span class="token punctuation">.</span>append<span class="token punctuation">(</span>B<span class="token punctuation">)</span>
 A <span class="token operator">==</span> B
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/praqi8eit_code_chunk.py&quot;, line 5, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/ls8g98x95_code_chunk.py&quot;, line 5, in <module>
     A == B
 RecursionError: maximum recursion depth exceeded in comparison
 </module></pre></div></div><p>In this case, the recursive function is <code>list.__eq__</code>, the method that compares two lists when you use <code>==</code>.  It compares the list by checking if the elements are equal.  The lists <code>A</code> and <code>B</code> each have length 2.  The first elements match.  The second element of each list is another list.  To compare them, there is another call to <code>list.__eq__</code>.  This is a repeat of the first call and the process repeats until the recursion limit is reached.</p>
@@ -3550,7 +3546,7 @@ mapput<span class="token punctuation">(</span>m<span class="token punctuation">,
 <span class="token keyword">assert</span><span class="token punctuation">(</span>mapget<span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&apos;one&apos;</span><span class="token punctuation">)</span>
 <span class="token keyword">assert</span><span class="token punctuation">(</span>mapget<span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&apos;four&apos;</span><span class="token punctuation">)</span>
 </pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/avslwts6w_code_chunk.py&quot;, line 2, in <module>
+  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/ynm4mvqrk_code_chunk.py&quot;, line 2, in <module>
     mapput(m, 4, &apos;five&apos;)
 NameError: name &apos;mapput&apos; is not defined
 </module></pre></div></div><p>At this point, it seems that the only advantage of the <code>dict</code> structure is that it provides some useful syntax for adding and getting entries.  There are some other advantages, but we&apos;ll only reveal them by trying to build a map ourselves.</p>
@@ -3736,11 +3732,7 @@ For any key <code>k</code>,  we want to compute the index of the <em>right</em> 
 
     <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_length
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/lutxvp0s7_code_chunk.py&quot;, line 1, in <module>
-    from listmapping import ListMapping
-ImportError: No module named &apos;listmapping&apos;
-</module></pre></div></div><h3 class="mume-header" id="rehashing">Rehashing</h3>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><h3 class="mume-header" id="rehashing">Rehashing</h3>
 
 <p>The most interesting part of the code above is the <code>_double</code> method.  This is a method that increases the number of buckets.  It&apos;s not enough to just append more buckets to the list, because the <code>_bucket</code> method that we use to find the right bucket depends on the number of buckets.  When that number changes, we have to reinsert all the items in the mapping so that they can be found when we next <code>get</code> them.</p>
 <h2 class="mume-header" id="factoring-out-a-superclass">Factoring Out A Superclass</h2>
@@ -3833,11 +3825,7 @@ ImportError: No module named &apos;listmapping&apos;
 
     <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>_entries<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/l8oa6kipd_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping, Entry
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><p>All the magic methods as well as the public iterators and string conversion are handled by the superclass.  The subclass only has the parts that are specific to this implementation.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>All the magic methods as well as the public iterators and string conversion are handled by the superclass.  The subclass only has the parts that are specific to this implementation.</p>
 <p>The <code>HashMapping</code> class can also be rewritten as follows.</p>
 <div class="code-chunk" data-id="_hashmapping" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=93, cmd id=&quot;_hashmapping&quot;}" class="language-python"><span class="token keyword">from</span> mapping <span class="token keyword">import</span> Mapping
 <span class="token keyword">from</span> listmapping <span class="token keyword">import</span> ListMapping
@@ -3879,11 +3867,7 @@ ImportError: No module named &apos;mapping&apos;
         <span class="token keyword">for</span> bucket <span class="token keyword">in</span> oldbuckets<span class="token punctuation">:</span>
             <span class="token keyword">for</span> key<span class="token punctuation">,</span> value <span class="token keyword">in</span> bucket<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
                 self<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/mmsgw5re9_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><p style="page-break-after:always;"></p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p style="page-break-after:always;"></p>
     <a name="chapter_15" href=""></a>
     <p style="font-size:80pt;color:#d0d0d0;font-weight:bold">
     Chapter 15
@@ -4063,11 +4047,8 @@ It should support all the same operations as any other mapping as well as some o
 <p>A tree is called a <strong>binary tree</strong> if every node has at most two children.
 We will continue to assume that we are working with ordered trees and so we call the children <code>left</code> and <code>right</code>.
 We say that a binary tree is a <strong>binary search tree</strong> if for every node <code>x</code>, all the keys in the subtree <code>x.left</code> are less than the key at <code>x</code> and all the keys in the subtree <code>x.right</code> are greater than the key of <code>x</code>.  This ordering property, also known as <strong>the BST property</strong> is what makes a binary search tree different from any other kind of binary tree.</p>
-<div class="code-chunk" data-id="code-chunk-id-96" data-cmd="python"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/4gzac7aiy_code_chunk.py&quot;, line 1, in <module>
-    from drawtrees import draw
-ImportError: No module named &apos;drawtrees&apos;
-</module></div></div><p>The BST property is related to a new kind of tree traversal, that was not possible with other trees.
+<div class="code-chunk" data-id="code-chunk-id-96" data-cmd="python"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><svg baseProfile="full" height="150" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink"><defs/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="160" x2="80" y1="20" y2="70"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="80" x2="40" y1="70" y2="120"/><circle cx="40" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="40" y="120">0</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="80" x2="120" y1="70" y2="120"/><circle cx="120" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="120" y="120">2</text><circle cx="80" cy="70" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="80" y="70">1</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="160" x2="240" y1="20" y2="70"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="240" x2="200" y1="70" y2="120"/><circle cx="200" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="200" y="120">4</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="240" x2="280" y1="70" y2="120"/><circle cx="280" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="280" y="120">6</text><circle cx="240" cy="70" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="240" y="70">5</text><circle cx="160" cy="20" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="160" y="20">3</text></svg>
+</div></div><p>The BST property is related to a new kind of tree traversal, that was not possible with other trees.
 Previously we saw <em>preorder</em> and <em>postorder</em> traversal of trees.
 These traversals visit all the nodes of the tree.
 The preorder traversal visits the root of each subtree before to visiting any of its descendants.
@@ -4122,11 +4103,7 @@ It&apos;s a top down implementation, so it delegates all the real work to the <c
     <span class="token keyword">def</span> <span class="token function">__delitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
 
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/8svz1raqt_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><p>The code above gives us almost everything we need.  There are a couple of mysterious lines to pay attention to.  One is the line in the <code>put</code> method that updates the root.  We will use this convention extensively.  As methods may rearrange the tree structure, such methods return the node that ought to be the new root of the subtree.  The same pattern appears in the <code>remove</code> function.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>The code above gives us almost everything we need.  There are a couple of mysterious lines to pay attention to.  One is the line in the <code>put</code> method that updates the root.  We will use this convention extensively.  As methods may rearrange the tree structure, such methods return the node that ought to be the new root of the subtree.  The same pattern appears in the <code>remove</code> function.</p>
 <p>One other construct we haven&apos;t seen before is the <code>yield from</code> operation in the iterator.  This takes an iterable and iterates over it, yielding each item.  So, <code>yield from self._root</code> is the same as <code>for item in iter(self._root): yield item</code>.  It implies that our <code>BSTNode</code> class will have to be iterable.</p>
 <p>Let&apos;s see how these methods are implemented.  We start with the initializer and some handy other methods.</p>
 <div class="code-chunk" data-id="_bstmapping_01" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python  {code_chunk_offset=96, cmd id=&quot;_bstmapping_01&quot; continue=&quot;_bstmapping_00&quot;}" class="language-python"><span class="token keyword">class</span> <span class="token class-name">BSTNode</span><span class="token punctuation">:</span>
@@ -4139,11 +4116,7 @@ ImportError: No module named &apos;mapping&apos;
 
     <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>_length
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/gef0974fw_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><p>The <code>get</code> method uses binary search to find the desired key.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>The <code>get</code> method uses binary search to find the desired key.</p>
 <div class="code-chunk" data-id="_bstmapping_02" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python  {code_chunk_offset=97, cmd id=&quot;_bstmapping_02&quot; continue=&quot;_bstmapping_01&quot;}" class="language-python">    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> key <span class="token operator">==</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
             <span class="token keyword">return</span> self
@@ -4153,11 +4126,7 @@ ImportError: No module named &apos;mapping&apos;
             <span class="token keyword">return</span> self<span class="token punctuation">.</span>right<span class="token punctuation">.</span>get<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
         <span class="token keyword">else</span><span class="token punctuation">:</span>
             <span class="token keyword">raise</span> KeyError
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/b21c1fzdz_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><p>Notice that we are using <code>self.left</code> and <code>self.right</code> as booleans.
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Notice that we are using <code>self.left</code> and <code>self.right</code> as booleans.
 This works because <code>None</code> evaluates to <code>False</code> and <code>BSTNode</code>&apos;s always evaluate to <code>True</code>.
 We could have implemented <code>__bool__</code> to make this work, but it suffices to implement <code>__len__</code>.  Objects that have a <code>__len__</code> method are <code>True</code> if and only if the length is greater than <code>0</code>.  This is the default way to check if a container is empty.  So, for example, it&apos;s fine to write <code>while L: L.pop()</code> and it will never try to pop from an empty list.  In our case, it will allow us to write <code>if self.left</code> to check if there is a left child rather than writing <code>if self.left is not None</code>.</p>
 <p>Next, we implement <code>put</code>.  It will work by first doing a binary search in the tree.  If it finds the key already in the tree, it overwrites the value (keys in a mapping are unique).  Otherwise, when it gets to the bottom of the tree, it adds a new node.</p>
@@ -4181,11 +4150,7 @@ We could have implemented <code>__bool__</code> to make this work, but it suffic
         len_left <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>left<span class="token punctuation">)</span> <span class="token keyword">if</span> self<span class="token punctuation">.</span>left <span class="token keyword">else</span> <span class="token number">0</span>
         len_right <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>right<span class="token punctuation">)</span> <span class="token keyword">if</span> self<span class="token punctuation">.</span>right <span class="token keyword">else</span> <span class="token number">0</span>
         self<span class="token punctuation">.</span>_length <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> len_left <span class="token operator">+</span> len_right
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/xr057laja_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><p>The <code>put</code> method also keeps track of the length, i.e. the number of entries in each subtree.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>The <code>put</code> method also keeps track of the length, i.e. the number of entries in each subtree.</p>
 <h3 class="mume-header" id="the-floor-function">The <code>floor</code> function</h3>
 
 <p>The <code>floor</code> function is just a slightly fancier version of <code>get</code>.
@@ -4198,11 +4163,7 @@ If we search to the left and the result is <code>None</code>, we also return <co
             <span class="token keyword">return</span> self<span class="token punctuation">.</span>left<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token keyword">if</span> self<span class="token punctuation">.</span>left <span class="token keyword">else</span> <span class="token boolean">None</span>
         <span class="token keyword">elif</span> key <span class="token operator">&gt;</span> self<span class="token punctuation">.</span>key<span class="token punctuation">:</span>
             <span class="token keyword">return</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>right<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token operator">or</span> self<span class="token punctuation">)</span> <span class="token keyword">if</span> self<span class="token punctuation">.</span>right <span class="token keyword">else</span> self
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/ihrhqnshi_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><p>To parse the expressions above, it&apos;s helpful to remember that boolean operations on objects can evaluate to objects.  In particular <code>False or myobject</code> evaluates to <code>myobject</code>.  Use the python interactive shell to try out some other examples and to see how <code>and</code> behaves.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>To parse the expressions above, it&apos;s helpful to remember that boolean operations on objects can evaluate to objects.  In particular <code>False or myobject</code> evaluates to <code>myobject</code>.  Use the python interactive shell to try out some other examples and to see how <code>and</code> behaves.</p>
 <h3 class="mume-header" id="iteration">Iteration</h3>
 
 <p>As mentioned above, binary search trees support inorder traversal.  The result of an inorder traversal is that the nodes are yielded <em>in the order of their keys</em>.</p>
@@ -4213,11 +4174,7 @@ ImportError: No module named &apos;mapping&apos;
         <span class="token keyword">yield</span> self
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>right<span class="token punctuation">:</span>
             <span class="token keyword">yield</span> <span class="token keyword">from</span> self<span class="token punctuation">.</span>right
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/2gz3cznkv_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><h2 class="mume-header" id="removal">Removal</h2>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><h2 class="mume-header" id="removal">Removal</h2>
 
 <p>To implement removal in a binary search tree, we&apos;ll use a standard algorithmic problem solving approach.
 We&apos;ll start by thinking about how to handle the easiest possible cases.
@@ -4240,11 +4197,7 @@ So, the removal will restore the BST property.</p>
 
     <span class="token keyword">def</span> <span class="token function">maxnode</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>right<span class="token punctuation">.</span>maxnode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">if</span> self<span class="token punctuation">.</span>right <span class="token keyword">else</span> self
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/tu7wgolr3_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><p>Now, we are ready to implement <code>remove</code>.
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Now, we are ready to implement <code>remove</code>.
 As mentioned above, it does a recursive binary search to find the node.
 When it finds the desired key, it swaps it into place and makes another recursive call.
 This swapping step will happen only once and the total running time is linear in the height of the tree.</p>
@@ -4261,46 +4214,21 @@ This swapping step will happen only once and the total running time is linear in
         <span class="token keyword">else</span><span class="token punctuation">:</span> <span class="token keyword">raise</span> KeyError
         self<span class="token punctuation">.</span>_updatelength<span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token keyword">return</span> self
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/nrogcqxdu_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><div class="code-chunk" data-id="removal_example1" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=103, cmd id=&quot;removal_example1&quot;}" class="language-python"><span class="token keyword">from</span> drawtrees <span class="token keyword">import</span> draw
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="removal_example1" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=103, cmd id=&quot;removal_example1&quot;}" class="language-python"><span class="token keyword">from</span> drawtrees <span class="token keyword">import</span> draw
 <span class="token keyword">from</span> bstmapping <span class="token keyword">import</span> BSTMapping
 
 T <span class="token operator">=</span> BSTMapping<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
     T<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">None</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/6etxitqbu_code_chunk.py&quot;, line 1, in <module>
-    from drawtrees import draw
-ImportError: No module named &apos;drawtrees&apos;
-</module></pre></div></div><div class="code-chunk" data-id="code-chunk-id-106" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=104, cmd continue=&quot;removal_example1&quot; output=&quot;html&quot;}" class="language-python">draw<span class="token punctuation">(</span>T<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/ginh7o2u3_code_chunk.py&quot;, line 1, in <module>
-    from drawtrees import draw
-ImportError: No module named &apos;drawtrees&apos;
-</module></div></div><div class="code-chunk" data-id="removal_example2" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=105, cmd id=&quot;removal_example2&quot; continue=&quot;removal_example1&quot; output=&quot;html&quot;}" class="language-python">T<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/xyjko2389_code_chunk.py&quot;, line 1, in <module>
-    from drawtrees import draw
-ImportError: No module named &apos;drawtrees&apos;
-</module></div></div><div class="code-chunk" data-id="code-chunk-id-108" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=106, cmd continue=&quot;removal_example2&quot; output=&quot;html&quot;}" class="language-python">draw<span class="token punctuation">(</span>T<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/i9t4bxfo7_code_chunk.py&quot;, line 1, in <module>
-    from drawtrees import draw
-ImportError: No module named &apos;drawtrees&apos;
-</module></div></div><div class="code-chunk" data-id="removal_example3" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=107, cmd id=&quot;removal_example3&quot; continue=&quot;removal_example2&quot; output=&quot;html&quot;}" class="language-python">T<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/dt6tznul3_code_chunk.py&quot;, line 1, in <module>
-    from drawtrees import draw
-ImportError: No module named &apos;drawtrees&apos;
-</module></div></div><div class="code-chunk" data-id="code-chunk-id-110" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=108, cmd continue=&quot;removal_example3&quot; output=&quot;html&quot;}" class="language-python">draw<span class="token punctuation">(</span>T<span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/h01pl6lzw_code_chunk.py&quot;, line 1, in <module>
-    from drawtrees import draw
-ImportError: No module named &apos;drawtrees&apos;
-</module></div></div><p style="page-break-after:always;"></p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-106" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=104, cmd continue=&quot;removal_example1&quot; output=&quot;html&quot;}" class="language-python">draw<span class="token punctuation">(</span>T<span class="token punctuation">)</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><svg baseProfile="full" height="200" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink"><defs/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="120" x2="80" y1="20" y2="70"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="80" x2="40" y1="70" y2="120"/><circle cx="40" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="40" y="120">1</text><circle cx="80" cy="70" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="80" y="70">2</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="120" x2="240" y1="20" y2="70"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="240" x2="160" y1="70" y2="120"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="160" x2="200" y1="120" y2="170"/><circle cx="200" cy="170" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="200" y="170">5</text><circle cx="160" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="160" y="120">4</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="240" x2="320" y1="70" y2="120"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="320" x2="280" y1="120" y2="170"/><circle cx="280" cy="170" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="280" y="170">8</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="320" x2="360" y1="120" y2="170"/><circle cx="360" cy="170" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="360" y="170">10</text><circle cx="320" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="320" y="120">9</text><circle cx="240" cy="70" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="240" y="70">6</text><circle cx="120" cy="20" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="120" y="20">3</text></svg>
+</div></div><div class="code-chunk" data-id="removal_example2" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=105, cmd id=&quot;removal_example2&quot; continue=&quot;removal_example1&quot; output=&quot;html&quot;}" class="language-python">T<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-108" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=106, cmd continue=&quot;removal_example2&quot; output=&quot;html&quot;}" class="language-python">draw<span class="token punctuation">(</span>T<span class="token punctuation">)</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><svg baseProfile="full" height="200" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink"><defs/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="120" x2="80" y1="20" y2="70"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="80" x2="40" y1="70" y2="120"/><circle cx="40" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="40" y="120">1</text><circle cx="80" cy="70" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="80" y="70">2</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="120" x2="200" y1="20" y2="70"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="200" x2="160" y1="70" y2="120"/><circle cx="160" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="160" y="120">4</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="200" x2="280" y1="70" y2="120"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="280" x2="240" y1="120" y2="170"/><circle cx="240" cy="170" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="240" y="170">8</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="280" x2="320" y1="120" y2="170"/><circle cx="320" cy="170" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="320" y="170">10</text><circle cx="280" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="280" y="120">9</text><circle cx="200" cy="70" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="200" y="70">5</text><circle cx="120" cy="20" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="120" y="20">3</text></svg>
+</div></div><div class="code-chunk" data-id="removal_example3" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=107, cmd id=&quot;removal_example3&quot; continue=&quot;removal_example2&quot; output=&quot;html&quot;}" class="language-python">T<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-110" data-cmd="python"><div class="input-div"><pre data-role="codeBlock" data-info="python {code_chunk_offset=108, cmd continue=&quot;removal_example3&quot; output=&quot;html&quot;}" class="language-python">draw<span class="token punctuation">(</span>T<span class="token punctuation">)</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><svg baseProfile="full" height="200" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink"><defs/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="80" x2="40" y1="20" y2="70"/><circle cx="40" cy="70" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="40" y="70">1</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="80" x2="160" y1="20" y2="70"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="160" x2="120" y1="70" y2="120"/><circle cx="120" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="120" y="120">4</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="160" x2="240" y1="70" y2="120"/><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="240" x2="200" y1="120" y2="170"/><circle cx="200" cy="170" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="200" y="170">8</text><line fill="white" fill-opacity="1" font-size="36pt" stroke="black" stroke-width="3" x1="240" x2="280" y1="120" y2="170"/><circle cx="280" cy="170" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="280" y="170">10</text><circle cx="240" cy="120" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="240" y="120">9</text><circle cx="160" cy="70" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="160" y="70">5</text><circle cx="80" cy="20" fill="white" fill-opacity="1" font-size="36pt" r="18" stroke="black" stroke-width="3"/><text dominant-baseline="central" fill="black" fill-opacity="1" font-size="20pt" stroke="black" stroke-width="0" text-anchor="middle" x="80" y="20">2</text></svg>
+</div></div><p style="page-break-after:always;"></p>
     <a name="chapter_17" href=""></a>
     <p style="font-size:80pt;color:#d0d0d0;font-weight:bold">
     Chapter 17
@@ -4488,11 +4416,7 @@ It is assumed that only <code>put</code> and <code>remove</code> will rearrange 
 
     <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token builtin">str</span><span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>preorder<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Traceback (most recent call last):
-  File &quot;/Users/don/Dropbox/work/research/books/datastructures/docs/oed4n98gn_code_chunk.py&quot;, line 1, in <module>
-    from mapping import Mapping, Entry
-ImportError: No module named &apos;mapping&apos;
-</module></pre></div></div><h3 class="mume-header" id="forward-compatibility-of-factories">Forward Compatibility of Factories</h3>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><h3 class="mume-header" id="forward-compatibility-of-factories">Forward Compatibility of Factories</h3>
 
 <p>We are looking into the future a little with this code.
 In particular, we want this class to be easily extendable.
