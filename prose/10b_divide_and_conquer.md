@@ -37,7 +37,7 @@ def mergeSort(L):
     # Divide!
     mid = len(L) // 2
     A = L[:mid]
-    B = L[mid=]
+    B = L[mid:]
 
     # Conquer!
     mergeSort(A)

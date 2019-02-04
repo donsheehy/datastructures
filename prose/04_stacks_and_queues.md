@@ -14,7 +14,7 @@ These together describe the **behavior** or **semantics** of the data structure.
 When we give an ADT, we will list the names of the methods that will be present, what kind of input they take, and what is their expected output.
 The ADT may also describe error situations and what should happen if they occur.
 A **data structure** is an implementation of an ADT.
-To make, this distinction, it is sometimes useful to call them **concrete data structures**, though we will usually omit the word "concrete".
+To make this distinction, it is sometimes useful to call them **concrete data structures**, though we will usually omit the word "concrete".
 
 The ADT tells us what methods the data structure will implement.
 However, the ADT *does not* give an hints or prescriptions for how the data structure is implemented.

@@ -22,7 +22,7 @@ class ListNode:
             self.link.prev = self
 ```
 
-First, we'll look at adding items a `DoublyLinkedList`.
+First, we'll look at adding items to a `DoublyLinkedList`.
 These operations are very similar to the `addfirst` operation on a `LinkedList`.
 One has to do a little more work to update the `prev` node that was not present in our `LinkedList`.
 

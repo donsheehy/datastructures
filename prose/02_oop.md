@@ -233,9 +233,9 @@ class Square(Polygon):
         return "I’m so square."
 ```
 
-Notice that the class definitions of `Triangle` and `Square` now indicate the `Polygon` class in parentheses.  This is called **inheritance**.  The `Triangle` class **inherits from** (or **extends**) the `Polygon` class.  The **superclass** `Polyon` and the **subclasses** are `Triangle` and `Square`.  When we call a method on an object, if that method is not defined in the class of that object, Python will look for the method in the superclass.   This search for the correct function to call is called the **method resolution order**.   If a method from the superclass is redefined in the subclass, then calling the method on an instance of the subclass calls the subclass method instead.
+Notice that the class definitions of `Triangle` and `Square` now indicate the `Polygon` class in parentheses.  This is called **inheritance**.  The `Triangle` class **inherits from** (or **extends**) the `Polygon` class.  The **superclass** `Polygon` and the **subclasses** are `Triangle` and `Square`.  When we call a method on an object, if that method is not defined in the class of that object, Python will look for the method in the superclass.   This search for the correct function to call is called the **method resolution order**.   If a method from the superclass is redefined in the subclass, then calling the method on an instance of the subclass calls the subclass method instead.
 
-The initializer of the superclass is not called automatically when we create a new instance (unless we didn’t define `__init__` in the subclass).  In this case, we manually call the `Polygon.__init__` function.  This is one of the few times where it’s acceptable to call a diner method by name.
+The initializer of the superclass is not called automatically when we create a new instance (unless we didn’t define `__init__` in the subclass).  In this case, we manually call the `Polygon.__init__` function.  This is one of the few times where it’s acceptable to call a dunder method by name.
 
 When using inheritance, you should always remember the most important rule of inheritance:
 

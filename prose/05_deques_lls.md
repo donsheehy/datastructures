@@ -64,7 +64,7 @@ class ListNode:
 
 Now, to start the `LinkedList`, we will store the head of the list.
 We will provide two methods, `addfirst` and `removefirst` both of which modify the beginning of the list.
-These will behove roughly like the push and pop operations of the stack.
+These will behave roughly like the push and pop operations of the stack.
 This first implementation will hide the nodes from the user.
 That is, from a users perspective, they can create a linked list, and they can add and remove nodes, but they don't have to touch (or even know about) the nodes.
 This is abstraction (hiding details)!
