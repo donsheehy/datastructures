@@ -94,8 +94,9 @@ class SVGEngine():
 #TODO: pointer start dots, regular polygons, text along a line
 
 if __name__ == '__main__':
+    textstyle = {'fill': 'black', 'stroke_width': 0, 'font_size': '24pt'}
     s = SVGEngine(300, 300)
-    s.draw_line((10,10), (200,250))
-
+    s.draw_line((10,10), (200,250), **{'class':'theline'})
+    s.draw_circle((160, 118), 70)
+    s.draw_text_center("It's text!", (160,125), **textstyle)
     print(s)
-    print("Done")

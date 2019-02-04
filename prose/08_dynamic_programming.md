@@ -145,7 +145,7 @@ That's too many!
 Our code would never finish for even $n = 100$.
 
 Here is the trick that cracks open this problem.
-If `X` and `Y` end in the same character, then that character is the last character in the longest common substring.
+If `X` and `Y` end in the same character, then that character is the last character in the longest common subsequence.
 That is, if `X[-1] == Y[-1]` then the `LCS(X,Y)` is `LCS(X[:-1], Y[:-1]) + X[-1]`.
 On the other hand, if `X[-1] != Y[-1]`, then at least one of `X[-1]` or `Y[-1]` is *not* in the LCS.
 In that case, `LCS(X,Y)` is the longer of `LCS(X[:-1],Y)` and `LCS(X,Y[:-1])`.
