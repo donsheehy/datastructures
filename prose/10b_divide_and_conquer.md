@@ -339,6 +339,8 @@ def partition(L, left, right):
             j -= 1
         if i < j:
             L[i], L[j] = L[j], L[i]
-    L[pivot], L[i] = L[i], L[pivot]    
-    return i
+    if L[pivot] <= L[i]:
+        L[pivot], L[i] = L[i], L[pivot]
+        pivot = i
+    return pivot
 ```
