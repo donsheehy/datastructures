@@ -26,9 +26,9 @@ If our goal is to find the second largest item in a list, we could do this in li
 def secondsmallest(L):
     a, b = None, None
     for item in L:
-        if a is None or item <= b:
+        if a is None or item <= a:
             a, b = item, a
-        elif b is None or item <= a:
+        elif b is None or item <= b:
             b = item
     return b
 ```
@@ -77,8 +77,10 @@ def partition(L, left, right):
             j -= 1
         if i < j:
             L[i], L[j] = L[j], L[i]
-    L[pivot], L[i] = L[i], L[pivot]    
-    return i
+    if L[pivot] <= L[i]:
+        L[pivot], L[i] = L[i], L[pivot]
+        pivot = i
+    return pivot
 ```
 
 Just as with `quicksort`, we use a randomized pivot so that we can expect to eliminate a constant fraction of the list with each new step.  Unlike `quicksort`, we will not make a recursive call on both sides.  As a result, we'll see that the average running time is only $O(n)$.  That means we can do selection faster than we can sort, which makes sense, but it is *not obvious* how to do it.
