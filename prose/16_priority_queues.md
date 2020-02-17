@@ -18,7 +18,7 @@ The **Priority Queue ADT** is a data type that stores a collection of items with
 
 As with every ADT presented in this book, there is a simple, though not necessarily efficient, implementation using a list. Let's start with a list and put all the entries in the list. To find the min, we can iterate through the list.
 
-```python
+```python {cmd id="_simplelistpq"}
 class SimpleListPQ:
     def __init__(self):
         self._L = []
@@ -52,7 +52,7 @@ class Entry:
 
 Now, we can rewrite the list version of the priority queue.  It's almost the same as before, except, that by using the `Entry` class, the code is more explicit about the types of objects, and hopefully, easier to read and understand.
 
-```python
+```python {cmd id="_unsortedlistpq" continue="entry"}
 class UnsortedListPQ:
     def __init__(self):
         self._entries = []
@@ -74,7 +74,7 @@ The `insert` method will clearly only require constant time because it is a sing
 
 The `findmin` would be much faster if the list were sorted.  Then we could just return the first item in the list.  An even better approach would sort the list backwards.  Then `removemin` could also be constant time, using the constant-time `pop` function on a list.
 
-```python
+```python {cmd id="_sortedlistpq" continue="entry"}
 class SortedListPQ:
     def __init__(self):
         self._entries = []
@@ -91,6 +91,15 @@ class SortedListPQ:
 ```
 
 I used a nice feature of the python `sort` method, a named parameter called `reversed` which, as one might guess, reverses the sorting order.
+
+
+```python {cmd continue="_sortedlistpq"}
+S = SortedListPQ()
+S.insert("ham", 3)
+S.insert("cheese", 1)
+S.insert("bread", 2)
+print([S.removemin() for i in [1,2,3]])
+```
 
 The asymptotic running time of both `findmin` and `removemin` is reduced to constant-time.  The `insert` method no longer runs in constant time, because it sorts.  This means that the running time will depend on the time it takes to sort.  In this case, assuming no other methods rearrange the (private!) `_entries` attribute, there will be only one entry out of sorted order, the one we just appended.  In this case, a good implementation of insertion sort would run in linear time (it only has to insert one item before everything is sorted).  Although, for code brevity, we called out to python's `sort` method, (which could take $O(n \log n)$-time) this is really a linear-time operation).
 
@@ -114,7 +123,7 @@ We will maintain the invariant that after each operation, the list of entries is
 
 Similarly, there is a `_downheap` operation that will repeatedly swap an entry with its child until it's heap-ordered.  This operation is useful in the next section for building a heap from scratch.
 
-```python
+```python {cmd id-"_heappq"}
 class HeapPQ:
     def __init__(self):
         self._entries = []
@@ -163,7 +172,7 @@ class HeapPQ:
 
 Just using the public interface, one could easily construct a `HeapPQ` from a list of item-priority pairs.  For example, the following code would work just fine.
 
-```python
+```python {cmd continue="_hapepq"}
 pq = HeapPQ()
 pairs = [(10, 10), (2, 2), (30, 30), (4,4)]
 for item, priority in pairs:
@@ -273,4 +282,4 @@ class PriorityQueue:
         for i in reversed(range(n)):
             self._downheap(i)
 
-``` 
+```

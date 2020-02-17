@@ -1,6 +1,8 @@
 // node.js
 const mume = require("@shd101wyy/mume");
 
+console.log("loaded the mume package.")
+
 async function main() {
   await mume.init();
 

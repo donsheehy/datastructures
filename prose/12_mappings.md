@@ -216,7 +216,7 @@ The `__getitem__` and `__setitem__` methods call the `_bucket` method to get one
 The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  As the number of entries grows, we can periodically increase the number of buckets.  Here is the code.
 
 ```python {cmd id="_hashmapping_notDRY"}
-from listmapping import ListMapping
+from ds2 import ListMapping
 
 class HashMapping:
     def __init__(self, size = 2):
@@ -330,7 +330,7 @@ There is a lot here, but notice that there are really only four methods that a s
 Now, the `ListMapping` can be rewritten as follows.
 
 ```python {cmd id="_listmapping"}
-from mapping import Mapping, Entry
+from .mapping import Mapping, Entry
 
 class ListMapping(Mapping):
     def __init__(self):
