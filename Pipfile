@@ -4,6 +4,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+sphinxcontrib-bibtex = "*"
+sphinx = "*"
+sphinx-rtd-theme = "*"
 
 [packages]
 
