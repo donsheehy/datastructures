@@ -6,3 +6,5 @@ code/figure_generation/__pycache__
 docs/fullbook.md
 .DS_Store
 prose/.DS_Store
+
+docsource/build
