@@ -8,23 +8,28 @@ Before we dive into particular sorting algorithms, let's first ask an easier que
 
 After a little, thought, you will probably come up with some code that looks like the following.
 
-```python {cmd id="j2uqamrd"}
-def is_sorted(L):
+```python{cmd id="_dumbsort_00"}
+def issorted(L):
     for i in range(len(L)-1):
         if L[i]>L[i+1]:
             return False
     return True
+```
 
-print(is_sorted([1,2,3,4,5]))
-print(is_sorted([1,4,5,7,2]))
+```python{cmd continue="_dumbsort_00"}
+A = [1,2,3,4,5]
+print(A, "is sorted:", issorted(A))
+
+B = [1,4,5,7,2]
+print(B, "is sorted:", issorted(B))
 ```
 
 This is much better than the following, more explicit code.
 
-```python
-def is_sorted_slow(L):
+```python {cmd}
+def issorted_slow(L):
     for i in range(len(L)-1):
-        for j in range(i+1, len(L))
+        for j in range(i+1, len(L)):
             if L[j] < L[i]:
               return False
     return True
@@ -36,11 +41,11 @@ If the list is not sorted, then there will be two adjacent elements that will be
 This is true because ordering relations are **transitive**, that is, if `a < b` and `b < c`, then `a < c`.
 It's important to realize that we are using this assumption, because later, we will define our own ways of ordering items, and we will need to make sure this is true so that sorting even makes sense (if `a < b < c < a`, then what is the correct sorted order?).
 
-Let's use the `is_sorted` method to write a sorting algorithm.
-Instead of returning False when we find two elements out of order, we'll just fix them and move on.  Let's call this (for reasons to become clear) `dumberSort`.
+Let's use the `issorted` method to write a sorting algorithm.
+Instead of returning False when we find two elements out of order, we'll just fix them and move on.  Let's call this (for reasons to become clear) `dumbersort`.
 
-```python
-def dumberSort(L):
+```python {cmd id="_dumbsort_01" continue="_dumbsort_00"}
+def dumbersort(L):
     for i in range(len(L)-1):
         if L[i]>L[i+1]:
             L[i], L[i+1] = L[i+1], L[i]
@@ -48,32 +53,24 @@ def dumberSort(L):
 
 The main problem with this code is that *it doesn't sort the list*.
 
-```python
+```python {cmd continue="_dumbsort_01"}
 L = [5,4,3,2,1]
-dumberSort(L)
+dumbersort(L)
 print(L)
-```
-
-```
-[4, 3, 2, 1, 5]
 ```
 
 We should probably do it twice *or more*.  We could even repeat the algorithm until it works.
 
-```python
-def dumbSort(L):
-    while (not isSorted(L)):
-        dumberSort(L)
+```python {cmd id="_dumbsort_02" continue="_dumbsort_01"}
+def dumbsort(L):
+    while (not issorted(L)):
+        dumbersort(L)
 ```
 
-```python        
+```python {cmd continue="_dumbsort_02"}
 L = [5,4,3,2,1]
-dumbSort(L)
+dumbsort(L)
 print(L)
-```
-
-```
-[1, 2, 3, 4, 5]
 ```
 
 Will it ever get the list sorted?  
@@ -87,28 +84,26 @@ Another way to see that this works is to check that after calling `dumberSort(L)
 At this point, we would test the code and think about refactoring.  Remember the DRY (**D** on't **R** epeat **Y** ourself) principle.  Because we know how many times to loop, we could just use a `for` loop.  
 
 
-```python
-def bubbleSort(L):
+```python {cmd id="_bubblesortsimple"}
+def bubblesort(L):
     for iteration in range(len(L)-1):
         for i in range(len(L)-1):
             if L[i]>L[i+1]:
                 L[i], L[i+1] = L[i+1], L[i]
+```
 
-alist = [0, 100000,54,26,93,17,77,31,44,55,20]
-bubbleSort(alist)
+```python {cmd continue="_bubblesortsimple"}
+alist = [30, 100000,54,26,93,17,77,31,44,55,20]
+bubblesort(alist)
 print(alist)
-```
-
-```
-[0, 17, 20, 26, 31, 44, 54, 55, 77, 93, 100000]
 ```
 
 At this point, we have a correct algorithm and it's quite easy to bound its running time.  It's $O(n^2)$, a quadratic time algorithm.
 
-We lost something compared to `dumbSort`, namely, we no longer stop early if the list is already sorted.  Let's bring that back.  We'll use a flag to check if any swaps were made.  
+We lost something compared to `dumbsort`, namely, we no longer stop early if the list is already sorted.  Let's bring that back.  We'll use a flag to check if any swaps were made.  
 
-```python
-def bubbleSort(L):
+```python {cmd id="_bubblesort"}
+def bubblesort(L):
     keepgoing = True
     while keepgoing:
         keepgoing = False
@@ -120,8 +115,8 @@ def bubbleSort(L):
 
 Now, that we know an invariant that leads to a correct sorting algorithm, maybe we could work backwards from the invariant to an algorithm.  Recall, the invariant was that after `i` iterations of a loop, the `i` largest elements are in their final positions.  We can write an algorithm that just makes sure to achieve this, by selecting the largest among the first n-i elements and moving that element into place.
 
-```python
-def selectionSort(L):
+```python {cmd id="_selectionsort"}
+def selectionsort(L):
     n = len(L)
     for i in range(n-1):
         max_index=0        
@@ -137,8 +132,8 @@ Do you see the difference between this and our previous invariant?
 
 There are many ways we could enforce this invariant.  We'll do it by "bubbling" element `n-i` into position in the `i`th step.  Note this is not the final position, but rather the position that satisfies the invariant.
 
-```python
-def insertionSort(L):
+```python {cmd id="_insertionsortsimple"}
+def insertionsort(L):
     n = len(L)
     for i in range(n):
         for j in range(n-i-1, n-1):
@@ -148,8 +143,8 @@ def insertionSort(L):
 
 As before, we can make this algorithm go faster if the list is already sorted (or almost already sorted).  We stop the inner loop as soon as the element is in the right place
 
-```python
-def insertionSort(L):
+```python {cmd id="_insertionsort"}
+def insertionsort(L):
     n = len(L)
     for i in range(n):
         j = n - i - 1
@@ -160,7 +155,7 @@ def insertionSort(L):
 
 There is an important point to remember in the code above.  If `j == n-1`, then evaluating `L[j] < L[j+1]` would cause an error.  However, this code does not cause an error, because the expression `j < n - 1 and L[j]>L[j+1]` evaluates the first part first.  As soon as `j < n-1` evaluates to False, it doesn't need to evaluate the other clause of the `and`.  It skips it.
 
-You often see `insertionSort` written in a way that keeps the sorted part of the list in the front rather than the end of the list.  
+You often see `insertionsort` written in a way that keeps the sorted part of the list in the front rather than the end of the list.  
 
 Could you write such an insertion sort?  Try it.
 
@@ -186,7 +181,7 @@ When working with your own classes, you may want to sort elements.  To do so, yo
 
 In the following example, the elements are sorted by decreasing value of `b`.  Then, the list is sorted again, but the key function is supplied give a different comparator.  Notice that the parameter is the function itself and not the evaluation of the function.
 
-```python
+```python {cmd}
 from random import randrange
 
 class Foo:
@@ -216,35 +211,15 @@ for foo in sorted(L, key = Foo.geta):
 
 ```
 
-```
-(28, 89, 84)
-(65, 51, 96)
-(55, 44, 60)
-(89, 36, 25)
-(57, 35, 84)
-(2, 5, 93)
---------
-(2, 5, 93)
-(28, 89, 84)
-(55, 44, 60)
-(57, 35, 84)
-(65, 51, 96)
-(89, 36, 25)
-```
-
 If the key function returns a tuple, it will sort by the first element and break ties with subsequent elements.  This kind of sorting is called lexicographic because it is how you would sort words in alphabetical order.
 
 Here is an example of sorting strings by their length (longest to shortest) using the alphabetical order (ignoring case) to break ties.
 
-```python
+```python {cmd}
 strings = "here are Some sample strings to be sorted".split()
 
 def mykey(x):
     return -len(x), x.upper()
 
 print(sorted(strings, key=mykey))
-```
-
-```
-['strings', 'sample', 'sorted', 'here', 'Some', 'are', 'be', 'to']
 ```

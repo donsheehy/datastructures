@@ -1,5 +1,5 @@
 # linkedqueue.py
-from linkedlist import LinkedList
+from ds2.linkedlist import LinkedList
 
 class LinkedQueue:
     def __init__(self):
@@ -13,3 +13,4 @@ class LinkedQueue:
 
     def __len__(self):
         return len(self._L)
+

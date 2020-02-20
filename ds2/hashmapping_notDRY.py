@@ -1,4 +1,4 @@
-from listmapping import ListMapping
+from ds2 import ListMapping
 
 class HashMapping:
     def __init__(self, size = 2):

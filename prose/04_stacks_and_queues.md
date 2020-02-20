@@ -63,7 +63,9 @@ class ListStack:
 
 The `Stack` class above illustrates the object-oriented strategy of *composition* (the `Stack` has a `list`).  It is also an example of the **Wrapper Pattern**.  The Python builtin `list` is doing all the heavy lifting, but from the user's perpective, they don't know or care how the methods are implemented.  This is not exactly true.  The user would start to care if the performance is bad.  It wouldn't be too hard to make this inefficient.  For example, we could have implemented the Stack by pushing new items into the front of the list.  Here we use inheritance to avoid rewriting the methods that will not be changing.
 
-```python {cmd continue="_liststack_00"}
+```python {cmd id="_badstack"}
+from ds2.liststack import ListStack
+
 class BadStack(ListStack):    
     def push(self, item):
         self._L.insert(0, item)
@@ -181,7 +183,9 @@ Otherwise, the stack trace reports the error in our code.
 Then, a user, might have to try to understand our class in order to backtrack to understand what they did wrong in their code.
 Instead, give them an error that explains exactly what happened.
 
-```python {cmd id="anotherstackerror" continue="_liststack_00"}
+```python {cmd id="_anotherstack"}
+from ds2.liststack import ListStack
+
 class AnotherStack(ListStack):
     def pop(self):
         try:

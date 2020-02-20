@@ -1,4 +1,4 @@
-from .mapping import Mapping, Entry
+from ds2.mapping import Mapping, Entry
 
 class ListMapping(Mapping):
     def __init__(self):
@@ -29,3 +29,4 @@ class ListMapping(Mapping):
 
     def __len__(self):
         return len(self._entries)
+

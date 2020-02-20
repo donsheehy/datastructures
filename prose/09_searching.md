@@ -89,8 +89,8 @@ It does require a little more thought to see why it's correct and why it runs in
 
 Here is a very simple implementation of the sorted list ADT.
 
-```python
-class SimpleSortedList:
+```python {cmd id="_sortedlistsimple"}
+class SortedListSimple:
     def __init__(self):
         self._L = []
 
@@ -123,8 +123,10 @@ Even though, we are just calling out to python's built-in method for checking me
 
 Let's replace it with binary search as we implemented it above.
 
-```python
-class BSSortedList(SimpleSortedList):
+```python {cmd id="_sortedlist"}
+from ds2.sortedlistsimple import SortedListSimple
+
+class SortedList(SortedListSimple):
     def __contains__(self, item):
         left, right = 0, len(self._L)
         while right - left > 1:

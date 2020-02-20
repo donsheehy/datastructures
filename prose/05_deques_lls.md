@@ -204,7 +204,7 @@ It will be surprisingly easy.
 
 ```python {cmd id="_linkedqueue"}
 # linkedqueue.py
-from linkedlist import LinkedList
+from ds2.linkedlist import LinkedList
 
 class LinkedQueue:
     def __init__(self):
@@ -302,7 +302,7 @@ If we rename our first Queue implementations `ListQueue`, we might have had the 
 
 ```python {cmd}
 import unittest
-from listqueue import ListQueue
+from ds2.listqueue import ListQueue
 
 class TestListQueue(unittest.TestCase):
     def testinit(self):
@@ -410,8 +410,8 @@ Here are our new test files.
 ```python {cmd}
 # testlistqueue.py
 import unittest
-from testqueue import TestQueue
-from listqueue import ListQueue
+from ds2.testqueue import TestQueue
+from ds2.listqueue import ListQueue
 
 class TestListQueue(unittest.TestCase, TestQueue):
     def newQueue(self):
@@ -424,8 +424,8 @@ if __name__ == '__main__':
 ```python {cmd}
 # testlinkedqueue.py
 import unittest
-from testqueue import TestQueue
-from linkedqueue import LinkedQueue
+from ds2.testqueue import TestQueue
+from ds2.linkedqueue import LinkedQueue
 
 class TestListQueue(unittest.TestCase, TestQueue):
     def newQueue(self):

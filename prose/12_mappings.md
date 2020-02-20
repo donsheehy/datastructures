@@ -180,7 +180,7 @@ Note that I took the opportunity to factor out some duplication in the `get` and
 
 ## It's Too Slow!
 
-Our goal is to to get the same kind of constant-time operations as in the `dict` class.  Right now, we are very far from that.  Currently, we need linear time to get put, and check membership.  To do better, we're going to need a new idea.  The `ListMapping` takes linear time because it has to iterate through the list.  We could make this faster if we had many short lists instead of one large list.  Then, we just need to have a quick way of knowing which short list to search or update.  
+Our goal is to to get the same kind of constant-time operations as in the `dict` class.  Right now, we are very far from that.  Currently, we need linear time to `get`, `put`, and check membership.  To do better, we're going to need a new idea.  The `ListMapping` takes linear time because it has to iterate through the list.  We could make this faster if we had many short lists instead of one large list.  Then, we just need to have a quick way of knowing which short list to search or update.  
 
 We're going to store a list of `ListMappings`.
 For any key `k`,  we want to compute the index of the *right* `ListMapping` for `k`.  We often call these `ListMapping`s *buckets*.  This term goes back to the idea that you can quickly group items into buckets.  Then, when looking for something in a bucket, you can check all the items in there assuming there aren’t too many.
@@ -216,7 +216,7 @@ The `__getitem__` and `__setitem__` methods call the `_bucket` method to get one
 The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  As the number of entries grows, we can periodically increase the number of buckets.  Here is the code.
 
 ```python {cmd id="_hashmapping_notDRY"}
-from ds2 import ListMapping
+from ds2.listmapping import ListMapping
 
 class HashMapping:
     def __init__(self, size = 2):
@@ -330,7 +330,7 @@ There is a lot here, but notice that there are really only four methods that a s
 Now, the `ListMapping` can be rewritten as follows.
 
 ```python {cmd id="_listmapping"}
-from .mapping import Mapping, Entry
+from ds2.mapping import Mapping, Entry
 
 class ListMapping(Mapping):
     def __init__(self):
@@ -368,8 +368,8 @@ All the magic methods as well as the public iterators and string conversion are 
 The `HashMapping` class can also be rewritten as follows.
 
 ```python {cmd id="_hashmapping"}
-from mapping import Mapping
-from listmapping import ListMapping
+from ds2.mapping import Mapping
+from ds2.listmapping import ListMapping
 
 class HashMapping(Mapping):
     def __init__(self, size = 100):

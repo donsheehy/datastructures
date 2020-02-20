@@ -1,5 +1,5 @@
-from mapping import Mapping
-from listmapping import ListMapping
+from ds2.mapping import Mapping
+from ds2.listmapping import ListMapping
 
 class HashMapping(Mapping):
     def __init__(self, size = 100):
