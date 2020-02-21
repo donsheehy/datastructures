@@ -1,11 +1,12 @@
+# mapping.py
+
 class Entry:
     def __init__(self, key, value):
         self.key = key
         self.value = value
 
     def __str__(self):
-        return "%d: %s" % (self.key, self.value)
-
+        return str(self.key) + " : " + str(self.value)
 
 class Mapping:
 

@@ -1,3 +1,5 @@
+from ds2.mapping import Entry
+
 class ListMapping:
     def __init__(self):
         self._entries = []
@@ -25,12 +27,6 @@ class ListMapping:
     def __str__(self):
         return str([str(e) for e in self._entries])
 
-    def __getitem__(self, key):
-        return self.get(key)
-
-    def __setitem__(self, key, value):
-        self.put(key, value)
-
     def __len__(self):
         return len(self._entries)
 
@@ -48,4 +44,7 @@ class ListMapping:
 
     def items(self):
         return ((e.key, e.value) for e in self._entries)
+
+    __getitem__ = get
+    __setitem__ = put
 

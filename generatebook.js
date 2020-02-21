@@ -19,12 +19,16 @@ async function main() {
   });
 
   // html export
-  await engine.htmlExport({ offline: false, runAllCodeChunks: true });
-  console.log("Should be done.");
+  // await engine.htmlExport({ offline: false, runAllCodeChunks: true });
+  // console.log("Should be done.");
 
   // chrome (puppeteer) export
-  await engine.chromeExport({ fileType: "pdf", runAllCodeChunks: true }); // fileType = 'pdf'|'png'|'jpeg'
-  console.log("PDF export should be done.");
+  // await engine.chromeExport({ fileType: "pdf", runAllCodeChunks: true }); // fileType = 'pdf'|'png'|'jpeg'
+  // console.log("PDF export should be done.");
+
+  // markdown(gfm) export
+  await engine.markdownExport({ runAllCodeChunks: true });
+  console.log("Should be done.");
 
   return process.exit();
 }

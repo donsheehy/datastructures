@@ -28,8 +28,8 @@ This is where you deal with inputs so small that they cannot be divided.
 The most direct application of the Divide and Conquer paradigm to the sorting problem is the **mergesort** algorithm.
 In this algorithm, all the difficult work is in the merge step.
 
-```python
-def mergeSort(L):
+```python {cmd id="_mergesort"}
+def mergesort(L):
     # Base Case!
     if len(L) < 2:
         return
@@ -40,8 +40,8 @@ def mergeSort(L):
     B = L[mid:]
 
     # Conquer!
-    mergeSort(A)
-    mergeSort(B)
+    mergesort(A)
+    mergesort(B)
 
     # Combine!
     merge(A, B, L)
@@ -56,8 +56,8 @@ def merge(A, B, L):
         else:
             L[i+j] = B[j]
             j = j + 1
-      # Add any remaining elements once one list is empty
-      L[i+j:] = A[i:] + B[j:]
+    # Add any remaining elements once one list is empty
+    L[i+j:] = A[i:] + B[j:]
 ```
 
 That last line might look a little strange.
@@ -169,7 +169,7 @@ Here is how one might implement these methods in python.
 The `BufferedIterator` class below is built from any iterator.
 It stays one step of the iteration ahead of the user and stores the next item in a buffer.
 
-```python
+```python {cmd id="_mergesort_iter_00"}
 class BufferedIterator:
     def __init__(self, i):
         self._i = iter(i)
@@ -204,7 +204,7 @@ class BufferedIterator:
 
 We can use this `BufferedIterator` to implement another iterator that takes two iterators and merges them as in the `merge` operation of `mergesort`.
 
-```python
+```python {cmd id="_mergesort_iter_01"}
 def merge(A, B):
     a = BufferedIterator(A)
     b = BufferedIterator(B)
@@ -227,7 +227,7 @@ The magic here is explained by understanding that this really is packaged into a
 
 We can use this new `merge` iterator to write a new version of `mergesort`.
 
-```python
+```python {cmd id="_mergesort_iter_02"}
 def mergesort(L):
     if len(L) > 1:
         m = len(L) // 2

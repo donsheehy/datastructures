@@ -8,6 +8,7 @@ sphinxcontrib-bibtex = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
 ds2 = {editable = true,path = "."}
+coverage = "*"
 
 [packages]
 

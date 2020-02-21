@@ -5,6 +5,8 @@ from ds2.bubblesort import bubblesort
 from ds2.insertionsortsimple import insertionsort as insertionsortsimple
 from ds2.insertionsort import insertionsort
 from ds2.selectionsort import selectionsort
+from ds2.mergesort import mergesort
+from ds2.mergesort_iter import mergesort as mergesort_iter
 
 class TestSorting:
     def testalreadysortedcase(self):
@@ -43,6 +45,8 @@ TestBubbleSort = test(bubblesort)
 TestSelectionSort = test(selectionsort)
 TestInsertionSort = test(insertionsort)
 TestInsertionSortSimple = test(insertionsortsimple)
+TestMergeSort = test(mergesort)
+TestMergeSortIter = test(mergesort_iter)
 
 if __name__ == '__main__':
     unittest.main()

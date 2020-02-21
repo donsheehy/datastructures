@@ -27,8 +27,9 @@ These are the two main operations.  They are what make a mapping, and are genera
 ## A minimal implementation
 
 Here is a very lightweight method for using a `list` as a mapping.  We start with a little class to store key-value pairs, then give two methods to implement get and put.
+```python {cmd id="_mapping_00"}
+# mapping.py
 
-```python {cmd id="_trivialmapping"}
 class Entry:
     def __init__(self, key, value):
         self.key = key
@@ -36,6 +37,9 @@ class Entry:
 
     def __str__(self):
         return str(self.key) + " : " + str(self.value)
+```
+
+```python {cmd id="trivialmapping" continue="_mapping_00"}
 
 def mapput(L, key, value):
     for e in L:
@@ -66,6 +70,8 @@ At this point, it seems that the only advantage of the `dict` structure is that 
 First, let's put our new data structure in a class.  This will allow us to encapsulate the underlying list so that users don't accidentally mess it up, for example, by appending to it rather than using `put`.  We'd like to protect users from themselves, especially when there are properties of the structure we want to maintain.  In this case, we want to make sure keys stay unique.
 
 ```python {cmd id="_listmappingsimple"}
+from ds2.mapping import Entry
+
 class ListMappingSimple:
     def __init__(self):
         self._entries = []
@@ -124,6 +130,8 @@ We'll add the same kind of functionality to our Mapping ADT.  So, the **extended
 It is very important to recall from the very beginning of the course that the `dict` class is a **non-sequential collection**.  That is, there is no significance to the ordering of the items and furthermore, you should never assume to know anything about the ordering of the pairs.  You should not even assume that the ordering will be consistent between two iterations of the same `dict`.  This same warning goes for the mappings we will implement and we'll see that the ability to rearrange the order of how they are stored is the secret behind the mysteriously fast running times.  However, this first implementation will have the items in a fixed order because we are using a `list` to store them.
 
 ```python {cmd id="_listmapping_notDRY"}
+from ds2.mapping import Entry
+
 class ListMapping:
     def __init__(self):
         self._entries = []
@@ -151,12 +159,6 @@ class ListMapping:
     def __str__(self):
         return str([str(e) for e in self._entries])
 
-    def __getitem__(self, key):
-        return self.get(key)
-
-    def __setitem__(self, key, value):
-        self.put(key, value)
-
     def __len__(self):
         return len(self._entries)
 
@@ -174,6 +176,9 @@ class ListMapping:
 
     def items(self):
         return ((e.key, e.value) for e in self._entries)
+
+    __getitem__ = get
+    __setitem__ = put
 ```
 
 Note that I took the opportunity to factor out some duplication in the `get` and `put` methods.
@@ -188,16 +193,18 @@ For any key `k`,  we want to compute the index of the *right* `ListMapping` for 
 This means, we want an integer, i.e. the index into our list of buckets.  A **hash function** takes a key and returns an integer.  Most classes in python implement a method called `__hash__` that does just this.  We can use it to implement a simple mapping scheme that improves on the `ListMapping`.  
 
 ```python {cmd id="_hashmappingsimple"}
+from ds2.listmapping import ListMapping
+
 class HashMappingSimple:
     def __init__(self):
         self._size = 100
         self._buckets = [ListMapping() for i in range(self._size)]
 
-    def __setitem__(self, key, value):
+    def put(self, key, value):
         m = self._bucket(key)
         m[key] = value
 
-    def __getitem__(self, key):
+    def get(self, key):
         m = self._bucket(key)
         return m[key]
 
@@ -213,9 +220,12 @@ The `__getitem__` and `__setitem__` methods call the `_bucket` method to get one
 
 ### How many buckets should we use?
 
-The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not more.  It makes sense to use more buckets as the size increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  As the number of entries grows, we can periodically increase the number of buckets.  Here is the code.
+The number 100 is pretty arbitrary.  If there are many many entries, then one might get 100-fold speedup over ListMap, but not more.  Take a moment to marvel at how greedy we can be: *only a 100x speedup?*
+
+It makes sense to use more buckets as the number of entries increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  As the number of entries grows, we can periodically increase the number of buckets.  Here is the code.
 
 ```python {cmd id="_hashmapping_notDRY"}
+from ds2.mapping import Entry
 from ds2.listmapping import ListMapping
 
 class HashMapping:
@@ -224,7 +234,7 @@ class HashMapping:
         self._buckets = [ListMapping() for i in range(self._size)]
         self._length = 0
 
-    def __setitem__(self, key, value):
+    def put(self, key, value):
         m = self._bucket(key)
         if key not in m:
             self._length += 1
@@ -234,9 +244,13 @@ class HashMapping:
         if self._length > self._size:
             self._double()
 
-    def __getitem__(self, key):
+    def get(self, key):
         m = self._bucket(key)
         return m[key]
+
+    def __contains__(self, key):
+        m = self._bucket(key)
+        return key in m
 
     def _bucket(self, key):
         return self._buckets[hash(key) % self._size]
@@ -257,6 +271,24 @@ class HashMapping:
 
     def __len__(self):
         return self._length
+
+    def __iter__(self):
+        for b in self._buckets:
+            for k in b:
+                yield k
+
+    def values(self):
+        for b in self._buckets:
+            for v in b.values():
+                yield v
+
+    def items(self):
+        for b in self._buckets:
+            for k, v in b.items():
+                yield k, v
+
+    __getitem__ = get
+    __setitem__ = put
 ```
 
 ### Rehashing
@@ -271,16 +303,7 @@ There are some methods that we expect to be implemented by the subclass.  We can
 
 Here is the code for the superclass.
 
-```python {cmd id="_mapping"}
-class Entry:
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
-
-    def __str__(self):
-        return "%d: %s" % (self.key, self.value)
-
-
+```python {cmd id="_mapping_01"}
 class Mapping:
 
     # Child class needs to implement this!

@@ -1,3 +1,5 @@
+from ds2.mapping import Entry
+
 class ListMappingSimple:
     def __init__(self):
         self._entries = []

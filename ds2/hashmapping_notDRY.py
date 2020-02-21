@@ -1,4 +1,5 @@
-from ds2 import ListMapping
+from ds2.mapping import Entry
+from ds2.listmapping import ListMapping
 
 class HashMapping:
     def __init__(self, size = 2):
@@ -6,7 +7,7 @@ class HashMapping:
         self._buckets = [ListMapping() for i in range(self._size)]
         self._length = 0
 
-    def __setitem__(self, key, value):
+    def put(self, key, value):
         m = self._bucket(key)
         if key not in m:
             self._length += 1
@@ -16,9 +17,13 @@ class HashMapping:
         if self._length > self._size:
             self._double()
 
-    def __getitem__(self, key):
+    def get(self, key):
         m = self._bucket(key)
         return m[key]
+
+    def __contains__(self, key):
+        m = self._bucket(key)
+        return key in m
 
     def _bucket(self, key):
         return self._buckets[hash(key) % self._size]
@@ -39,4 +44,22 @@ class HashMapping:
 
     def __len__(self):
         return self._length
+
+    def __iter__(self):
+        for b in self._buckets:
+            for k in b:
+                yield k
+
+    def values(self):
+        for b in self._buckets:
+            for v in b.values():
+                yield v
+
+    def items(self):
+        for b in self._buckets:
+            for k, v in b.items():
+                yield k, v
+
+    __getitem__ = get
+    __setitem__ = put
 
