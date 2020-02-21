@@ -1,3 +1,5 @@
+from ds2.priorityqueue import Entry
+
 class UnsortedListPQ:
     def __init__(self):
         self._entries = []

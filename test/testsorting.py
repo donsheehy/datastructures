@@ -57,5 +57,18 @@ TestMergeSortIter = _test(mergesort_iter)
 TestQuickSort = _test(quicksort)
 TestQuickSortLong = _test(quicksort_long)
 
+class TestQuickSorted(unittest.TestCase):
+    def testsmallexample(self):
+        L = [4, 3, 1, 5, 9, 7, 6, 0, 2, 8]
+        S = quicksorted(L)
+        self.assertEqual(S, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+        self.assertFalse(S == L)
+
+    def testlargerexample(self):
+        L = list(range(100)) + list(reversed(range(100)))
+        A = quicksorted(L)
+        for i in range(200):
+            self.assertEqual(i//2, A[i])
+
 if __name__ == '__main__':
     unittest.main()

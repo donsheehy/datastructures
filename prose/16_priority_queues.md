@@ -40,7 +40,9 @@ As the data are stored as tuples, we have to use an index to pull out the priori
 
 We'll make a class that stores the entries, each will have an `item` and a `priority` as attributes. We'll make the entries comparable by implementing `__lt__` and thus the comparison of entries will always just compare their priorities.
 
-```python {cmd id="entry"}
+```python {cmd id="_priorityqueue"}
+# priorityqueue.py
+
 class Entry:
     def __init__(self, item, priority):
         self.priority = priority
@@ -52,7 +54,9 @@ class Entry:
 
 Now, we can rewrite the list version of the priority queue.  It's almost the same as before, except, that by using the `Entry` class, the code is more explicit about the types of objects, and hopefully, easier to read and understand.
 
-```python {cmd id="_unsortedlistpq" continue="entry"}
+```python {cmd id="_unsortedlistpq"}
+from ds2.priorityqueue import Entry
+
 class UnsortedListPQ:
     def __init__(self):
         self._entries = []
@@ -74,7 +78,9 @@ The `insert` method will clearly only require constant time because it is a sing
 
 The `findmin` would be much faster if the list were sorted.  Then we could just return the first item in the list.  An even better approach would sort the list backwards.  Then `removemin` could also be constant time, using the constant-time `pop` function on a list.
 
-```python {cmd id="_sortedlistpq" continue="entry"}
+```python {cmd id="_sortedlistpq"}
+from ds2.priorityqueue import Entry
+
 class SortedListPQ:
     def __init__(self):
         self._entries = []
@@ -123,7 +129,9 @@ We will maintain the invariant that after each operation, the list of entries is
 
 Similarly, there is a `_downheap` operation that will repeatedly swap an entry with its child until it's heap-ordered.  This operation is useful in the next section for building a heap from scratch.
 
-```python {cmd id-"_heappq"}
+```python {cmd id="_heappq"}
+from ds2.priorityqueue import Entry
+
 class HeapPQ:
     def __init__(self):
         self._entries = []
@@ -172,7 +180,7 @@ class HeapPQ:
 
 Just using the public interface, one could easily construct a `HeapPQ` from a list of item-priority pairs.  For example, the following code would work just fine.
 
-```python {cmd continue="_hapepq"}
+```python {cmd continue="_heappq"}
 pq = HeapPQ()
 pairs = [(10, 10), (2, 2), (30, 30), (4,4)]
 for item, priority in pairs:
@@ -211,7 +219,7 @@ However, the usual way to reduce the priority is to specify the item and its new
 
 The full code including the `_heapify` method is given below.  This full version of the priority queue will be very useful for some graph algorithms that we will see soon.
 
-```python {cmd continue="entry"}
+```python {cmd id="_priorityqueue_01" continue="_priorityqueue_00"}
 class PriorityQueue:
     def __init__(self, entries = None):
         entries = entries or []
