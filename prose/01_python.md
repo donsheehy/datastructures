@@ -66,7 +66,7 @@ print("z has type", type(z))
 ```
 
 You should think of an object as having three things: an *identity*, a *type*, and a *value*.
-It’s identity cannot change.  It can be used to see if two objects are actually the same object with the `is` keyword.
+Its identity cannot change.  It can be used to see if two objects are actually the same object with the `is` keyword.
 For example, consider the following code.
 
 ```python {cmd=true}
