@@ -218,6 +218,9 @@ class LinkedQueue:
 
     def __len__(self):
         return len(self._L)
+
+    def isempty(self):
+        return len(self) == 0
 ```
 
 ## Storing the length
@@ -358,7 +361,7 @@ Our new class will be called `TestQueue`.
 Both `TestListQueue` and `TestLinkedQueue` will extend `TestQueue`.
 Remember extending means inheriting from.
 
-```python {cmd id="_testqueue"}
+```python {cmd id="testqueue"}
 # testqueue.py
 class TestQueue:
     def newQueue():

@@ -1,4 +1,4 @@
-class Queue:
+class QueueSimple:
     def __init__(self):
         self._head = 0
         self._L = []
@@ -17,7 +17,7 @@ class Queue:
     def isempty(self):
         return len(self) == 0
 
-class ListQueue(Queue):
+class ListQueue(QueueSimple):
     def dequeue(self):
         item = self._L[self._head]
         self._head += 1

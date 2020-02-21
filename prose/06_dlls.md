@@ -26,7 +26,7 @@ First, we'll look at adding items to a `DoublyLinkedList`.
 These operations are very similar to the `addfirst` operation on a `LinkedList`.
 One has to do a little more work to update the `prev` node that was not present in our `LinkedList`.
 
-```python {cmd continue="_doublylinkedlist_00" id="_doublylinkedlist_01"}
+```python {cmd continue="_doublylinkedlist_00" id="dll_before_refactoring"}
 class DoublyLinkedList:
     def __init__(self):
         self._head = None
@@ -62,6 +62,15 @@ In this case, we might consider the more general problem of adding a node betwee
 We will just need to consider those cases where the nodes `before` or `after` or both are `None`.
 
 ```python {cmd continue="_doublylinkedlist_01", id="_doublylinkedlist_02"}
+class DoublyLinkedList:
+    def __init__(self):
+        self._head = None
+        self._tail = None
+        self._length = 0
+
+    def __len__(self):
+        return self._length
+
     def _addbetween(self, item, before, after):
         node = ListNode(item, before, after)
         if after is self._head:

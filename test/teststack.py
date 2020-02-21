@@ -2,7 +2,7 @@ import unittest
 from ds2.liststack import ListStack
 from ds2.badstack import BadStack
 
-class TestStack:
+class StackTests:
     def Stack(self):
         raise NotImplementedError
 
@@ -49,10 +49,10 @@ class TestStack:
         s.pop()
         self.assertTrue(s.isempty())
 
-class TestListStack(unittest.TestCase, TestStack):
+class TestListStack(unittest.TestCase, StackTests):
     Stack = ListStack
 
-class TestBadStack(unittest.TestCase, TestStack):
+class TestBadStack(unittest.TestCase, StackTests):
     Stack = BadStack
 
 if __name__ == '__main__':

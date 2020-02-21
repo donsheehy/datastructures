@@ -127,6 +127,8 @@ We'll add the same kind of functionality to our Mapping ADT.  So, the **extended
 
   - `items` - return an iterator over the key-value pairs (as tuples).
 
+  - `__str__` - return a string representation of the mapping.
+
 It is very important to recall from the very beginning of the course that the `dict` class is a **non-sequential collection**.  That is, there is no significance to the ordering of the items and furthermore, you should never assume to know anything about the ordering of the pairs.  You should not even assume that the ordering will be consistent between two iterations of the same `dict`.  This same warning goes for the mappings we will implement and we'll see that the ability to rearrange the order of how they are stored is the secret behind the mysteriously fast running times.  However, this first implementation will have the items in a fixed order because we are using a `list` to store them.
 
 ```python {cmd id="_listmapping_notDRY"}
@@ -157,7 +159,7 @@ class ListMapping:
         return None
 
     def __str__(self):
-        return str([str(e) for e in self._entries])
+        return "{" + ", ".join(str(e) for e in self._entries) + "}"
 
     def __len__(self):
         return len(self._entries)
@@ -287,6 +289,12 @@ class HashMapping:
             for k, v in b.items():
                 yield k, v
 
+    def __str__(self):
+        # The following line is dangerous. It accesses a private attribute.
+        # Thankfully, this will get factored out soon.
+        itemlist = [str(e) for b in self._buckets for e in b._entries]
+        return "{" + ", ".join(itemlist) + "}"
+
     __getitem__ = get
     __setitem__ = put
 ```
@@ -308,19 +316,19 @@ class Mapping:
 
     # Child class needs to implement this!
     def get(self, key):
-        raise NotImplemented
+        raise NotImplementedError
 
     # Child class needs to implement this!
     def put(self, key, value):
-        raise NotImplemented
+        raise NotImplementedError
 
     # Child class needs to implement this!
     def __len__(self):
-        raise NotImplemented
+        raise NotImplementedError
 
     # Child class needs to implement this!
     def _entryiter(self):
-        raise NotImplemented        
+        raise NotImplementedError   
 
     def __iter__(self):
       return (e.key for e in self._entryiter())
@@ -345,7 +353,7 @@ class Mapping:
         self.put(key, value)
 
     def __str__(self):
-        return "{%s}" % (", ".join([str(e) for e in self._entryiter()]))
+        return "{" + ", ".join(str(e) for e in self._entryiter()) + "}"
 ```
 
 There is a lot here, but notice that there are really only four methods that a subclass has to implement: `get`, `put`, `__len__`, and a method called `_entryiter` that iterates through the entries.  This last method is private because the user of this class does not need to access `Entry` objects.  They have the Mapping ADT methods to provide access to the data.  This is why the `Entry` class is an inner class (defined inside the `Mapping` class).

@@ -60,6 +60,12 @@ class HashMapping:
             for k, v in b.items():
                 yield k, v
 
+    def __str__(self):
+        # The following line is dangerous. It accesses a private attribute.
+        # Thankfully, this will get factored out soon.
+        itemlist = [str(e) for b in self._buckets for e in b._entries]
+        return "{" + ", ".join(itemlist) + "}"
+
     __getitem__ = get
     __setitem__ = put
 

@@ -12,19 +12,19 @@ class Mapping:
 
     # Child class needs to implement this!
     def get(self, key):
-        raise NotImplemented
+        raise NotImplementedError
 
     # Child class needs to implement this!
     def put(self, key, value):
-        raise NotImplemented
+        raise NotImplementedError
 
     # Child class needs to implement this!
     def __len__(self):
-        raise NotImplemented
+        raise NotImplementedError
 
     # Child class needs to implement this!
     def _entryiter(self):
-        raise NotImplemented        
+        raise NotImplementedError   
 
     def __iter__(self):
       return (e.key for e in self._entryiter())
@@ -49,5 +49,5 @@ class Mapping:
         self.put(key, value)
 
     def __str__(self):
-        return "{%s}" % (", ".join([str(e) for e in self._entryiter()]))
+        return "{" + ", ".join(str(e) for e in self._entryiter()) + "}"
 

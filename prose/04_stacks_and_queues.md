@@ -115,7 +115,7 @@ Yes, it takes time proportional to the length of the list, but what can we do?  
 Here's a different idea.  Let's not really delete things from the front of the list.  Instead, we'll ignore them by keeping the index of the head of the queue.
 
 ```python {cmd id="_listqueue_00"}
-class Queue:
+class QueueSimple:
     def __init__(self):
         self._head = 0
         self._L = []
@@ -138,7 +138,7 @@ class Queue:
 There is something a little odd about this code: it never gets rid of old items after they have been dequeued.  Even if it deleted them, it still keeps a place in the list for them.  This is a kind of **lazy** update.  Shouldn't we clean up after ourselves?  Yes, but let's wait.  Here's the idea.  If the list ever gets half empty, that is, if `_head` is more than half the length of `_L`, then we will bite the bullet and replace `_L` with a slice of it.  "Biting the bullet" is an especially good turn of phrase here if you view this process as a kind of amputation of the old gangrenous stump of the list.
 
 ```python {cmd id="_listqueue_01" continue="_listqueue_00"}
-class ListQueue(Queue):
+class ListQueue(QueueSimple):
     def dequeue(self):
         item = self._L[self._head]
         self._head += 1

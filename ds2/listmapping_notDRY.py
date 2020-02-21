@@ -25,7 +25,7 @@ class ListMapping:
         return None
 
     def __str__(self):
-        return str([str(e) for e in self._entries])
+        return "{" + ", ".join(str(e) for e in self._entries) + "}"
 
     def __len__(self):
         return len(self._entries)

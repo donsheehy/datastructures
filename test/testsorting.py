@@ -8,7 +8,7 @@ from ds2.selectionsort import selectionsort
 from ds2.mergesort import mergesort
 from ds2.mergesort_iter import mergesort as mergesort_iter
 
-class TestSorting:
+class SortingTests:
     def testalreadysortedcase(self):
         L = [1,2,3]
         self.sort(L)
@@ -31,22 +31,22 @@ class TestSorting:
         self.assertEqual(L, [])
 
 
-def test(sortingalgorithm):
+def _test(sortingalgorithm):
     """Return a new testcase class for the given sorting algorithm.
     """
-    class MySortingTest(unittest.TestCase, TestSorting):
+    class MySortingTest(unittest.TestCase, SortingTests):
         def sort(self, L):
             return sortingalgorithm(L)
     return MySortingTest
 
-TestDumbSort = test(dumbsort)
-TestBubbleSortSimple = test(bubblesortsimple)
-TestBubbleSort = test(bubblesort)
-TestSelectionSort = test(selectionsort)
-TestInsertionSort = test(insertionsort)
-TestInsertionSortSimple = test(insertionsortsimple)
-TestMergeSort = test(mergesort)
-TestMergeSortIter = test(mergesort_iter)
+TestDumbSort = _test(dumbsort)
+TestBubbleSortSimple = _test(bubblesortsimple)
+TestBubbleSort = _test(bubblesort)
+TestSelectionSort = _test(selectionsort)
+TestInsertionSort = _test(insertionsort)
+TestInsertionSortSimple = _test(insertionsortsimple)
+TestMergeSort = _test(mergesort)
+TestMergeSortIter = _test(mergesort_iter)
 
 if __name__ == '__main__':
     unittest.main()

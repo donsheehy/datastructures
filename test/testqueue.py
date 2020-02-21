@@ -1,14 +1,11 @@
 import unittest
-from ds2.listqueue import ListQueue
+from ds2.listqueue import QueueSimple, ListQueue
 from ds2.linkedqueue import LinkedQueue
 
 
-class TestQueue:
+class QueueTests:
     def Queue():
         raise NotImplementedError
-
-    def testinit(self):
-        q = self.Queue()
 
     def testaddandremoveoneitem(self):
         q = self.Queue()
@@ -41,10 +38,22 @@ class TestQueue:
             q.dequeue()
         self.assertEqual(len(q), 5)
 
-class TestListQueue(unittest.TestCase, TestQueue):
+    def testisempty(self):
+        Q = self.Queue()
+        self.assertTrue(Q.isempty())
+        Q.enqueue(100)
+        self.assertFalse(Q.isempty())
+        Q.dequeue()
+        self.assertTrue(Q.isempty())
+        
+
+class TestQueueSimple(unittest.TestCase, QueueTests):
+    Queue = QueueSimple
+
+class TestListQueue(unittest.TestCase, QueueTests):
     Queue = ListQueue
 
-class TestLinkedQueue(unittest.TestCase, TestQueue):
+class TestLinkedQueue(unittest.TestCase, QueueTests):
     Queue = LinkedQueue
 
 

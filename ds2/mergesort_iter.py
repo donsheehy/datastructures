@@ -45,4 +45,3 @@ def mergesort(L):
         mergesort(A)
         mergesort(B)
         L[:] = merge(A, B)
-

@@ -14,3 +14,6 @@ class LinkedQueue:
     def __len__(self):
         return len(self._L)
 
+    def isempty(self):
+        return len(self) == 0
+

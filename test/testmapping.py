@@ -1,4 +1,5 @@
 import unittest
+from ds2.mapping import Mapping
 from ds2.listmappingsimple import ListMappingSimple
 from ds2.listmapping import ListMapping
 from ds2.listmapping_notDRY import ListMapping as ListMapping_notDRY
@@ -6,7 +7,7 @@ from ds2.hashmappingsimple import HashMappingSimple
 from ds2.hashmapping import HashMapping
 from ds2.hashmapping_notDRY import HashMapping as HashMapping_notDRY
 
-class TestMapping:
+class MappingTests:
     def Mapping(self):
         raise NotImplementedError
 
@@ -36,7 +37,14 @@ class TestMapping:
         with self.assertRaises(KeyError):
             M.get("one")
 
-class TestExtendedMapping:
+    def testputoverwrites(self):
+        M = self.Mapping()
+        M.put(1, 1000)
+        M.put(2, 'two')
+        M.put(1, 'one')
+        self.assertEqual(M.get(1), 'one')
+
+class ExtendedMappingTests:
     def testlen(self):
         M = self.Mapping()
         for i in range(30):
@@ -88,23 +96,54 @@ class TestExtendedMapping:
             M[i] = 1
         self.assertEqual(len(M), 1000)
 
-class TestListMappingSimple(unittest.TestCase, TestMapping):
+    def teststr(self):
+        M = self.Mapping()
+        M[1] = 2
+        self.assertEqual(str(M), '{1 : 2}')
+
+class TestListMappingSimple(unittest.TestCase, MappingTests):
     Mapping = ListMappingSimple
 
-class TestListMapping(unittest.TestCase, TestMapping, TestExtendedMapping):
+class TestListMapping(unittest.TestCase, MappingTests, ExtendedMappingTests):
     Mapping = ListMapping
 
-class TestListMapping_notDRY(unittest.TestCase, TestMapping, TestExtendedMapping):
+class TestListMapping_notDRY(unittest.TestCase, MappingTests, ExtendedMappingTests):
     Mapping = ListMapping_notDRY
 
-class TestHashMappingSimple(unittest.TestCase, TestMapping):
+class TestHashMappingSimple(unittest.TestCase, MappingTests):
     Mapping = HashMappingSimple
 
-class TestHashMapping(unittest.TestCase, TestMapping, TestExtendedMapping):
+class TestHashMapping(unittest.TestCase, MappingTests, ExtendedMappingTests):
     Mapping = HashMapping
 
-class TestHashMapping_notDRY(unittest.TestCase, TestMapping, TestExtendedMapping):
+class TestHashMapping_notDRY(unittest.TestCase, MappingTests, ExtendedMappingTests):
     Mapping = HashMapping_notDRY
+
+class TestAbstractMapping(unittest.TestCase):
+    """ These tests just check (and document) the methods that must
+    be implemented by any class that extends `Mapping`.
+    They are mostly here to exercise these code paths.
+    """
+    def testmustimplementget(self):
+        M = Mapping()
+        with self.assertRaises(NotImplementedError):
+            M.get(1)
+
+    def testmustimplementput(self):
+        M = Mapping()
+        with self.assertRaises(NotImplementedError):
+            M.put(1, 2)
+
+    def testmustimplementlen(self):
+        M = Mapping()
+        with self.assertRaises(NotImplementedError):
+            len(M)
+
+    def testmustimplement_entryiter(self):
+        M = Mapping()
+        with self.assertRaises(NotImplementedError):
+            M._entryiter()
+
 
 if __name__ == '__main__':
     unittest.main()
