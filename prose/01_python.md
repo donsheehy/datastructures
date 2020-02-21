@@ -1,6 +1,6 @@
 # Basic Python
 
-```python {cmd=true output="none" id="type"}
+```python {cmd=true hide output="none" id="type"}
 # This is a hack to allow html escape the output of the type function.
 import builtins
 def type(x):

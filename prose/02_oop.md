@@ -173,7 +173,7 @@ Notice that in this example, the encapsulation of the class is not about securit
 
 ## Inheritance and "is a" relationships
 
-Whenever we talk about the types of things in our everyday life, it’s possible to talk about them at different levels of generality.  We can talk about a specific basketball player, say Kylie Irving, or we can talk about professional basketball players, or all basketball players, or people or living creatures.  The specific player we started with could be said to belong to any of these classes.  The same principle applies to code that we write.  
+Whenever we talk about the types of things in our everyday life, it’s possible to talk about them at different levels of generality.  We can talk about a specific basketball player, say Kyrie Irving, or we can talk about professional basketball players, or all basketball players, or people, or living creatures.  The specific player we started with could be said to belong to any of these classes.  The same principle applies to code that we write.  
 
 Consider this example from a geometry program.
 
