@@ -1,6 +1,6 @@
 # Basic Python
 
-```python {cmd hide output="none" id="type"}
+```python {cmd=true output="none" id="type"}
 # This is a hack to allow html escape the output of the type function.
 import builtins
 def type(x):
@@ -56,7 +56,7 @@ Every object has a **type**.  The type often determines what you can do with the
 
 The difference between a variable and the **object** it represents can get lost in our common speech because the variable is usually acting as the *name* of the object.  There are some times when it's useful to be clear about the difference, in particular when copying objects.  You might want to try some examples of copying objects from one variable to another.  Does changing one of them affect the other?
 
-```python {cmd id="j4htmm25" continue="type"}
+```python {cmd=true id="j4htmm25" continue="type"}
 x = 5
 y = 3.2
 z = True
@@ -69,7 +69,7 @@ You should think of an object as having three things: an *identity*, a *type*, a
 It’s identity cannot change.  It can be used to see if two objects are actually the same object with the `is` keyword.
 For example, consider the following code.
 
-```python {cmd}
+```python {cmd=true}
 x = [1, 2, 3]
 y = x
 z = [1, 2, 3]
