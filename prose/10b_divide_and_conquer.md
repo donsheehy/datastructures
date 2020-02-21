@@ -246,8 +246,8 @@ A sorting algorithm, that just rearranges the elements in a single list is calle
 Before we get there, let's see the easiest version of `quicksort`.  One way to think about the motivation for `quicksort` is that we want to do divide and conquer, but we want the combine step to be as easy as possible.  Recall that in `mergesort`, most of our cleverness was devoted to doing the combining.
 In `quicksort`, the harder step is the dividing.
 
-```python
-def quickSorted(L):
+```python {cmd id="_quicksort_long_00"}
+def quicksorted(L):
     #base case
     if len(L) < 2:
         return L[:]
@@ -259,8 +259,8 @@ def quickSorted(L):
     GT = [e for e in L if e > pivot]
 
     # Conquer
-    A = quickSorted(LT)
-    B = quickSorted(GT)
+    A = quicksorted(LT)
+    B = quicksorted(GT)
 
     # Combine
     return A + ET + B
@@ -268,7 +268,7 @@ def quickSorted(L):
 
 Let's do an in-place version.  For this, we want to avoid creating new lists and concatenating them at the end.
 
-```python {cmd}
+```python {cmd id="_quicksort_long_01"}
 def quicksort(L, left = 0, right = None):
     if right is None:
         right = len(L)
@@ -283,7 +283,9 @@ def quicksort(L, left = 0, right = None):
 
         # Combine!
         # Nothing to do!
+```
 
+```python {cmd id="_quicksort_long_02" continue="_quicksort_long_01"}
 def partition(L, left, right):
     pivot = right - 1
     i = left        # index in left half
@@ -309,7 +311,8 @@ def partition(L, left, right):
 
     # Return the index of the pivot.
     return pivot
-
+```
+```python {cmd continue="_quicksort_long_03" continue="_quicksort_long_02"}
 # Simple test to see if it works.
 L = [5,2,3,1,4]
 quicksort(L)
@@ -320,7 +323,7 @@ Here is a version without all the comments.
 It uses a helper function rather than using default parameters to handle the initial call.
 It's helpful to look at at two different implementations of the same function and compare the different choices that were made between the two.
 
-```python
+```python {cmd id="_quicksort"}
 def quicksort(L):
     _quicksort(L, 0, len(L))
 
@@ -339,6 +342,8 @@ def partition(L, left, right):
             j -= 1
         if i < j:
             L[i], L[j] = L[j], L[i]
-    L[pivot], L[i] = L[i], L[pivot]    
-    return i
+    if L[pivot] <= L[i]:
+        L[pivot], L[i] = L[i], L[pivot]
+        pivot = i
+    return pivot
 ```

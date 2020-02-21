@@ -7,6 +7,9 @@ from ds2.insertionsort import insertionsort
 from ds2.selectionsort import selectionsort
 from ds2.mergesort import mergesort
 from ds2.mergesort_iter import mergesort as mergesort_iter
+from ds2.quicksort import quicksort
+from ds2.quicksort_long import quicksort as quicksort_long
+from ds2.quicksort_long import quicksorted
 
 class SortingTests:
     def testalreadysortedcase(self):
@@ -30,6 +33,10 @@ class SortingTests:
         # Mostly just checking that it didn't choke on [].
         self.assertEqual(L, [])
 
+    def testsortreversedlist(self):
+        L = list(reversed(range(100)))
+        self.sort(L)
+        self.assertEqual(L, list(range(100)))
 
 def _test(sortingalgorithm):
     """Return a new testcase class for the given sorting algorithm.
@@ -47,6 +54,8 @@ TestInsertionSort = _test(insertionsort)
 TestInsertionSortSimple = _test(insertionsortsimple)
 TestMergeSort = _test(mergesort)
 TestMergeSortIter = _test(mergesort_iter)
+TestQuickSort = _test(quicksort)
+TestQuickSortLong = _test(quicksort_long)
 
 if __name__ == '__main__':
     unittest.main()
