@@ -16,7 +16,7 @@ help:
 
 github:
 	@make html
-	@cp -a build/html/. ../docs
+	@cp -a docsource/build/html/. docs/
 
 test:
 	@nosetests --with-coverage

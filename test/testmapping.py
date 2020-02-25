@@ -104,6 +104,8 @@ class ExtendedMappingTests:
         self.assertEqual(str(M), '{1 : 2}')
 
 def _test(mapping, extended=False):
+    """ Produce a TestCase class that uses the given implementation.
+    """
     if extended:
         class MappingTestCase(unittest.TestCase, MappingTests, ExtendedMappingTests):
             Mapping = mapping
