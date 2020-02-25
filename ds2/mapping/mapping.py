@@ -1,4 +1,4 @@
-# mapping.py
+# mapping/mapping.py
 
 class Entry:
     def __init__(self, key, value):

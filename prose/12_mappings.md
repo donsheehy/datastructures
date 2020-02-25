@@ -27,8 +27,8 @@ These are the two main operations.  They are what make a mapping, and are genera
 ## A minimal implementation
 
 Here is a very lightweight method for using a `list` as a mapping.  We start with a little class to store key-value pairs, then give two methods to implement get and put.
-```python {cmd id="_mapping_00"}
-# mapping.py
+```python {cmd id="_mapping.mapping_00"}
+# mapping/mapping.py
 
 class Entry:
     def __init__(self, key, value):
@@ -69,7 +69,7 @@ At this point, it seems that the only advantage of the `dict` structure is that 
 
 First, let's put our new data structure in a class.  This will allow us to encapsulate the underlying list so that users don't accidentally mess it up, for example, by appending to it rather than using `put`.  We'd like to protect users from themselves, especially when there are properties of the structure we want to maintain.  In this case, we want to make sure keys stay unique.
 
-```python {cmd id="_listmappingsimple"}
+```python {cmd id="_mapping.listmappingsimple"}
 from ds2.mapping import Entry
 
 class ListMappingSimple:
@@ -131,7 +131,7 @@ We'll add the same kind of functionality to our Mapping ADT.  So, the **extended
 
 It is very important to recall from the very beginning of the course that the `dict` class is a **non-sequential collection**.  That is, there is no significance to the ordering of the items and furthermore, you should never assume to know anything about the ordering of the pairs.  You should not even assume that the ordering will be consistent between two iterations of the same `dict`.  This same warning goes for the mappings we will implement and we'll see that the ability to rearrange the order of how they are stored is the secret behind the mysteriously fast running times.  However, this first implementation will have the items in a fixed order because we are using a `list` to store them.
 
-```python {cmd id="_listmapping_notDRY"}
+```python {cmd id="_mapping.listmapping_notDRY"}
 from ds2.mapping import Entry
 
 class ListMapping:
@@ -194,8 +194,8 @@ For any key `k`,  we want to compute the index of the *right* `ListMapping` for 
 
 This means, we want an integer, i.e. the index into our list of buckets.  A **hash function** takes a key and returns an integer.  Most classes in python implement a method called `__hash__` that does just this.  We can use it to implement a simple mapping scheme that improves on the `ListMapping`.  
 
-```python {cmd id="_hashmappingsimple"}
-from ds2.listmapping import ListMapping
+```python {cmd id="_mapping.hashmappingsimple"}
+from ds2.mapping import ListMapping
 
 class HashMappingSimple:
     def __init__(self):
@@ -226,9 +226,8 @@ The number 100 is pretty arbitrary.  If there are many many entries, then one mi
 
 It makes sense to use more buckets as the number of entries increases.  To do this, we will keep track of the number of entries in the map.  This will allow us to implement `__len__` and also grow the number of buckets as needed.  As the number of entries grows, we can periodically increase the number of buckets.  Here is the code.
 
-```python {cmd id="_hashmapping_notDRY"}
-from ds2.mapping import Entry
-from ds2.listmapping import ListMapping
+```python {cmd id="_mapping.hashmapping_notDRY"}
+from ds2.mapping import Entry, ListMapping
 
 class HashMapping:
     def __init__(self, size = 2):
@@ -311,7 +310,7 @@ There are some methods that we expect to be implemented by the subclass.  We can
 
 Here is the code for the superclass.
 
-```python {cmd id="_mapping_01"}
+```python {cmd id="_mapping.mapping_01"}
 class Mapping:
 
     # Child class needs to implement this!
@@ -360,7 +359,7 @@ There is a lot here, but notice that there are really only four methods that a s
 
 Now, the `ListMapping` can be rewritten as follows.
 
-```python {cmd id="_listmapping"}
+```python {cmd id="_mapping.listmapping"}
 from ds2.mapping import Mapping, Entry
 
 class ListMapping(Mapping):
@@ -398,9 +397,8 @@ All the magic methods as well as the public iterators and string conversion are 
 
 The `HashMapping` class can also be rewritten as follows.
 
-```python {cmd id="_hashmapping"}
-from ds2.mapping import Mapping
-from ds2.listmapping import ListMapping
+```python {cmd id="_mapping.hashmapping"}
+from ds2.mapping import Mapping, ListMapping
 
 class HashMapping(Mapping):
     def __init__(self, size = 100):

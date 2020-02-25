@@ -28,7 +28,7 @@ This is where you deal with inputs so small that they cannot be divided.
 The most direct application of the Divide and Conquer paradigm to the sorting problem is the **mergesort** algorithm.
 In this algorithm, all the difficult work is in the merge step.
 
-```python {cmd id="_mergesort"}
+```python {cmd id="_sorting.mergesort"}
 def mergesort(L):
     # Base Case!
     if len(L) < 2:
@@ -169,7 +169,7 @@ Here is how one might implement these methods in python.
 The `BufferedIterator` class below is built from any iterator.
 It stays one step of the iteration ahead of the user and stores the next item in a buffer.
 
-```python {cmd id="_mergesort_iter_00"}
+```python {cmd id="_sorting.mergesort_iter_00"}
 class BufferedIterator:
     def __init__(self, i):
         self._i = iter(i)
@@ -204,7 +204,7 @@ class BufferedIterator:
 
 We can use this `BufferedIterator` to implement another iterator that takes two iterators and merges them as in the `merge` operation of `mergesort`.
 
-```python {cmd id="_mergesort_iter_01"}
+```python {cmd id="_sorting.mergesort_iter_01" continue="_sorting.mergesort_iter_00"}
 def merge(A, B):
     a = BufferedIterator(A)
     b = BufferedIterator(B)
@@ -227,7 +227,7 @@ The magic here is explained by understanding that this really is packaged into a
 
 We can use this new `merge` iterator to write a new version of `mergesort`.
 
-```python {cmd id="_mergesort_iter_02"}
+```python {cmd id="_sorting.mergesort_iter_02" continue="_sorting.mergesort_iter_01"}
 def mergesort(L):
     if len(L) > 1:
         m = len(L) // 2
@@ -246,7 +246,7 @@ A sorting algorithm, that just rearranges the elements in a single list is calle
 Before we get there, let's see the easiest version of `quicksort`.  One way to think about the motivation for `quicksort` is that we want to do divide and conquer, but we want the combine step to be as easy as possible.  Recall that in `mergesort`, most of our cleverness was devoted to doing the combining.
 In `quicksort`, the harder step is the dividing.
 
-```python {cmd id="_quicksort_long_00"}
+```python {cmd id="_sorting.quicksort_long_00"}
 def quicksorted(L):
     #base case
     if len(L) < 2:
@@ -268,7 +268,7 @@ def quicksorted(L):
 
 Let's do an in-place version.  For this, we want to avoid creating new lists and concatenating them at the end.
 
-```python {cmd id="_quicksort_long_01"}
+```python {cmd id="_sorting.quicksort_long_01" continue="_sorting.quicksort_long_00"}
 def quicksort(L, left = 0, right = None):
     if right is None:
         right = len(L)
@@ -285,7 +285,7 @@ def quicksort(L, left = 0, right = None):
         # Nothing to do!
 ```
 
-```python {cmd id="_quicksort_long_02" continue="_quicksort_long_01"}
+```python {cmd id="_sorting.quicksort_long_02" continue="_sorting.quicksort_long_01"}
 def partition(L, left, right):
     pivot = right - 1
     i = left        # index in left half
@@ -312,18 +312,39 @@ def partition(L, left, right):
     # Return the index of the pivot.
     return pivot
 ```
-```python {cmd continue="_quicksort_long_03" continue="_quicksort_long_02"}
+```python {cmd continue="_sorting.quicksort_long_03" continue="_sorting.quicksort_long_02"}
 # Simple test to see if it works.
 L = [5,2,3,1,4]
 quicksort(L)
 print(L)
 ```
 
-Here is a version without all the comments.
-It uses a helper function rather than using default parameters to handle the initial call.
+Below is a second implementation.
+It uses a (private) helper function rather than using default parameters to handle the initial call.
 It's helpful to look at at two different implementations of the same function and compare the different choices that were made between the two.
 
-```python {cmd id="_quicksort"}
+The main difference in the code below is that it uses a random pivot element instead of always choosing the last element.
+Notice that *random* is not the same as *arbitrary*.
+We use a random number generator to pick which element in a list will be the pivot.
+
+This is not just a cosmetic change.
+Notice that the following code raises an error.
+
+```python
+L = list(reversed(range(1000)))
+
+quicksort(L)
+```
+
+```
+RecursionError: maximum recursion depth exceeded in comparison
+```
+
+Here's the new code.
+
+```python {cmd id="_sorting.quicksort"}
+from random import randrange
+
 def quicksort(L):
     _quicksort(L, 0, len(L))
 
@@ -334,6 +355,8 @@ def _quicksort(L, left, right):
         _quicksort(L, mid+1, right)
 
 def partition(L, left, right):
+    pivot = randrange(left, right)
+    L[pivot], L[right -1] = L[right -1], L[pivot]
     i, j, pivot = left, right - 2, right - 1
     while i < j:
         while L[i] < L[pivot]:

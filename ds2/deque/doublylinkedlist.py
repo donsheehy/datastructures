@@ -52,16 +52,16 @@ class DoublyLinkedList:
 
 
     def __iadd__(self, other):
-        if other._head is None: return
-        if self._head is None:
-            self._head = other._head
-        else:
-            self._tail.link = other._head
-            other._head.prev = self._tail
-        self._tail = other._tail
-        self._length = self._length + other._length
+        if other._head is not None:
+            if self._head is None:
+                self._head = other._head
+            else:
+                self._tail.link = other._head
+                other._head.prev = self._tail
+            self._tail = other._tail
+            self._length = self._length + other._length
 
-        # Clean up the other list.
-        other.__init__()
+            # Clean up the other list.
+            other.__init__()
         return self
 

@@ -51,6 +51,7 @@ for chunk in chunks:
         tangled[name] = [chunk]
 
 for name, chunklist in tangled.items():
+    name = '/'.join(name.split('.'))
     with open('ds2/' + name + '.py', 'w') as outfile:
         for chunk in chunklist:
             outfile.write(str(chunk))

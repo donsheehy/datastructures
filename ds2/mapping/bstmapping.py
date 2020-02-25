@@ -1,4 +1,4 @@
-from mapping import Mapping
+from ds2.mapping import Mapping
 
 class BSTMapping(Mapping):
     def __init__(self):

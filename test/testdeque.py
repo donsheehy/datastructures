@@ -1,7 +1,5 @@
 import unittest
-from ds2.listdeque import ListDeque
-from ds2.linkedlist import LinkedList
-from ds2.doublylinkedlist import DoublyLinkedList
+from ds2.deque import ListDeque, LinkedList, DoublyLinkedList
 
 class DequeTests:
     def Deque(self):
@@ -58,8 +56,26 @@ class TestDoublyLinkedList(unittest.TestCase, DequeTests):
             B.addlast(i+9)
         A += B
         self.assertEqual(len(A), 18)
+        self.assertEqual(len(B), 0)
         for i in range(18):
             self.assertEqual(A.removefirst(), i)
+
+    def testconcattoempty(self):
+        A = self.Deque()
+        C = self.Deque()
+        A.addlast(1)
+        A.addlast(2)
+        C += A
+        self.assertEqual(len(C), 2)
+        self.assertEqual(C.removefirst(), 1)
+        self.assertEqual(C.removefirst(), 2)
+
+    def testconcatempty(self):
+        A = self.Deque()
+        C = self.Deque()
+        C += A
+        self.assertEqual(len(C), 0)
+
 
 
 if __name__ == '__main__':

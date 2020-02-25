@@ -1,4 +1,20 @@
-class QueueSimple:
+class ListQueueSimple:
+    def __init__(self):
+        self._L = []
+
+    def enqueue(self, item):
+        self._L.append(item)
+
+    def dequeue(self):
+        return self._L.pop(0)
+
+    def __len__(self):
+        return len(self._L)
+
+    def isempty(self):
+        return len(self) == 0
+
+class ListQueueFakeDelete:
     def __init__(self):
         self._head = 0
         self._L = []
@@ -17,7 +33,7 @@ class QueueSimple:
     def isempty(self):
         return len(self) == 0
 
-class ListQueue(QueueSimple):
+class ListQueue(ListQueueFakeDelete):
     def dequeue(self):
         item = self._L[self._head]
         self._head += 1

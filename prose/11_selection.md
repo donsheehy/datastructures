@@ -53,7 +53,9 @@ The idea is to partition the list and then recursive do the selection on one par
 Unlike `quicksort`, we only have to do a recursive search on one half of the list (as in binary search).
 (Note that the smallest element will be returned for $k=1$, *not* $k=0$, so there are several cases where we add one to the pivot index.)
 
-```python
+```python {cmd id="_select.quickselect_recursive"}
+from ds2.sorting.quicksort import partition
+
 def quickselect(L, k):
     return _quickselect(L, k, 0, len(L))
 
@@ -65,20 +67,6 @@ def _quickselect(L, k, left, right):
         return L[pivot]
     else:
         return _quickselect(L, k, pivot + 1, right)
-
-def partition(L, left, right):
-    pivot = randrange(left, right)
-    L[pivot], L[right -1] = L[right -1], L[pivot]
-    i, j, pivot = left, right - 2, right - 1
-    while i < j:
-        while L[i] < L[pivot]:
-            i += 1
-        while i < j and L[j] >= L[pivot]:
-            j -= 1
-        if i < j:
-            L[i], L[j] = L[j], L[i]
-    L[pivot], L[i] = L[i], L[pivot]    
-    return i
 ```
 
 Just as with `quicksort`, we use a randomized pivot so that we can expect to eliminate a constant fraction of the list with each new step.  Unlike `quicksort`, we will not make a recursive call on both sides.  As a result, we'll see that the average running time is only $O(n)$.  That means we can do selection faster than we can sort, which makes sense, but it is *not obvious* how to do it.
@@ -131,9 +119,13 @@ The last step follows by the well-known equation for geometric series.  You shou
 
 ## One last time without recursion
 
-The `quickselect` algorithm is an example of linear recursion.  Each function call makes just one more function call.  It's also **tail recursive** because that single recursive call is the last operation prior to returning.  So, as we've seen several times before, it's possible to eliminate the recursion and replace it with a single loop.  The code is below, but you might want to try to write this yourself to see if you understand both the algorithm and the process of tail recursion elimination.
+The `quickselect` algorithm is an example of linear recursion.  Each function call makes just one more function call.  It's also **tail recursive** because that single recursive call is the last operation prior to returning.  So, as we've seen several times before, it's possible to eliminate the recursion and replace it with a single loop.  
 
-```python
+The code is below, but you might want to try to write this yourself to see if you understand both the algorithm and the process of tail recursion elimination.
+
+```python {cmd id="_select.quickselect"}
+from ds2.sorting.quicksort import partition
+
 def quickselect(L, k):
     left, right = 0, len(L)
     while left < right:
@@ -144,7 +136,7 @@ def quickselect(L, k):
             return L[pivot]
         else:
             left = pivot + 1
-      return L[left]
+    return L[left]
 ```
 
 As long as the difference between left and right shrinks by a constant factor every couple of pivots, we can be sure to *prune* enough of the search to get a linear time algorithm.

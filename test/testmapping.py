@@ -1,11 +1,13 @@
 import unittest
-from ds2.mapping import Mapping
-from ds2.listmappingsimple import ListMappingSimple
-from ds2.listmapping import ListMapping
-from ds2.listmapping_notDRY import ListMapping as ListMapping_notDRY
-from ds2.hashmappingsimple import HashMappingSimple
-from ds2.hashmapping import HashMapping
-from ds2.hashmapping_notDRY import HashMapping as HashMapping_notDRY
+from ds2.mapping import (Mapping,
+                        ListMappingSimple,
+                        ListMapping,
+                        ListMapping_notDRY,
+                        HashMappingSimple,
+                        HashMapping_notDRY,
+                        HashMapping,
+                        BSTMapping
+                        )
 
 class MappingTests:
     def Mapping(self):
@@ -101,23 +103,22 @@ class ExtendedMappingTests:
         M[1] = 2
         self.assertEqual(str(M), '{1 : 2}')
 
-class TestListMappingSimple(unittest.TestCase, MappingTests):
-    Mapping = ListMappingSimple
+def _test(mapping, extended=False):
+    if extended:
+        class MappingTestCase(unittest.TestCase, MappingTests, ExtendedMappingTests):
+            Mapping = mapping
+    else:
+        class MappingTestCase(unittest.TestCase, MappingTests):
+            Mapping = mapping
+    return MappingTestCase
 
-class TestListMapping(unittest.TestCase, MappingTests, ExtendedMappingTests):
-    Mapping = ListMapping
-
-class TestListMapping_notDRY(unittest.TestCase, MappingTests, ExtendedMappingTests):
-    Mapping = ListMapping_notDRY
-
-class TestHashMappingSimple(unittest.TestCase, MappingTests):
-    Mapping = HashMappingSimple
-
-class TestHashMapping(unittest.TestCase, MappingTests, ExtendedMappingTests):
-    Mapping = HashMapping
-
-class TestHashMapping_notDRY(unittest.TestCase, MappingTests, ExtendedMappingTests):
-    Mapping = HashMapping_notDRY
+TestListMappingSimple = _test(ListMappingSimple)
+TestHashMappingSimple = _test(HashMappingSimple)
+TestListMapping = _test(ListMapping, extended=True)
+TestListMapping_notDRY = _test(ListMapping_notDRY, extended=True)
+TestHashMapping = _test(HashMapping, extended=True)
+TestHashMapping_notDRY = _test(HashMapping_notDRY, extended=True)
+# TestBSTMapping = _test(BSTMapping)
 
 class TestAbstractMapping(unittest.TestCase):
     """ These tests just check (and document) the methods that must
@@ -143,7 +144,6 @@ class TestAbstractMapping(unittest.TestCase):
         M = Mapping()
         with self.assertRaises(NotImplementedError):
             M._entryiter()
-
 
 if __name__ == '__main__':
     unittest.main()

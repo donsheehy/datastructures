@@ -1,6 +1,5 @@
 import unittest
-from ds2.sortedlist import SortedList
-from ds2.sortedlistsimple import SortedListSimple
+from ds2.sortedlist import SortedList, SortedListSimple
 
 class SortedListTests:
     def SortedList(self):

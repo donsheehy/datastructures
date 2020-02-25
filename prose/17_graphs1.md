@@ -43,7 +43,7 @@ First, let's write a Graph class that is as close as possible to the mathematica
 It will store a set for the vertices and a set of pairs (2-tuples) for the edges.
 To get the neighbors of a vertex, it will iterate over all edges in the graph.
 
-```python
+```python {cmd id="_graph.edgesetgraph_00"}
 class EdgeSetGraph:
     def __init__(self, V, E):
         self._V = set()
@@ -70,7 +70,7 @@ class EdgeSetGraph:
 To make an undirected version of this class, we can simply modify the `addedge` method to add an edge in each direction.
 We also change the `nbrs` method to work with unordered pairs (sets).
 
-```python
+```python {cmd id="_graph.edgesetgraph_01" continue="_graph.edgesetgraph_00"}
 class UndirectedEdgeSetGraph(EdgeSetGraph):
     def addedge(self, u, v):
         self._E.add((u,v))
@@ -91,7 +91,7 @@ It should not be necessary to go through all the edges, just to find the ones in
 
 An alternative approach is to store a set with each vertex and have this set contain all the neighbors of that vertex.  This allows for fast access to the neighbors.  In fact, it means that we don't have to store the edges explicitly at all.
 
-```python {cmd, id='adjacencysetgraph'}
+```python {cmd, id="_graph.adjacencysetgraph_00"}
 class AdjacencySetGraph:
     def __init__(self, V, E):
         self._V = set()
@@ -118,7 +118,7 @@ class AdjacencySetGraph:
         return iter(self._nbrs[v])
 ```
 
-```python {cmd continue="adjacencysetgraph"}
+```python {cmd continue="_graph.adjacencysetgraph_00"}
 G = AdjacencySetGraph({1,2,3}, {(1,2),(2,1),(1,3)})
 print("neighbors of 1:", list(G.nbrs(1)))
 print("neighbors of 2:", list(G.nbrs(2)))
@@ -135,7 +135,7 @@ This can be very convenient as it allows one to put a graph structure on top of 
 As written, there is no clear reason to use a set for the neighbors rather than a list.
 One case where the set is better is if we want to test if the graph contains a particular edge.  With the `AdjacencySetGraph` above, this method could be implemented as follows.
 
-```python
+```python {cmd id="_graph.adjacencysetgraph_01" continue="_graph.adjacencysetgraph_00"}
     def hasedge(self, u, v):
         return v in self._nbrs[u]
 ```
@@ -156,22 +156,35 @@ A **cycle is simple** if is is a cycle and removing the last edge results in a s
 
 To solidify these definitions, we could write a couple methods to check them.
 
-```python
-def ispath(G, V):
-  """Return True if and only if the vertices V form a path in G."""
-  return V and all(G.hasedge(V[i-1], V[i]) for i in range(1, len(V)))
+```python {cmd id="_graph.adjacencysetgraph_02" continue="_graph.adjacencysetgraph_01"}
+    def ispath(self, V):
+      """Return True if and only if the vertices V form a path."""
+      return V and all(self.hasedge(V[i-1], V[i]) for i in range(1, len(V)))
 
-def issimplepath(G, V):
-  """Return True if and only if the vertices V form a simple path in G."""
-  return ispath(G, V) and len(V) == len(set(V))
+    def issimplepath(self, V):
+      """Return True if and only if the vertices V form a simple path."""
+      return self.ispath(V) and len(V) == len(set(V))
 
-def iscycle(G, V):
-    """Return True if and only if the vertices V form a cycle in G."""
-    return ispath(G, V) and V[0] == V[-1]
+    def iscycle(self, V):
+        """Return True if and only if the vertices V form a cycle."""
+        return self.ispath(V) and V[0] == V[-1]
 
-def issimplecycle(G, V):
-    """Return True if and only if the vertices V form a simple cycle in G."""
-    return iscycle(G,V) and issimplepath(G, V[:-1])
+    def issimplecycle(self, V):
+        """Return True if and only if the vertices V form a simple cycle."""
+        return self.iscycle(V) and self.issimplepath(V[:-1])
+```
+
+```python {cmd continue="_graph.adjacencysetgraph_02"}
+G = AdjacencySetGraph({1,2,3,4}, {(1,2),(3,1), (2,3), (3,4), (4,3)})
+print("[1,2,3,1] is a path", G.ispath([1,2,3,1]))
+print("[1,2,3,1] is a simple path", G.issimplepath([1,2,3,1]))
+print("[1,2,3] is a simple path", G.issimplepath([1,2,3]))
+print("[1,2,3] is a simple cycle:", G.issimplecycle([1,2,3]))
+print("[1,2,3,1] is a simple cycle:", G.issimplecycle([1,2,3]))
+print("[1,2,3,4] is a simple path:", G.issimplepath([1,2,3,4]))
+print("[1,2,3,4] is a simple cycle:", G.issimplecycle([1,2,3,4]))
+print("[1,2,3,4,3,1] is a cycle:", G.iscycle([1,2,3,4,3,1]))
+print("[1,2,3,4,3,1] is a simple cycle:", G.issimplecycle([1,2,3,4,3,1]))
 ```
 
 We say that $u$ is **connected** to $v$ if there exists a path that starts at $u$ and ends at $v$.
@@ -183,7 +196,7 @@ For a directed graph, two vertices $u$ and $v$ are **strongly connected** if $u$
 Let's consider a simple method to test of two vertices are connected.
 We will add it to our `AdjacencySetGraph` class.  As a first exercise, we could try to work recursively.  The idea is simple: in the base case, see if you are trying to get from a vertex to itself.  Otherwise, it suffices to check if any of the neighbors of the first vertex are connected to the last vertex.
 
-```python {cmd continue="adjacencysetgraph", id="connected1"}
+```python {cmd continue="_graph.adjacencysetgraph_01", id="connected1"}
     def connected(self, a, b):
         if a == b: return True
         return any(self.connected(nbr, b) for nbr in self.nbrs(a))
@@ -207,7 +220,7 @@ except RecursionError:
 
 It's clear that if the graph has any cycles, we can't check connectivity this way.  To deal with cycles, we can keep a set of visited vertices.  Recall that this is called memoization.
 
-```python {cmd continue="adjacencysetgraph", id="connected2"}
+```python {cmd continue="_graph.adjacencysetgraph_01", id="connected2"}
     def connected(self, a, b):
         return self._connected(a, b, set())
 

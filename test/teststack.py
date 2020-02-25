@@ -1,6 +1,5 @@
 import unittest
-from ds2.liststack import ListStack
-from ds2.badstack import BadStack
+from ds2.stack import ListStack, BadStack, AnotherStack
 
 class StackTests:
     def Stack(self):
@@ -51,6 +50,9 @@ class StackTests:
 
 class TestListStack(unittest.TestCase, StackTests):
     Stack = ListStack
+
+class TestAnotherStack(unittest.TestCase, StackTests):
+    Stack = AnotherStack
 
 class TestBadStack(unittest.TestCase, StackTests):
     Stack = BadStack

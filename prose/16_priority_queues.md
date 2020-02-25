@@ -18,7 +18,7 @@ The **Priority Queue ADT** is a data type that stores a collection of items with
 
 As with every ADT presented in this book, there is a simple, though not necessarily efficient, implementation using a list. Let's start with a list and put all the entries in the list. To find the min, we can iterate through the list.
 
-```python {cmd id="_simplelistpq"}
+```python {cmd id="_priorityqueue.simplelistpq"}
 class SimpleListPQ:
     def __init__(self):
         self._L = []
@@ -40,7 +40,7 @@ As the data are stored as tuples, we have to use an index to pull out the priori
 
 We'll make a class that stores the entries, each will have an `item` and a `priority` as attributes. We'll make the entries comparable by implementing `__lt__` and thus the comparison of entries will always just compare their priorities.
 
-```python {cmd id="_priorityqueue"}
+```python {cmd id="_priorityqueue.priorityqueue"}
 # priorityqueue.py
 
 class Entry:
@@ -54,7 +54,7 @@ class Entry:
 
 Now, we can rewrite the list version of the priority queue.  It's almost the same as before, except, that by using the `Entry` class, the code is more explicit about the types of objects, and hopefully, easier to read and understand.
 
-```python {cmd id="_unsortedlistpq"}
+```python {cmd id="_priorityqueue.unsortedlistpq"}
 from ds2.priorityqueue import Entry
 
 class UnsortedListPQ:
@@ -78,7 +78,7 @@ The `insert` method will clearly only require constant time because it is a sing
 
 The `findmin` would be much faster if the list were sorted.  Then we could just return the first item in the list.  An even better approach would sort the list backwards.  Then `removemin` could also be constant time, using the constant-time `pop` function on a list.
 
-```python {cmd id="_sortedlistpq"}
+```python {cmd id="_priorityqueue.sortedlistpq"}
 from ds2.priorityqueue import Entry
 
 class SortedListPQ:
@@ -99,7 +99,7 @@ class SortedListPQ:
 I used a nice feature of the python `sort` method, a named parameter called `reversed` which, as one might guess, reverses the sorting order.
 
 
-```python {cmd continue="_sortedlistpq"}
+```python {cmd continue="_priorityqueue.sortedlistpq"}
 S = SortedListPQ()
 S.insert("ham", 3)
 S.insert("cheese", 1)
@@ -129,7 +129,7 @@ We will maintain the invariant that after each operation, the list of entries is
 
 Similarly, there is a `_downheap` operation that will repeatedly swap an entry with its child until it's heap-ordered.  This operation is useful in the next section for building a heap from scratch.
 
-```python {cmd id="_heappq"}
+```python {cmd id="_priorityqueue.heappq"}
 from ds2.priorityqueue import Entry
 
 class HeapPQ:
@@ -180,7 +180,7 @@ class HeapPQ:
 
 Just using the public interface, one could easily construct a `HeapPQ` from a list of item-priority pairs.  For example, the following code would work just fine.
 
-```python {cmd continue="_heappq"}
+```python {cmd continue="_priorityqueue.heappq"}
 pq = HeapPQ()
 pairs = [(10, 10), (2, 2), (30, 30), (4,4)]
 for item, priority in pairs:
@@ -194,8 +194,8 @@ Perhaps surprisingly, we can construct the `HeapPQ` in linear time.  We call thi
 ```python
 def _heapify(self):
     n = len(self._entries)
-    for i in range(n):
-        self._downheap(n - i - 1)
+    for i in reversed(range(n)):
+        self._downheap(i)
 ```
 
 Look at the difference between the `heapify` code above and the `_heapify_slower` code below.  The former works from the end and "downheaps" every entry and the latter starts at the beginning and "upheaps" every entry.  Both are correct, but one is faster.
@@ -219,7 +219,7 @@ However, the usual way to reduce the priority is to specify the item and its new
 
 The full code including the `_heapify` method is given below.  This full version of the priority queue will be very useful for some graph algorithms that we will see soon.
 
-```python {cmd id="_priorityqueue_01" continue="_priorityqueue_00"}
+```python {cmd id="_priorityqueue.priorityqueue_01" continue="_priorityqueue.priorityqueue_00"}
 class PriorityQueue:
     def __init__(self, entries = None):
         entries = entries or []

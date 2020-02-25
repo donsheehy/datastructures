@@ -1,3 +1,5 @@
+from random import randrange
+
 def quicksort(L):
     _quicksort(L, 0, len(L))
 
@@ -8,6 +10,8 @@ def _quicksort(L, left, right):
         _quicksort(L, mid+1, right)
 
 def partition(L, left, right):
+    pivot = randrange(left, right)
+    L[pivot], L[right -1] = L[right -1], L[pivot]
     i, j, pivot = left, right - 2, right - 1
     while i < j:
         while L[i] < L[pivot]:

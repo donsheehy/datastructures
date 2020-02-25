@@ -15,7 +15,7 @@ Here is the ADT.
 
 As a start, let's see what a deque implementation would look like using a list.
 
-```python {cmd id="_listdeque"}
+```python {cmd id="_deque.listdeque"}
 class ListDeque:
     def __init__(self):
         self._L = []
@@ -55,7 +55,7 @@ We will use the usual trick of looking back into our intuitive description above
 In this case, there is the list itself and the nodes.
 Let's write a class for a `ListNode`.
 
-```python {cmd id="_linkedlist_00"}
+```python {cmd id="_deque.linkedlist_00"}
 class ListNode:
     def __init__(self, data, link = None):
         self.data = data
@@ -69,7 +69,7 @@ This first implementation will hide the nodes from the user.
 That is, from a users perspective, they can create a linked list, and they can add and remove nodes, but they don't have to touch (or even know about) the nodes.
 This is abstraction (hiding details)!
 
-```python {cmd id="simplelinkedlist", continue="_linkedlist_00"}
+```python {cmd id="simplelinkedlist", continue="_deque.linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -90,7 +90,7 @@ We could hope to do better with a linked list.
 However, right now, we have no way to add to or remove from the end of the linked list.
 Here is an inefficient, though simple and correct way to do it.
 
-```python {cmd id="linkedlist_A" continue="_linkedlist_00"}
+```python {cmd id="linkedlist_A" continue="_deque.linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -149,7 +149,7 @@ This requires a bit of overhead to make sure it always stores the correct node.
 Most of the special cases happen when there is only one item in the list.
 We will be able to use this to get some improvement for `addlast`, because we will be able to jump right to the end without traversing.  We will also be able to clean up the code for `removelast` a little by eliminating the `link.link` stuff and instead just check if we reached the tail.
 
-```python {cmd id="linkedlist_B" continue="_linkedlist_00"}
+```python {cmd id="linkedlist_B" continue="_deque.linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -202,9 +202,9 @@ assert(LL.removelast() == 13)
 Now we can implement the Queue ADT with a linked list.
 It will be surprisingly easy.
 
-```python {cmd id="_linkedqueue"}
+```python {cmd id="_queue.linkedqueue"}
 # linkedqueue.py
-from ds2.linkedlist import LinkedList
+from ds2.deque import LinkedList
 
 class LinkedQueue:
     def __init__(self):
@@ -231,7 +231,7 @@ To implement the same method on the `LinkedQueue`, we will want **delegate** the
 Let's add the ability to get the length of the linked list.
 We'll do it by storing the length and updating it with each operation.
 
-```python {cmd id="_linkedlist_01" continue="_linkedlist_00"}
+```python {cmd id="_deque.linkedlist_01" continue="_deque.linkedlist_00"}
 class LinkedList:
     def __init__(self):
         self._head = None
@@ -275,7 +275,7 @@ class LinkedList:
         return self._length
 ```
 
-```python {cmd hide continue="_linkedlist_01"}
+```python {cmd hide continue="_deque.linkedlist_01"}
 LL = LinkedList()
 LL.addfirst(3)
 LL.addfirst(5)
@@ -305,7 +305,7 @@ If we rename our first Queue implementations `ListQueue`, we might have had the 
 
 ```python {cmd}
 import unittest
-from ds2.listqueue import ListQueue
+from ds2.queue import ListQueue
 
 class TestListQueue(unittest.TestCase):
     def testinit(self):
@@ -414,7 +414,7 @@ Here are our new test files.
 # testlistqueue.py
 import unittest
 from ds2.testqueue import TestQueue
-from ds2.listqueue import ListQueue
+from ds2.queue import ListQueue
 
 class TestListQueue(unittest.TestCase, TestQueue):
     def newQueue(self):
@@ -428,7 +428,7 @@ if __name__ == '__main__':
 # testlinkedqueue.py
 import unittest
 from ds2.testqueue import TestQueue
-from ds2.linkedqueue import LinkedQueue
+from ds2.queue import LinkedQueue
 
 class TestListQueue(unittest.TestCase, TestQueue):
     def newQueue(self):

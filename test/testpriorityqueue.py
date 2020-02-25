@@ -1,11 +1,11 @@
-import generatecode
-
 import unittest
-from ds2.simplelistpq import SimpleListPQ
-from ds2.sortedlistpq import SortedListPQ
-from ds2.unsortedlistpq import UnsortedListPQ
-from ds2.heappq import HeapPQ
-from ds2.priorityqueue import PriorityQueue
+from ds2.priorityqueue import (
+                                SimpleListPQ,
+                                SortedListPQ,
+                                UnsortedListPQ,
+                                HeapPQ,
+                                PriorityQueue,
+                                )
 
 class PQTests:
     def testinit(self):
@@ -50,7 +50,6 @@ TestSimpleListPQ = _test(SimpleListPQ)
 TestHeapPQ = _test(HeapPQ)
 TestSortedListPQ = _test(SortedListPQ)
 TestUnsortedListPQ = _test(UnsortedListPQ)
-TestPriorityQueue = _test(PriorityQueue)
 
 class TestPriorityQueue(unittest.TestCase, PQTests):
     PQ = PriorityQueue

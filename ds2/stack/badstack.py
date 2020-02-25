@@ -1,4 +1,4 @@
-from ds2.liststack import ListStack
+from ds2.stack import ListStack
 
 class BadStack(ListStack):    
     def push(self, item):

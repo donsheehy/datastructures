@@ -8,7 +8,7 @@ Before we dive into particular sorting algorithms, let's first ask an easier que
 
 After a little, thought, you will probably come up with some code that looks like the following.
 
-```python{cmd id="_dumbsort_00"}
+```python{cmd id="_sorting.dumbsort_00"}
 def issorted(L):
     for i in range(len(L)-1):
         if L[i]>L[i+1]:
@@ -16,7 +16,7 @@ def issorted(L):
     return True
 ```
 
-```python{cmd continue="_dumbsort_00"}
+```python{cmd continue="_sorting.dumbsort_00"}
 A = [1,2,3,4,5]
 print(A, "is sorted:", issorted(A))
 
@@ -44,7 +44,7 @@ It's important to realize that we are using this assumption, because later, we w
 Let's use the `issorted` method to write a sorting algorithm.
 Instead of returning False when we find two elements out of order, we'll just fix them and move on.  Let's call this (for reasons to become clear) `dumbersort`.
 
-```python {cmd id="_dumbsort_01" continue="_dumbsort_00"}
+```python {cmd id="_sorting.dumbsort_01" continue="_sorting.dumbsort_00"}
 def dumbersort(L):
     for i in range(len(L)-1):
         if L[i]>L[i+1]:
@@ -53,7 +53,7 @@ def dumbersort(L):
 
 The main problem with this code is that *it doesn't sort the list*.
 
-```python {cmd continue="_dumbsort_01"}
+```python {cmd continue="_sorting.dumbsort_01"}
 L = [5,4,3,2,1]
 dumbersort(L)
 print(L)
@@ -61,13 +61,13 @@ print(L)
 
 We should probably do it twice *or more*.  We could even repeat the algorithm until it works.
 
-```python {cmd id="_dumbsort_02" continue="_dumbsort_01"}
+```python {cmd id="_sorting.dumbsort_02" continue="_sorting.dumbsort_01"}
 def dumbsort(L):
     while (not issorted(L)):
         dumbersort(L)
 ```
 
-```python {cmd continue="_dumbsort_02"}
+```python {cmd continue="_sorting.dumbsort_02"}
 L = [5,4,3,2,1]
 dumbsort(L)
 print(L)
@@ -84,7 +84,7 @@ Another way to see that this works is to check that after calling `dumberSort(L)
 At this point, we would test the code and think about refactoring.  Remember the DRY (**D** on't **R** epeat **Y** ourself) principle.  Because we know how many times to loop, we could just use a `for` loop.  
 
 
-```python {cmd id="_bubblesortsimple"}
+```python {cmd id="_sorting.bubblesortsimple"}
 def bubblesort(L):
     for iteration in range(len(L)-1):
         for i in range(len(L)-1):
@@ -92,7 +92,7 @@ def bubblesort(L):
                 L[i], L[i+1] = L[i+1], L[i]
 ```
 
-```python {cmd continue="_bubblesortsimple"}
+```python {cmd continue="_sorting.bubblesortsimple"}
 alist = [30, 100000,54,26,93,17,77,31,44,55,20]
 bubblesort(alist)
 print(alist)
@@ -102,7 +102,7 @@ At this point, we have a correct algorithm and it's quite easy to bound its runn
 
 We lost something compared to `dumbsort`, namely, we no longer stop early if the list is already sorted.  Let's bring that back.  We'll use a flag to check if any swaps were made.  
 
-```python {cmd id="_bubblesort"}
+```python {cmd id="_sorting.bubblesort"}
 def bubblesort(L):
     keepgoing = True
     while keepgoing:
@@ -115,7 +115,7 @@ def bubblesort(L):
 
 Now, that we know an invariant that leads to a correct sorting algorithm, maybe we could work backwards from the invariant to an algorithm.  Recall, the invariant was that after `i` iterations of a loop, the `i` largest elements are in their final positions.  We can write an algorithm that just makes sure to achieve this, by selecting the largest among the first n-i elements and moving that element into place.
 
-```python {cmd id="_selectionsort"}
+```python {cmd id="_sorting.selectionsort"}
 def selectionsort(L):
     n = len(L)
     for i in range(n-1):
@@ -132,7 +132,7 @@ Do you see the difference between this and our previous invariant?
 
 There are many ways we could enforce this invariant.  We'll do it by "bubbling" element `n-i` into position in the `i`th step.  Note this is not the final position, but rather the position that satisfies the invariant.
 
-```python {cmd id="_insertionsortsimple"}
+```python {cmd id="_sorting.insertionsortsimple"}
 def insertionsort(L):
     n = len(L)
     for i in range(n):
@@ -143,7 +143,7 @@ def insertionsort(L):
 
 As before, we can make this algorithm go faster if the list is already sorted (or almost already sorted).  We stop the inner loop as soon as the element is in the right place
 
-```python {cmd id="_insertionsort"}
+```python {cmd id="_sorting.insertionsort"}
 def insertionsort(L):
     n = len(L)
     for i in range(n):
@@ -208,7 +208,6 @@ print("--------")
 
 for foo in sorted(L, key = Foo.geta):
     print(foo)
-
 ```
 
 If the key function returns a tuple, it will sort by the first element and break ties with subsequent elements.  This kind of sorting is called lexicographic because it is how you would sort words in alphabetical order.

@@ -1,4 +1,4 @@
-from ds2.liststack import ListStack
+from ds2.stack import ListStack
 
 class AnotherStack(ListStack):
     def pop(self):
@@ -7,8 +7,4 @@ class AnotherStack(ListStack):
         except IndexError:
             raise RuntimeError("pop from empty stack")
 
-s = AnotherStack()
-s.push(5)
-s.pop()
-s.pop()
 

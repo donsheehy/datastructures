@@ -1,4 +1,4 @@
-from ds2.sortedlistsimple import SortedListSimple
+from ds2.sortedlist import SortedListSimple
 
 class SortedList(SortedListSimple):
     def __contains__(self, item):

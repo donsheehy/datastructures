@@ -1,15 +1,16 @@
 import unittest
-from ds2.dumbsort import dumbsort
-from ds2.bubblesortsimple import bubblesort as bubblesortsimple
-from ds2.bubblesort import bubblesort
-from ds2.insertionsortsimple import insertionsort as insertionsortsimple
-from ds2.insertionsort import insertionsort
-from ds2.selectionsort import selectionsort
-from ds2.mergesort import mergesort
-from ds2.mergesort_iter import mergesort as mergesort_iter
-from ds2.quicksort import quicksort
-from ds2.quicksort_long import quicksort as quicksort_long
-from ds2.quicksort_long import quicksorted
+from ds2.sorting import (dumbsort,
+                        bubblesortsimple,
+                        bubblesort,
+                        insertionsortsimple,
+                        insertionsort,
+                        selectionsort,
+                        mergesort,
+                        mergesort_iter,
+                        quicksort,
+                        quicksort_long,
+                        quicksorted
+                        )
 
 class SortingTests:
     def testalreadysortedcase(self):

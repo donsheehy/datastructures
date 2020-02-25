@@ -37,7 +37,7 @@ We will implement it with a class called `ListStack`.
 Here, we are giving hints about the implementation in the name.
 This is more common in Java programming, but we adopt the convention in the book to help us distinguish between different implementations of the same ADT.
 
-```python {cmd id="_liststack_00"}
+```python {cmd id="_stack.liststack_00"}
 class ListStack:
     def __init__(self):
         self._L = []
@@ -63,8 +63,8 @@ class ListStack:
 
 The `Stack` class above illustrates the object-oriented strategy of *composition* (the `Stack` has a `list`).  It is also an example of the **Wrapper Pattern**.  The Python builtin `list` is doing all the heavy lifting, but from the user's perpective, they don't know or care how the methods are implemented.  This is not exactly true.  The user would start to care if the performance is bad.  It wouldn't be too hard to make this inefficient.  For example, we could have implemented the Stack by pushing new items into the front of the list.  Here we use inheritance to avoid rewriting the methods that will not be changing.
 
-```python {cmd id="_badstack"}
-from ds2.liststack import ListStack
+```python {cmd id="_stack.badstack"}
+from ds2.stack import ListStack
 
 class BadStack(ListStack):    
     def push(self, item):
@@ -90,8 +90,8 @@ Thus, the `list.pop` call in our `pop` method will take $O(n)$ time as well.   S
    - **len** - returns the number of items in the queue.
    - **isempty** - return `True` if the queue has no items and return `False` otherwise.
 
-```python
-class Queue:
+```python {cmd id="_queue.listqueue_00"}
+class ListQueueSimple:
     def __init__(self):
         self._L = []
 
@@ -114,8 +114,8 @@ Yes, it takes time proportional to the length of the list, but what can we do?  
 
 Here's a different idea.  Let's not really delete things from the front of the list.  Instead, we'll ignore them by keeping the index of the head of the queue.
 
-```python {cmd id="_listqueue_00"}
-class QueueSimple:
+```python {cmd id="_queue.listqueue_01"}
+class ListQueueFakeDelete:
     def __init__(self):
         self._head = 0
         self._L = []
@@ -137,8 +137,8 @@ class QueueSimple:
 
 There is something a little odd about this code: it never gets rid of old items after they have been dequeued.  Even if it deleted them, it still keeps a place in the list for them.  This is a kind of **lazy** update.  Shouldn't we clean up after ourselves?  Yes, but let's wait.  Here's the idea.  If the list ever gets half empty, that is, if `_head` is more than half the length of `_L`, then we will bite the bullet and replace `_L` with a slice of it.  "Biting the bullet" is an especially good turn of phrase here if you view this process as a kind of amputation of the old gangrenous stump of the list.
 
-```python {cmd id="_listqueue_01" continue="_listqueue_00"}
-class ListQueue(QueueSimple):
+```python {cmd id="_queue.listqueue_02" continue="_queue.listqueue_01"}
+class ListQueue(ListQueueFakeDelete):
     def dequeue(self):
         item = self._L[self._head]
         self._head += 1
@@ -167,7 +167,7 @@ In the case of a stack, it is never correct usage to `pop` from an empty stack.
 Thus, it makes sense that someone using our `Stack` class should have their program crash and see an error message if they attempt to call `pop` when there are no items left on the stack.
 In the list implementation above, this does happen:
 
-```python {cmd id="liststackerror" continue="_liststack_00"}
+```python {cmd id="liststackerror" continue="_stack.liststack_00"}
 s = ListStack()
 s.push(5)
 s.pop()
@@ -183,8 +183,8 @@ Otherwise, the stack trace reports the error in our code.
 Then, a user, might have to try to understand our class in order to backtrack to understand what they did wrong in their code.
 Instead, give them an error that explains exactly what happened.
 
-```python {cmd id="_anotherstack"}
-from ds2.liststack import ListStack
+```python {cmd id="_stack.anotherstack"}
+from ds2.stack import ListStack
 
 class AnotherStack(ListStack):
     def pop(self):
@@ -193,6 +193,9 @@ class AnotherStack(ListStack):
         except IndexError:
             raise RuntimeError("pop from empty stack")
 
+```
+
+```python {cmd continue="_stack.anotherstack"}
 s = AnotherStack()
 s.push(5)
 s.pop()

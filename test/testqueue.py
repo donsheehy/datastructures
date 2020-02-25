@@ -1,6 +1,6 @@
 import unittest
-from ds2.listqueue import QueueSimple, ListQueue
-from ds2.linkedqueue import LinkedQueue
+from ds2.queue import ListQueueSimple, ListQueue, ListQueueFakeDelete
+from ds2.queue import LinkedQueue
 
 
 class QueueTests:
@@ -45,10 +45,13 @@ class QueueTests:
         self.assertFalse(Q.isempty())
         Q.dequeue()
         self.assertTrue(Q.isempty())
-        
 
-class TestQueueSimple(unittest.TestCase, QueueTests):
-    Queue = QueueSimple
+
+class TestListQueueSimple(unittest.TestCase, QueueTests):
+    Queue = ListQueueSimple
+
+class TestListQueueFakeDelete(unittest.TestCase, QueueTests):
+    Queue = ListQueueFakeDelete
 
 class TestListQueue(unittest.TestCase, QueueTests):
     Queue = ListQueue

@@ -1,5 +1,5 @@
 # linkedqueue.py
-from ds2.linkedlist import LinkedList
+from ds2.deque import LinkedList
 
 class LinkedQueue:
     def __init__(self):
