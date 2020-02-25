@@ -12,11 +12,11 @@ There is a book and a library of data structures, `ds2`.
 
 You can download and install the code as a python package from the github repository.
 
-<a href="https://github.com/donsheehy/datastructures">Here is the full source of the book on github.</a>
+`Here is the full source of the book on github. <https://github.com/donsheehy/datastructures>`_
 
-<a href ="fullbook.pdf">Click here to download the full book in PDF</a>
+`Click here to download the full book in PDF <https://donsheehy.github.io/datastructures/fullbook.pdf>`_
 
-<a href ="fullbook.html">Click here to access the full book in HTML</a>
+`Click here to access the full book in HTML <https://donsheehy.github.io/datastructures/fullbook.html>`_
 
 .. toctree::
    :maxdepth: 2
