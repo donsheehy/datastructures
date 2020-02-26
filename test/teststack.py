@@ -48,6 +48,13 @@ class StackTests:
         s.pop()
         self.assertTrue(s.isempty())
 
+    def testpopemptyraiseserror(self):
+        s = self.Stack()
+        try:
+            s.pop()
+        except (IndexError, RuntimeError):
+            pass
+
 class TestListStack(unittest.TestCase, StackTests):
     Stack = ListStack
 

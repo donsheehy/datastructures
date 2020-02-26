@@ -25,9 +25,9 @@ class BSTMapping(Mapping):
     def floor(self, key):
         if self._root:
             floornode = self._root.floor(key)
-            return floornode.key, floornode.value
-        else:
-            return None, None
+            if floornode is not None:
+                return floornode.key, floornode.value
+        return None, None
 
     def remove(self, key):
         if self._root:
@@ -37,7 +37,6 @@ class BSTMapping(Mapping):
 
     def __delitem__(self, key):
         self.remove(key)
-
 
 class BSTNode:
     def __init__(self, key, value):
@@ -49,6 +48,9 @@ class BSTNode:
 
     def __len__(self):
         return self._length
+
+    def __str__(self):
+        return str(self.key) + " : " + str(self.value)
 
     def get(self, key):
         if key == self.key:
@@ -74,7 +76,6 @@ class BSTNode:
             else:
                 self.right = BSTNode(key, value)
         self._updatelength()
-
 
     def _updatelength(self):
         len_left = len(self.left) if self.left else 0

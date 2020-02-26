@@ -1,5 +1,5 @@
-from svghelper import SVGEngine
-from bstmapping import BSTMapping as Tree
+from ds2.figure_generation.svghelper import SVGEngine
+from ds2.orderedmapping.bstmapping import BSTMapping as Tree
 
 # def draw_line(x1, y1, x2, y2):
 # 	canvas.set_line_width(3)

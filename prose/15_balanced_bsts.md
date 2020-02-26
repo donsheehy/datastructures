@@ -40,9 +40,8 @@ We make sure to also update the lengths after each rotation.
 The main difference with our previous code is that now, all methods that can change the tree structure are combined with assignments.
 It is assumed that only `put` and `remove` will rearrange the tree, and so `get` and `floor` will keep the tree structure as is.
 
-```python {cmd}
-from mapping import Mapping, Entry
-
+```python {cmd id="_orderedmapping.balancedbst"}
+from ds2.mapping import Mapping
 
 class BSTNode:
     def __init__(self, key, value):
@@ -150,6 +149,9 @@ class BSTNode:
     def __len__(self):
         return self._length
 
+    def __str__(self):
+        return str(self.key) + " : " + str(self.value)
+
 class BSTMapping(Mapping):
     Node = BSTNode
 
@@ -188,8 +190,12 @@ class BSTMapping(Mapping):
     def __len__(self):
         return len(self._root) if self._root else 0
 
-    def __str__(self):
-        return str(list(self.preorder()))
+    def __iter__(self):
+        if self.left:
+            yield from self.left
+        yield self
+        if self.right:
+            yield from self.right
 ```
 
 ### Forward Compatibility of Factories
@@ -223,7 +229,7 @@ If the key in each node is a good pivot among the keys in its subtree, then we c
 
 We'll say a node `x` is **weight-balanced** if
 
-`len(x) + 1 < 4 * (min(len(x.left),len(x.right)) +  1)`.
+`len(x) + 1 < 4 * (min(len(x.left), len(x.right)) +  1)`.
 
 It's easy enough to check this condition with our `BSTMapping` implementation because it keeps track of the length at each node.
 If some change causes a node to no longer be weight balanced, we will recover the weight balance by rotations.
@@ -244,9 +250,8 @@ This description is not enough to be convincing that the algorithm is correct, b
 Let's look at the code first and see the rebalance method in action.
 Then, we'll go back and do the algebra to prove it is correct.
 
-```python
-from bstmapping import BSTMapping, BSTNode
-
+```python {cmd id="_orderedmapping.wbtree"}
+from ds2.orderedmapping import BSTMapping, BSTNode
 
 class WBTreeNode(BSTNode):
     def newnode(self, key, value):
@@ -382,7 +387,7 @@ The splaying operation conveniently rotates the found node all the way to the ro
 So, the `SplayTreeNode.get` method will return the new root of the subtree, and the `SplayTreeMapping.get` returns the value at the root.
 
 ```python
-from bstmapping import BSTMapping, BSTNode
+from ds2.mapping.bstmapping import BSTMapping, BSTNode
 
 class SplayTreeNode(BSTNode):
     def newnode(self, key, value):

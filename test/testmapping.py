@@ -1,3 +1,4 @@
+import generatecode
 import unittest
 from ds2.mapping import (Mapping,
                         ListMappingSimple,
@@ -6,8 +7,8 @@ from ds2.mapping import (Mapping,
                         HashMappingSimple,
                         HashMapping_notDRY,
                         HashMapping,
-                        BSTMapping
                         )
+from ds2.orderedmapping import BSTMapping, BSTMappingSimple
 
 class MappingTests:
     def Mapping(self):
@@ -37,7 +38,7 @@ class MappingTests:
         with self.assertRaises(KeyError):
             M.get(2)
         with self.assertRaises(KeyError):
-            M.get("one")
+            M.get(4)
 
     def testputoverwrites(self):
         M = self.Mapping()
@@ -67,14 +68,14 @@ class ExtendedMappingTests:
 
     def testgetsetitem(self):
         M = self.Mapping()
-        M[0] = 'test'
-        M['test'] = 100
-        self.assertEqual(M[0], 'test')
-        self.assertEqual(M['test'], 100)
+        M[0] = 1000
+        M[1000] = 10
+        self.assertEqual(M[0], 1000)
+        self.assertEqual(M[1000], 10)
 
     def testiter(self):
         M = self.Mapping()
-        keys = {'one', 'two', 'three', 1, 2, 3}
+        keys = {'one', 'two', 'three', '1', '2', '3'}
         for k in keys:
             M[k] = 100
         self.assertEqual(set(M), keys)
@@ -94,9 +95,9 @@ class ExtendedMappingTests:
 
     def testmanyitems(self):
         M = self.Mapping()
-        for i in range(1000):
+        for i in range(900):
             M[i] = 1
-        self.assertEqual(len(M), 1000)
+        self.assertEqual(len(M), 900)
 
     def teststr(self):
         M = self.Mapping()
@@ -120,7 +121,8 @@ TestListMapping = _test(ListMapping, extended=True)
 TestListMapping_notDRY = _test(ListMapping_notDRY, extended=True)
 TestHashMapping = _test(HashMapping, extended=True)
 TestHashMapping_notDRY = _test(HashMapping_notDRY, extended=True)
-# TestBSTMapping = _test(BSTMapping)
+TestBSTMappingSimple = _test(BSTMappingSimple, extended=True)
+TestBSTMappingSimple = _test(BSTMapping, extended=True)
 
 class TestAbstractMapping(unittest.TestCase):
     """ These tests just check (and document) the methods that must

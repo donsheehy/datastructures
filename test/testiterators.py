@@ -1,5 +1,5 @@
 import unittest
-from ds2.mergesort_iter import BufferedIterator
+from ds2.sorting.mergesort_iter import BufferedIterator
 
 class TestBufferedIterator(unittest.TestCase):
     def testinit(self):
