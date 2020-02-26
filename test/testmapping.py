@@ -1,5 +1,3 @@
-import generatecode
-
 import unittest
 from ds2.mapping import (Mapping,
                         ListMappingSimple,

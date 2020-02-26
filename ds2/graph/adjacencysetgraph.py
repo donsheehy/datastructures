@@ -1,5 +1,5 @@
 class AdjacencySetGraph:
-    def __init__(self, V, E):
+    def __init__(self, V = (), E = ()):
         self._V = set()
         self._nbrs = {}
         for v in V: self.addvertex(v)
@@ -22,6 +22,9 @@ class AdjacencySetGraph:
 
     def nbrs(self, v):
         return iter(self._nbrs[v])
+
+    def __len__(self):
+      return len(self._nbrs)
 
     def hasedge(self, u, v):
         return v in self._nbrs[u]

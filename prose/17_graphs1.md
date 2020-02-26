@@ -28,7 +28,9 @@ We want to be able to create the graph from a collection of vertices and a colle
    - `edges()` : Return an iterable collection of the edges.
    - `addvertex(v)` : Add a new vertex to the graph.  The new vertex is identified with the `v` object.
    - `addedge(u, v)` : Add a new edge to the graph between the vertices with keys `u` and `v`.
+   - `hasedge(u,v)` : Return True if the edge `(u,v)` is in the graph and return False otherwise.
    - `nbrs(v)` : Return an iterable collection of the (out)neighbors of `v`, i.e. those vertices `w` such that `(v, w)` is an edge.  (For directed graphs, this is the collection of out-neighbors.)
+   - `__len__()` : Return the number of vertices in the graph.
 
 There are several error conditions to consider. For example, what happens if a vertex is added more than once?
 What happens if an edge `(u,v)` is added, but `u` is not a vertex in the graph?
@@ -45,7 +47,7 @@ To get the neighbors of a vertex, it will iterate over all edges in the graph.
 
 ```python {cmd id="_graph.edgesetgraph_00"}
 class EdgeSetGraph:
-    def __init__(self, V, E):
+    def __init__(self, V = (), E = ()):
         self._V = set()
         self._E = set()
         for v in V: self.addvertex(v)
@@ -63,8 +65,14 @@ class EdgeSetGraph:
     def addedge(self, u, v):
         self._E.add((u,v))
 
+    def hasedge(self, u, v):
+        return (u,v) in self._E
+
     def nbrs(self, v):
         return (w for u,w in self._E if u == v)
+
+    def __len__(self):
+        return len(self._V)
 ```
 
 To make an undirected version of this class, we can simply modify the `addedge` method to add an edge in each direction.
@@ -93,7 +101,7 @@ An alternative approach is to store a set with each vertex and have this set con
 
 ```python {cmd, id="_graph.adjacencysetgraph_00"}
 class AdjacencySetGraph:
-    def __init__(self, V, E):
+    def __init__(self, V = (), E = ()):
         self._V = set()
         self._nbrs = {}
         for v in V: self.addvertex(v)
@@ -116,6 +124,9 @@ class AdjacencySetGraph:
 
     def nbrs(self, v):
         return iter(self._nbrs[v])
+
+    def __len__(self):
+      return len(self._nbrs)
 ```
 
 ```python {cmd continue="_graph.adjacencysetgraph_00"}

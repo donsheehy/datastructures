@@ -1,5 +1,3 @@
-import generatecode
-
 import unittest
 from ds2.orderedmapping import (BSTMapping,
                                 BalancedBST,

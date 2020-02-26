@@ -1,5 +1,5 @@
 class EdgeSetGraph:
-    def __init__(self, V, E):
+    def __init__(self, V = (), E = ()):
         self._V = set()
         self._E = set()
         for v in V: self.addvertex(v)
@@ -17,8 +17,14 @@ class EdgeSetGraph:
     def addedge(self, u, v):
         self._E.add((u,v))
 
+    def hasedge(self, u, v):
+        return (u,v) in self._E
+
     def nbrs(self, v):
         return (w for u,w in self._E if u == v)
+
+    def __len__(self):
+        return len(self._V)
 
 class UndirectedEdgeSetGraph(EdgeSetGraph):
     def addedge(self, u, v):
