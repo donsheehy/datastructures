@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>A User’s Guide to this Book &mdash; ds2 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="A Course in Data Structures" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ds2
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A User’s Guide to this Book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#running-code">Running Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pythonpath-issues">PYTHONPATH Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#making-improvements">Making Improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-book">Building the book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#drawing-figures">Drawing figures</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ds2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>A User’s Guide to this Book</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/user_guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="a-user-s-guide-to-this-book">
+<h1>A User’s Guide to this Book<a class="headerlink" href="#a-user-s-guide-to-this-book" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="running-code">
+<h2>Running Code<a class="headerlink" href="#running-code" title="Permalink to this headline">¶</a></h2>
+<p>The code chunks throughout the book are executed in one of several ways.
+The most basic way that these chunks are executed is using the <em>Mume</em> markdown processor.
+The syntax used to pass parameters for code chunks is specific to Mume.
+As it processes the markdown into html, it identifies the code chunks, executes them, and puts the output directly into the output.</p>
+<p>The examples in the book can be executed directly inline with the right editor and plugins.
+You will need to use the <strong>Markdown Preview Enhanced</strong> plugin for either Atom or Visual Studio Code.
+This wonderful plugin allows for realtime preview and instant code execution right in the editor.</p>
+<p>I recommend changing the settings to not break on single newlines.
+I <em>try</em> to stick to the one-sentence-per-line policy to ease the process of reviewing git diffs.</p>
+</div>
+<div class="section" id="pythonpath-issues">
+<h2>PYTHONPATH Issues<a class="headerlink" href="#pythonpath-issues" title="Permalink to this headline">¶</a></h2>
+<p>One challenge to running the code from two different locations involves python’s system path.
+For most code chunks, it’s no problem.
+However, for more complex data structures that need to import other modules from other chapters, Python will need to know where to look for the code.
+The simplest fix is to simply add the <cite>code/</cite> directory to your python path.
+I did this with the following line in my <cite>.bash_profile</cite> file.</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">export</span> <span class="pre">PYTHONPATH=&quot;/Users/don/Dropbox/work/research/books/datastructures/code:$PYTHONPATH&quot;</span>
+<span class="pre">`</span></code></p>
+<p>This also solves the issue of running tests from the <cite>tests/</cite> folder.</p>
+</div>
+<div class="section" id="making-improvements">
+<h2>Making Improvements<a class="headerlink" href="#making-improvements" title="Permalink to this headline">¶</a></h2>
+<p>All of the source for this book is available on github.
+As a result, you can contribute improvements of your own.
+A project of this scale always has bugs.
+If you find a bug, you can fork the repository, fix the bug, and make a pull request.</p>
+<p>There are a couple things to keep mind:</p>
+<ul class="simple">
+<li><p>Any code generated in the <cite>code/</cite> directory is scraped from the text in the prose folder. Edit the markdown file, not the <cite>.py</cite> file.</p></li>
+<li><p>Similarly, the <cite>fullbook*</cite> files in the <cite>docs/</cite> directory are generated by the build. These files should also not be edited.</p></li>
+<li><p>Please avoid hard-wrapping lines.  I guess some people still do this.</p></li>
+</ul>
+</div>
+<div class="section" id="building-the-book">
+<h2>Building the book<a class="headerlink" href="#building-the-book" title="Permalink to this headline">¶</a></h2>
+<p>Currently, the books build process has two steps.</p>
+<ol class="arabic simple">
+<li><p>Running the <cite>generatebook.py</cite> script will integrate all the chapters into a single markdown file.  It does a little extra to add chapter numbers and forced page breaks for print layouts.</p></li>
+<li><p>Running <cite>generatebook.js</cite> from node will use mume to process the <cite>fullbook.md</cite> file into html and pdf.  The pdf export requires installing the Chrome Puppeteer node module (and Mume too of course).  This second step is in javascript because Mume is built on node.</p></li>
+</ol>
+<p>To pull the code out of the book into separate <cite>.py</cite> files, you will need to run the <cite>generatecode.py</cite> script.</p>
+</div>
+<div class="section" id="drawing-figures">
+<h2>Drawing figures<a class="headerlink" href="#drawing-figures" title="Permalink to this headline">¶</a></h2>
+<p>Currently, the book is light on figures.
+I am working to integrate a system where data structures are drawn inline using svgs that get integrated directly into the resulting html.</p>
+<p>You may need to install the svgwrite package.</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">svgwrite</span>
+<span class="pre">`</span></code></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="A Course in Data Structures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Donald R. Sheehy
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
