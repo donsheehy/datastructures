@@ -1,6 +1,5 @@
 import unittest
-from ds2.select import quickselect as quickselect_recursive
-from ds2.select import quickselect
+from ds2.select import quickselect, quickselect_recursive
 
 class SelectTests:
     def testselect(self):
@@ -14,8 +13,17 @@ class SelectTests:
 
     def testmanyruns(self):
         A = list(range(100))
+        self.assertEqual(self.select(A,1), 0)
+        self.assertEqual(self.select(A,1), 0)
         for i in range(100):
-            self.assertEqual(self.select(A,1), 0)
+            self.assertEqual(self.select(A,i+1), i)
+
+    def testonstrings(self):
+        A = ['abc', 'def', 'aa', 'b']
+        self.assertEqual(self.select(A, 4), 'def')
+        self.assertEqual(self.select(A, 3), 'b')
+        self.assertEqual(self.select(A, 2), 'abc')
+        self.assertEqual(self.select(A, 1), 'aa')
 
     def testbigexample(self):
         A = [1] * 1000 + [2] + [3] * 1000

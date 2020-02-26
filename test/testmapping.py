@@ -1,4 +1,5 @@
 import generatecode
+
 import unittest
 from ds2.mapping import (Mapping,
                         ListMappingSimple,
@@ -8,7 +9,12 @@ from ds2.mapping import (Mapping,
                         HashMapping_notDRY,
                         HashMapping,
                         )
-from ds2.orderedmapping import BSTMapping, BSTMappingSimple
+from ds2.orderedmapping import (BSTMapping,
+                                BalancedBST,
+                                WBTree,
+                                AVLTree,
+                                SplayTree
+                                )
 
 class MappingTests:
     def Mapping(self):
@@ -104,7 +110,7 @@ class ExtendedMappingTests:
         M[1] = 2
         self.assertEqual(str(M), '{1 : 2}')
 
-def _test(mapping, extended=False):
+def _test(mapping, extended=True):
     """ Produce a TestCase class that uses the given implementation.
     """
     if extended:
@@ -115,14 +121,17 @@ def _test(mapping, extended=False):
             Mapping = mapping
     return MappingTestCase
 
-TestListMappingSimple = _test(ListMappingSimple)
-TestHashMappingSimple = _test(HashMappingSimple)
-TestListMapping = _test(ListMapping, extended=True)
-TestListMapping_notDRY = _test(ListMapping_notDRY, extended=True)
-TestHashMapping = _test(HashMapping, extended=True)
-TestHashMapping_notDRY = _test(HashMapping_notDRY, extended=True)
-TestBSTMappingSimple = _test(BSTMappingSimple, extended=True)
-TestBSTMappingSimple = _test(BSTMapping, extended=True)
+TestListMappingSimple = _test(ListMappingSimple, extended = False)
+TestHashMappingSimple = _test(HashMappingSimple, extended = False)
+TestListMapping = _test(ListMapping)
+TestListMapping_notDRY = _test(ListMapping_notDRY)
+TestHashMapping = _test(HashMapping)
+TestHashMapping_notDRY = _test(HashMapping_notDRY)
+TestBSTMapping = _test(BSTMapping)
+TestBalancedBST = _test(BalancedBST)
+TestWBTree = _test(WBTree)
+TestAVLTree = _test(AVLTree)
+TestSplayTree = _test(SplayTree)
 
 class TestAbstractMapping(unittest.TestCase):
     """ These tests just check (and document) the methods that must

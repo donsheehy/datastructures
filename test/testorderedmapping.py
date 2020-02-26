@@ -1,7 +1,12 @@
 import generatecode
 
 import unittest
-from ds2.orderedmapping import BSTMapping, BSTMappingSimple
+from ds2.orderedmapping import (BSTMapping,
+                                BalancedBST,
+                                WBTree,
+                                AVLTree,
+                                SplayTree
+                                )
 
 class OrderedMappingTests:
     """ This Testcase only covers those aspects of an ordered mapping that go
@@ -44,7 +49,10 @@ def _test(orderedmapping):
     return OrderedMappingTestCase
 
 TestBSTMapping = _test(BSTMapping)
-TestBSTMappingSimple = _test(BSTMappingSimple)
+TestBalancedBST = _test(BalancedBST)
+TestWBTree = _test(WBTree)
+TestAVLTree = _test(AVLTree)
+TestSplayTree = _test(SplayTree)
 
 if __name__ == '__main__':
     unittest.main()

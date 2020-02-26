@@ -1,6 +1,6 @@
-from ds2.orderedmapping import BSTMapping, BSTNode
+from ds2.orderedmapping import BalancedBST, BalancedBSTNode
 
-class WBTreeNode(BSTNode):
+class WBTreeNode(BalancedBSTNode):
     def newnode(self, key, value):
         return WBTreeNode(key, value)
 
@@ -22,13 +22,13 @@ class WBTreeNode(BSTNode):
         return newroot
 
     def put(self, key, value):
-        newroot = BSTNode.put(self, key, value)
+        newroot = BalancedBSTNode.put(self, key, value)
         return newroot.rebalance()
 
     def remove(self, key):
-        newroot = BSTNode.remove(self, key)
+        newroot = BalancedBSTNode.remove(self, key)
         return newroot.rebalance() if newroot else None
 
-class WBTreeMapping(BSTMapping):
+class WBTree(BalancedBST):
     Node = WBTreeNode
 

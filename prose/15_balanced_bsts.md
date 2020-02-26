@@ -41,28 +41,11 @@ The main difference with our previous code is that now, all methods that can cha
 It is assumed that only `put` and `remove` will rearrange the tree, and so `get` and `floor` will keep the tree structure as is.
 
 ```python {cmd id="_orderedmapping.balancedbst"}
-from ds2.mapping import Mapping
+from ds2.orderedmapping import BSTMapping, BSTNode
 
-class BSTNode:
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
-        self.left = None
-        self.right = None
-        self._length = 1
-
+class BalancedBSTNode(BSTNode):
     def newnode(self, key, value):
-        return BSTNode(key, value)
-
-    def get(self, key):
-        if key == self.key:
-            return self
-        elif key < self.key and self.left:
-            return self.left.get(key)
-        elif key > self.key and self.right:
-            return self.right.get(key)
-        else:
-            raise KeyError
+        return BalancedBSTNode(key, value)
 
     def put(self, key, value):
         if key == self.key:
@@ -77,125 +60,33 @@ class BSTNode:
                 self.right = self.right.put(key, value)
             else:
                 self.right = self.newnode(key, value)
-        self.updatelength()
+        self._updatelength()
         return self
-
-    def updatelength(self):
-        len_left = len(self.left) if self.left else 0
-        len_right = len(self.right) if self.right else 0
-        self._length = 1 + len_left + len_right
-
-    def floor(self, key):
-        if key == self.key:
-            return self
-        elif key < self.key:
-            return self.left.floor(key) if self.left else None
-        elif key > self.key:
-            return (self.right.floor(key) or self) if self.right else self
 
     def rotateright(self):
         newroot = self.left
         self.left = newroot.right
         newroot.right = self
-        self.updatelength()
-        newroot.updatelength()
+        self._updatelength()
+        newroot._updatelength()
         return newroot
 
     def rotateleft(self):
         newroot = self.right
         self.right = newroot.left
         newroot.left = self
-        self.updatelength()
-        newroot.updatelength()
+        self._updatelength()
+        newroot._updatelength()
         return newroot
 
-    def maxnode(self):
-        return self.right.maxnode() if self.right else self
-
-    def _swapwith(self, other):
-        """
-        Swaps the key and value of a node.
-        This operation has the potential to break the BST property.
-        Use with caution!
-        """
-        self.key, other.key = other.key, self.key
-        self.value, other.value = other.value, self.value
-
-    def remove(self, key):
-        if key == self.key:
-            if self.left is None: return self.right
-            if self.right is None: return self.left
-            self._swapwith(self.left.maxnode())
-            self.left = self.left.remove(key)
-        elif key < self.key and self.left:
-            self.left = self.left.remove(key)
-        elif key > self.key and self.right:
-            self.right = self.right.remove(key)
-        else:
-            raise KeyError
-        self.updatelength()
-        return self
-
-    def __iter__(self):
-        if self.left: yield from self.left
-        yield Entry(self.key, self.value)
-        if self.right: yield from self.right
-
-    def preorder(self):
-        yield self.key
-        if self.left: yield from self.left.preorder()
-        if self.right: yield from self.right.preorder()
-
-    def __len__(self):
-        return self._length
-
-    def __str__(self):
-        return str(self.key) + " : " + str(self.value)
-
-class BSTMapping(Mapping):
-    Node = BSTNode
-
-    def __init__(self):
-        self._root = None
-
-    def get(self, key):
-        if self._root is None: raise KeyError
-        return self._root.get(key).value
+class BalancedBST(BSTMapping):
+    Node = BalancedBSTNode
 
     def put(self, key, value):
         if self._root:
             self._root = self._root.put(key, value)
         else:
             self._root = self.Node(key, value)
-
-    def floor(self, key):
-        if self._root:
-            floornode = self._root.floor(key)
-            if floornode is not None:
-                return floornode.key, floornode.value
-        return None, None
-
-    def remove(self, key):
-        if self._root is None: raise KeyError
-        self._root = self._root.remove(key)
-
-    def _entryiter(self):
-        if self._root:
-            yield from self._root
-
-    def preorder(self):
-        if self._root:
-            yield from self._root.preorder()
-
-    def __len__(self):
-        return len(self._root) if self._root else 0
-
-    def __iter__(self):
-        if self.left:
-            yield from self.left
-        yield self
-        if self.right:
-            yield from self.right
 ```
 
 ### Forward Compatibility of Factories
@@ -251,9 +142,9 @@ Let's look at the code first and see the rebalance method in action.
 Then, we'll go back and do the algebra to prove it is correct.
 
 ```python {cmd id="_orderedmapping.wbtree"}
-from ds2.orderedmapping import BSTMapping, BSTNode
+from ds2.orderedmapping import BalancedBST, BalancedBSTNode
 
-class WBTreeNode(BSTNode):
+class WBTreeNode(BalancedBSTNode):
     def newnode(self, key, value):
         return WBTreeNode(key, value)
 
@@ -275,14 +166,14 @@ class WBTreeNode(BSTNode):
         return newroot
 
     def put(self, key, value):
-        newroot = BSTNode.put(self, key, value)
+        newroot = BalancedBSTNode.put(self, key, value)
         return newroot.rebalance()
 
     def remove(self, key):
-        newroot = BSTNode.remove(self, key)
+        newroot = BalancedBSTNode.remove(self, key)
         return newroot.rebalance() if newroot else None
 
-class WBTreeMapping(BSTMapping):
+class WBTree(BalancedBST):
     Node = WBTreeNode
 ```
 
@@ -303,26 +194,26 @@ Such height balanced trees are often called AVL trees.
 In our implementation, we'll maintain the height of each subtree and use these to check for balance.
 Often, AVL trees only keep the balance at each node rather than the exact height, but computing heights is relatively painless.
 
-```python
-from bstmapping import BSTMapping, BSTNode
+```python {cmd id="_orderedmapping.avltree"}
+from ds2.orderedmapping import BalancedBST, BalancedBSTNode
 
 def height(node):
     return node.height if node else -1
 
 def update(node):
     if node:
-        node.updatelength()
-        node.updateheight()
+        node._updatelength()
+        node._updateheight()
 
-class AVLTreeNode(BSTNode):
+class AVLTreeNode(BalancedBSTNode):
     def __init__(self, key, value):
-        BSTNode.__init__(self, key, value)
-        self.updateheight()
+        BalancedBSTNode.__init__(self, key, value)
+        self._updateheight()
 
     def newnode(self, key, value):
         return AVLTreeNode(key, value)
 
-    def updateheight(self):
+    def _updateheight(self):
         self.height = 1 + max(height(self.left), height(self.right))
 
     def balance(self):
@@ -346,18 +237,17 @@ class AVLTreeNode(BSTNode):
         return newroot
 
     def put(self, key, value):
-        newroot = BSTNode.put(self, key, value)
+        newroot = BalancedBSTNode.put(self, key, value)
         update(newroot)
         return newroot.rebalance()
 
     def remove(self, key):
-        newroot = BSTNode.remove(self, key)
+        newroot = BalancedBSTNode.remove(self, key)
         update(newroot)
         return newroot.rebalance() if newroot else None
 
-class AVLTreeMapping(BSTMapping):
+class AVLTree(BalancedBST):
     Node = AVLTreeNode
-
 ```
 
 ## Splay Trees
@@ -374,7 +264,7 @@ If the rotations are in the same direction, the bottom one is done first.
 If the rotations are in opposite directions, it does the top one first.
 
 At the very top level, we may do only a single rotation to get the node all the way to the root.
-This is handled by the `splayup` method in the `SplayTreeMapping` class.
+This is handled by the `splayup` method in the `SplayTree` class.
 
 A major difference from our previous implementations is that now, we will modify the tree on calls to `get`.
 As a result, we will have to rewrite `get` rather than inheriting it.
@@ -384,12 +274,12 @@ So, which should we return?
 Clearly, we need that value to return, and we also need to not break the tree.
 Thankfully, there is a simple solution.
 The splaying operation conveniently rotates the found node all the way to the root.
-So, the `SplayTreeNode.get` method will return the new root of the subtree, and the `SplayTreeMapping.get` returns the value at the root.
+So, the `SplayTreeNode.get` method will return the new root of the subtree, and the `SplayTree.get` returns the value at the root.
 
-```python
-from ds2.mapping.bstmapping import BSTMapping, BSTNode
+```python {cmd id="_orderedmapping.splaytree"}
+from ds2.orderedmapping import BalancedBST, BalancedBSTNode
 
-class SplayTreeNode(BSTNode):
+class SplayTreeNode(BalancedBSTNode):
     def newnode(self, key, value):
         return SplayTreeNode(key, value)
 
@@ -410,7 +300,7 @@ class SplayTreeNode(BSTNode):
         return newroot
 
     def put(self, key, value):
-        newroot = BSTNode.put(self, key, value)
+        newroot = BalancedBSTNode.put(self, key, value)
         return newroot.splayup(key)
 
     def get(self, key):
@@ -424,7 +314,7 @@ class SplayTreeNode(BSTNode):
             raise KeyError
         return self.splayup(key)
 
-class SplayTreeMapping(BSTMapping):
+class SplayTree(BalancedBST):
     Node = SplayTreeNode
 
     def splayup(self, key):
@@ -440,6 +330,6 @@ class SplayTreeMapping(BSTMapping):
         return self._root.value
 
     def put(self, key, value):
-        BSTMapping.put(self, key, value)
+        BalancedBST.put(self, key, value)
         self.splayup(key)
 ```
