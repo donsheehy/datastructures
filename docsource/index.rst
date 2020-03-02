@@ -22,6 +22,7 @@ You can download and install the code as a python package from the github reposi
    :maxdepth: 2
    :caption: Contents:
 
+   about
    user_guide
 
 

@@ -18,6 +18,7 @@ There are many many examples of hierarchical (tree-like) structures:
 Even though we use the family metaphor for many of the naming conventions, a family tree is not actually a tree.  The reason is that these violate the one parent rule.
 
 When we draw trees, we take an Australian convention of putting the root on the top and the children below.  Although this is backwards with respect to the trees we see in nature, it does correspond to how we generally think of most other hierarchies.
+Thankfully, there will be sufficiently little conceptual overlap between your experience of trees in the park and the trees in this book, that the metaphoric breakdown should not be confusing.
 
 ## Some more definitions
 
@@ -81,11 +82,37 @@ def printtree(T):
 
 Here we use the iterator to extract the first list item, then loop through the rest of the children.  
 
-The information in the tree is all present in this *list of lists* structure.
-However, it can be cumbersome to read, write, and work with.
-Let's package this into a class that allows us to write code that is as close as possible to how we think about and talk about trees.
 
-```python
+## A Tree ADT
+
+The information in the tree is all present in the *list of lists* structure.
+However, it can be cumbersome to read, write, and work with.
+We will package it into a class that allows us to write code that is as close as possible to how we think about and talk about trees.
+As always, we will start with an ADT that describes our expectations for the data structure and its usage.
+The **Tree ADT** is as follows.
+
+- **`__init__(L)`** : Initialize a new tree given a list of lists.  The convention is that the first element in the list is the data and the later elements (if they exist) are the children.
+
+- **`height()`** : Return the height of the tree.
+
+- **`__str__()`** : Return a string representing the entire tree.
+
+- **`__eq__(other)`** : Return `True` if the tree is equal to `other`.  This means that they have the same data and their children are equal (and in the same order).
+
+- **`__contains__(k)`** : Return `True` if and only if the tree contains the data `k` either at the root or at one of its descendants.  Return `False` otherwise.
+
+- **`preorder()`** Return an iterator over the data in the tree that yields values according to the **preorder** traversal of the tree.
+
+- **`postorder()`** : Return an iterator over the data in the tree that yields values according to the **postorder** traversal of the tree.
+
+- **`__iter__()`** : An alias for preorder.
+
+- **`layerorder()`** : Return an iterator over the data in the tree that yields values according to the **layer order** traversal of the tree.
+
+
+## An implementation
+
+```python {cmd id="_tree.tree_00"}
 class Tree:
     def __init__(self, L):
         iterator = iter(L)
@@ -94,40 +121,110 @@ class Tree:
 ```
 
 The initializer takes a *list of lists* representation of a tree as input.  A `Tree` object has two attributes, `data` stores data associated with a node and `children` stores a list of `Tree` objects.
-The recursive aspect of this tree is clear from the way the children are generated as `Tree`'s.
+The recursive aspect of this tree is clear from the way the children are generated as `Tree`'s.  This definition does not allow for an empty tree (i.e. one with no nodes).
 
-Let's add our print function to the class.
+Let's rewrite our print function to operate on an instance of the `Tree` class.
 
-```python
-def printtree(self):
-    print(self.data)
-    for child in self.children:
-        child.printtree()
+```python {cmd id="printfunction2" continue="_tree.tree_00"}
+def printtree(T):
+    print(T.data)
+    for child in T.children:
+        printtree(child)
+```
+
+```python {cmd continue="printfunction2"}
+T = Tree(['a', ['b', ['c', ['d']]],['e',['f'], ['g']]])
+printtree(T)
 ```
 
 This is the most common pattern for algorithms that operate on trees.
 It has two parts; one part operates on the data and the other part applies the function recursively on the children.
-Here is another example of the same pattern.
+
+One unfortunate aspect of this code is that although it prints out the data, it doesn't tell us about the structure of the tree.
+It would be nicer if we used indentation to indicate the depth of the node as we print the data.
+It turns out that this is not too difficult and we will implement it as our `__str__` method.
+
+```python {cmd id="treetostring1" continue="_tree.tree_00"}
+    def __str__(self, level = 0):
+        treestring = "  " * level + str(self.data)
+        for child in self.children:
+            treestring += "\n" + child.__str__(level + 1)
+        return treestring
+```
+
+```python {cmd continue="treetostring1"}
+T = Tree(['a', ['b', ['c', ['d']]],['e',['f'], ['g']]])
+print(str(T))
+```
+
+To "see" the tree structure in this print out, you find the parent of a node by finding the lowest line above that node that is not at the same indentation level.
+This is a task that you have some training for; it is how you visually parse python file to understand their block structure.
+
+
+Although the code above seems to work, it does something terrible.
+It builds up a string by iterative adding more strings (i.e. with concatenation).
+This copies and recopies some part of the string for every node in the tree.
+Instead, we would prefer to just keep a nice list of the trees and then join them into a string in one final act before returning.
+To do this, it is handy to use a helper method that takes the level and the current list of trees as parameters.
+With each recursive call, we add one to the level, and we pass down the same list to be appended to.
+
+
+```python {cmd id="_tree.tree_01" continue="_tree.tree_00"}
+    def _listwithlevels(self, level, trees):
+        trees.append("  " * level + str(self.data))
+        for child in self.children:
+            child._listwithlevels(level + 1, trees)
+
+    def __str__(self):
+        trees = []
+        self._listwithlevels(0, trees)
+        return "\n".join(trees)
+```
+
+```python {cmd continue="_tree.tree_01"}
+T = Tree(['a', ['b', ['c', ['d']]],['e',['f'], ['g']]])
+print(str(T))
+```
+
+The pattern involved here is called a tree traversal and we will discuss these in more depth below.
+We implemented this one first, because it will help us to see that our trees look the way we expect them to.
+Naturally, it is vital to write good tests, but when things go wrong, you can learn a lot by seeing the tree.
+It can give you hints on where to look for bugs.
+
+Here is another example of a similar traversal pattern.
 Let's check if two trees are equal in the sense of having the same shape and data.  We use the `__eq__` method so this method will be used when we use `==` to check equality between `Tree`'s.
 
-```python
-def __eq__(self, other):
-    return self.data == other.data and self.children == other.children
+```python {cmd id="_tree.tree_02" continue="_tree.tree_01"}
+    def __eq__(self, other):
+        return self.data == other.data and self.children == other.children
 ```
 
 Here, it is less obvious that we are doing recursion, but we are because `self.children` and `other.children` are lists and list equality is determined by testing the equality of the items.  In this case, the items in the  lists are `Tree`'s, so our `__eq__` method will be invoked for each one.
 
 Here's another example.  Let's write a function that computes the height of the tree.  We can do this by computing the height of the subtrees and return one more than the max of those.  If there are no children, the height is $0$.
 
-```python
-def height(self):
-    if len(self.children) == 0:
-        return 0
-    else:
-        return 1 + max(child.height() for child in self.children)
+```python {cmd id="_tree.tree_03" continue="_tree.tree_02"}
+    def height(self):
+        if len(self.children) == 0:
+            return 0
+        else:
+            return 1 + max(child.height() for child in self.children)
 ```
 
 *Hopefully, you are getting the hang of these generator expressions.*
+
+Recall that the `__contains__` magic method allows us to use the `in` keyword for membership testing in a collection.
+The desired behavior of this function as described in the ADT tells us how to implement it.
+
+```python {cmd id="_tree.tree_04" continue="_tree.tree_03"}
+    def __contains__(self, k):
+        return self.data == k or any(k in ch for ch in self.children)
+```
+
+The `any` function takes an iterable of booleans and return `True` if any of them are `True`.
+It handles short-circuited evaluation, so it can stop as soon as it finds that one is true.
+If the answer is `False`, then this will iterate over the whole tree.
+This is precisely the behavior we saw with
 
 ## Tree Traversal
 
@@ -144,10 +241,10 @@ The `printtree` method given previously is a classic example of a preorder trave
 We could also print the nodes in a postorder traversal as follows.
 
 ```python
-def printpostorder(self):
+def printpostorder(T):
     for child in self.children:
-        child.printpostoder()
-    print(self.data)
+        printpostoder(child)
+    print(T.data)
 ```
 
 It is only a slight change in the code, but it results in a different output.
@@ -189,17 +286,16 @@ It would not be enough to store just the stack of nodes in the path from your cu
 
 ```python
 def _postorder(self):
-	node, childiter = self, iter(self.children)
-	stack = [(node, childiter)]
-	while stack:
-		node, childiter = stack[-1]
-		try:
-			child = next(childiter)
-			stack.append((child, iter(child.children)))
-		except StopIteration:
-			yield node
-			stack.pop()					
+    node, childiter = self, iter(self.children)
+    stack = [(node, childiter)]
+    while stack:
+        node, childiter = stack[-1]
+        try:
+            child = next(childiter)
+            stack.append((child, iter(child.children)))
+        except StopIteration:
+            yield node
+            stack.pop()					
 ```
 
 In the above code, I don’t love the fact that I am reassigning `node` and `childiter` at every iteration of the loop.  Can you fix that so that it still works?
-
