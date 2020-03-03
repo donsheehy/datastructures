@@ -8,6 +8,9 @@ class ListQueueSimple:
     def dequeue(self):
         return self._L.pop(0)
 
+    def peek(self):
+        return self._L[0]
+
     def __len__(self):
         return len(self._L)
 
@@ -22,8 +25,11 @@ class ListQueueFakeDelete:
     def enqueue(self, item):
         self._L.append(item)
 
+    def peek(self):
+      return self._L[self._head]
+
     def dequeue(self):
-        item = self._L[self._head]
+        item = self.peek()
         self._head += 1
         return item
 

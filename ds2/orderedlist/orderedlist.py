@@ -1,6 +1,6 @@
-from ds2.sortedlist import SortedListSimple
+from ds2.orderedlist import OrderedListSimple
 
-class SortedList(SortedListSimple):
+class OrderedList(OrderedListSimple):
     def __contains__(self, item):
         left, right = 0, len(self._L)
         while right - left > 1:

@@ -20,6 +20,12 @@ class AdjacencySetGraph:
     def addedge(self, u, v):
         self._nbrs[u].add(v)
 
+    def removeedge(self, u, v):
+        self._nbrs[u].remove(v)
+
+    def __contains__(self, v):
+        return v in self._nbrs
+
     def nbrs(self, v):
         return iter(self._nbrs[v])
 

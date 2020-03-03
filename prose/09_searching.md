@@ -78,19 +78,19 @@ def bs(L, item):
 Note that this solution is simpler to write than our original, and is also probably slightly faster.
 It does require a little more thought to see why it's correct and why it runs in $O(\log n)$ time.
 
-## The Sorted List ADT
+## The Ordered List ADT
 
-  - `add(item)` - adds `item` to the sorted list.
-  - `remove(item)` - removes the first occurrence of `item` from the sorted list. Raise a `ValueError` if the `item` is not present.
+  - `add(item)` - adds `item` to the list.
+  - `remove(item)` - removes the first occurrence of `item` from the list. Raise a `ValueError` if the `item` is not present.
   - `__getitem__(index)` - returns the item with the given `index` in the sorted list.   This is also known as **selection**.
-  - `__contains__(item)` - returns true if there is an item of the sorted list equal to `item`.
-  - `__iter__` - returns an iterator over the sorted list that yields the items in sorted order.
-  - `__len__` - returns the length of the sorted list.
+  - `__contains__(item)` - returns true if there is an item of the list equal to `item`.
+  - `__iter__` - returns an iterator over the ordered list that yields the items in sorted order.
+  - `__len__` - returns the length of the ordered list.
 
-Here is a very simple implementation of the sorted list ADT.
+Here is a very simple implementation of the Ordered List ADT.
 
-```python {cmd id="_sortedlist.sortedlistsimple"}
-class SortedListSimple:
+```python {cmd id="_orderedlist.orderedlistsimple"}
+class OrderedListSimple:
     def __init__(self):
         self._L = []
 
@@ -123,10 +123,10 @@ Even though, we are just calling out to python's built-in method for checking me
 
 Let's replace it with binary search as we implemented it above.
 
-```python {cmd id="_sortedlist.sortedlist"}
-from ds2.sortedlist import SortedListSimple
+```python {cmd id="_orderedlist.orderedlist"}
+from ds2.orderedlist import OrderedListSimple
 
-class SortedList(SortedListSimple):
+class OrderedList(OrderedListSimple):
     def __contains__(self, item):
         left, right = 0, len(self._L)
         while right - left > 1:

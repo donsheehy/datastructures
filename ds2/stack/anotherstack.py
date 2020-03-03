@@ -7,4 +7,3 @@ class AnotherStack(ListStack):
         except IndexError:
             raise RuntimeError("pop from empty stack")
 
-

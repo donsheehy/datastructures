@@ -57,6 +57,8 @@ class TestPriorityQueue(unittest.TestCase, PQTests):
     def testinitwihtentries(self):
         P = self.PQ([('a', 3), ('b', 6), ('c', 4)])
         P = self.PQ((i,i) for i in reversed(range(100)))
+        for i in range(100):
+            self.assertEqual(P.removemin(), i)
 
     def testlen(self):
         P = self.PQ()
@@ -67,17 +69,23 @@ class TestPriorityQueue(unittest.TestCase, PQTests):
         P.removemin()
         self.assertEqual(len(P), 9)
 
-    def testreducepriority(self):
+    def testchangepriority(self):
         P = self.PQ()
         for i in range(10):
             P.insert(i, i + 10)
         self.assertEqual(P.findmin(), 0)
-        P.reducepriority(4, 6)
+        P.changepriority(4, 6)
         self.assertEqual(P.findmin(), 4)
-        P.reducepriority(7, 8)
+        P.changepriority(7, 8)
         self.assertEqual(P.removemin(), 4)
         self.assertEqual(P.removemin(), 7)
 
+    def test_keyfunction(self):
+        P = self.PQ(key = lambda x: -x)
+        for i in range(100):
+            P.insert(i)
+        for i in reversed(range(100)):
+            self.assertEqual(P.removemin(), i)
 
 if __name__ == '__main__':
     unittest.main()

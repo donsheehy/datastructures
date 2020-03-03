@@ -18,6 +18,15 @@ class QueueTests:
             q.enqueue(i)
             self.assertEqual(q.dequeue(), i)
 
+    def testpeek(self):
+        q = self.Queue()
+        q.enqueue(12)
+        q.enqueue(20)
+        self.assertEqual(q.peek(), 12)
+        self.assertEqual(q.peek(), 12)
+        q.dequeue()
+        self.assertEqual(q.peek(), 20)
+
     def testmanyoperations(self):
         q = self.Queue()
         for i in range(1000):

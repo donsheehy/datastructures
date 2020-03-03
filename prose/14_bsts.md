@@ -1,7 +1,7 @@
 # Binary Search Trees
 
 Let's start with an ADT.  An **ordered mapping** is a mapping data type for which the keys are ordered.
-It should support all the same operations as any other mapping as well as some other operations similar to those in a `SortedList` such as predecessor search.
+It should support all the same operations as any other mapping as well as some other operations similar to those in an `OrderedList` such as predecessor search.
 
 ## The Ordered Mapping ADT
 An **ordered mapping** stores a collection of key-value pairs (*with comparable keys*) supporting the following operations.
@@ -169,12 +169,19 @@ If we search to the left and the result is `None`, we also return `None`.
         if key == self.key:
             return self
         elif key < self.key:
-            return self.left.floor(key) if self.left else None
+            if self.left is not None:
+                return self.left.floor(key)
+            else:
+                return None
         elif key > self.key:
-            return (self.right.floor(key) or self) if self.right else self
+            if self.right is not None:
+                floor = self.right.floor(key)
+                return floor if floor is not None else self
+            else:
+                return self
 ```
 
-To parse the expressions above, it's helpful to remember that boolean operations on objects can evaluate to objects.  In particular `False or myobject` evaluates to `myobject`.  Use the python interactive shell to try out some other examples and to see how `and` behaves.
+<!-- To parse the expressions above, it's helpful to remember that boolean operations on objects can evaluate to objects.  In particular `False or myobject` evaluates to `myobject`.  Use the python interactive shell to try out some other examples and to see how `and` behaves. -->
 
 ### Iteration
 
@@ -184,10 +191,10 @@ Here is an inorder iterator for a binary search tree implemented using recursive
 
 ```python  {cmd id="_orderedmapping.bstmapping_05" continue="_orderedmapping.bstmapping_04"}
     def __iter__(self):
-        if self.left:
+        if self.left is not None:
             yield from self.left
         yield self
-        if self.right:
+        if self.right is not None:
             yield from self.right
 ```
 

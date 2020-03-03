@@ -85,10 +85,11 @@ Similarly, if we pop an item at the beginning of the list, then every other item
 Thus, the `list.pop` call in our `pop` method will take $O(n)$ time as well.   So, `push` and `pop` both take linear time in this implementation.  It really earns its name.
 
 ## The Queue ADT
-   - **enqueue** - add a new item to the queue.
-   - **dequeue** - remove and return the next item in First In First Out (FIFO) ordering.
-   - **len** - returns the number of items in the queue.
-   - **isempty** - return `True` if the queue has no items and return `False` otherwise.
+   - **`enqueue(item)`** - Add a new item to the queue.
+   - **`dequeue()`** - Remove and return the next item in First In First Out (FIFO) ordering.
+   - **`peek()`** - Return (without removing) the next item in the queue in FIFO order.
+   - **`__len__`** - Return the number of items in the queue.
+   - **`isempty()`** - Return `True` if the queue has no items and return `False` otherwise.
 
 ```python {cmd id="_queue.listqueue_00"}
 class ListQueueSimple:
@@ -100,6 +101,9 @@ class ListQueueSimple:
 
     def dequeue(self):
         return self._L.pop(0)
+
+    def peek(self):
+        return self._L[0]
 
     def __len__(self):
         return len(self._L)
@@ -123,8 +127,11 @@ class ListQueueFakeDelete:
     def enqueue(self, item):
         self._L.append(item)
 
+    def peek(self):
+      return self._L[self._head]
+
     def dequeue(self):
-        item = self._L[self._head]
+        item = self.peek()
         self._head += 1
         return item
 
@@ -192,7 +199,6 @@ class AnotherStack(ListStack):
             return self._L.pop()
         except IndexError:
             raise RuntimeError("pop from empty stack")
-
 ```
 
 ```python {cmd continue="_stack.anotherstack"}

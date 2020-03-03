@@ -39,6 +39,12 @@ class OrderedMappingTests:
         M.remove(3)
         self.assertEqual(M.floor(4), (1,1))
 
+    def testiter(self):
+        M = self.OrderedMapping()
+        for i in [9,1,2,6,3,4]:
+            M[i] = None
+        self.assertEqual(list(M), [1,2,3,4,6,9])
+
 def _test(orderedmapping):
     """ Produce a TestCase class that uses the given implementation.
     """

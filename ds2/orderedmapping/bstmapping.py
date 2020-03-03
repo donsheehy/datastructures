@@ -86,15 +86,22 @@ class BSTNode:
         if key == self.key:
             return self
         elif key < self.key:
-            return self.left.floor(key) if self.left else None
+            if self.left is not None:
+                return self.left.floor(key)
+            else:
+                return None
         elif key > self.key:
-            return (self.right.floor(key) or self) if self.right else self
+            if self.right is not None:
+                floor = self.right.floor(key)
+                return floor if floor is not None else self
+            else:
+                return self
 
     def __iter__(self):
-        if self.left:
+        if self.left is not None:
             yield from self.left
         yield self
-        if self.right:
+        if self.right is not None:
             yield from self.right
 
     def _swapwith(self, other):

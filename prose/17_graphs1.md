@@ -28,6 +28,8 @@ We want to be able to create the graph from a collection of vertices and a colle
    - `edges()` : Return an iterable collection of the edges.
    - `addvertex(v)` : Add a new vertex to the graph.  The new vertex is identified with the `v` object.
    - `addedge(u, v)` : Add a new edge to the graph between the vertices with keys `u` and `v`.
+   - `removeedge(u,v)` : Remove the edge u,v from the graph.
+   - `__contains__(v)` : Return True if the vertex `v` is in the graph and return False otherwise.
    - `hasedge(u,v)` : Return True if the edge `(u,v)` is in the graph and return False otherwise.
    - `nbrs(v)` : Return an iterable collection of the (out)neighbors of `v`, i.e. those vertices `w` such that `(v, w)` is an edge.  (For directed graphs, this is the collection of out-neighbors.)
    - `__len__()` : Return the number of vertices in the graph.
@@ -65,6 +67,12 @@ class EdgeSetGraph:
     def addedge(self, u, v):
         self._E.add((u,v))
 
+    def removeedge(self, u, v):
+        self._E.remove((u,v))
+
+    def __contains__(self, v):
+        return v in self._V
+
     def hasedge(self, u, v):
         return (u,v) in self._E
 
@@ -75,21 +83,27 @@ class EdgeSetGraph:
         return len(self._V)
 ```
 
-To make an undirected version of this class, we can simply modify the `addedge` method to add an edge in each direction.
-We also change the `nbrs` method to work with unordered pairs (sets).
+To make an undirected version of this class, we can will replace the tuples we are currently using with sets.
+The problem here is that Python doesn't let us use sets as elements of sets.
+Remember that mutable types like sets and lists cannot be used this way.
+Thankfully, Python provides an immutable set type called `frozenset`.
+It is just like a set except that it cannot be changed.
+It can be used for our edge set in the undirected graph as follows.
 
 ```python {cmd id="_graph.edgesetgraph_01" continue="_graph.edgesetgraph_00"}
 class UndirectedEdgeSetGraph(EdgeSetGraph):
     def addedge(self, u, v):
-        self._E.add((u,v))
-        self._E.add((v,u))
+        self._E.add(frozenset({u,v}))
 
-    def edges(self):
-        edgeset = set()
-        for u,v in self._E:
-            if (v,u) not in edgeset:
-                edgeset.add((u,v))
-        return iter(edgeset)
+    def removeedge(self, u, v):
+        self._E.remove(frozenset({u,v}))
+
+    def nbrs(self, v):
+        for u, w in self._E:
+            if u == v:
+                yield w
+            elif w == v:
+                yield u
 ```
 
 ## The `AdjacencySetGraph` Implementation
@@ -122,6 +136,12 @@ class AdjacencySetGraph:
     def addedge(self, u, v):
         self._nbrs[u].add(v)
 
+    def removeedge(self, u, v):
+        self._nbrs[u].remove(v)
+
+    def __contains__(self, v):
+        return v in self._nbrs
+
     def nbrs(self, v):
         return iter(self._nbrs[v])
 
@@ -152,6 +172,28 @@ One case where the set is better is if we want to test if the graph contains a p
 ```
 
 If `self._nbrs[u]` were a list, the method could take time linear in the degree of `u`.
+
+To make an undirected version of the `AdjacencySetGraph`, we will let it behave like a directed graph in which every edge has a twin in the opposite direction.
+This affects our `addedge` and `removeedge` methods.
+It also requires us to be a little more careful about the `edges` method so as not to return twice as many edges as before.
+We will use a set of frozensets as before to eliminate duplicates.
+
+```python {cmd id="_graph.undirectedadjacencysetgraph_00"}
+from ds2.graph import AdjacencySetGraph
+
+class UndirectedAdjacencySetGraph(AdjacencySetGraph):
+    def addedge(self, u, v):
+        AdjacencySetGraph.addedge(self, u, v)
+        AdjacencySetGraph.addedge(self, v, u)
+
+    def removeedge(self, u, v):
+        AdjacencySetGraph.removeedge(self, u, v)
+        AdjacencySetGraph.removeedge(self, v, u)
+
+    def edges(self):
+        E = {frozenset(e) for e in AdjacencySetGraph.edges(self)}
+        return iter(E)
+```
 
 ## Paths and Connectivity
 

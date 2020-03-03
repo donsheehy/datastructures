@@ -17,6 +17,12 @@ class EdgeSetGraph:
     def addedge(self, u, v):
         self._E.add((u,v))
 
+    def removeedge(self, u, v):
+        self._E.remove((u,v))
+
+    def __contains__(self, v):
+        return v in self._V
+
     def hasedge(self, u, v):
         return (u,v) in self._E
 
@@ -28,13 +34,15 @@ class EdgeSetGraph:
 
 class UndirectedEdgeSetGraph(EdgeSetGraph):
     def addedge(self, u, v):
-        self._E.add((u,v))
-        self._E.add((v,u))
+        self._E.add(frozenset({u,v}))
 
-    def edges(self):
-        edgeset = set()
-        for u,v in self._E:
-            if (v,u) not in edgeset:
-                edgeset.add((u,v))
-        return iter(edgeset)
+    def removeedge(self, u, v):
+        self._E.remove(frozenset({u,v}))
+
+    def nbrs(self, v):
+        for u, w in self._E:
+            if u == v:
+                yield w
+            elif w == v:
+                yield u
 

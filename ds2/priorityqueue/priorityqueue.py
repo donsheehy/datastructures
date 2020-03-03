@@ -9,13 +9,17 @@ class Entry:
         return self.priority < other.priority
 
 class PriorityQueue:
-    def __init__(self, entries = None):
-        entries = entries or []
+    def __init__(self, entries = None, key = lambda x: x):
+        if entries is None: entries = []
+        self._key = key
         self._entries = [Entry(i, p) for i, p in entries]
-        self._itemmap = {i: index for index, (i,p) in enumerate(entries)}
+        self._itemmap = {entry.item : index
+                         for index, entry in enumerate(self._entries)}
         self._heapify()
 
-    def insert(self, item, priority):
+    def insert(self, item, priority = None):
+        if priority is None:
+            priority = self._key(item)
         index = len(self._entries)
         self._entries.append(Entry(item, priority))
         self._itemmap[item] = index
@@ -43,11 +47,14 @@ class PriorityQueue:
             self._swap(i,parent)
             self._upheap(parent)
 
-    def reducepriority(self, item, priority):
+    def changepriority(self, item, priority = None):
+        if priority is None:
+            priority = self._key(item)
         i = self._itemmap[item]
-        entry = self._entries[i]
-        entry.priority = min(entry.priority, priority)
+        self._entries[i].priority = priority
+        # Assuming the tree is heap ordered, only one will have an effect.
         self._upheap(i)
+        self._downheap(i)
 
     def findmin(self):
         return self._entries[0].item

@@ -1,4 +1,4 @@
-class SortedListSimple:
+class OrderedListSimple:
     def __init__(self):
         self._L = []
 

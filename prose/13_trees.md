@@ -112,6 +112,10 @@ The **Tree ADT** is as follows.
 
 ## An implementation
 
+```python {cmd id="_tree.tree" hide}
+from ds2.queue import ListQueue as Queue
+```
+
 ```python {cmd id="_tree.tree_00"}
 class Tree:
     def __init__(self, L):
@@ -253,12 +257,15 @@ It is only a slight change in the code, but it results in a different output.
 
 It was considered a great achievement in python to be able to do this kind of traversal with a generator.  Recursive generators seem a little mysterious, especially at first.  However, if you break down this code and walk through it by hand, it will help you have a better understanding of how generators work.
 
-```python
-def preorder(self):
-    yield self.data
-    for child in self.children:
-        for data in child.preorder():
-            yield data
+```python {cmd id="_tree.tree_05" continue="_tree.tree_04"}
+    def preorder(self):
+        yield self.data
+        for child in self.children:
+            for data in child.preorder():
+                yield data
+
+    # Set __iter__ to be an alias for preorder.
+    __iter__ = preorder
 ```
 
 You can also do this to iterate over the trees (i.e. nodes).  I have made this one private because the user of the tree likely does not want or need access to the nodes.
@@ -284,18 +291,44 @@ For a perfectly balanced binary tree, this is $O(n \log n)$ time.
 Using recursion and the call stack make the tree traversal code substantially simpler than if we had to keep track of everything manually.
 It would not be enough to store just the stack of nodes in the path from your current node up to the root. You would also have to keep track of your place in the iteration of the children of each of those nodes.  Remember that it is the job of an iterator object to keep track of where it is in the iteration. Thus, we can just push the iterators for the children onto the stack too.
 
-```python
-def _postorder(self):
-    node, childiter = self, iter(self.children)
-    stack = [(node, childiter)]
-    while stack:
-        node, childiter = stack[-1]
-        try:
-            child = next(childiter)
-            stack.append((child, iter(child.children)))
-        except StopIteration:
-            yield node
-            stack.pop()					
+```python{cmd id="_tree.tree_06" continue="_tree.tree_05"}
+    def _postorder(self):
+        node, childiter = self, iter(self.children)
+        stack = [(node, childiter)]
+        while stack:
+            node, childiter = stack[-1]
+            try:
+                child = next(childiter)
+                stack.append((child, iter(child.children)))
+            except StopIteration:
+                yield node
+                stack.pop()					
+
+    def postorder(self):
+        return (node.data for node in self._postorder())
 ```
 
 In the above code, I don’t love the fact that I am reassigning `node` and `childiter` at every iteration of the loop.  Can you fix that so that it still works?
+
+### Layer by Layer
+
+Starting with our non-recursive postorder traversal, we can modify it to traverse the tree layer by layer.
+We will consider this traversal when we study heaps later on.
+
+```python{cmd id="_tree.tree_06" continue="_tree.tree_05"}
+    def _layerorder(self):
+        node, childiter = self, iter(self.children)
+        queue = Queue()
+        queue.enqueue((node, childiter))
+        while queue:
+            node, childiter = queue.peek()
+            try:
+                child = next(childiter)
+                queue.enqueue((child, iter(child.children)))
+            except StopIteration:
+                yield node
+                queue.dequeue()					
+
+    def layerorder(self):
+        return (node.data for node in self._layerorder())
+```

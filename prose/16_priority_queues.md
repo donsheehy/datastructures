@@ -40,7 +40,7 @@ As the data are stored as tuples, we have to use an index to pull out the priori
 
 We'll make a class that stores the entries, each will have an `item` and a `priority` as attributes. We'll make the entries comparable by implementing `__lt__` and thus the comparison of entries will always just compare their priorities.
 
-```python {cmd id="_priorityqueue.priorityqueue"}
+```python {cmd id="_priorityqueue.priorityqueue_00"}
 # priorityqueue.py
 
 class Entry:
@@ -211,9 +211,23 @@ They may seem to be the same, but they are not.  To see why, we have to look a l
 
 On the other hand, to analyze `_heapify`, we have to add up the heights of all the nodes in a complete binary tree.  Formally, this will be $n\sum_{i=1}^{\log_2 n}i/2^i$.  There is a cute trick to bound this sum.  Simply observe that if from every node in the tree, we take a path that goes left on the first step and right for every step thereafter, no two paths will overlap.  This means that the the sum of the lengths of these paths (which is also to the sum of the heights) is at most the total number of edges, $n-1$.  Thus, `_heapify` runs in $O(n)$ time.
 
-## Changing priorities
+## Implicit and Changing Priorities
 
-There is another "standard" operation on priority queues.  It's called `reducepriority`.  It does what it says, reducing the priority of an entry.  This is very simple to implement in our current code if the index of the entry to change is known.  It would suffice to change the priority of the entry and call `_upheap` on that index.  
+Sometimes, we would like our priority queue to just compare items, rather than their priorities.
+That is, the priority is implicit.
+To accomplish this, we can make the priority optional for the methods that use it.
+Moreover, we often would like to specify some function `key` such that the priority of `item` should be `key(item)`.
+This is, for example how it worked for other functions on ordered collections, like `sort`, `min`, and `max`.
+We will take care of both goals at once.
+We will allow an optional parameter to `__init__` to specify the key function.
+The default value of this function will be a function that takes an item and simply returns that same item.
+This way, if no key function is given and no priority is given, the priority will be equal to the item.
+
+There is another "standard" operation on priority queues.  It is called `changepriority`.  It does what it says, reducing the priority of an entry.  
+This is very simple to implement in our current code if the index of the entry to change is known.  
+It would suffice to change the priority of the entry and call `_upheap` and `_downheap` on that index.
+If it needs to move up the heap to recover the heap order invariant, the `_upheap` method will do that.
+If it needs to move down the heap, the `_upheap` method will leave it where it is, and the `_downheap` method will move it down the heap until the heap ordering is recovered.
 
 However, the usual way to reduce the priority is to specify the item and its new priority.  This requires that we can find the index of an item.  We'll do this by storing a dictionary that maps items to indices.  We'll have to update this dictionary every time we rearrange the items.  To make sure this happens correctly, we will add a method for swapping entries and use this whenever we make a swap.  
 
@@ -221,13 +235,17 @@ The full code including the `_heapify` method is given below.  This full version
 
 ```python {cmd id="_priorityqueue.priorityqueue_01" continue="_priorityqueue.priorityqueue_00"}
 class PriorityQueue:
-    def __init__(self, entries = None):
-        entries = entries or []
+    def __init__(self, entries = None, key = lambda x: x):
+        if entries is None: entries = []
+        self._key = key
         self._entries = [Entry(i, p) for i, p in entries]
-        self._itemmap = {i: index for index, (i,p) in enumerate(entries)}
+        self._itemmap = {entry.item : index
+                         for index, entry in enumerate(self._entries)}
         self._heapify()
 
-    def insert(self, item, priority):
+    def insert(self, item, priority = None):
+        if priority is None:
+            priority = self._key(item)
         index = len(self._entries)
         self._entries.append(Entry(item, priority))
         self._itemmap[item] = index
@@ -255,11 +273,14 @@ class PriorityQueue:
             self._swap(i,parent)
             self._upheap(parent)
 
-    def reducepriority(self, item, priority):
+    def changepriority(self, item, priority = None):
+        if priority is None:
+            priority = self._key(item)
         i = self._itemmap[item]
-        entry = self._entries[i]
-        entry.priority = min(entry.priority, priority)
+        self._entries[i].priority = priority
+        # Assuming the tree is heap ordered, only one will have an effect.
         self._upheap(i)
+        self._downheap(i)
 
     def findmin(self):
         return self._entries[0].item
@@ -290,4 +311,17 @@ class PriorityQueue:
         for i in reversed(range(n)):
             self._downheap(i)
 
+```
+
+We can use the code above to implement a `MaxHeap`, that is a priority queue of items ordered by *decreasing* value.
+
+```python {cmd continue="_priorityqueue.priorityqueue_01"}
+maxheap = PriorityQueue(key = lambda x: -x)
+
+n = 10
+for i in range(n):
+    maxheap.insert(i) #no need to specify the priority
+
+# These should print in decreasing order.
+print([maxheap.removemin() for i in range(n)])
 ```

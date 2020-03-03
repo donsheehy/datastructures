@@ -1,17 +1,17 @@
 import unittest
-from ds2.sortedlist import SortedList, SortedListSimple
+from ds2.orderedlist import OrderedList, OrderedListSimple
 
-class SortedListTests:
-    def SortedList(self):
+class OrderedListTests:
+    def OrderedList(self):
         raise NotImplementedError
 
     def testadd(self):
-        L = self.SortedList()
+        L = self.OrderedList()
         for i in [3,1,4,0,2]:
             L.add(i)
 
     def testcontains(self):
-        L = self.SortedList()
+        L = self.OrderedList()
         for i in [3,1,4,0,2]:
             L.add(i)
         L.__contains__(2)
@@ -19,7 +19,7 @@ class SortedListTests:
         self.assertTrue(4 in L)
 
     def testgeitem(self):
-        L = self.SortedList()
+        L = self.OrderedList()
         for i in [3,1,100,2,4]:
             L.add(i)
         self.assertEqual(L[0], 1)
@@ -29,7 +29,7 @@ class SortedListTests:
         self.assertEqual(L[4], 100)
 
     def testremove(self):
-        L = self.SortedList()
+        L = self.OrderedList()
         for i in [3,1,100,2,4]:
             L.add(i)
         self.assertEqual(L[1], 2)
@@ -41,23 +41,23 @@ class SortedListTests:
         self.assertEqual(len(L), 3)
 
     def testiter(self):
-        L = self.SortedList()
+        L = self.OrderedList()
         for i in [3,1,4,0,2]:
             L.add(i)
         self.assertEqual(list(L), [0,1,2,3,4])
 
     def testlen(self):
-        L = self.SortedList()
+        L = self.OrderedList()
         self.assertEqual(len(L), 0)
         for i in [3,1,4,0,2]:
             L.add(i)
         self.assertEqual(len(L), 5)
 
-class TestSortedList(unittest.TestCase, SortedListTests):
-    SortedList = SortedList
+class TestOrderedList(unittest.TestCase, OrderedListTests):
+    OrderedList = OrderedList
 
-class TestSortedListSimple(unittest.TestCase, SortedListTests):
-    SortedList = SortedListSimple
+class TestOrderedListSimple(unittest.TestCase, OrderedListTests):
+    OrderedList = OrderedListSimple
 
 
 if __name__ == '__main__':
