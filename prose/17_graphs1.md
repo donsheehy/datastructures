@@ -113,7 +113,13 @@ It should not be necessary to go through all the edges, just to find the ones in
 
 An alternative approach is to store a set with each vertex and have this set contain all the neighbors of that vertex.  This allows for fast access to the neighbors.  In fact, it means that we don't have to store the edges explicitly at all.
 
-```python {cmd, id="_graph.adjacencysetgraph_00"}
+```python {cmd id="_graph.adjacencysetgraph" hide}
+from ds2.queue import ListQueue as Queue
+
+
+```
+
+```python {cmd, id="_graph.adjacencysetgraph_00" continue="_graph.adjacencysetgraph"}
 class AdjacencySetGraph:
     def __init__(self, V = (), E = ()):
         self._V = set()

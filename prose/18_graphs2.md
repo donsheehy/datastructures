@@ -5,27 +5,43 @@ For example, a tree can now be viewed as a graph with edges directed from parent
 Given a graph that represents a rooted tree, we could rewrite our preorder traversal using the Graph ADT.
 Let's say we just want to print all the vertices.
 
-```python
+```python {cmd id="graphprintall1"}
 def printall(G, v):
     print(v)
     for n in G.nbrs(v):
         printall(G, n)
 ```
 
+```python {cmd continue="graphprintall1"}
+from ds2.graph import AdjacencySetGraph as Graph
+
+G = Graph({1,2,3,4}, {(1,2), (1,3), (1,4)})
+printall(G, 1)
+```
+
 This is fine for a tree, but it quickly gets very bad as soon as there is a cycle.
 In that case, there is nothing in the code to keep us from going around and around the cycle.
-We can take the same approach as Hansel and Gretel: we're going to leave bread crumbs to see where we've been.
+We will get a `RecursionError`.
+We will take the same approach as Hansel and Gretel: we're going to leave bread crumbs to see where we've been.
 The easiest way to do this is to just keep around a set that stores the vertices that have been already visited in the search.
 Thus, our `printall` method becomes the following.
 
-```python
+```python {cmd id="graphprintall2"}
 def printall(G, v, visited):
+    visited.add(v)
     print(v)
     for n in G.nbrs(v):
         if n not in visited:
-            visited.add(n)
-            printall(G, n)
+            printall(G, n, visited)
 ```
+
+```python {cmd continue="graphprintall2"}
+from ds2.graph import AdjacencySetGraph as Graph
+
+G = Graph({1,2,3,4}, {(1,2), (2,3), (3,4), (4,1)})
+printall(G, 1, set())
+```
+
 
 This is the most direct generalization of a recursive tree traversal into something that also traverses the vertices of a graph.
 Unlike with (rooted) trees, we have to specify the starting vertex, because there is no specially marked "root" vertex in a graph.
@@ -35,30 +51,49 @@ This pattern can be made to work more generally.
 
 ## Depth-First Search
 
+```python {cmd id="runninggraph" hide}
+from ds2.graph import AdjacencySetGraph
+from ds2.queue import ListQueue as Queue
+
+class Graph(AdjacencySetGraph):
+    pass
+```
+
 A **depth-first search** (or **DFS**) of a graph $G$ starting from a vertex $v$ will visit all the vertices connected to $v$.
 It will always prioritize moving "outward" in the direction of new vertices, backtracking as little as possible.
 The `printall` method above prints the vertices in a **depth-first order**.
 Below is the general form of this algorithm.
 
-```python
-def dfs(self, v):
-    visited = {v}
-    self._dfs(v, visited)
-    return visited
+```python {cmd id="graphdfs_01" continue="runninggraph"}
+    def dfs(self, v):
+        visited = {v}
+        self._dfs(v, visited)
+        return visited
 
-def _dfs(self, v, visited):
-    for n in self.nbrs(v):
-        if n not in visited:
-            visited.add(n)
-            self._dfs(n, visited)
+    def _dfs(self, v, visited):
+        for n in self.nbrs(v):
+            if n not in visited:
+                visited.add(n)
+                self._dfs(n, visited)
 ```
 
 With this code, it will be easy to check if two vertices are connected.
 For example, one could write the following.
 
-```python
+```python {cmd id="graphconnected_01" continue="graphdfs_01"}
 def connected(G, u, v):
     return v in G.dfs(u)
+```
+
+We can try this code on a small example to see.
+Notice that it is operating on a directed graph.
+
+```python {cmd continue="graphconnected_01"}
+G = Graph({1,2,3,4}, {(1,2), (2,3), (3,4), (4,2)})
+
+print("1 is connected to 4:", connected(G, 1, 4))
+print("4 is connected to 3:", connected(G, 4, 3))
+print("4 is connected to 1:", connected(G, 4, 1))
 ```
 
 It's possible to modify our `dfs` code to provide not only the set of connected vertices, but also the paths used in the search.
@@ -71,17 +106,17 @@ The resulting tree is called the **depth-first search tree**.
 It requires only a small change to generate it.
 We use the convention that the starting vertex maps to `None`.
 
-```python
-def dfs(self, v):
-    tree = {v: None}
-    self._dfs(v, tree)
-    return tree
+```python {cmd id="graphdfs_02" continue="runninggraph"}
+    def dfs(self, v):
+        tree = {v: None}
+        self._dfs(v, tree)
+        return tree
 
-def _dfs(self, v, tree):
-    for n in self.nbrs(v):
-        if n not in tree:
-            tree[n] = v
-            self._dfs(n, tree)
+    def _dfs(self, v, tree):
+        for n in self.nbrs(v):
+            if n not in tree:
+                tree[n] = v
+                self._dfs(n, tree)
 ```
 
 ## Removing the Recursion
@@ -93,17 +128,17 @@ This is not just an academic exercise.
 By removing the recursion, we will reveal the structure of the algorithm in a way that will allow us to generalize it to other algorithms.
 Here's the code.
 
-```python
-def dfs(self, v):
-    tree = {}
-    tovisit = [(None, v)]
-    while tovisit:
-        a,b = tovisit.pop()
-        if b not in tree:
-            tree[b] = a
-            for n in self.nbrs(b):
-                tovisit.append((b,n))
-    return tree
+```python {cmd id="_graph.adjacencysetgraph_03" continue="runninggraph"}
+    def dfs(self, v):
+        tree = {}
+        tovisit = [(None, v)]
+        while tovisit:
+            a,b = tovisit.pop()
+            if b not in tree:
+                tree[b] = a
+                for n in self.nbrs(b):
+                    tovisit.append((b,n))
+        return tree
 ```
 
 ## Breadth-First Search
@@ -111,23 +146,24 @@ def dfs(self, v):
 We get another important traversal by replacing the stack with a queue.
 In this case, the search prioritizes breadth over depth, resulting in a **breadth-first search** of **BFS**.
 
-```python
-def bfs(self, v):
-    tree = {}
-    tovisit = Queue([(None, v)])
-    while tovisit:
-        a,b = tovisit.dequeue()
-        if b not in tree:
-            tree[b] = a
-            for n in self.nbrs(b):
-                tovisit.enqueue((b,n))
-    return tree
+```python {cmd id="_graph.adjacencysetgraph_04" continue="_graph.adjacencysetgraph_03"}
+    def bfs(self, v):
+        tree = {}
+        tovisit = Queue()
+        tovisit.enqueue((None, v))
+        while tovisit:
+            a,b = tovisit.dequeue()
+            if b not in tree:
+                tree[b] = a
+                for n in self.nbrs(b):
+                    tovisit.enqueue((b,n))
+        return tree
 ```
 
 A wonderful property of breadth-first search is that the paths encoded in the resulting **breadth-first search tree** are the shortest paths from each vertex to the starting vertex.
 Thus, BFS can be used to find the shortest path connecting pairs of vertices in a graph.
 
-```python
+```python {cmd id="graphdistance_01" continue="_graph.adjacencysetgraph_04"}
 def distance(G, u, v):
     tree = G.bfs(u)
     if v not in tree:
@@ -137,6 +173,13 @@ def distance(G, u, v):
         edgecount += 1
         v = tree[v]
     return edgecount
+```
+
+```python {cmd continue="graphdistance_01"}
+G = Graph({1,2,3,4,5}, {(1,2), (2,3), (3,4), (4,5)})
+print("distance from 1 to 5:", distance(G, 1, 5))
+print("distance from 2 to 5:", distance(G, 2, 5))
+print("distance from 3 to 4:", distance(G, 3, 4))
 ```
 
 ## Weighted Graphs and Shortest Paths

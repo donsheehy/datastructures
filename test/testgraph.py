@@ -99,12 +99,26 @@ class TestEdgeSetGraph(unittest.TestCase, DigraphTests):
 class TestUndirectedEdgeSetGraph(unittest.TestCase, GraphTests):
     Graph = UndirectedEdgeSetGraph
 
-class TestAdjacencySetGraph(unittest.TestCase, DigraphTests):
-    Graph = AdjacencySetGraph
-
 class TestUndirectedAdjacencySetGraph(unittest.TestCase, GraphTests):
     Graph = UndirectedAdjacencySetGraph
 
+class TestAdjacencySetGraph(unittest.TestCase, DigraphTests):
+    Graph = AdjacencySetGraph
+
+    def testdfs(self):
+        G = self.Graph({1,2,3,4}, {(1,2), (2,3), (2,4)})
+        dfstree = G.dfs(1)
+        self.assertEqual(dfstree[2], 1)
+        self.assertEqual(dfstree[3], 2)
+        self.assertEqual(dfstree[4], 2)
+
+    def testbfs(self):
+        G = self.Graph({1,2,3,4,5}, {(1,2), (2,3), (2,4), (3,5), (5,1)})
+        bfstree = G.bfs(1)
+        self.assertEqual(bfstree[2], 1)
+        self.assertEqual(bfstree[3], 2)
+        self.assertEqual(bfstree[4], 2)
+        self.assertEqual(bfstree[5], 3)
 
 if __name__ == '__main__':
     unittest.main()

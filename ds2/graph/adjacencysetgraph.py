@@ -1,3 +1,7 @@
+from ds2.queue import ListQueue as Queue
+
+
+
 class AdjacencySetGraph:
     def __init__(self, V = (), E = ()):
         self._V = set()
@@ -50,4 +54,27 @@ class AdjacencySetGraph:
     def issimplecycle(self, V):
         """Return True if and only if the vertices V form a simple cycle."""
         return self.iscycle(V) and self.issimplepath(V[:-1])
+
+    def dfs(self, v):
+        tree = {}
+        tovisit = [(None, v)]
+        while tovisit:
+            a,b = tovisit.pop()
+            if b not in tree:
+                tree[b] = a
+                for n in self.nbrs(b):
+                    tovisit.append((b,n))
+        return tree
+
+    def bfs(self, v):
+        tree = {}
+        tovisit = Queue()
+        tovisit.enqueue((None, v))
+        while tovisit:
+            a,b = tovisit.dequeue()
+            if b not in tree:
+                tree[b] = a
+                for n in self.nbrs(b):
+                    tovisit.enqueue((b,n))
+        return tree
 
