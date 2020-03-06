@@ -76,7 +76,7 @@ class point:
     def __repr__(self):
         return '(' + str(self.x) + ', ' + str(self.y) + ')'
 
-P = [point(2,3), point(3,5), point(1,-1)]
+P = [point(10,-1), point(2,3), point(3,5)]
 ```
 
 If we just tried to sort the points, we get an error.
@@ -147,4 +147,29 @@ def foo2(x):
 
 for i in range(4):
     print(foo1(i), "==", foo2(i))
+```
+
+Now, we can use a lambda expression to sort the points by their y-coordinate.
+
+```python {cmd continue="point"}
+P.sort(key = lambda p: p.y)
+print(P)
+```
+
+We could also sort the sum of the coordinates.
+
+```python {cmd continue="point"}
+P.sort(key = lambda p: p.x + p.y)
+print(P)
+```
+
+You can also have lambda expressions that evaluate to functions with more (or even zero) parameters.
+
+```python {cmd}
+foo = lambda : 5
+print(foo())
+
+bar = lambda a, b: a * 8 + b
+print(bar(1, 2))
+print(bar('Na', ' batman'))
 ```

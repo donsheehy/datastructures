@@ -10,6 +10,7 @@ sphinx-rtd-theme = "*"
 ds2 = {editable = true,path = "."}
 coverage = "*"
 svgwrite = "*"
+nose = "*"
 
 [packages]
 

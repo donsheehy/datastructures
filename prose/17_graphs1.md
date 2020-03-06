@@ -125,7 +125,7 @@ class AdjacencySetGraph:
         self._V = set()
         self._nbrs = {}
         for v in V: self.addvertex(v)
-        for u,v in E: self.addedge(u,v)
+        for e in E: self.addedge(*e)
 
     def vertices(self):
         return iter(self._V)

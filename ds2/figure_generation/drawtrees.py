@@ -1,28 +1,10 @@
 from ds2.figure_generation.svghelper import SVGEngine
 from ds2.orderedmapping.bstmapping import BSTMapping as Tree
 
-# def draw_line(x1, y1, x2, y2):
-# 	canvas.set_line_width(3)
-# 	canvas.draw_line(x1, y1, x2, y2)
-#
-# def draw_circle(x, y, r):
-# 	canvas.set_line_width(3)
-# 	canvas.set_stroke_color(0, 0, 0)
-# 	canvas.set_fill_color(255,255,255)
-# 	canvas.fill_ellipse(x - r, y - r, 2 * r, 2 * r)
-# 	canvas.draw_ellipse(x - r, y - r, 2 * r, 2 * r)
-
 def x(node, offset):
 	nodewidth = 40
 	lenleft = len(node.left) if node.left is not None else 0
 	return nodewidth * (lenleft + 1) + offset
-
-# def draw_label(s, x, y):
-# 	fs = 30
-# 	fnt = 'Helvetica-Bold'
-# 	w, h = canvas.get_text_size(str(s), fnt, fs)
-# 	canvas.set_fill_color(0,0,0)
-# 	canvas.draw_text(str(s), x - w / 2, y - h / 2, fnt, fs)
 
 textstyle = {"stroke_width" : "0", "stroke" : "black",
             "fill" : "black", "fill_opacity" : "1",

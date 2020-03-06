@@ -4,6 +4,8 @@ from ds2.graph import ( EdgeSetGraph,
                         UndirectedEdgeSetGraph,
                         AdjacencySetGraph,
                         UndirectedAdjacencySetGraph,
+                        Digraph,
+                        Graph,
                         )
 
 class GeneralGraphTests:
@@ -102,6 +104,12 @@ class TestUndirectedEdgeSetGraph(unittest.TestCase, GraphTests):
 class TestUndirectedAdjacencySetGraph(unittest.TestCase, GraphTests):
     Graph = UndirectedAdjacencySetGraph
 
+class TestDigraph(unittest.TestCase, DigraphTests):
+    Graph = Digraph
+
+class TestGraph(unittest.TestCase, GraphTests):
+    Graph = Graph
+
 class TestAdjacencySetGraph(unittest.TestCase, DigraphTests):
     Graph = AdjacencySetGraph
 
@@ -119,6 +127,26 @@ class TestAdjacencySetGraph(unittest.TestCase, DigraphTests):
         self.assertEqual(bfstree[3], 2)
         self.assertEqual(bfstree[4], 2)
         self.assertEqual(bfstree[5], 3)
+
+class TestDijkstraAndPrim(unittest.TestCase):
+    Graph = Digraph
+
+    def testdijkstra(self):
+        n = 10
+        V = set(range(n))
+        E = {(i, (i+1) % n, 1) for i in range(n)}
+        G = self.Graph(V, E)
+        tree, D = G.dijkstra(3)
+        self.assertEqual(D[4], 1)
+        self.assertEqual(D[7], 4)
+
+    def testprim(self):
+        V = {1,2,3,4}
+        E = {(i, j, i+j) for i in V for j in V}
+        G = self.Graph(V, E)
+        mst = G.prim()
+        self.assertTrue(mst[1] == 2 or mst[2] == 1)
+
 
 if __name__ == '__main__':
     unittest.main()

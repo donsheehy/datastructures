@@ -191,6 +191,42 @@ We will augment our graph ADT to support a function `wt(u,v)` that returns the w
 Then, the weight of a path is the sum of the weights of the edges on that path.
 Now, simple examples make it clear that the shortest path may not be what we get from the BFS tree.
 
+```python {cmd id="_graph.digraph_00"}
+from ds2.graph import AdjacencySetGraph
+from ds2.priorityqueue import PriorityQueue
+
+class Digraph(AdjacencySetGraph):
+    def addedge(self, u, v, weight = 1):
+        self._nbrs[u][v] = weight
+
+    def removeedge(self, u, v):
+        del self._nbrs[u][v]
+
+    def addvertex(self, v):
+        self._V.add(v)
+        self._nbrs[v] = {}
+
+    def wt(self, u, v):
+        return self._nbrs[u][v]
+```
+
+```python {cmd id="_graph.graph_00"}
+from ds2.graph import Digraph
+
+class Graph(Digraph):
+    def addedge(self, u, v, weight = 1):
+        Digraph.addedge(self, u, v, weight)
+        Digraph.addedge(self, v, u, weight)
+
+    def removeedge(self, u, v):
+        Digraph.removeedge(self, u, v)
+        Digraph.removeedge(self, v, u)
+
+    def edges(self):
+        E = {frozenset(e) for e in Digraph.edges(self)}
+        return iter(E)
+```
+
 One nice algorithm for the single source, all shortest paths problem on weighted graphs is called Dijkstra's algorithm.
 It looks a lot like DFS and BFS except now, the stack or queue is replaced by a priority queue.
 The vertices will be visited in order of their distance to the source.
@@ -206,21 +242,47 @@ So, if we use this edge, the shortest path to `v` will go through `u`.
 In this way, the tree will encode all the shortest paths from the start vertex.
 Thus, the result will be not only the lengths of all the paths, but also an efficient encoding of the paths themselves.
 
-```python
-def dijkstra(self, v):
-    tree = {}
-    D = {v: 0}
-    tovisit = PriorityQueue()
-    tovisit.insert((None,v), 0)
-    while tovisit:
-        a,b = tovisit.removemin()
-        if b not in tree:
-            tree[b] = a
-            if a is not None:
-                D[b] = D[a] + self.wt(a,b)
-            for n in self.nbrs(b):
-                tovisit.add((b,n), D[b] + self.wt(b,n))
-    return tree, D
+```python {cmd id="_graph.digraph_01" continue="_graph.digraph_00"}
+    def dijkstra(self, v):
+        tree = {}
+        D = {v: 0}
+        tovisit = PriorityQueue()
+        tovisit.insert((None,v), 0)
+        while tovisit:
+            a,b = tovisit.removemin()
+            if b not in tree:
+                tree[b] = a
+                if a is not None:
+                    D[b] = D[a] + self.wt(a,b)
+                for n in self.nbrs(b):
+                    tovisit.insert((b,n), D[b] + self.wt(b,n))
+        return tree, D
+```
+
+Let's write a little code to see how this works.
+We'll add a function to write out the path in the tree and then we'll display all the shortest paths found by teh algorithm.
+
+```python {cmd id="shortestpaths" continue="_graph.digraph_02"}
+def path(tree, v):
+    path = []
+    while v is not None:
+        path.append(str(v))
+        v = tree[v]
+    return ' --> '.join(path)
+
+def shortestpaths(G, v):
+    tree, D = G.dijkstra(v)
+    for v in G.vertices():
+        print('Vertex', v, ':', path(tree, v), ", distance = ", D[v])
+```
+
+```python {cmd continue="shortestpaths"}
+G = Digraph({1,2,3}, {(1,2, 4.6), (2, 3, 9.2), (1, 3, 3.1)})
+shortestpaths(G, 1)
+print('------------------------')
+# Adding an edge creates a shortcut to vertex 2.
+G.addedge(3, 2, 1.1)
+shortestpaths(G, 1)
 ```
 
 ## Prim's Algorithm for Minimum Spanning Trees
@@ -249,21 +311,36 @@ This is a contradiction, because we assumed that we started with the MST.
 So, in light of our previous graph algorithms, we can try to always add the lightest edge from the visited vertices to an unvisited vertex.
 This can easily be encoded in a priority queue.
 
-```python
-def prim(self, v):
-    tree = {}
-    tovisit = PriorityQueue()
-    tovisit.insert((None, v), 0)
-    while tovisit:
-        a,b = tovisit.removemin()
-        if b not in tree:
-            tree[b] = a
-            for n in self.nbrs(b):
-                tovisit.add((b,n), self.wt(b,n))
-    return tree
+```python {cmd id="_graph.digraph_02", continue="_graph.digraph_01"}
+    def prim(self):
+        v = next(iter(self.vertices()))
+        tree = {}
+        tovisit = PriorityQueue()
+        tovisit.insert((None, v), 0)
+        while tovisit:
+            a,b = tovisit.removemin()
+            if b not in tree:
+                tree[b] = a
+                for n in self.nbrs(b):
+                    tovisit.insert((b,n), self.wt(b,n))
+        return tree
 ```
 
+The following example clearly shows that the minimum spanning tree and the shortest path tree are not the same.
 
+```python {cmd id="msts" continue="_graph.graph_00"}
+G = Graph({1,2,3,4,5}, {(1, 2, 1),
+                        (2, 3, 1),
+                        (1, 3, 2),
+                        (3, 4, 1),
+                        (3, 5, 3),
+                        (4, 5, 2),
+                       })
+mst = G.prim()
+sp, D = G.dijkstra(1)
+print(mst)
+print(sp)
+```
 ## An optimization for Priority-First search
 
 The implementation above, although correct, is not technically Dijkstra's Algorithm, but it's close.
@@ -275,31 +352,44 @@ It would be better to not have to these edges in the priority queue, but we don'
 We can avoid adding a new entry to the priority and instead modify the existing entry that is no longer valid.
 
 The idea is to store vertices rather than edges in the priority queue.
-Then, we'll use the `reducepriority` method to update an entry when we find a new shorter path to a given vertex.
+Then, we'll use the `changepriority` method to update an entry when we find a new shorter path to a given vertex.
 Although we won't know the distances at first, we'll store the shortest distance we've seen so far.
 If we find a shortcut to a given vertex, we will reduce it's priority and update the priority queue.
 Updating after finding a shortcut is called **edge relaxation**.
 It works as follows.
 The distances to the source are stored in a dictionary `D` that maps vertices to the distance, based on what we've searched so far.
 If we find that `D[n] > D[u] + G.wt(u,n)`, then it would be a shorter path to `n` if we just took the shortest path from the source to `u` and appended the edge `(u,n)`.  In that case, we set `D[n] = D[u] + G.wt(u,n)` and update the priority queue.
-*Note that we had this algorithm in mind when we added `reducepriority` to our Priority Queue ADT.*
+*Note that we had this algorithm in mind when we added `changepriority` to our Priority Queue ADT.*
 
 Here's the code.
 
-```python
-def dijkstra2(self, v):
-    tree = {v: None}
-    D = {u: float('inf') for u in self.vertices()}
-    D[v] = 0
-    tovisit = PriorityQueue([(u, D[u]) for u in self.vertices()])
-    while tovisit:
-        u = tovisit.removemin()
-        for n in self.nbrs(u):
-            if D[u] + self.wt(u,n) < D[n]:
-                D[n] = D[u] + self.wt(u,n)
-                tree[n] = u
-                tovisit.reducepriority(n, D[n])
-    return tree, D
+```python {cmd id="dijkstra2" continue="_graph.digraph_02"}
+    def dijkstra2(self, v):
+        tree = {v: None}
+        D = {u: float('inf') for u in self.vertices()}
+        D[v] = 0
+        tovisit = PriorityQueue([(u, D[u]) for u in self.vertices()])
+        while tovisit:
+            u = tovisit.removemin()
+            for n in self.nbrs(u):
+                if D[u] + self.wt(u,n) < D[n]:
+                    D[n] = D[u] + self.wt(u,n)
+                    tree[n] = u
+                    tovisit.changepriority(n, D[n])
+        return tree, D
+```
+
+```python {cmd continue="dijkstra2"}
+V = {1,2,3,4,5}
+E = {(1,2,1),
+     (2,3,2),
+     (1,3,2),
+     (3,4,2),
+     (2,5,2)
+    }
+G = Digraph(V, E)
+tree, D = G.dijkstra2(1)
+print(tree, D)
 ```
 
 An important difference with our DFS/BFS code is that the main data structure now stores vertices, not edges.
