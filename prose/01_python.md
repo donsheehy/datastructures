@@ -26,7 +26,7 @@ In fact, you usually have to have special constructions in a language to do some
 
 ## Expressions and Evaluation
 
-Python can do simple arithmetic.  For example, `2+2` is a simple arithmetic **expression**.
+Python can do simple arithmetic.  For example, `2 + 2` is a simple arithmetic **expression**.
 Expressions get **evaluated** and produce a **value**.  Some values are numerical like the `2 + 2` example, but they don’t need to be.
 For example, `5 > 7` is an expression that evaluates to the boolean value `False`.
 Expressions can become more complex by combining many operations and functions.

@@ -21,7 +21,7 @@ In fact, you usually have to have special constructions in a language to do some
 \section{Expressions and Evaluation}
 
 
-Python can do simple arithmetic.  For example, \texttt{2+2} is a simple arithmetic \textbf{expression}.
+Python can do simple arithmetic.  For example, \texttt{2 + 2} is a simple arithmetic \textbf{expression}.
 Expressions get \textbf{evaluated} and produce a \textbf{value}.  Some values are numerical like the \texttt{2 + 2} example, but they don’t need to be.
 For example, \texttt{5 > 7} is an expression that evaluates to the boolean value \texttt{False}.
 Expressions can become more complex by combining many operations and functions.
@@ -64,7 +64,6 @@ Every object has a \textbf{type}.  The type often determines what you can do wit
 
 The difference between a variable and the \textbf{object} it represents can get lost in our common speech because the variable is usually acting as the \emph{name} of the object.  There are some times when it's useful to be clear about the difference, in particular when copying objects.  You might want to try some examples of copying objects from one variable to another.  Does changing one of them affect the other?
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{5}
 \PY{n}{y} \PY{o}{=} \PY{l+m+mf}{3.2}
@@ -74,18 +73,11 @@ The difference between a variable and the \textbf{object} it represents can get 
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{z has type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-x has type <class 'int'>
-y has type <class 'float'>
-z has type <class 'bool'>
-
-\end{Verbatim}
 
 
 You should think of an object as having three things: an \emph{identity}, a \emph{type}, and a \emph{value}.
 Its identity cannot change.  It can be used to see if two objects are actually the same object with the \texttt{is} keyword.
 For example, consider the following code.
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
@@ -97,19 +89,12 @@ For example, consider the following code.
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{x} \PY{o}{==} \PY{n}{z}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-True
-False
-True
-
-\end{Verbatim}
 
 
 An object cannot change its identity.
 In Python, you also cannot change the type of an object.
 You can reassign a variable to point to different object of a different type, but that's not the same thing.
 There are several functions that may seem to be changing the types of objects, but they are really just creating a new object from the old.
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{2}
@@ -122,18 +107,9 @@ There are several functions that may seem to be changing the types of objects, b
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Now, x has type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-x = 2
-float(x) = 2.0
-x still has type <class 'int'>
-Overwriting x.
-Now, x has type <class 'float'>
-
-\end{Verbatim}
 
 
 You can do more elaborate things as well.
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{numstring} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{3.1415926}\PY{l+s+s2}{\PYZdq{}}
@@ -149,12 +125,6 @@ You can do more elaborate things as well.
 \PY{n}{infinity\PYZus{}plus\PYZus{}one} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
 \end{Verbatim}
 
-\begin{Verbatim}
-y has type <class 'float'>
-x has type <class 'str'>
-float('inf') has type <class 'float'>
-
-\end{Verbatim}
 
 
 This last example introduced a new type, that of a \textbf{string}.  A string is a sequence of characters.  In Python, there is no special class for a single character (as in C for example).
@@ -176,7 +146,6 @@ The next five most important types in Python are strings, lists, tuples, diction
 
 \textbf{Strings} are sequences of characters and can be used to store text of all kinds.  Note that you can \textbf{concatenate} strings to create a new string using the plus sign.  You can also access individual characters using square brackets and an \textbf{index}.  The name of the class for strings is \texttt{str}.  You can often turn other objects into strings.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{s} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello, }\PY{l+s+s2}{\PYZdq{}}
 \PY{n}{t} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{World.}\PY{l+s+s2}{\PYZdq{}}
@@ -188,13 +157,6 @@ The next five most important types in Python are strings, lists, tuples, diction
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{n}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-<class 'str'>
-Hello, World.
-r
-7
-
-\end{Verbatim}
 
 \subsection{Lists (\texttt{list})}
 
@@ -202,16 +164,11 @@ r
 \textbf{Lists} are ordered sequences of objects.  The objects do not have to be the same type.  They are indicated by square brackets and the \textbf{elements} of the list are separated by commas.  You can append an item to the end of a list \texttt{L} by using the command \texttt{L.append(newitem)}.
 It is possible to index into a list exactly as we did with strings.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{L}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-<class 'list'>
-
-\end{Verbatim}
 
 
 Here is a common visual representation of the list.
@@ -232,7 +189,6 @@ Here is a common visual representation of the list.
 
 \textbf{Tuples} are also ordered sequences of objects, but unlike lists, they are immutable.  You can access the items but you can’t change what items are in the tuple after you create it.  For example, trying to \texttt{append} raises an exception.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{t} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{skip a few}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{99}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{)}
@@ -241,12 +197,6 @@ Here is a common visual representation of the list.
 \PY{n}{t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{101}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-<class 'tuple'>
-(1, 2, 'skip a few', 99, 100)
-100
-
-\end{Verbatim}
 
 \subsection{Dictionaries (\texttt{dict})}
 
@@ -256,7 +206,6 @@ Here is a common visual representation of the list.
 
 Dictionaries are also known as maps,  \textbf{mappings}, or hash tables.  We will go deep into how these are constructed later in the course.
 A dictionary doesn't have a fixed order.
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{d} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
@@ -268,11 +217,6 @@ A dictionary doesn't have a fixed order.
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-{2: 'two', 5: 'five', 'pi': 3.1415926}
-3.1415926
-
-\end{Verbatim}
 
 \subsection{Sets (\texttt{set})}
 
@@ -281,7 +225,6 @@ A dictionary doesn't have a fixed order.
 
 
 Be careful that empty braces \texttt{{}} indicates an empty dictionary and not an empty set.  Here is an example of a newly created set.  Some items are added.  Notice that the duplicates have no effect on the value as its printed.
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{s} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}
@@ -293,11 +236,6 @@ Be careful that empty braces \texttt{{}} indicates an empty dictionary and not a
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{s}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-<class 'set'>
-{1, 2, 3}
-
-\end{Verbatim}
 
 \section{Some common things to do with collections}
 
@@ -306,7 +244,6 @@ There are several operations that can be performed on any of the collections cla
 
 
 You can find the number of elements in the collection (the \textbf{length}) using \texttt{len}.
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{a} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a string}\PY{l+s+s2}{\PYZdq{}}
@@ -318,17 +255,12 @@ You can find the number of elements in the collection (the \textbf{length}) usin
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{c}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{e}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-8 4 2 3 4
-
-\end{Verbatim}
 
 
 For the sequential types (lists, tuples, and strings), you can \textbf{slice} a subsequence of indices using square brackets and a colon as in the following examples.  The range of indices is half open in that the slice will start with the first index and proceed up to but not including the last index.  Negative indices count backwards from the end.  Leaving out the first index is the same as starting at 0.  Leaving out the second index will continue the slice until the end of the sequence.
 
 
 \textbf{Important}: slicing a sequence creates a new object.  That means a big slice will do a lot of copying.  It's really easy to write inefficient code this way.
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{a} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a string}\PY{l+s+s2}{\PYZdq{}}
@@ -340,13 +272,6 @@ For the sequential types (lists, tuples, and strings), you can \textbf{slice} a 
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-trin
- stri
-['second', 'favorite', 'list']
-(1, 2)
-
-\end{Verbatim}
 
 \section{Iterating over a collection}
 
@@ -407,7 +332,6 @@ The \texttt{for} loops from the previous section are classic examples if this.  
 
 An \texttt{if} statement in its simplest form evaluates an expression and tries to interpret it as a boolean.  This expression is referred to as a predicate.  If the predicate evaluates to \texttt{True}, then a block of code is executed.  Otherwise, the code is not executed.  This is the \emph{selection} of sequence, selection, and iteration.  Here is an example.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{if} \PY{l+m+mi}{3} \PY{o}{+} \PY{l+m+mi}{3} \PY{o}{\PYZlt{}} \PY{l+m+mi}{7}\PY{p}{:}
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This should be printed.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
@@ -416,14 +340,9 @@ An \texttt{if} statement in its simplest form evaluates an expression and tries 
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This should not be printed.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-This should be printed.
-
-\end{Verbatim}
 
 
 An \texttt{if} statement can also include an \texttt{else} clause.  This is a second block of code that executes if the predicate evaluates to \texttt{False}.
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{if} \PY{k+kc}{False}\PY{p}{:}
@@ -432,14 +351,9 @@ An \texttt{if} statement can also include an \texttt{else} clause.  This is a se
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This will print.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-This will print.
-
-\end{Verbatim}
 
 
 A \texttt{while} loop also has a predicate.  It is evaluated at the top of a block of code.  If it evaluates to \texttt{True}, then the block is executed and then it repeats.  The repetition continues until the predicate evaluate to \texttt{False} or until the code reaches a \texttt{break} statement.
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{1}
@@ -448,20 +362,9 @@ A \texttt{while} loop also has a predicate.  It is evaluated at the top of a blo
     \PY{n}{x} \PY{o}{=} \PY{n}{x} \PY{o}{*} \PY{l+m+mi}{2}
 \end{Verbatim}
 
-\begin{Verbatim}
-1
-2
-4
-8
-16
-32
-64
-
-\end{Verbatim}
 
 
 A \texttt{try} block is the way to catch and recover from errors while a program is running.  If you have some code that may cause an error, but you don’t want it to crash your program, you can put the code in a \texttt{try} block.  Then, you can \emph{catch} the error (also known as an \textbf{exception}) and deal with it.  A simple example might be a case where you want to convert some number to a \texttt{float}.  Many types of objects can be converted to \texttt{float}, but many cannot.  If we simply try to do the conversion and it works, everything is fine.  Otherwise, if there is a \texttt{ValueError}, we can do something else instead.  
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{not a number}\PY{l+s+s2}{\PYZdq{}}
@@ -471,14 +374,9 @@ A \texttt{try} block is the way to catch and recover from errors while a program
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{You can’t do that!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-You can’t do that!
-
-\end{Verbatim}
 
 
 A function also changes the control flow.  In Python, you define a function with the \texttt{def} keyword.  This keyword creates an object to store the block of code.  The parameters for the function are listed in parentheses after the function name.  The \texttt{return} statement causes the control flow to revert back to where the function was called and determines the value of the function call.  
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{foo}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
@@ -488,15 +386,9 @@ A function also changes the control flow.  In Python, you define a function with
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{foo}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Na}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ batman}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-17
-NaNaNaNaNaNaNaNa batman
-
-\end{Verbatim}
 
 
 Notice that there is no requirement that we specify the types of objects a function expects for its arguments.  This is very convenient, because it means that we can use the same function to operate on different types of objects (as in the example above).  If we define a function twice, even if we change the parameters, the first will be overwritten by the second.  This is exactly the same as assigning to a variable twice.  The name of a function is just a name; it refers to an object (the function).  Functions can be treated like any other object.
-
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{foo}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
@@ -510,11 +402,6 @@ Notice that there is no requirement that we specify the types of objects a funct
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{bar}\PY{p}{(}\PY{n}{somevariable}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-6
-6
-
-\end{Verbatim}
 
 \section{Modules and Imports}
 
@@ -554,16 +441,11 @@ The \texttt{import} brings the module name into the current namespace.  I can th
 
 There is very little magic in an import.  In some sense, it’s just telling the current program about the results of another program.  Because the import (usually) results in the module being executed, it’s good practice to change the behavior of a script depending on whether it is being run directly, or being run as part of an import.  It is possible to check by looking at the \texttt{\_\_name\_\_} attribute of the module.  If you run the module directly (i.e. as a script), then the \texttt{\_\_name\_\_} variable is automatically set to \texttt{\_\_main\_\_}.  If the module is being imported, the \texttt{\_\_name\_\_} defaults to the module name.  This is easily seen from the following experiment.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} File: mymodule.py}
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The name of this module is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-The name of this module is __main__
-
-\end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} File: theimporter.py}
@@ -576,7 +458,6 @@ The name of this module is __main__
 
 Here is how we use the \texttt{\_\_name\_\_} attribute to check how the program is being run.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{somefunction}\PY{p}{(}\PY{p}{)}\PY{p}{:}
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Real important stuff here.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
@@ -585,10 +466,6 @@ Here is how we use the \texttt{\_\_name\_\_} attribute to check how the program 
     \PY{n}{somefunction}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-Real important stuff here.
-
-\end{Verbatim}
 
 
 In the preceding code, the message is printed only when the module is executed as a script.  It is not printed (i.e. the \texttt{somefunction} function is not called) if the module is being imported.  This is a very common python idiom.

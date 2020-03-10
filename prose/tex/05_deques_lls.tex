@@ -300,7 +300,6 @@ In fact, we probably want to test both implementations with the same tests.
 
 If we rename our first Queue implementations \texttt{ListQueue}, we might have had the following tests for it.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{unittest}
 \PY{k+kn}{from} \PY{n+nn}{ds2}\PY{n+nn}{.}\PY{n+nn}{queue} \PY{k+kn}{import} \PY{n}{ListQueue}
@@ -344,15 +343,6 @@ If we rename our first Queue implementations \texttt{ListQueue}, we might have h
     \PY{n}{unittest}\PY{o}{.}\PY{n}{main}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-
-.....
-----------------------------------------------------------------------
-Ran 5 tests in 0.004s
-
-OK
-
-\end{Verbatim}
 
 
 Now that we have another implementation, we might be tempted to just copy and paste the old tests, changing the references from \texttt{ListQueue} to \texttt{LinkedQueue}.
@@ -422,7 +412,6 @@ There is another \emph{important difference} between the \texttt{TestQueue} clas
 It just defines some methods that will be \textbf{mixed into} \texttt{TestListQueue} and \texttt{TestLinkedQueue}.
 Here are our new test files.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} testlistqueue.py}
 \PY{k+kn}{import} \PY{n+nn}{unittest}
@@ -435,15 +424,6 @@ Here are our new test files.
 
 \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
     \PY{n}{unittest}\PY{o}{.}\PY{n}{main}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}
-
-Traceback (most recent call last):
-  File "ton67a7syl", line 3, in <module>
-    from ds2.testqueue import TestQueue
-ModuleNotFoundError: No module named 'ds2.testqueue'
-
 \end{Verbatim}
 
 
@@ -461,9 +441,6 @@ ModuleNotFoundError: No module named 'ds2.testqueue'
     \PY{n}{unittest}\PY{o}{.}\PY{n}{main}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-
-\end{Verbatim}
 
 
 The classes, \texttt{TestListQueue} and \texttt{TestLinkedQueue}, extend both \texttt{unittest.TestCase} \emph{and} \texttt{TestQueue}.

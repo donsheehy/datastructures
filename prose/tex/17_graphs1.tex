@@ -178,7 +178,6 @@ An alternative approach is to store a set with each vertex and have this set con
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{G} \PY{o}{=} \PY{n}{AdjacencySetGraph}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neighbors of 1:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{G}\PY{o}{.}\PY{n}{nbrs}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
@@ -186,12 +185,6 @@ An alternative approach is to store a set with each vertex and have this set con
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neighbors of 3:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{G}\PY{o}{.}\PY{n}{nbrs}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-neighbors of 1: [2, 3]
-neighbors of 2: [1]
-neighbors of 3: []
-
-\end{Verbatim}
 
 
 Let's do a very simple example to make sure it works as we expect it to.
@@ -275,7 +268,6 @@ To solidify these definitions, we could write a couple methods to check them.
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{G} \PY{o}{=} \PY{n}{AdjacencySetGraph}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[1,2,3,1] is a path}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{G}\PY{o}{.}\PY{n}{ispath}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
@@ -289,18 +281,6 @@ To solidify these definitions, we could write a couple methods to check them.
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[1,2,3,4,3,1] is a simple cycle:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{G}\PY{o}{.}\PY{n}{issimplecycle}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-[1,2,3,1] is a path True
-[1,2,3,1] is a simple path False
-[1,2,3] is a simple path True
-[1,2,3] is a simple cycle: False
-[1,2,3,1] is a simple cycle: False
-[1,2,3,4] is a simple path: True
-[1,2,3,4] is a simple cycle: False
-[1,2,3,4,3,1] is a cycle: True
-[1,2,3,4,3,1] is a simple cycle: False
-
-\end{Verbatim}
 
 
 We say that $u$ is \textbf{connected} to $v$ if there exists a path that starts at $u$ and ends at $v$.
@@ -325,7 +305,6 @@ We will add it to our \texttt{AdjacencySetGraph} class.  As a first exercise, we
 Can you guess what will go wrong?
 Here's an example.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{G} \PY{o}{=} \PY{n}{AdjacencySetGraph}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
 \PY{k}{assert}\PY{p}{(}\PY{n}{G}\PY{o}{.}\PY{n}{connected}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
@@ -340,12 +319,6 @@ Here's an example.
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There was too much recursion!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-First graph is okay.
-There was too much recursion!
-
-
-\end{Verbatim}
 
 
 It's clear that if the graph has any cycles, we can't check connectivity this way.  To deal with cycles, we can keep a set of visited vertices.  Recall that this is called memoization.
@@ -365,7 +338,6 @@ It's clear that if the graph has any cycles, we can't check connectivity this wa
 
 Now, we can try again and see what happens.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{H} \PY{o}{=} \PY{n}{AdjacencySetGraph}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
 \PY{k}{try}\PY{p}{:}
@@ -376,9 +348,6 @@ Now, we can try again and see what happens.
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{It works now!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-
-\end{Verbatim}
 
 \chapter{Graph Search}
 
@@ -396,7 +365,6 @@ Let's say we just want to print all the vertices.
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{ds2}\PY{n+nn}{.}\PY{n+nn}{graph} \PY{k+kn}{import} \PY{n}{AdjacencySetGraph} \PY{k}{as} \PY{n}{Graph}
 
@@ -404,13 +372,6 @@ Let's say we just want to print all the vertices.
 \PY{n}{printall}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-1
-2
-3
-4
-
-\end{Verbatim}
 
 
 This is fine for a tree, but it quickly gets very bad as soon as there is a cycle.
@@ -430,7 +391,6 @@ Thus, our \texttt{printall} method becomes the following.
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{ds2}\PY{n+nn}{.}\PY{n+nn}{graph} \PY{k+kn}{import} \PY{n}{AdjacencySetGraph} \PY{k}{as} \PY{n}{Graph}
 
@@ -438,13 +398,6 @@ Thus, our \texttt{printall} method becomes the following.
 \PY{n}{printall}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{set}\PY{p}{(}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-1
-2
-3
-4
-
-\end{Verbatim}
 
 
 This is the most direct generalization of a recursive tree traversal into something that also traverses the vertices of a graph.
@@ -489,7 +442,6 @@ For example, one could write the following.
 We can try this code on a small example to see.
 Notice that it is operating on a directed graph.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{G} \PY{o}{=} \PY{n}{AdjacencySetGraph}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
 
@@ -498,12 +450,6 @@ Notice that it is operating on a directed graph.
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{4 is connected to 1:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{connected}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-1 is connected to 4: True
-4 is connected to 3: True
-4 is connected to 1: False
-
-\end{Verbatim}
 
 
 It's possible to modify our \texttt{dfs} code to provide not only the set of connected vertices, but also the paths used in the search.
@@ -594,7 +540,6 @@ Thus, BFS can be used to find the shortest path connecting pairs of vertices in 
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{G} \PY{o}{=} \PY{n}{AdjacencySetGraph}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{distance from 1 to 5:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{distance}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
@@ -602,12 +547,6 @@ Thus, BFS can be used to find the shortest path connecting pairs of vertices in 
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{distance from 3 to 4:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{distance}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-distance from 1 to 5: 4
-distance from 2 to 5: 3
-distance from 3 to 4: 1
-
-\end{Verbatim}
 
 \section{Weighted Graphs and Shortest Paths}
 
@@ -711,7 +650,6 @@ We'll add a function to write out the path in the tree and then we'll display al
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{G} \PY{o}{=} \PY{n}{Digraph}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{4.6}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mf}{9.2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mf}{3.1}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
 \PY{n}{shortestpaths}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
@@ -721,9 +659,6 @@ We'll add a function to write out the path in the tree and then we'll display al
 \PY{n}{shortestpaths}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-
-\end{Verbatim}
 
 \section{Prim's Algorithm for Minimum Spanning Trees}
 
@@ -775,7 +710,6 @@ This can easily be encoded in a priority queue.
 
 The following example clearly shows that the minimum spanning tree and the shortest path tree are not the same.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{G} \PY{o}{=} \PY{n}{Graph}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
                         \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
@@ -790,11 +724,6 @@ The following example clearly shows that the minimum spanning tree and the short
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{sp}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-{1: None, 2: 1, 3: 2, 4: 3, 5: 4}
-{1: None, 2: 1, 3: 1, 4: 3, 5: 3}
-
-\end{Verbatim}
 
 \section{An optimization for Priority-First search}
 
@@ -839,7 +768,6 @@ Here's the code.
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{V} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{\PYZcb{}}
 \PY{n}{E} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
@@ -853,10 +781,6 @@ Here's the code.
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{tree}\PY{p}{,} \PY{n}{D}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-{1: None, 2: 1, 3: 1, 5: 2, 4: 3} {1: 0, 2: 1, 3: 2, 4: 4, 5: 3}
-
-\end{Verbatim}
 
 
 An important difference with our DFS/BFS code is that the main data structure now stores vertices, not edges.

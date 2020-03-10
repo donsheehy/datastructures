@@ -1,0 +1,264 @@
+\chapter{Iterators, Generators, and Comprehensions}
+
+\section{For loops and comprehensions, the long way.}
+
+
+The simplest way to make a \texttt{list} is to just write out the elements inside square brackets, as follows.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{]}
+\end{Verbatim}
+
+
+
+This is called a \textbf{list literal}.  Often, we want to create a list and we know exactly what items we want to put in it.
+However, even in some of these situations, it might not be so nice to write out all the elements.  In the example above, we have the first five powers of two, but what if we needed a list of the first 1000 powers of two.  We might build it up with a for loop.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+    \PY{n}{L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+
+That’s easy enough, but there is an easier syntax for doing this.  It’s called a \textbf{list comprehension}.  It looks a little like a for loop inside square brackets:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2} \PY{o}{*}\PY{o}{*} \PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+
+This is a very common idiom used in all kinds of programs.  You can do comprehensions with other types of collections too.  For example the following \textbf{set comprehension} is equivalent to a for loop construction as follows.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{S} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{\PYZcb{}}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+
+\PY{n}{S} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{p}{)}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{:}
+    \PY{n}{S}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Both snippets of code produce the same set of pairs.
+
+\section{More exotic comprehensions}
+
+
+More complicated comprehensions are possible.  If you want to have nested loops, that is possible; just keep the loops in the same order you would write them if you were writing them out the long way.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{n}{j} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{]}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{L}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} ... is equivalent to ...}
+
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+    \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+        \PY{n}{L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{n}{j} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{L}\PY{p}{)}
+\end{Verbatim}
+
+
+\section{Iterators}
+
+
+The \texttt{for} loop is a powerful tool for working with lists, tuples, sets, strings, and dictionaries.
+It is the basic way that we loop over a collection.
+In this chapter, we’ll delve deeply into how it really works.
+At the heart of a \texttt{for} loop is the notion of an \textbf{iterator}.
+The job of an iterator is to provide sequential access to objects in a collection.
+
+
+The reason we need a separate object to iterate over a list is that we need that object to keep track of where in the list we are.  If we imagine the list written out on a piece of paper.  If we read out the items in the list in order, we might keep our finger on the current item.  Our finger is acting as the iterator’s internal state, keeping our place in the list.  The same is true for other iterators.
+
+
+The simplest way to get an iterator object is to call the \texttt{iter} method on some collection, such as a list.  Internally Python calls the \texttt{\_\_iter\_\_} method on the object.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}
+\PY{n}{myiterator} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{L}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Any object for which we can call \texttt{iter} is called \textbf{iterable}.  It is not uncommon to use iterable as a noun as well, saying the object or class is an iterable.  This slight abuse of grammar is consistent with the \textbf{is a} vocabulary used in duck typing.  It has the \texttt{\_\_iter\_\_} method and therefore it \emph{is iterable}.
+
+
+Once you have an iterator, you can access the items by calling the \texttt{next} function as follows.  Internally, Python calls the \texttt{\_\_next\_\_} method on the iterator.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{item} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{myiterator}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Any iterable for which you can call \texttt{next} in this way is an iterator.  Again, this is duck typing at work.  If the class has an \texttt{\_\_iter\_\_} and \texttt{\_\_next\_\_} method, then it is an iterator.
+
+
+If there are no more items, the \texttt{next} function will raise the \texttt{StopIteration} exception.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{emptyiterator} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{next}\PY{p}{(}\PY{n}{emptyiterator}\PY{p}{)}
+\end{Verbatim}
+
+
+
+When you use these collections in a \texttt{for} loop, the first thing Python does is call \texttt{iter} on them to get an iterator.   You can rewrite a \texttt{for} loop with a \texttt{while} loop as follows.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}
+
+\PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{L}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} is equivalent to}
+
+\PY{n}{myiterator} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{L}\PY{p}{)}
+\PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+    \PY{k}{try}\PY{p}{:}
+        \PY{n}{f} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{myiterator}\PY{p}{)}
+    \PY{k}{except} \PY{n+ne}{StopIteration}\PY{p}{:}
+        \PY{k}{break}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Everyone agrees that the \texttt{for} loop is much prettier and easier to understand.  However, the \texttt{while} loop version doesn’t hide anything (or at least not as much).  You should never write a \texttt{while} loop like the one above, but you should understand it.  That is how you’ll know what is really happening in a \texttt{for} loop and someday it will help you track down a bug.  It’s also how you would understand the running time of a \texttt{for} loop.
+
+
+In Python, an iterator is required to also be iterable.  That is, I should be able to call \texttt{iter} on an iterator and get an iterator; usually this just gives me back the same iterator.  This is very useful, because it means that there is no problem if I try to loop over an iterator.  The following code works.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{]}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{L}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+
+You should think of the iterator as a separate object from the object it is iterating over.  It keeps track of where it is in the list.  This is why you can have multiple iterators over the same collection at the same time.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{]}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{L}\PY{p}{:}
+    \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{L}\PY{p}{:}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{)}
+\end{Verbatim}
+
+
+
+The builtin function \texttt{iter} calls the \texttt{\_\_iter\_\_} magic method on the object.  The builtin function \texttt{next} calls the \texttt{\_\_next\_\_} method.  So, you can create your own iterators objects and your own iterable objects by implementing these methods.  We’ll see examples a little later.
+
+\section{Generators}
+
+
+A \textbf{generator} is an easy way to write your own iterators in Python.  It looks like a function, but it includes one or more \texttt{yield} statements.  When called, it will return an object of type generator.  A generator is  an iterator, i.e. you can call \texttt{next} and \texttt{iter} on it.  This also mean you can loop over it.
+
+
+Because a generator is an iterator, you can imagine that calling \texttt{next} should execute the function until the first value is yielded, and then it pauses.  Calling next again will cause the execution to continue from where it left off.  If the function returns, then \texttt{StopIteration} will be raised.  
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{mygen}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+        \PY{k}{yield} \PY{l+m+mi}{2} \PY{o}{*}\PY{o}{*} \PY{n}{i}
+
+\PY{k}{for} \PY{n}{poweroftwo} \PY{o+ow}{in} \PY{n}{mygen}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{poweroftwo}\PY{p}{)}
+
+\PY{n}{myiterator} \PY{o}{=} \PY{n}{mygen}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{next}\PY{p}{(}\PY{n}{myiterator}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{next}\PY{p}{(}\PY{n}{myiterator}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{next}\PY{p}{(}\PY{n}{myiterator}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Above we have a simple generator.  It is used in a \texttt{for} loop and it is also used explicitly with the \texttt{next} function.  You should understand the function call \texttt{mygen()} as returning an iterator.  The type of the iterator object is \texttt{generator}.  Because we’ve already seen that the generator is an iterator, we know this means that \texttt{\_\_iter\_\_} and \texttt{\_\_next\_\_} are defined on the generator and so we can call \texttt{iter} and \texttt{next} respectively.
+
+\section{Generator Expressions and Comprehensions}
+
+
+It very often happens that we want to create our
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{MyCollection}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}iter\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+            \PY{k}{yield} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1000}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{MyCollection}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{start}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{mymax}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:}
+    \PY{n}{items} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+    \PY{n+nb}{max} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{items}\PY{p}{)}
+    \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{items}\PY{p}{:}
+        \PY{k}{if} \PY{n}{item} \PY{o}{\PYZgt{}} \PY{n+nb}{max}\PY{p}{:}
+            \PY{n+nb}{max} \PY{o}{=} \PY{n}{item}
+    \PY{k}{return} \PY{n+nb}{max}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{mymax}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{mysum}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:}
+    \PY{n}{items} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+    \PY{n+nb}{sum} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{items}\PY{p}{)}
+    \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{items}\PY{p}{:}
+        \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{item}
+    \PY{k}{return} \PY{n+nb}{sum}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{up}\PY{p}{(}\PY{n}{S}\PY{p}{,} \PY{n}{f}\PY{p}{)}\PY{p}{:}
+    \PY{n}{items} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+    \PY{n}{output} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{items}\PY{p}{)}
+    \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{items}\PY{p}{:}
+        \PY{n}{output} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{n}{item}\PY{p}{)}
+    \PY{k}{return} \PY{n}{output}
+
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{up}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{k}{lambda} \PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{:} \PY{n}{a} \PY{k}{if} \PY{n}{a} \PY{o}{\PYZgt{}} \PY{n}{b} \PY{k}{else} \PY{n}{b}\PY{p}{)}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{up}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{k}{lambda} \PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{:} \PY{n}{a}\PY{o}{+}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{myreduce}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf}{up}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:}
+        \PY{n}{items} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+        \PY{n}{output} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{items}\PY{p}{)}
+        \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{items}\PY{p}{:}
+            \PY{n}{output} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{n}{item}\PY{p}{)}
+        \PY{k}{return} \PY{n}{output}
+    \PY{k}{return} \PY{n}{up}
+
+\PY{n}{mymax} \PY{o}{=} \PY{n}{myreduce}\PY{p}{(}\PY{k}{lambda} \PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{:} \PY{n}{a} \PY{k}{if} \PY{n}{a} \PY{o}{\PYZgt{}} \PY{n}{b} \PY{k}{else} \PY{n}{b}\PY{p}{)}
+\PY{n}{mysum} \PY{o}{=} \PY{n}{myreduce}\PY{p}{(}\PY{k}{lambda} \PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{:} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{p}{)}
+\PY{n}{myall} \PY{o}{=} \PY{n}{myreduce}\PY{p}{(}\PY{k}{lambda} \PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{:} \PY{n}{a} \PY{o+ow}{and} \PY{n}{b}\PY{p}{)}
+
+\PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{mymax}\PY{p}{(}\PY{n}{L}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{mysum}\PY{p}{(}\PY{n}{L}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{myall}\PY{p}{(}\PY{n}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{5} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{L}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{myall}\PY{p}{(}\PY{n}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{6} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{L}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{itertools} \PY{k+kn}{import} \PY{n}{permutations}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{w}\PY{p}{)} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{permutations}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wow}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}

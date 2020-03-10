@@ -9,7 +9,7 @@ It can be much harder to track down problems with efficiency.
 
 
 We want to develop a vocabulary for describing the efficiency of our code.
-Sentences like "This code is fast" or "This code is slow" tell us very little.
+Sentences like \emph{This code is fast} or \emph{This code is slow} tell us very little.
 How fast or slow is it?
 Moreover, the same code will take different amounts of time and memory depending on the input.
 It will also run faster on a faster computer.
@@ -79,7 +79,6 @@ How fast is this code?
 The simplest answer to this question comes from simply running the program and measuring how long it takes.
 We could do this as follows.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{time}
 
@@ -91,14 +90,6 @@ We could do this as follows.
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Time taken for n = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{timetaken}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-Time taken for n =  1000 :  0.0880279541015625
-Time taken for n =  1000 :  0.0837411880493164
-Time taken for n =  1000 :  0.08772611618041992
-Time taken for n =  1000 :  0.08916115760803223
-Time taken for n =  1000 :  0.08251309394836426
-
-\end{Verbatim}
 
 
 
@@ -128,22 +119,11 @@ It runs the given function on lists of the given length and averages the time ta
 We can now look at the average running time as the length of the list gets longer.
 It's not surprising to see that the average time goes up as the length $n$ increases.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{1600}\PY{p}{,} \PY{l+m+mi}{3200}\PY{p}{]}\PY{p}{:}
     \PY{n}{timetrials}\PY{p}{(}\PY{n}{duplicates1}\PY{p}{,} \PY{n}{n}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-average = 0.0010441 for n = 50
-average = 0.0043388 for n = 100
-average = 0.0168115 for n = 200
-average = 0.0692369 for n = 400
-average = 0.2774606 for n = 800
-average = 1.0983673 for n = 1600
-average = 4.3586108 for n = 3200
-
-\end{Verbatim}
 
 
 Let's try to make our code faster.
@@ -163,22 +143,11 @@ Here is what the code would look like.
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{1600}\PY{p}{,} \PY{l+m+mi}{3200}\PY{p}{]}\PY{p}{:}
     \PY{n}{timetrials}\PY{p}{(}\PY{n}{duplicates2}\PY{p}{,} \PY{n}{n}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-average = 0.0004540 for n = 50
-average = 0.0016604 for n = 100
-average = 0.0064440 for n = 200
-average = 0.0256724 for n = 400
-average = 0.1032133 for n = 800
-average = 0.4160967 for n = 1600
-average = 1.7252789 for n = 3200
-
-\end{Verbatim}
 
 
 There is a python shortcut the kind of loop used in \texttt{duplicates2}.
@@ -193,22 +162,11 @@ This can be very handy.
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{1600}\PY{p}{,} \PY{l+m+mi}{3200}\PY{p}{]}\PY{p}{:}
     \PY{n}{timetrials}\PY{p}{(}\PY{n}{duplicates3}\PY{p}{,} \PY{n}{n}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-average = 0.0006135 for n = 50
-average = 0.0023283 for n = 100
-average = 0.0090276 for n = 200
-average = 0.0365970 for n = 400
-average = 0.1456282 for n = 800
-average = 0.6053430 for n = 1600
-average = 2.4252203 for n = 3200
-
-\end{Verbatim}
 
 
 This last optimization reduces the number of lines of code and may be desirable for code readability, but it doesn't improve the speed.
@@ -252,7 +210,6 @@ If there are duplicates, they will be adjacent after sorting.
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{1600}\PY{p}{,} \PY{l+m+mi}{3200}\PY{p}{]}\PY{p}{:}
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Quadratic: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{end}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
@@ -264,37 +221,6 @@ If there are duplicates, they will be adjacent after sorting.
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-Quadratic: average = 0.0006807 for n = 50
-Sorting:   average = 0.0000414 for n = 50
-Sets:      average = 0.0000138 for n = 50
----------------------------
-Quadratic: average = 0.0025345 for n = 100
-Sorting:   average = 0.0000671 for n = 100
-Sets:      average = 0.0000188 for n = 100
----------------------------
-Quadratic: average = 0.0096260 for n = 200
-Sorting:   average = 0.0001244 for n = 200
-Sets:      average = 0.0000303 for n = 200
----------------------------
-Quadratic: average = 0.0359850 for n = 400
-Sorting:   average = 0.0002439 for n = 400
-Sets:      average = 0.0000568 for n = 400
----------------------------
-Quadratic: average = 0.1426171 for n = 800
-Sorting:   average = 0.0007433 for n = 800
-Sets:      average = 0.0002729 for n = 800
----------------------------
-Quadratic: average = 0.5766615 for n = 1600
-Sorting:   average = 0.0011085 for n = 1600
-Sets:      average = 0.0002966 for n = 1600
----------------------------
-Quadratic: average = 2.4172290 for n = 3200
-Sorting:   average = 0.0021445 for n = 3200
-Sets:      average = 0.0004934 for n = 3200
----------------------------
-
-\end{Verbatim}
 
 
 Some key ideas:
@@ -326,20 +252,11 @@ Below is a program that adds up the first $k$ positive integers and returns both
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sum: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{, time taken: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{sumk}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-Sum: 50005000, time taken: 0.000511
-Sum: 50005000, time taken: 0.000504
-Sum: 50005000, time taken: 0.000522
-Sum: 50005000, time taken: 0.000519
-Sum: 50005000, time taken: 0.000528
-
-\end{Verbatim}
 
 
 Notice that we see some variation in the time required.
@@ -357,7 +274,6 @@ For now, let's run the code several times and take the average to smooth them ou
 \end{Verbatim}
 
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{timetrials}\PY{p}{(}\PY{n}{sumk}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{)}
 \PY{n}{timetrials}\PY{p}{(}\PY{n}{sumk}\PY{p}{,} \PY{l+m+mi}{100000}\PY{p}{)}
@@ -365,13 +281,6 @@ For now, let's run the code several times and take the average to smooth them ou
 \PY{n}{timetrials}\PY{p}{(}\PY{n}{sumk}\PY{p}{,} \PY{l+m+mi}{10000000}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-average = 0.0004631 for k = 10000
-average = 0.0049296 for k = 100000
-average = 0.0469800 for k = 1000000
-average = 0.4823536 for k = 10000000
-
-\end{Verbatim}
 
 
 Seeing the times for different values of \texttt{k} reveals a rather unsuprising pattern.
@@ -396,7 +305,6 @@ it suffices to observe that you can add the numbers in pairs, matching $i$ with 
 There are $k/2$ such pairs and each adds up to $k+1$.
 Let's use this formula to rewrite our \texttt{sumk} function and time it.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{time}
 
@@ -413,14 +321,6 @@ Let's use this formula to rewrite our \texttt{sumk} function and time it.
 \PY{n}{timetrials}\PY{p}{(}\PY{n}{sumk2}\PY{p}{,} \PY{l+m+mi}{100000000}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-average = 0.0000004 for k = 10000
-average = 0.0000000 for k = 100000
-average = 0.0000005 for k = 1000000
-average = 0.0000000 for k = 10000000
-average = 0.0000005 for k = 100000000
-
-\end{Verbatim}
 
 
 This is much much faster.
@@ -438,7 +338,6 @@ A single line of code can do a lot of stuff.
 Here's a one line function that does all kinds of stuff.
 It creates a list of 200 items and sums all the entries for each of value of i from 0 to k-1 and returns a list of the results.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{f001}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
     \PY{k}{return} \PY{p}{[}\PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{]}
@@ -446,10 +345,6 @@ It creates a list of 200 items and sums all the entries for each of value of i f
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{f001}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-[100, 300, 500, 700, 900, 1100, 1300, 1500, 1700]
-
-\end{Verbatim}
 
 
 Instead, we will want to count operations a little more carefully.

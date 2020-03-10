@@ -7,7 +7,7 @@ When the code is inefficient, we may not notice when running small tests because
 It can be much harder to track down problems with efficiency.
 
 We want to develop a vocabulary for describing the efficiency of our code.
-Sentences like "This code is fast" or "This code is slow" tell us very little.
+Sentences like *This code is fast* or *This code is slow* tell us very little.
 How fast or slow is it?
 Moreover, the same code will take different amounts of time and memory depending on the input.
 It will also run faster on a faster computer.
@@ -365,7 +365,7 @@ Below, let $n_A$ be the size of set `A` and let $n_B$ be the size of set `B`.
 |---------------------------|-----------|:------:|
 | Add a new item            | `A.add(newitem)` | $1$ |
 | Delete an item            | `A.delete(item)` | $1$ |
-| Union                     | <code>A &#124; B</code>   | $n_A + n_B$ |
+| Union                     | `A | B`   | $n_A + n_B$ |
 | Intersection              | `A & B`   | $\min\{n_A, n_B\}$ |
 | Set differences           | `A - B`   | $n_A$ |
 | Symmetric Difference      | `A ^ B`   | $n_A + n_B$ |
