@@ -1,0 +1,391 @@
+\chapter{Object-Oriented Programming}
+
+
+A primary goal of \textbf{object-oriented programming} is to make it possible to write code that is close to the way you think about the things your code represents.
+This will make it easier to reason about the code and think through its correctness.
+
+
+A \textbf{class} is a data type.  In python \emph{type} and \emph{class} are (mostly) synonymous.  An \textbf{object} is an \textbf{instance} of a class.  For example, python has a \texttt{list} class.  If I make a list called \texttt{mylist}.  Then, \texttt{mylist} is an object of type \texttt{list}.  
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{mylist} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{mylist}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{mylist}\PY{p}{,} \PY{n+nb}{list}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{mylist}\PY{p}{,} \PY{n+nb}{str}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+<class 'list'>
+True
+False
+\end{Verbatim}
+
+
+There are all kinds of classes built into python.  Some you might not expect.
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{foo}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{k}{return} \PY{l+m+mi}{0}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{foo}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+<class 'function'>
+\end{Verbatim}
+
+
+For the advanced students, here is a more exotic example called a generator.  In python you can \texttt{yield} instead of \texttt{return}.  If so, the result will be something called a generator and not a function.  This powerful idea shows up a lot in python, but we won't really be able to get our head around it until we understand how classes are able to package up data and code.  
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{mygenerator}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+        \PY{k}{yield} \PY{n}{i}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{mygenerator}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{mygenerator}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+<class 'function'>
+<class 'generator'>
+\end{Verbatim}
+
+\section{A simple example}
+
+
+One of the first ways that we learn about to combine multiple pieces of information into a single object is in calculus or linear algebra, with the introduction of vectors.  We can think of a 2-dimensional vector as a pair of numbers.  If we are trying to write some code that works with 2-dimensional vectors, we could just use tuples.  It's not too hard to define some basic functions that work with vectors.
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{u} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+\PY{n}{v} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{add}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+    \PY{k}{return} \PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{subtract}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+    \PY{k}{return} \PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{dot}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+    \PY{k}{return} \PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{norm}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{:}
+    \PY{k}{return} \PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mf}{0.5}
+
+\PY{k}{def} \PY{n+nf}{isvertical}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{:}
+    \PY{k}{return} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{norm}\PY{p}{(}\PY{n}{u}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{add}\PY{p}{(}\PY{n}{u}\PY{p}{,}\PY{n}{v}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{u} \PY{o}{+} \PY{n}{v}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{isvertical}\PY{p}{(}\PY{n}{subtract}\PY{p}{(}\PY{n}{v}\PY{p}{,} \PY{n}{u}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+5.0
+(6, 10)
+(3, 4, 3, 6)
+True
+\end{Verbatim}
+
+
+This could be fine if that's all we wanted to do, but as we fill out the code, things will start to get messier.  For example, suppose we want to make sure that the inputs to these functions really are tuples that contain two numbers.  We might add some code to every method to check for this error or recover otherwise, but this is not great, because we really just want to operate on vectors.  Moreover, we might want to \texttt{add} other types of things besides vectors.  This would probably require us to make the add function much more complicated, or rename it something more descriptive such as \texttt{vectoradd}.
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{Vector}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{n}{x}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n}{y}
+
+    \PY{k}{def} \PY{n+nf}{norm}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mf}{0.5}
+
+\PY{n}{u} \PY{o}{=} \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{u}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+5.0
+13.0
+\end{Verbatim}
+
+
+A function defined in a class is called a \textbf{method}.  It is a standard convention to use \texttt{self} as the name of the first parameter to a method.  This parameter is object that will generally be operated on by the method.  When, calling the method, you don't have to pass a parameter explicitly for \texttt{self}.  Instead, the dot notation fills in this parameter for you.  That is \texttt{u.norm()} is translated into \texttt{vector.norm(u)}.  
+
+
+The \texttt{\_\_init\_\_} method is called a \textbf{initializer}.  Methods like this one that start and end with two underscores are sometimes called the \textbf{magic methods} or also \textbf{dunder methods}.  You should not make up your own methods starting and ending with two underscores.  That's how python sets them apart so you don't actually call your own methods the same thing.  Also, dunder methods are usually not called explicitly, but instead provide some other means of calling them.  In the case of a initializer, calling the name of the class as a function invokes the initializer.  You've seen this before, such as in \texttt{float("3.14159")}.
+
+
+We will use another magic method to implement addition.
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{Vector}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{n}{x}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n}{y}
+
+    \PY{k}{def} \PY{n+nf}{norm}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mf}{0.5}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}add\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{other}\PY{p}{)}\PY{p}{:}
+        \PY{n}{newx} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{+} \PY{n}{other}\PY{o}{.}\PY{n}{x}
+        \PY{n}{newy} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{+} \PY{n}{other}\PY{o}{.}\PY{n}{y}
+        \PY{k}{return} \PY{n}{Vector}\PY{p}{(}\PY{n}{newx}\PY{p}{,} \PY{n}{newy}\PY{p}{)}
+
+\PY{n}{u} \PY{o}{=} \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+\PY{n}{v} \PY{o}{=} \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{u} \PY{o}{+} \PY{n}{v}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+<__main__.Vector object at 0x107e61c50>
+\end{Verbatim}
+
+
+That output is pretty weird.  It's telling me that u + v is a vector object at some memory address, but doesn't tell me what vector it is.  We need to implement \texttt{\_\_str\_\_} in order to print the vector nicely.  This magic method is called by the print function to convert its parameters into a string.  It is not obvious how a string ought to be printed for a given class.  We have to specify it ourselves.
+
+
+In the example below, I added a \texttt{\_\_str\_\_} method as well as some type checking on the inputs.  The result will guarantee that a vector has two floats as coordinates.
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{Vector}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+        \PY{k}{try}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+        \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{l+m+mf}{0.0}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{l+m+mf}{0.0}
+
+    \PY{k}{def} \PY{n+nf}{norm}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mf}{0.5}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}add\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{other}\PY{p}{)}\PY{p}{:}
+        \PY{n}{newx} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{+} \PY{n}{other}\PY{o}{.}\PY{n}{x}
+        \PY{n}{newy} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{+} \PY{n}{other}\PY{o}{.}\PY{n}{y}
+        \PY{k}{return} \PY{n}{Vector}\PY{p}{(}\PY{n}{newx}\PY{p}{,} \PY{n}{newy}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(}\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{, }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{)}
+
+\PY{n}{u} \PY{o}{=} \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+\PY{n}{v} \PY{o}{=} \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{u} \PY{o}{+} \PY{n}{v}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+(6.000000, 10.000000)
+\end{Verbatim}
+
+\section{Encapsulation and the Public Interface of a Class}
+
+
+The word \textbf{encapsulation} has two different, but related, meanings.  The first is the idea of encapsulating or combining into a single thing, data and the methods that operate on that data.  In Python, this is accomplished via classes, as we have seen.  
+
+
+The second meaning of encapsulation emphasizes the boundary between the inside and the outside of the class, specifying what is visible to the users of a class.  Often this means partitioning the attributes into \textbf{public} and \textbf{private}.  In Python, there is no formal mechanism to keep one from accessing attributes of a class from outside that class.  So, in a sense, everything is public.  However, there is a convention to make it clear what \emph{ought} to be kept private.  Any attribute that starts with an underscore is considered private.  Think of it like someone’s unlocked diary.  You can read it, but you shouldn’t.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{Diary}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{title} \PY{o}{=} \PY{n}{title}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf}{addentry}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{entry}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{entry}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}lastentry}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+
+In the example above, the \texttt{addentry} method is public.  Anyone can add an entry.  However, the \texttt{\_lastentry} method is private.  One should not call this method from outside of the \texttt{Diary} class. (Again, you can, but you shouldn’t.)  The \texttt{title} is also public, but the list \texttt{\_entries} is private.  The collection of all public attributes (in this case, \texttt{addentry} and \texttt{title}) constitute the \textbf{public interface} of the class.  This is what a user of the class should interact with.  For example, one can use the class above as follows.
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{mydiary} \PY{o}{=} \PY{n}{Diary}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Don’t read this!!!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{mydiary}\PY{o}{.}\PY{n}{addentry}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{It was a good day.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The diary is called }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mydiary}\PY{o}{.}\PY{n}{title}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+The diary is called  Don’t read this!!!
+\end{Verbatim}
+
+
+Notice that in this example, the encapsulation of the class is not about security.  Heck, if it’s my diary, I should be able to read it, right?  The reason to respect the private attributes and stick to the public interface is really to help us write working code that continues to work in the future.  Code gets changed all the time.  If you are modifying a class that is being used elsewhere in the code, you have to be careful not to break that code.  If the public interface and its behavior doesn’t change, then one can be confident that the changes don’t affect the other code.  One could change the name of a private variable, say changing \texttt{\_entries} to \texttt{\_diaryentries} and be confident that this won’t cause some other code somewhere else to break.
+
+\section{Inheritance and "is a" relationships}
+
+
+Whenever we talk about the types of things in our everyday life, it’s possible to talk about them at different levels of generality.  We can talk about a specific basketball player, say Kyrie Irving, or we can talk about professional basketball players, or all basketball players, or people, or living creatures.  The specific player we started with could be said to belong to any of these classes.  The same principle applies to code that we write.  
+
+
+Consider this example from a geometry program.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{Triangle}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{points}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}sides} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}points} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{points}\PY{p}{)}
+        \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}points}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{3}\PY{p}{:}
+            \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wrong number of points.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{sides}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{l+m+mi}{3}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I’m a triangle.}\PY{l+s+s2}{\PYZdq{}}
+
+\PY{k}{class} \PY{n+nc}{Square}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{points}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}sides} \PY{o}{=} \PY{l+m+mi}{4}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}points} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{points}\PY{p}{)}
+        \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}points}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{4}\PY{p}{:}
+            \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wrong number of points.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{sides}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{l+m+mi}{4}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I’m so square.}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+
+These are obviously, very closely related classes.  One can make another class for which these two classes are \textbf{subclasses}.  Then, anything common between the two classes can be put into the larger class or \textbf{superclass}.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{Polygon}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{sides}\PY{p}{,} \PY{n}{points}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}sides} \PY{o}{=} \PY{n}{sides}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}points} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{points}\PY{p}{)}
+        \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}points}\PY{p}{)} \PY{o}{!=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}sides}\PY{p}{:}
+            \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wrong number of points.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}     
+
+    \PY{k}{def} \PY{n+nf}{sides}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}sides}
+
+\PY{k}{class} \PY{n+nc}{Triangle}\PY{p}{(}\PY{n}{Polygon}\PY{p}{)}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{points}\PY{p}{)}\PY{p}{:}
+        \PY{n}{Polygon}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{points}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I’m a triangle.}\PY{l+s+s2}{\PYZdq{}}
+
+\PY{k}{class} \PY{n+nc}{Square}\PY{p}{(}\PY{n}{Polygon}\PY{p}{)}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{points}\PY{p}{)}\PY{p}{:}
+        \PY{n}{Polygon}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{points}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I’m so square.}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+
+Notice that the class definitions of \texttt{Triangle} and \texttt{Square} now indicate the \texttt{Polygon} class in parentheses.  This is called \textbf{inheritance}.  The \texttt{Triangle} class \textbf{inherits from} (or \textbf{extends}) the \texttt{Polygon} class.  The \textbf{superclass} \texttt{Polygon} and the \textbf{subclasses} are \texttt{Triangle} and \texttt{Square}.  When we call a method on an object, if that method is not defined in the class of that object, Python will look for the method in the superclass.   This search for the correct function to call is called the \textbf{method resolution order}.   If a method from the superclass is redefined in the subclass, then calling the method on an instance of the subclass calls the subclass method instead.
+
+
+The initializer of the superclass is not called automatically when we create a new instance (unless we didn’t define \texttt{\_\_init\_\_} in the subclass).  In this case, we manually call the \texttt{Polygon.\_\_init\_\_} function.  This is one of the few times where it’s acceptable to call a dunder method by name.
+
+
+When using inheritance, you should always remember the most important rule of inheritance:
+
+\begin{quote}
+
+Inheritance means \textbf{is a}.
+
+\end{quote}
+
+This means that if \texttt{ClassB} extends \texttt{ClassA}, then a \texttt{ClassB} object \textbf{is a} \texttt{ClassA} object.  This should be true at the conceptual level.  So, in our shapes example, we followed this rule, because a triangle is a polygon.  
+
+
+In total, this might look like more code.  However, it has less duplication.  Duplication is very bad.  Even though it’s easy to copy and paste on a computer, this is a source of many bugs.  The reason is simple.  Bugs are everywhere.  If you copy and paste a code with a bug, then now you have two bugs.  If you find the bug, you have to hope you remember to fix it both places.  Anytime you are relying on your memory, you are going to get yourself in trouble.  
+
+
+Software engineers use the acronym \textbf{DRY}, to mean \textbf{Don’t Repeat Yourself}.  They will even use it as an adjective, saying "Keep the code DRY".   The process of removing duplication by putting common code into a superclass is called \textbf{factoring out a superclass}.  This is the most common way that inheritance enters a codebase.  Sometimes, opportunities for inheritance are identified at the design stage, before coding begins.
+
+\section{Duck Typing}
+
+
+Inheritance is considered a staple of object-oriented programming, and it’s important to understand it.  That said, it’s not nearly as useful in Python as it is in other languages.  The reason is that python has built-in (parametric) \textbf{polymorphism}.   That means we can pass any type of object we want to a function.  For example, suppose we have a class to store collections of polygons as follows.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{PolygonCollection}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}triangles} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}squares} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf}{add}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{polygon}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{polygon}\PY{o}{.}\PY{n}{sides}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}triangles}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{polygon}\PY{p}{)}
+        \PY{k}{if} \PY{n}{polygon}\PY{o}{.}\PY{n}{sides}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{4}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}squares}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{polygon}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Notice that the \texttt{add} method would work equally well with either version of the \texttt{Triangle} and \texttt{Square} classes defined previously.  In fact, we could pass it any object that has a method called \texttt{sides}.  We didn’t \emph{need} inheritance in order to treat Triangles and squares as special cases of the same object.  Sometimes, inheritance is the right way to combine classes so they can be treated as a single class, but in Python, it’s not as necessary as it is in other languages.
+
+
+Python’s polymorphism is based on the idea of \textbf{duck typing}.  The name comes from an old expression that if something walks like a duck and quacks like a duck, then it \emph{is} a duck.  In the \texttt{PolygonCollection} example, if I call the \texttt{add} method with an argument that has a \texttt{sides} method that returns something that can be compared to an integer, then the code will run without error.  Having the right methods is equivalent to "walking and talking like a duck".  This means that although inheritance should always mean \textbf{is a}, not every \emph{“is a”} relationship in your code needs to be expressed with inheritance.  
+
+
+This idea that \emph{not only inheritance means “is a”} is very important in Python and will be very important throughout this course.  We will discuss this more when we look in more depth at abstract data types.  
+
+
+One example that we have already seen is the \texttt{str} function.  Different types objects can be converted to strings, including objects of classes that we have defined ourselves.  As long as we implemented the \texttt{\_\_str\_\_} method on our class, then we can call \texttt{str} on an instance of that class.  That function calls the corresponding method, i.e., \texttt{str(t)} for a \texttt{Triangle} \texttt{t} calls \texttt{t.\_\_str\_\_()} which is equivalent to \texttt{Triangle.\_\_str\_\_(t)}.   
+
+\section{Composition and "has a" relationships}
+
+
+There are many cases where we want objects of different types to share some functionality.  Sometimes, inheritance is used to allow for this sharing, but more often we use something called \textbf{composition}.  This is where one class stores an instance of another class.  It allows us to produce more complex objects.  The most important rule about composition is the following.
+
+\begin{quote}
+
+Composition means "has a".
+
+\end{quote}
+
+Consider the case where we want a class to behave like a \texttt{list}.  For example, we’d like to be able to append to the list and access items by their index, but we don’t want any of the other list stuff.  In this case, it would be \emph{wrong} to use inheritance.  Instead, we would make our class store a list internally (composition).  Then, the public interface to our class would contain the methods we want while making calls to the stored \texttt{list} instance to avoid duplicating the list implementation.  Here is an example.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{MyLimitedList}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}getitem\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{index}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{p}{[}\PY{n}{index}\PY{p}{]}
+\end{Verbatim}
+
+
+
+Here, the magic method \texttt{\_\_getitem\_\_} will allow us to use the square bracket notation with our class.  As with other magic methods, we don’t call it directly.
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{L} \PY{o}{=} \PY{n}{MyLimitedList}\PY{p}{(}\PY{p}{)}
+\PY{n}{L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\PY{n}{L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{L}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+100
+\end{Verbatim}

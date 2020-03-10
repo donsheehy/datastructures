@@ -44,4 +44,3 @@ class BalancedBST(BSTMapping):
             self._root = self._root.put(key, value)
         else:
             self._root = self.Node(key, value)
-

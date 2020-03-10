@@ -15,4 +15,3 @@ class HashMappingSimple:
 
     def _bucket(self, key):
         return self._buckets[hash(key) % self._size]
-

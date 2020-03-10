@@ -53,4 +53,3 @@ class SplayTree(BalancedBST):
     def put(self, key, value):
         BalancedBST.put(self, key, value)
         self.splayup(key)
-

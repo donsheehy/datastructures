@@ -310,7 +310,7 @@ There are some methods that we expect to be implemented by the subclass.  We can
 
 Here is the code for the superclass.
 
-```python {cmd id="_mapping.mapping_01"}
+```python {cmd id="_mapping.mapping_01" continue="_mapping.mapping_00"}
 class Mapping:
 
     # Child class needs to implement this!

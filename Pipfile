@@ -16,6 +16,7 @@ prosecode = {editable = true,path = "./../../../code/prosecode"}
 markdown = "*"
 pygments = "*"
 gizeh = "*"
+python-markdown-math = "*"
 
 [packages]
 

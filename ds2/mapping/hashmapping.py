@@ -37,4 +37,3 @@ class HashMapping(Mapping):
         for bucket in oldbuckets:
             for key, value in bucket.items():
                 self[key] = value
-

@@ -47,4 +47,3 @@ class ListMapping:
 
     __getitem__ = get
     __setitem__ = put
-

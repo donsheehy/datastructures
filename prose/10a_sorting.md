@@ -8,7 +8,7 @@ Before we dive into particular sorting algorithms, let's first ask an easier que
 
 After a little, thought, you will probably come up with some code that looks like the following.
 
-```python{cmd id="_sorting.dumbsort_00"}
+```python {cmd id="_sorting.dumbsort_00"}
 def issorted(L):
     for i in range(len(L)-1):
         if L[i]>L[i+1]:
@@ -16,7 +16,7 @@ def issorted(L):
     return True
 ```
 
-```python{cmd continue="_sorting.dumbsort_00"}
+```python {cmd continue="_sorting.dumbsort_00"}
 A = [1,2,3,4,5]
 print(A, "is sorted:", issorted(A))
 

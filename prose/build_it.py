@@ -9,4 +9,5 @@ chapters = """00_overview.md 01_python.md 02_oop.md 02b_testing.md
             18_graphs2.md 19_disjointsets.md""".split()
 
 for chap in chapters:
-    weave('./prose/', chap, './ds2/')
+    texfile = './tex/'  + chap.replace('.md', '.tex')
+    weave('../ds2/', './' + chap, texfile)

@@ -24,4 +24,3 @@ def partition(L, left, right):
         L[pivot], L[i] = L[i], L[pivot]
         pivot = i
     return pivot
-

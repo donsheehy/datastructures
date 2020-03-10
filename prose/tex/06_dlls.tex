@@ -1,0 +1,188 @@
+\chapter{Doubly-Linked Lists}
+
+
+Previously, we introduced the Deque ADT and we gave two implementations, one using a list and one using a linked list.
+In our linked list implementation, all of the basic operations ran in constant time except \texttt{removelast}.
+In this chapter, we're going to introduce a new data structure that allows us to do all the Deque operations in constant time.
+The key idea will be to store two links in each node, one forwards and one backwards so that we can traverse the list in either direction.
+In this \textbf{doubly-linked list}, removing from the end will be symmetric to removing from the beginning, with the roles of head and tail reversed.
+
+
+When we create a new \texttt{ListNode}, we can specify the nodes before and after so that the appropriate links can be established.
+We want it to always be true that \texttt{b == a.link} if and only if \texttt{a = b.prev} for any two nodes \texttt{a} and \texttt{b}.
+To help ensure this invariant, we set \texttt{self.prev.link = self} and \texttt{self.link.prev = self} unless \texttt{prev} or \texttt{link} respectively are \texttt{None}.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{ListNode}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{prev} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,} \PY{n}{link} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n}{data}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev} \PY{o}{=} \PY{n}{prev}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{link} \PY{o}{=} \PY{n}{link}
+        \PY{k}{if} \PY{n}{prev} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev}\PY{o}{.}\PY{n}{link} \PY{o}{=} \PY{n+nb+bp}{self}
+        \PY{k}{if} \PY{n}{link} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{link}\PY{o}{.}\PY{n}{prev} \PY{o}{=} \PY{n+nb+bp}{self}
+\end{Verbatim}
+
+
+
+First, we'll look at adding items to a \texttt{DoublyLinkedList}.
+These operations are very similar to the \texttt{addfirst} operation on a \texttt{LinkedList}.
+One has to do a little more work to update the \texttt{prev} node that was not present in our \texttt{LinkedList}.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{DoublyLinkedList}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head} \PY{o}{=} \PY{k+kc}{None}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail} \PY{o}{=} \PY{k+kc}{None}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}length} \PY{o}{=} \PY{l+m+mi}{0}
+
+    \PY{k}{def} \PY{n+nf}{addfirst}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail} \PY{o}{=} \PY{n}{ListNode}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n}{newnode} \PY{o}{=} \PY{n}{ListNode}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head}\PY{p}{)}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head}\PY{o}{.}\PY{n}{prev} \PY{o}{=} \PY{n}{newnode}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head} \PY{o}{=} \PY{n}{newnode}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}length} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+
+    \PY{k}{def} \PY{n+nf}{addlast}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail} \PY{o}{=} \PY{n}{ListNode}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n}{newnode} \PY{o}{=} \PY{n}{ListNode}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail}\PY{o}{.}\PY{n}{link} \PY{o}{=} \PY{n}{newnode}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail} \PY{o}{=} \PY{n}{newnode}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}length} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}len\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}length}
+\end{Verbatim}
+
+
+
+The code above is begging for refactoring.
+It's clear that there is a lot of shared logic between the two methods.
+We should use this as an opportunity to simplify the code.
+In this case, we might consider the more general problem of adding a node between two other nodes.
+We will just need to consider those cases where the nodes \texttt{before} or \texttt{after} or both are \texttt{None}.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{DoublyLinkedList}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head} \PY{o}{=} \PY{k+kc}{None}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail} \PY{o}{=} \PY{k+kc}{None}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}length} \PY{o}{=} \PY{l+m+mi}{0}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}len\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}length}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}addbetween}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{before}\PY{p}{,} \PY{n}{after}\PY{p}{)}\PY{p}{:}
+        \PY{n}{node} \PY{o}{=} \PY{n}{ListNode}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{before}\PY{p}{,} \PY{n}{after}\PY{p}{)}
+        \PY{k}{if} \PY{n}{after} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head} \PY{o}{=} \PY{n}{node}
+        \PY{k}{if} \PY{n}{before} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail} \PY{o}{=} \PY{n}{node}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}length} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+
+    \PY{k}{def} \PY{n+nf}{addfirst}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}addbetween}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{addlast}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}addbetween}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Symmetry is also apparent in the code to remove an item from either end.
+As with the \texttt{add} methods, we factor out a (private) method that both use to remove a node and return its data.
+It includes a little logic to detect if the head or tail or both change with the removal.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{k}{def} \PY{n+nf}{\PYZus{}remove}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{node}\PY{p}{)}\PY{p}{:}
+        \PY{n}{before}\PY{p}{,} \PY{n}{after} \PY{o}{=} \PY{n}{node}\PY{o}{.}\PY{n}{prev}\PY{p}{,} \PY{n}{node}\PY{o}{.}\PY{n}{link}
+        \PY{k}{if} \PY{n}{node} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head} \PY{o}{=} \PY{n}{after}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n}{before}\PY{o}{.}\PY{n}{link} \PY{o}{=} \PY{n}{after}
+        \PY{k}{if} \PY{n}{node} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail} \PY{o}{=} \PY{n}{before}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n}{after}\PY{o}{.}\PY{n}{prev} \PY{o}{=} \PY{n}{before}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}length} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+        \PY{k}{return} \PY{n}{node}\PY{o}{.}\PY{n}{data}
+
+    \PY{k}{def} \PY{n+nf}{removefirst}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}remove}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{removelast}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}remove}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail}\PY{p}{)}
+\end{Verbatim}
+
+
+\section{Concatenating Doubly Linked Lists}
+
+
+There are several operations that are very fast on doubly linked lists compared to other lists.
+One of the most useful is the ability to concatenate two lists.
+Recall that the plus sign can be used to concatenate two \texttt{list} objects.
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{A} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}
+\PY{n}{B} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}
+\PY{n}{C} \PY{o}{=} \PY{n}{A} \PY{o}{+} \PY{n}{B}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{B}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{C}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+[1, 2, 3]
+[4, 5, 6]
+[1, 2, 3, 4, 5, 6]
+\end{Verbatim}
+
+
+For lists, concatenation creates a new list.
+It takes time proportional to the length of the newly created list \texttt{C} and it doesn't modify the lists \texttt{A} or \texttt{B}.
+For doubly linked lists, we could achieve the same asymptotic running time by incrementally building up a new list.
+However, if we are allowed to modify the lists, the concatenation can be accomplished by pointing the tail of the first list at the head of the second.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}iadd\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{other}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{other}\PY{o}{.}\PY{n}{\PYZus{}head} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+            \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}head} \PY{o}{=} \PY{n}{other}\PY{o}{.}\PY{n}{\PYZus{}head}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail}\PY{o}{.}\PY{n}{link} \PY{o}{=} \PY{n}{other}\PY{o}{.}\PY{n}{\PYZus{}head}
+                \PY{n}{other}\PY{o}{.}\PY{n}{\PYZus{}head}\PY{o}{.}\PY{n}{prev} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}tail} \PY{o}{=} \PY{n}{other}\PY{o}{.}\PY{n}{\PYZus{}tail}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}length} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}length} \PY{o}{+} \PY{n}{other}\PY{o}{.}\PY{n}{\PYZus{}length}
+
+            \PY{c+c1}{\PYZsh{} Clean up the other list.}
+            \PY{n}{other}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+        \PY{k}{return} \PY{n+nb+bp}{self}
+\end{Verbatim}
+
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{L} \PY{o}{=} \PY{n}{DoublyLinkedList}\PY{p}{(}\PY{p}{)}
+\PY{p}{[}\PY{n}{L}\PY{o}{.}\PY{n}{addlast}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{]}
+\PY{n}{B} \PY{o}{=} \PY{n}{DoublyLinkedList}\PY{p}{(}\PY{p}{)}
+\PY{p}{[}\PY{n}{B}\PY{o}{.}\PY{n}{addlast}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{11}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{]}
+
+\PY{n}{L} \PY{o}{+}\PY{o}{=} \PY{n}{B}
+
+\PY{n}{n} \PY{o}{=} \PY{n}{L}\PY{o}{.}\PY{n}{\PYZus{}head}
+\PY{k}{while} \PY{n}{n} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{n}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{end} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+    \PY{n}{n} \PY{o}{=} \PY{n}{n}\PY{o}{.}\PY{n}{link}
+\end{Verbatim}
+
+\begin{Verbatim}
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 \end{Verbatim}
+
+
+We have to be a bit careful about the differences between this concatenation operation and concatenation of regular lists.  With the doubly-linked list, concatenation empties the other list.  It does this so that we don’t have multiple doubly-linked lists with the same \texttt{ListNode}s.    That would be a problem if we tried to edit just one of the lists, because the changes would be reflected in the other list as well, possibly with disastrous consequences.

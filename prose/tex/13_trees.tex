@@ -1,0 +1,454 @@
+\chapter{Trees}
+
+
+\textbf{Trees} data types are ideal for representing hierarchical structure.
+Trees are composed of \textbf{nodes} and nodes have $0$ or more \textbf{children} or \textbf{child nodes}.
+A node is called the \textbf{parent} of its children.
+Each node has (at most) one parent.
+If the children are ordered in some way, then we have an \textbf{ordered tree}.
+We are concerned primarily with \textbf{rooted trees}, i.e. there is a single special node called the \textbf{root} of the tree.
+The root is the only node that does not have a parent.
+The nodes that do not have any children are called \textbf{leaves} or \textbf{leaf nodes}.
+
+
+There are many many examples of hierarchical (tree-like) structures:
+
+\begin{itemize}
+
+\item Class Hierarchies (assuming single inheritance).  The subclass is the child and the superclasses is the parent.  The python class \texttt{object} is the root.
+
+\item File folders or directories on a computer can be nested inside other directories.  The parent-child relationship encode containment.
+
+\item The tree of recursive function calls in the execution of a divide-and-conquer algorithm.  The leaves are those calls where the base case executes.
+
+\end{itemize}
+
+Even though we use the family metaphor for many of the naming conventions, a family tree is not actually a tree.  The reason is that these violate the one parent rule.
+
+
+When we draw trees, we take an Australian convention of putting the root on the top and the children below.  Although this is backwards with respect to the trees we see in nature, it does correspond to how we generally think of most other hierarchies.
+Thankfully, there will be sufficiently little conceptual overlap between your experience of trees in the park and the trees in this book, that the metaphoric breakdown should not be confusing.
+
+\section{Some more definitions}
+
+
+A \textbf{path} in a tree is a sequence of nodes in which each node is a child of the previous node.
+We say it is a path from $x$ to $y$ if the first node is $x$ and the last node is $y$.
+There exists a path from the root to every node in the tree.
+The \textbf{length of the path} is the number of hops or edges which is one less than the number of nodes in the path.
+The \textbf{descendants} of a node $x$ are all those nodes $y$ for which there is a path from $x$ to $y$.
+If $y$ is a descendant of $x$, then we say $x$ is an \textbf{ancestor} of $y$.
+Given a tree $T$ and a node $n$ in that tree, the \textbf{subtree rooted at $n$} is the tree whose root is $n$ that contains all descendants of $n$.
+
+
+The \textbf{depth} of a node is the length of the path to the node from the root.
+The \textbf{height} of a tree is the maximum depth of any node in the tree.
+
+\section{A recursive view of trees}
+
+
+A tree can be defined recursively as a root with $0$ or more children, each of which is tree.
+This will be convenient at first and will be important later on as we think about doing more elaborate algorithms on trees, many of which are easiest to describe recursively.
+Be warned however, that our object-oriented instincts will later kick in as we separate the notions of trees and nodes.
+Having two different kinds of things will lead us to use two different classes to represent them.
+
+
+We can use lists to represent a hierarchical structure by making lists of lists.
+To make this a little more useful, we will also store some data in each node of the tree.
+We'll use the convention that a list is a tree in which the first item is the data and the remaining items are the children (each should be a list).
+
+
+Here is a simple example.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+
+This is a tree with \texttt{'a'} stored in the root.
+The root has 3 children storing respectively, \texttt{'p'}, \texttt{'n'}, and \texttt{'t'}.
+Here is a slightly bigger example that contains the previous example as a subtree.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{T} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+
+We can print all the nodes in such a tree with the following code.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{printtree}\PY{p}{(}\PY{n}{T}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+    \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{T}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+        \PY{n}{printtree}\PY{p}{(}\PY{n}{T}\PY{p}{[}\PY{n}{child}\PY{p}{]}\PY{p}{)}
+
+\PY{n}{printtree}\PY{p}{(}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Whenever I see code like that above, I want to replace it with something that can work with any iterable collection.
+This would involve getting rid of all the indices and using an iterator.  Here's the equivalent code that uses an iterator.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{printtree}\PY{p}{(}\PY{n}{T}\PY{p}{)}\PY{p}{:}
+    \PY{n}{iterator} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{T}\PY{p}{)}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{next}\PY{p}{(}\PY{n}{iterator}\PY{p}{)}\PY{p}{)}
+    \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{iterator}\PY{p}{:}
+        \PY{n}{printtree}\PY{p}{(}\PY{n}{child}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Here we use the iterator to extract the first list item, then loop through the rest of the children.  
+
+\section{A Tree ADT}
+
+
+The information in the tree is all present in the \emph{list of lists} structure.
+However, it can be cumbersome to read, write, and work with.
+We will package it into a class that allows us to write code that is as close as possible to how we think about and talk about trees.
+As always, we will start with an ADT that describes our expectations for the data structure and its usage.
+The \textbf{Tree ADT} is as follows.
+
+\begin{itemize}
+
+\item 
+
+\textbf{\texttt{\_\_init\_\_(L)}} : Initialize a new tree given a list of lists.  The convention is that the first element in the list is the data and the later elements (if they exist) are the children.
+
+
+
+\item 
+
+\textbf{\texttt{height()}} : Return the height of the tree.
+
+
+
+\item 
+
+\textbf{\texttt{\_\_str\_\_()}} : Return a string representing the entire tree.
+
+
+
+\item 
+
+\textbf{\texttt{\_\_eq\_\_(other)}} : Return \texttt{True} if the tree is equal to \texttt{other}.  This means that they have the same data and their children are equal (and in the same order).
+
+
+
+\item 
+
+\textbf{\texttt{\_\_contains\_\_(k)}} : Return \texttt{True} if and only if the tree contains the data \texttt{k} either at the root or at one of its descendants.  Return \texttt{False} otherwise.
+
+
+
+\item 
+
+\textbf{\texttt{preorder()}} Return an iterator over the data in the tree that yields values according to the \textbf{preorder} traversal of the tree.
+
+
+
+\item 
+
+\textbf{\texttt{postorder()}} : Return an iterator over the data in the tree that yields values according to the \textbf{postorder} traversal of the tree.
+
+
+
+\item 
+
+\textbf{\texttt{\_\_iter\_\_()}} : An alias for preorder.
+
+
+
+\item 
+
+\textbf{\texttt{layerorder()}} : Return an iterator over the data in the tree that yields values according to the \textbf{layer order} traversal of the tree.
+
+
+
+\end{itemize}
+\section{An implementation}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{Tree}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{L}\PY{p}{)}\PY{p}{:}
+        \PY{n}{iterator} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{L}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{iterator}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children} \PY{o}{=} \PY{p}{[}\PY{n}{Tree}\PY{p}{(}\PY{n}{c}\PY{p}{)} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{iterator}\PY{p}{]}
+\end{Verbatim}
+
+
+
+The initializer takes a \emph{list of lists} representation of a tree as input.  A \texttt{Tree} object has two attributes, \texttt{data} stores data associated with a node and \texttt{children} stores a list of \texttt{Tree} objects.
+The recursive aspect of this tree is clear from the way the children are generated as \texttt{Tree}'s.  This definition does not allow for an empty tree (i.e. one with no nodes).
+
+
+Let's rewrite our print function to operate on an instance of the \texttt{Tree} class.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{printtree}\PY{p}{(}\PY{n}{T}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{T}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+    \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{T}\PY{o}{.}\PY{n}{children}\PY{p}{:}
+        \PY{n}{printtree}\PY{p}{(}\PY{n}{child}\PY{p}{)}
+\end{Verbatim}
+
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{T} \PY{o}{=} \PY{n}{Tree}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\PY{n}{printtree}\PY{p}{(}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+a
+b
+c
+d
+e
+f
+g
+\end{Verbatim}
+
+
+This is the most common pattern for algorithms that operate on trees.
+It has two parts; one part operates on the data and the other part applies the function recursively on the children.
+
+
+One unfortunate aspect of this code is that although it prints out the data, it doesn't tell us about the structure of the tree.
+It would be nicer if we used indentation to indicate the depth of the node as we print the data.
+It turns out that this is not too difficult and we will implement it as our \texttt{\_\_str\_\_} method.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{level} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+        \PY{n}{treestring} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{  }\PY{l+s+s2}{\PYZdq{}} \PY{o}{*} \PY{n}{level} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{:}
+            \PY{n}{treestring} \PY{o}{+}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{child}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{level} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{k}{return} \PY{n}{treestring}
+\end{Verbatim}
+
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{T} \PY{o}{=} \PY{n}{Tree}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{T}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+a
+  b
+    c
+      d
+  e
+    f
+    g
+\end{Verbatim}
+
+
+To "see" the tree structure in this print out, you find the parent of a node by finding the lowest line above that node that is not at the same indentation level.
+This is a task that you have some training for; it is how you visually parse python file to understand their block structure.
+
+
+Although the code above seems to work, it does something terrible.
+It builds up a string by iterative adding more strings (i.e. with concatenation).
+This copies and recopies some part of the string for every node in the tree.
+Instead, we would prefer to just keep a nice list of the trees and then join them into a string in one final act before returning.
+To do this, it is handy to use a helper method that takes the level and the current list of trees as parameters.
+With each recursive call, we add one to the level, and we pass down the same list to be appended to.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{k}{def} \PY{n+nf}{\PYZus{}listwithlevels}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{level}\PY{p}{,} \PY{n}{trees}\PY{p}{)}\PY{p}{:}
+        \PY{n}{trees}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{  }\PY{l+s+s2}{\PYZdq{}} \PY{o}{*} \PY{n}{level} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{:}
+            \PY{n}{child}\PY{o}{.}\PY{n}{\PYZus{}listwithlevels}\PY{p}{(}\PY{n}{level} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{trees}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n}{trees} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}listwithlevels}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{trees}\PY{p}{)}
+        \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{trees}\PY{p}{)}
+\end{Verbatim}
+
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{T} \PY{o}{=} \PY{n}{Tree}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{T}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+a
+  b
+    c
+      d
+  e
+    f
+    g
+\end{Verbatim}
+
+
+The pattern involved here is called a tree traversal and we will discuss these in more depth below.
+We implemented this one first, because it will help us to see that our trees look the way we expect them to.
+Naturally, it is vital to write good tests, but when things go wrong, you can learn a lot by seeing the tree.
+It can give you hints on where to look for bugs.
+
+
+Here is another example of a similar traversal pattern.
+Let's check if two trees are equal in the sense of having the same shape and data.  We use the \texttt{\_\_eq\_\_} method so this method will be used when we use \texttt{==} to check equality between \texttt{Tree}'s.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}eq\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{other}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{==} \PY{n}{other}\PY{o}{.}\PY{n}{data} \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children} \PY{o}{==} \PY{n}{other}\PY{o}{.}\PY{n}{children}
+\end{Verbatim}
+
+
+
+Here, it is less obvious that we are doing recursion, but we are because \texttt{self.children} and \texttt{other.children} are lists and list equality is determined by testing the equality of the items.  In this case, the items in the  lists are \texttt{Tree}'s, so our \texttt{\_\_eq\_\_} method will be invoked for each one.
+
+
+Here's another example.  Let's write a function that computes the height of the tree.  We can do this by computing the height of the subtrees and return one more than the max of those.  If there are no children, the height is $0$.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{k}{def} \PY{n+nf}{height}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+            \PY{k}{return} \PY{l+m+mi}{0}
+        \PY{k}{else}\PY{p}{:}
+            \PY{k}{return} \PY{l+m+mi}{1} \PY{o}{+} \PY{n+nb}{max}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{height}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{)}
+\end{Verbatim}
+
+
+
+\emph{Hopefully, you are getting the hang of these generator expressions.}
+
+
+Recall that the \texttt{\_\_contains\_\_} magic method allows us to use the \texttt{in} keyword for membership testing in a collection.
+The desired behavior of this function as described in the ADT tells us how to implement it.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}contains\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{==} \PY{n}{k} \PY{o+ow}{or} \PY{n+nb}{any}\PY{p}{(}\PY{n}{k} \PY{o+ow}{in} \PY{n}{ch} \PY{k}{for} \PY{n}{ch} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{)}
+\end{Verbatim}
+
+
+
+The \texttt{any} function takes an iterable of booleans and return \texttt{True} if any of them are \texttt{True}.
+It handles short-circuited evaluation, so it can stop as soon as it finds that one is true.
+If the answer is \texttt{False}, then this will iterate over the whole tree.
+This is precisely the behavior we saw with
+
+\section{Tree Traversal}
+
+
+Previously, all the collections we stored were either sequential (i.e., \texttt{list}, \texttt{tuple}, and \texttt{str}) or non-sequential (i.e., \texttt{dict} and \texttt{set}).  The tree structure seems to lie somewhere between the two.
+There is some structure, but it's not linear.
+We can give it a linear (sequential) structure by iterating through all the nodes in the tree, but there is not a unique way to do this.
+For trees, the process of visiting all the nodes is called \textbf{tree traversal}.
+For ordered trees, there are two standard traversals, called \textbf{preorder} and \textbf{postorder}, both are naturally defined recursively.
+
+
+In a preorder traversal, we \emph{visit} the node first followed by the traversal of its children.
+In a postorder traversal, we traverse all the children and then visit the node itself.
+The \emph{visit} refers to whatever computation we want to do with the nodes.
+The \texttt{printtree} method given previously is a classic example of a preorder traversal.
+We could also print the nodes in a postorder traversal as follows.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{printpostorder}\PY{p}{(}\PY{n}{T}\PY{p}{)}\PY{p}{:}
+    \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{:}
+        \PY{n}{printpostoder}\PY{p}{(}\PY{n}{child}\PY{p}{)}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{T}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+
+It is only a slight change in the code, but it results in a different output.
+
+\section{If you want to get fancy...}
+
+
+It was considered a great achievement in python to be able to do this kind of traversal with a generator.  Recursive generators seem a little mysterious, especially at first.  However, if you break down this code and walk through it by hand, it will help you have a better understanding of how generators work.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{k}{def} \PY{n+nf}{preorder}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{yield} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data}
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{:}
+            \PY{k}{for} \PY{n}{data} \PY{o+ow}{in} \PY{n}{child}\PY{o}{.}\PY{n}{preorder}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{k}{yield} \PY{n}{data}
+
+    \PY{c+c1}{\PYZsh{} Set \PYZus{}\PYZus{}iter\PYZus{}\PYZus{} to be an alias for preorder.}
+    \PY{n+nf+fm}{\PYZus{}\PYZus{}iter\PYZus{}\PYZus{}} \PY{o}{=} \PY{n}{preorder}
+\end{Verbatim}
+
+
+
+You can also do this to iterate over the trees (i.e. nodes).  I have made this one private because the user of the tree likely does not want or need access to the nodes.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{\PYZus{}preorder}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+    \PY{k}{yield} \PY{n+nb+bp}{self}
+    \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{:}
+        \PY{k}{for} \PY{n}{descendant} \PY{o+ow}{in} \PY{n}{child}\PY{o}{.}\PY{n}{\PYZus{}preorder}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{yield} \PY{n}{descendant}
+\end{Verbatim}
+
+
+\subsection{There's a catch!}
+
+
+This recursive generator does not run in linear time!
+Recall that each call to the generator produces an object.
+The object does not go away after yielding because it may need to yield more values.
+If one calls this method on a tree, each value yielded is passed all the way from the node to the root.
+Thus, the total running time is proportional to the sum of the depths of all the nodes in the tree.
+For a degenerate tree (i.e. a single path), this is $O(n^2)$ time.
+For a perfectly balanced binary tree, this is $O(n \log n)$ time.
+
+
+Using recursion and the call stack make the tree traversal code substantially simpler than if we had to keep track of everything manually.
+It would not be enough to store just the stack of nodes in the path from your current node up to the root. You would also have to keep track of your place in the iteration of the children of each of those nodes.  Remember that it is the job of an iterator object to keep track of where it is in the iteration. Thus, we can just push the iterators for the children onto the stack too.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{k}{def} \PY{n+nf}{\PYZus{}postorder}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n}{node}\PY{p}{,} \PY{n}{childiter} \PY{o}{=} \PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{iter}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{)}
+        \PY{n}{stack} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{node}\PY{p}{,} \PY{n}{childiter}\PY{p}{)}\PY{p}{]}
+        \PY{k}{while} \PY{n}{stack}\PY{p}{:}
+            \PY{n}{node}\PY{p}{,} \PY{n}{childiter} \PY{o}{=} \PY{n}{stack}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{child} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{childiter}\PY{p}{)}
+                \PY{n}{stack}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{child}\PY{p}{,} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{children}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{k}{except} \PY{n+ne}{StopIteration}\PY{p}{:}
+                \PY{k}{yield} \PY{n}{node}
+                \PY{n}{stack}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}                 
+
+    \PY{k}{def} \PY{n+nf}{postorder}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{p}{(}\PY{n}{node}\PY{o}{.}\PY{n}{data} \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}postorder}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+
+In the above code, I don’t love the fact that I am reassigning \texttt{node} and \texttt{childiter} at every iteration of the loop.  Can you fix that so that it still works?
+
+\subsection{Layer by Layer}
+
+
+Starting with our non-recursive postorder traversal, we can modify it to traverse the tree layer by layer.
+We will consider this traversal when we study heaps later on.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{k}{def} \PY{n+nf}{\PYZus{}layerorder}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n}{node}\PY{p}{,} \PY{n}{childiter} \PY{o}{=} \PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{iter}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{)}
+        \PY{n}{queue} \PY{o}{=} \PY{n}{Queue}\PY{p}{(}\PY{p}{)}
+        \PY{n}{queue}\PY{o}{.}\PY{n}{enqueue}\PY{p}{(}\PY{p}{(}\PY{n}{node}\PY{p}{,} \PY{n}{childiter}\PY{p}{)}\PY{p}{)}
+        \PY{k}{while} \PY{n}{queue}\PY{p}{:}
+            \PY{n}{node}\PY{p}{,} \PY{n}{childiter} \PY{o}{=} \PY{n}{queue}\PY{o}{.}\PY{n}{peek}\PY{p}{(}\PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{child} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{childiter}\PY{p}{)}
+                \PY{n}{queue}\PY{o}{.}\PY{n}{enqueue}\PY{p}{(}\PY{p}{(}\PY{n}{child}\PY{p}{,} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{children}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{k}{except} \PY{n+ne}{StopIteration}\PY{p}{:}
+                \PY{k}{yield} \PY{n}{node}
+                \PY{n}{queue}\PY{o}{.}\PY{n}{dequeue}\PY{p}{(}\PY{p}{)}                 
+
+    \PY{k}{def} \PY{n+nf}{layerorder}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{p}{(}\PY{n}{node}\PY{o}{.}\PY{n}{data} \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}layerorder}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}

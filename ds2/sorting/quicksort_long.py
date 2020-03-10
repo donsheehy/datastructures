@@ -56,4 +56,3 @@ def partition(L, left, right):
 
     # Return the index of the pivot.
     return pivot
-

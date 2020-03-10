@@ -47,7 +47,7 @@ class Tree:
                 stack.append((child, iter(child.children)))
             except StopIteration:
                 yield node
-                stack.pop()					
+                stack.pop()                 
 
     def postorder(self):
         return (node.data for node in self._postorder())
@@ -63,8 +63,7 @@ class Tree:
                 queue.enqueue((child, iter(child.children)))
             except StopIteration:
                 yield node
-                queue.dequeue()					
+                queue.dequeue()                 
 
     def layerorder(self):
         return (node.data for node in self._layerorder())
-

@@ -10,7 +10,7 @@ When we create a new `ListNode`, we can specify the nodes before and after so th
 We want it to always be true that `b == a.link` if and only if `a = b.prev` for any two nodes `a` and `b`.
 To help ensure this invariant, we set `self.prev.link = self` and `self.link.prev = self` unless `prev` or `link` respectively are `None`.
 
-```python {cmd id="_deque.doublylinkedlist_00"}
+```python {cmd id="_deque.doublylinkedlist_01"}
 class ListNode:
     def __init__(self, data, prev = None, link = None):
         self.data = data
@@ -61,7 +61,7 @@ We should use this as an opportunity to simplify the code.
 In this case, we might consider the more general problem of adding a node between two other nodes.
 We will just need to consider those cases where the nodes `before` or `after` or both are `None`.
 
-```python {cmd continue="_deque.doublylinkedlist_01", id="_deque.doublylinkedlist_02"}
+```python {cmd continue="_deque.doublylinkedlist_01" id="_deque.doublylinkedlist_02"}
 class DoublyLinkedList:
     def __init__(self):
         self._head = None
@@ -90,7 +90,7 @@ Symmetry is also apparent in the code to remove an item from either end.
 As with the `add` methods, we factor out a (private) method that both use to remove a node and return its data.
 It includes a little logic to detect if the head or tail or both change with the removal.
 
-```python {cmd continue="_deque.doublylinkedlist_02", id="_deque.doublylinkedlist_03"}
+```python {cmd continue="_deque.doublylinkedlist_02" id="_deque.doublylinkedlist_03"}
     def _remove(self, node):
         before, after = node.prev, node.link
         if node is self._head:
@@ -131,7 +131,7 @@ It takes time proportional to the length of the newly created list `C` and it do
 For doubly linked lists, we could achieve the same asymptotic running time by incrementally building up a new list.
 However, if we are allowed to modify the lists, the concatenation can be accomplished by pointing the tail of the first list at the head of the second.
 
-```python {cmd continue="_deque.doublylinkedlist_03", id="_deque.doublylinkedlist_04"}
+```python {cmd continue="_deque.doublylinkedlist_03" id="_deque.doublylinkedlist_04"}
 
     def __iadd__(self, other):
         if other._head is not None:

@@ -1,0 +1,91 @@
+\chapter{Sorting with Divide and Conquer}
+
+
+Previously, we saw some simple quadratic algorithms for sorting.
+We saw \texttt{bubbleSort}, \texttt{selectionSort}, and \texttt{insertionSort}.
+We considered all these algorithms from the perspective of correctness.
+We wanted to have ways to argue that the result was indeed a sorted list, and only afterwards applied some optimizations (such as stopping early).
+We used the idea of an \textbf{invariant}.
+Specifically, it was a \textbf{loop invariant}, something that is true on each iteration of the loop.
+We started with the invariant that after \texttt{i} iterations, the last \texttt{i} elements are in sorted order.
+
+
+Invariants help us to reason about our code the same way we do with recursive algorithms.
+Once the code is written, we assume the algorithm works on small examples in the same way we assume a loop invariant holds from a previous iteration of the loop.
+
+
+Now, our goal is to write a faster sorting algorithm.
+
+
+\textbf{Divide and Conquer} is a paradigm for algorithm design.
+It usually consists of 3 (plus one) parts.
+The first part is to \textbf{divide} the problem into 2 or more pieces.
+The second part is the \textbf{conquer} step, where one solves the problem on the pieces.
+The third part is the \textbf{combine} step where one combines the solutions on the parts into a solution on the whole.
+
+
+The description of these parts leads pretty directly to recursive algorithms, i.e. using recursion for the conquer part.
+The other part that appears in many such algorithms is a \textbf{base case}, as one might expect in a recursive algorithm.
+This is where you deal with inputs so small that they cannot be divided.
+
+\section{Mergesort}
+
+
+The most direct application of the Divide and Conquer paradigm to the sorting problem is the \textbf{mergesort} algorithm.
+In this algorithm, all the difficult work is in the merge step.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{mergesort}\PY{p}{(}\PY{n}{L}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} Base Case!}
+    \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{L}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{p}{:}
+        \PY{k}{return}
+
+    \PY{c+c1}{\PYZsh{} Divide!}
+    \PY{n}{mid} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{L}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+    \PY{n}{A} \PY{o}{=} \PY{n}{L}\PY{p}{[}\PY{p}{:}\PY{n}{mid}\PY{p}{]}
+    \PY{n}{B} \PY{o}{=} \PY{n}{L}\PY{p}{[}\PY{n}{mid}\PY{p}{:}\PY{p}{]}
+
+    \PY{c+c1}{\PYZsh{} Conquer!}
+    \PY{n}{mergesort}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+    \PY{n}{mergesort}\PY{p}{(}\PY{n}{B}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Combine!}
+    \PY{n}{merge}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{,} \PY{n}{L}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{merge}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{,} \PY{n}{L}\PY{p}{)}\PY{p}{:}   
+    \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} index into A}
+    \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} index into B}
+    \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{A}\PY{p}{)} \PY{o+ow}{and} \PY{n}{j} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{B}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{A}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{B}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{:}
+            \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{A}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+            \PY{n}{i} \PY{o}{=} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{B}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+            \PY{n}{j} \PY{o}{=} \PY{n}{j} \PY{o}{+} \PY{l+m+mi}{1}
+    \PY{c+c1}{\PYZsh{} Add any remaining elements once one list is empty}
+    \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{A}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{B}\PY{p}{[}\PY{n}{j}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+
+That last line might look a little strange.
+The right side of the assignment is concatenating the remaining elements from the two lists (of which one should be empty).
+Then, this list is assigned into a slice.
+In its wonderfulness, python allows you to assign into a slice the same way you would assign into an index.
+
+
+We could also use some more logic in the loop to avoid this last step, though I have found students disagree as to which approach is simpler.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{merge}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{,} \PY{n}{L}\PY{p}{)}\PY{p}{:}   
+    \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
+    \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{A}\PY{p}{)} \PY{o+ow}{or} \PY{n}{j} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{B}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{j} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{B}\PY{p}{)} \PY{o+ow}{or} \PY{p}{(}\PY{n}{i} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{A}\PY{p}{)} \PY{o+ow}{and} \PY{n}{A}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{B}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{A}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+            \PY{n}{i} \PY{o}{=} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{B}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+            \PY{n}{j} \PY{o}{=} \PY{n}{j} \PY{o}{+} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+

@@ -1,7 +1,6 @@
 from ds2.queue import ListQueue as Queue
 
 
-
 class AdjacencySetGraph:
     def __init__(self, V = (), E = ()):
         self._V = set()
@@ -77,4 +76,3 @@ class AdjacencySetGraph:
                 for n in self.nbrs(b):
                     tovisit.enqueue((b,n))
         return tree
-

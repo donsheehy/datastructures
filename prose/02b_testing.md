@@ -22,7 +22,7 @@ class Doubler:
     def n(self):
         return self._n
 
-if __name__ == ‘__main__’:
+if __name__ == '__main__':
     x = Doubler(5)
     assert(x.n() == 10)
     y = Doubler(-4)
@@ -31,7 +31,7 @@ if __name__ == ‘__main__’:
 
 The `assert` statement will raise an error if the predicate that follows it is `False`.  Otherwise, the program just continues as usual.  Assertions are much better than just printing because you don’t have to manually check to see that it printed what you expected it to print.  Also, people have a tendency to delete old print statements to reduce clutter in their test output.  Deleting tests after they pass is a *very bad idea*.  Your code is going to change, and you will want to know if a change breaks something that *used* to work.
 
-The line `if __name__ == ‘__main__’:` makes sure that the tests will not run when the module is imported from somewhere else.
+The line `if __name__ == '__main__':` makes sure that the tests will not run when the module is imported from somewhere else.
 
 For some, learning to test their code runs into a substantial psychological block.  They feel that testing the code will reveal its flaws and thus reveal the programmer’s flaws.  If you feel the slightest hesitation to testing your own code, you should practice the OGAE protocol.  It stands for, "Oh Good, An Error!".  Every time you get an error, you say this with honest enthusiasm.  The computer has just done you a huge favor by identifying something wrong, and it has done so in the safety of your room or office.  You can fix it before it becomes any bigger.
 

@@ -1,6 +1,18 @@
 pandoc_experiment
 mumeexperiment.js
 
+# LaTeX stuff
+*.fls
+*.bib
+*.log
+*.synctex.gz
+*.fdb_latexmk
+*.aux
+examples/src/
+
+# Mac stuff
+.DS_Store
+
 node_modules
 __pycache__
 code/__pycache__

@@ -116,7 +116,7 @@ The **Tree ADT** is as follows.
 from ds2.queue import ListQueue as Queue
 ```
 
-```python {cmd id="_tree.tree_00"}
+```python {cmd id="_tree.tree_00" continue="_tree.tree"}
 class Tree:
     def __init__(self, L):
         iterator = iter(L)
@@ -291,7 +291,7 @@ For a perfectly balanced binary tree, this is $O(n \log n)$ time.
 Using recursion and the call stack make the tree traversal code substantially simpler than if we had to keep track of everything manually.
 It would not be enough to store just the stack of nodes in the path from your current node up to the root. You would also have to keep track of your place in the iteration of the children of each of those nodes.  Remember that it is the job of an iterator object to keep track of where it is in the iteration. Thus, we can just push the iterators for the children onto the stack too.
 
-```python{cmd id="_tree.tree_06" continue="_tree.tree_05"}
+```python {cmd id="_tree.tree_06" continue="_tree.tree_05"}
     def _postorder(self):
         node, childiter = self, iter(self.children)
         stack = [(node, childiter)]
@@ -315,7 +315,7 @@ In the above code, I don’t love the fact that I am reassigning `node` and `chi
 Starting with our non-recursive postorder traversal, we can modify it to traverse the tree layer by layer.
 We will consider this traversal when we study heaps later on.
 
-```python{cmd id="_tree.tree_06" continue="_tree.tree_05"}
+```python {cmd id="_tree.tree_07" continue="_tree.tree_06"}
     def _layerorder(self):
         node, childiter = self, iter(self.children)
         queue = Queue()

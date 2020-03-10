@@ -12,4 +12,3 @@ def dumbersort(L):
 def dumbsort(L):
     while (not issorted(L)):
         dumbersort(L)
-

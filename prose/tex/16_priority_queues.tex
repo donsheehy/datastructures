@@ -1,0 +1,389 @@
+\chapter{Priority Queues}
+
+
+We're going to discuss a versatile and  fundamental data structure called a \textbf{priority queue}.  It will resemble a queue except that items all have a priority and will come out ordered by their priority rather than their order of insertion.
+
+
+By this point, we know enough about different data structures that we will be able to implement this data structure in several different ways.  Eventually, we will introduce a data structure called a \textbf{heap} that will give good performance in many respects, but it won't be
+
+\section{The Priority Queue ADT}
+
+
+The \textbf{Priority Queue ADT} is a data type that stores a collection of items with priorities (not necessarily unique) that supports the following operations.
+
+\begin{itemize}
+
+\item 
+
+\texttt{insert(item, priority)} - Add \texttt{item} with the given \texttt{priority}.
+
+
+
+\item 
+
+\texttt{findmin()} - Return the item with the minimum priority.  If there are multiple items with the minimum priority, ties may be broken arbitrarily.
+
+
+
+\item 
+
+\texttt{removemin()} - Remove and return the item with the minimum priority.  Ties are broken arbitrarily.
+
+
+
+\end{itemize}
+\section{Using a list}
+
+
+As with every ADT presented in this book, there is a simple, though not necessarily efficient, implementation using a list. Let's start with a list and put all the entries in the list. To find the min, we can iterate through the list.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{SimpleListPQ}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf}{insert}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{findmin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x} \PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf}{removemin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n}{item}\PY{p}{,} \PY{n}{priority} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x} \PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{)}
+        \PY{k}{return} \PY{n}{item}
+\end{Verbatim}
+
+
+
+Although this code will work, there are a couple design decisions that are not great. First, there is something we might call \emph{magical indices}.
+As the data are stored as tuples, we have to use an index to pull out the priority or the item as needed.  This is an undocumented convention.  Someone reading the code would have to read the insert code to understand the \texttt{findmin} code. Also, there is some duplication in the use of \texttt{min} with the same \texttt{key} lambda expression for both \texttt{removemin} and \texttt{findmin}. These shortcomings can be our motivation to go back and clean it up, i.e. \textbf{refactor} it.
+
+
+We'll make a class that stores the entries, each will have an \texttt{item} and a \texttt{priority} as attributes. We'll make the entries comparable by implementing \texttt{\_\_lt\_\_} and thus the comparison of entries will always just compare their priorities.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} priorityqueue.py}
+
+\PY{k}{class} \PY{n+nc}{Entry}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{priority} \PY{o}{=} \PY{n}{priority}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{item} \PY{o}{=} \PY{n}{item}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}lt\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{other}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{priority} \PY{o}{\PYZlt{}} \PY{n}{other}\PY{o}{.}\PY{n}{priority}
+\end{Verbatim}
+
+
+
+Now, we can rewrite the list version of the priority queue.  It's almost the same as before, except, that by using the \texttt{Entry} class, the code is more explicit about the types of objects, and hopefully, easier to read and understand.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{ds2}\PY{n+nn}{.}\PY{n+nn}{priorityqueue} \PY{k+kn}{import} \PY{n}{Entry}
+
+\PY{k}{class} \PY{n+nc}{UnsortedListPQ}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf}{insert}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Entry}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{findmin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)}\PY{o}{.}\PY{n}{item}
+
+    \PY{k}{def} \PY{n+nf}{removemin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n}{entry} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{entry}\PY{p}{)}
+        \PY{k}{return} \PY{n}{entry}\PY{o}{.}\PY{n}{item}
+\end{Verbatim}
+
+
+
+Let's analyze the running time of the methods in this class.
+The \texttt{insert} method will clearly only require constant time because it is a single list append.  Both \texttt{findmin} and \texttt{removemin} take $O(n)$ time for a priority queue with $n$ items, because the \texttt{min} function will iterate through the while list to find the smallest priority entry.
+
+
+The \texttt{findmin} would be much faster if the list were sorted.  Then we could just return the first item in the list.  An even better approach would sort the list backwards.  Then \texttt{removemin} could also be constant time, using the constant-time \texttt{pop} function on a list.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{ds2}\PY{n+nn}{.}\PY{n+nn}{priorityqueue} \PY{k+kn}{import} \PY{n}{Entry}
+
+\PY{k}{class} \PY{n+nc}{SortedListPQ}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf}{insert}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Entry}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{findmin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{item}
+
+    \PY{k}{def} \PY{n+nf}{removemin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{item}
+\end{Verbatim}
+
+
+
+I used a nice feature of the python \texttt{sort} method, a named parameter called \texttt{reversed} which, as one might guess, reverses the sorting order.
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{S} \PY{o}{=} \PY{n}{SortedListPQ}\PY{p}{(}\PY{p}{)}
+\PY{n}{S}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ham}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+\PY{n}{S}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cheese}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{S}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bread}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n}{S}\PY{o}{.}\PY{n}{removemin}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+['cheese', 'bread', 'ham']
+\end{Verbatim}
+
+
+The asymptotic running time of both \texttt{findmin} and \texttt{removemin} is reduced to constant-time.  The \texttt{insert} method no longer runs in constant time, because it sorts.  This means that the running time will depend on the time it takes to sort.  In this case, assuming no other methods rearrange the (private!) \texttt{\_entries} attribute, there will be only one entry out of sorted order, the one we just appended.  In this case, a good implementation of insertion sort would run in linear time (it only has to insert one item before everything is sorted).  Although, for code brevity, we called out to python's \texttt{sort} method, (which could take $O(n \log n)$-time) this is really a linear-time operation).
+
+
+What we have with our two list implementations of the priority queue ADT is \textbf{tradeoff} between two operations.  In one case, we have fast \texttt{insert} and slow \texttt{removemin} and in the other we have slow \texttt{insert} and fast \texttt{removemin}.  Our goal will be to get all of the operations pretty fast.  We may not achieve constant time for all, but logarithmic-time is achievable.
+
+\section{Heaps}
+
+
+The data structure we'll use for an efficient priority queue is called a \textbf{heap}.  Heaps are almost always used to implement a priority queue so that as you look at other sources, you might not see a distinction between the two ideas.  As we are using it, the priority queue is the ADT, the heap is the data structure.  
+
+
+Matters are complicated by two other vocabulary issues.  First, there are many different kinds of heaps.  We'll study just one example, the so-called binary heap.  Second, the usual word used for the \emph{priority} in a heap is "key".  This can be confusing, because unlike \emph{keys} in mapping data structures, there is no requirement that priorities be unique.  We will stick with the word "priority" despite the usual conventions in order to keep these ideas separate.
+
+
+We can think of a binary heap as a binary tree that is arranged so that smaller priorities are above larger priorities.  The name is apt as any good heap of stuff should have the big things on the bottom and small things on the top.  For any tree with nodes that have priorities, we say that the \textbf{tree is heap-ordered} if for every node, the priority of its children are at least as large as the the priority of the node itself.  This naturally implies that the minimum priority is at the root.
+
+\section{Storing a tree in a list}
+
+
+Previously, we stored trees as a \textbf{linked data structure}.  This means having a node class that stores references to other nodes, i.e. the children.  We'll use the heap as an opportunity to see a different way to represent a tree.  We'll put the heap entries in a list and let the list indices encode the parent-child relationships of the tree.
+
+
+For a node at index \texttt{i}, its left child will be at index \texttt{2 * i + 1} and the right child will be at index \texttt{2 * i + 2}.  This means that the parent of the node at index \texttt{i} is at index \texttt{(i-1) // 2}.  This mapping of nodes to indices puts the root at index \texttt{0} and the rest of the nodes appear level by level from left-to-right, top-to-bottom.  Using this mapping, we say a \textbf{list is heap-ordered} if the corresponding binary tree is heap-ordered.  This is equivalent to saying that for all $i > 0$, the priority of the entry at index $i$ is greater than or equal to the priority at index $(i-1) // 2$.
+
+
+We will maintain the invariant that after each operation, the list of entries is heap-ordered.  To insert a new node, we append it to the list and then repeated swap it with its parent until it is heap-ordered.  This updating step will be called \texttt{\_upheap} and is similar to the inner loop of an insertion sort.  However, unlike insertion sort, it only does at most $O(\log n)$ swap operations (each one reduces the index by half).
+
+
+Similarly, there is a \texttt{\_downheap} operation that will repeatedly swap an entry with its child until it's heap-ordered.  This operation is useful in the next section for building a heap from scratch.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{ds2}\PY{n+nn}{.}\PY{n+nn}{priorityqueue} \PY{k+kn}{import} \PY{n}{Entry}
+
+\PY{k}{class} \PY{n+nc}{HeapPQ}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf}{insert}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Entry}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}upheap}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}parent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{p}{(}\PY{n}{i} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}children}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
+        \PY{n}{left} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}
+        \PY{n}{right} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{2}
+        \PY{k}{return} \PY{n+nb}{range}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)}\PY{p}{,} \PY{n}{right} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}upheap}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
+        \PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}
+        \PY{n}{parent} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}parent}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+        \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{L}\PY{p}{[}\PY{n}{parent}\PY{p}{]}\PY{p}{:}
+            \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{L}\PY{p}{[}\PY{n}{parent}\PY{p}{]} \PY{o}{=} \PY{n}{L}\PY{p}{[}\PY{n}{parent}\PY{p}{]}\PY{p}{,} \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}upheap}\PY{p}{(}\PY{n}{parent}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{findmin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{item}
+
+    \PY{k}{def} \PY{n+nf}{removemin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}
+        \PY{n}{item} \PY{o}{=} \PY{n}{L}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{item}
+        \PY{n}{L}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{L}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n}{L}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}downheap}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{k}{return} \PY{n}{item}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}downheap}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
+        \PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}
+        \PY{n}{children} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}children}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+        \PY{k}{if} \PY{n}{children}\PY{p}{:}
+            \PY{n}{child} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{children}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{L}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+            \PY{k}{if} \PY{n}{L}\PY{p}{[}\PY{n}{child}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{L}\PY{p}{[}\PY{n}{child}\PY{p}{]} \PY{o}{=} \PY{n}{L}\PY{p}{[}\PY{n}{child}\PY{p}{]}\PY{p}{,} \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}downheap}\PY{p}{(}\PY{n}{child}\PY{p}{)}
+\end{Verbatim}
+
+
+\section{Building a Heap from scratch}
+
+
+Just using the public interface, one could easily construct a \texttt{HeapPQ} from a list of item-priority pairs.  For example, the following code would work just fine.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{pq} \PY{o}{=} \PY{n}{HeapPQ}\PY{p}{(}\PY{p}{)}
+\PY{n}{pairs} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{]}
+\PY{k}{for} \PY{n}{item}\PY{p}{,} \PY{n}{priority} \PY{o+ow}{in} \PY{n}{pairs}\PY{p}{:}
+    \PY{n}{pq}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}
+\end{Verbatim}
+
+
+
+The \texttt{insert} method takes $O(\log n)$ time, so the total running time for this approach is $O(n \log n)$ time.  \emph{You should double check that you believe this claim despite the fact that for each insertion, there are fewer than $n$ entries.}
+
+
+Perhaps surprisingly, we can construct the \texttt{HeapPQ} in linear time.  We call this \textbf{heapifying a list}.  We will exploit the \texttt{\_downheap} method that we have already written.  The code is deceptively simple.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{\PYZus{}heapify}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+    \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{reversed}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}downheap}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Look at the difference between the \texttt{heapify} code above and the \texttt{\_heapify\_slower} code below.  The former works from the end and "downheaps" every entry and the latter starts at the beginning and "upheaps" every entry.  Both are correct, but one is faster.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{\PYZus{}heapify\PYZus{}slower}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+    \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}upheap}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+
+They may seem to be the same, but they are not.  To see why, we have to look a little closer at the running time of \texttt{\_upheap} and \texttt{\_downheap}.  Consider the tree perspective of the list.  For \texttt{\_upheap}, the running time depends on the depth of the starting node.  For \texttt{\_downheap}, the running time depends on the height of the subtree rooted at the starting node.  Looking at a complete binary tree, half of the nodes are leaves and so \texttt{\_downheap} will take constant time and \texttt{\_upheap} will take $O(\log n)$ time.  Thus, \texttt{\_heapify\_slower} will take at least $\frac{n}{2}\log_2 n = O(n \log n)$ time.  
+
+
+On the other hand, to analyze \texttt{\_heapify}, we have to add up the heights of all the nodes in a complete binary tree.  Formally, this will be $n\sum_{i=1}^{\log_2 n}i/2^i$.  There is a cute trick to bound this sum.  Simply observe that if from every node in the tree, we take a path that goes left on the first step and right for every step thereafter, no two paths will overlap.  This means that the the sum of the lengths of these paths (which is also to the sum of the heights) is at most the total number of edges, $n-1$.  Thus, \texttt{\_heapify} runs in $O(n)$ time.
+
+\section{Implicit and Changing Priorities}
+
+
+Sometimes, we would like our priority queue to just compare items, rather than their priorities.
+That is, the priority is implicit.
+To accomplish this, we can make the priority optional for the methods that use it.
+Moreover, we often would like to specify some function \texttt{key} such that the priority of \texttt{item} should be \texttt{key(item)}.
+This is, for example how it worked for other functions on ordered collections, like \texttt{sort}, \texttt{min}, and \texttt{max}.
+We will take care of both goals at once.
+We will allow an optional parameter to \texttt{\_\_init\_\_} to specify the key function.
+The default value of this function will be a function that takes an item and simply returns that same item.
+This way, if no key function is given and no priority is given, the priority will be equal to the item.
+
+
+There is another "standard" operation on priority queues.  It is called \texttt{changepriority}.  It does what it says, reducing the priority of an entry.\\
+This is very simple to implement in our current code if the index of the entry to change is known.\\
+It would suffice to change the priority of the entry and call \texttt{\_upheap} and \texttt{\_downheap} on that index.
+If it needs to move up the heap to recover the heap order invariant, the \texttt{\_upheap} method will do that.
+If it needs to move down the heap, the \texttt{\_upheap} method will leave it where it is, and the \texttt{\_downheap} method will move it down the heap until the heap ordering is recovered.
+
+
+However, the usual way to reduce the priority is to specify the item and its new priority.  This requires that we can find the index of an item.  We'll do this by storing a dictionary that maps items to indices.  We'll have to update this dictionary every time we rearrange the items.  To make sure this happens correctly, we will add a method for swapping entries and use this whenever we make a swap.  
+
+
+The full code including the \texttt{\_heapify} method is given below.  This full version of the priority queue will be very useful for some graph algorithms that we will see soon.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{PriorityQueue}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{entries} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{entries} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:} \PY{n}{entries} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}key} \PY{o}{=} \PY{n}{key}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries} \PY{o}{=} \PY{p}{[}\PY{n}{Entry}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{p}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{p} \PY{o+ow}{in} \PY{n}{entries}\PY{p}{]}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}itemmap} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{entry}\PY{o}{.}\PY{n}{item} \PY{p}{:} \PY{n}{index}
+                         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{entry} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)}\PY{p}{\PYZcb{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}heapify}\PY{p}{(}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{insert}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{priority} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{priority} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+            \PY{n}{priority} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}key}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+        \PY{n}{index} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Entry}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{priority}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}itemmap}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{n}{index}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}upheap}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}parent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{p}{(}\PY{n}{i} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}children}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
+        \PY{n}{left}\PY{p}{,} \PY{n}{right} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{2}
+        \PY{k}{return} \PY{n+nb}{range}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)}\PY{p}{,} \PY{n}{right} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}swap}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+        \PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}
+        \PY{n}{va} \PY{o}{=} \PY{n}{L}\PY{p}{[}\PY{n}{a}\PY{p}{]}\PY{o}{.}\PY{n}{item}
+        \PY{n}{vb} \PY{o}{=} \PY{n}{L}\PY{p}{[}\PY{n}{b}\PY{p}{]}\PY{o}{.}\PY{n}{item}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}itemmap}\PY{p}{[}\PY{n}{va}\PY{p}{]} \PY{o}{=} \PY{n}{b}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}itemmap}\PY{p}{[}\PY{n}{vb}\PY{p}{]} \PY{o}{=} \PY{n}{a}
+        \PY{n}{L}\PY{p}{[}\PY{n}{a}\PY{p}{]}\PY{p}{,} \PY{n}{L}\PY{p}{[}\PY{n}{b}\PY{p}{]} \PY{o}{=} \PY{n}{L}\PY{p}{[}\PY{n}{b}\PY{p}{]}\PY{p}{,} \PY{n}{L}\PY{p}{[}\PY{n}{a}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}upheap}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
+        \PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}
+        \PY{n}{parent} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}parent}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+        \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{L}\PY{p}{[}\PY{n}{parent}\PY{p}{]}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}swap}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{parent}\PY{p}{)}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}upheap}\PY{p}{(}\PY{n}{parent}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{changepriority}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{priority} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{priority} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+            \PY{n}{priority} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}key}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+        \PY{n}{i} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}itemmap}\PY{p}{[}\PY{n}{item}\PY{p}{]}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{priority} \PY{o}{=} \PY{n}{priority}
+        \PY{c+c1}{\PYZsh{} Assuming the tree is heap ordered, only one will have an effect.}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}upheap}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}downheap}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{findmin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{item}
+
+    \PY{k}{def} \PY{n+nf}{removemin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}
+        \PY{n}{item} \PY{o}{=} \PY{n}{L}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{item}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}swap}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{L}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{k}{del} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}itemmap}\PY{p}{[}\PY{n}{item}\PY{p}{]}
+        \PY{n}{L}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}downheap}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{k}{return} \PY{n}{item}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}downheap}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
+        \PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}
+        \PY{n}{children} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}children}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+        \PY{k}{if} \PY{n}{children}\PY{p}{:}
+            \PY{n}{child} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{children}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{L}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+            \PY{k}{if} \PY{n}{L}\PY{p}{[}\PY{n}{child}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}swap}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{child}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}downheap}\PY{p}{(}\PY{n}{child}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}len\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}heapify}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entries}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{reversed}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}downheap}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+
+We can use the code above to implement a \texttt{MaxHeap}, that is a priority queue of items ordered by \emph{decreasing} value.
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{maxheap} \PY{o}{=} \PY{n}{PriorityQueue}\PY{p}{(}\PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}
+
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{10}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+    \PY{n}{maxheap}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{c+c1}{\PYZsh{}no need to specify the priority}
+
+\PY{c+c1}{\PYZsh{} These should print in decreasing order.}
+\PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n}{maxheap}\PY{o}{.}\PY{n}{removemin}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+\end{Verbatim}

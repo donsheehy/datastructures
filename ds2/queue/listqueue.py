@@ -47,4 +47,3 @@ class ListQueue(ListQueueFakeDelete):
             self._L = self._L[self._head:]
             self._head = 0
         return item
-

@@ -5,4 +5,3 @@ def insertionsort(L):
         while j < n - 1 and L[j]>L[j+1]:
             L[j], L[j+1] = L[j+1], L[j]
             j+=1
-

@@ -21,4 +21,3 @@ class LinkedQueue:
 
     def isempty(self):
         return len(self) == 0
-

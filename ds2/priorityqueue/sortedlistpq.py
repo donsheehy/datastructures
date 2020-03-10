@@ -13,4 +13,3 @@ class SortedListPQ:
 
     def removemin(self):
         return self._entries.pop().item
-

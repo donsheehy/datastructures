@@ -6,4 +6,3 @@ def selectionsort(L):
             if L[index] > L[max_index]:
                 max_index = index
         L[n-i-1], L[max_index] = L[max_index], L[n-i-1]
-

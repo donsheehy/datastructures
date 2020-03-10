@@ -330,7 +330,7 @@ In almost all cases, one can see the reason for the running times by understandi
 | Membership testing      | `item in L` | $n$ |
 | Slice                   | `L[a:b]` | $b-a$
 | Concatenate two lists   | `L1 + L2` | $n_1 + n_2$ |
-| Sort                    | `L.sort()` | $n \log_2 n$
+| Sort                    | `L.sort()` | $n \log_2 n$ |
 
 Note that these running times are the same for the other sequential collections, `list` and `str` assuming the operation exists for those immutable types.
 For example, index access, membership testing, slicing, and concatenation all work.

@@ -10,4 +10,3 @@ class BadStack(ListStack):
     def peek(self):
         return self._L[0]
 
-

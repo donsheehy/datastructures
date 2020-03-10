@@ -14,4 +14,3 @@ class UnsortedListPQ:
         entry = min(self._entries)
         self._entries.remove(entry)
         return entry.item
-

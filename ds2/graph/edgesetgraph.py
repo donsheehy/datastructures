@@ -45,4 +45,3 @@ class UndirectedEdgeSetGraph(EdgeSetGraph):
                 yield w
             elif w == v:
                 yield u
-

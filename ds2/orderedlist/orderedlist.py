@@ -10,4 +10,3 @@ class OrderedList(OrderedListSimple):
             else:
                 left = median
         return right > left and self._L[left] == item
-

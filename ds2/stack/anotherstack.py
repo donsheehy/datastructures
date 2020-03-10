@@ -6,4 +6,3 @@ class AnotherStack(ListStack):
             return self._L.pop()
         except IndexError:
             raise RuntimeError("pop from empty stack")
-

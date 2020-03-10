@@ -151,4 +151,3 @@ class DisjointSets:
                 a,b = b,a
             self._parent[self._root(b)] = self._root(a)
             self._weight[a] += self._weight[b]
-

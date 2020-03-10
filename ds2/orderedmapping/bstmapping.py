@@ -16,7 +16,7 @@ class BSTMapping(Mapping):
             self._root = BSTNode(key, value)
 
     def __len__(self):
-        return len(self._root) if self._root else 0
+        return len(self._root) if self._root is not None else 0
 
     def _entryiter(self):
         if self._root:
@@ -124,4 +124,3 @@ class BSTNode:
         else: raise KeyError
         self._updatelength()
         return self
-

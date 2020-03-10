@@ -64,4 +64,3 @@ class DoublyLinkedList:
             # Clean up the other list.
             other.__init__()
         return self
-

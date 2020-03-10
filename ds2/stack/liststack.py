@@ -17,4 +17,3 @@ class ListStack:
     def isempty(self):
         return len(self) == 0
 
-

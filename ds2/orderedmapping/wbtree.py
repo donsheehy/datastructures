@@ -31,4 +31,3 @@ class WBTreeNode(BalancedBSTNode):
 
 class WBTree(BalancedBST):
     Node = WBTreeNode
-

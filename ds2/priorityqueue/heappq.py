@@ -42,4 +42,3 @@ class HeapPQ:
             if L[child] < L[i]:
                 L[i], L[child] = L[child], L[i]
                 self._downheap(child)
-

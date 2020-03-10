@@ -118,7 +118,7 @@ Yes, it takes time proportional to the length of the list, but what can we do?  
 
 Here's a different idea.  Let's not really delete things from the front of the list.  Instead, we'll ignore them by keeping the index of the head of the queue.
 
-```python {cmd id="_queue.listqueue_01"}
+```python {cmd id="_queue.listqueue_01" continue="_queue.listqueue_00"}
 class ListQueueFakeDelete:
     def __init__(self):
         self._head = 0

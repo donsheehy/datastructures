@@ -1,0 +1,169 @@
+\chapter{Binary Search}
+
+
+Binary search is a classic algorithm.
+It is particularly nice to think about as a recursive algorithm.
+If you are looking for an item in a sorted list, you break the list in half and repeat the search on whichever side could contain the missing element, which can be found by comparing with the median element.
+Then, repeating on the smaller list is just a single recursive call.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{bs}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+    \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{L}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} \PY{k}{return} \PY{k+kc}{False}
+    \PY{n}{median} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{L}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+    \PY{k}{if} \PY{n}{item} \PY{o}{==} \PY{n}{L}\PY{p}{[}\PY{n}{median}\PY{p}{]}\PY{p}{:}
+        \PY{k}{return} \PY{k+kc}{True}
+    \PY{k}{elif} \PY{n}{item} \PY{o}{\PYZlt{}} \PY{n}{L}\PY{p}{[}\PY{n}{median}\PY{p}{]}\PY{p}{:}
+        \PY{k}{return} \PY{n}{bs}\PY{p}{(}\PY{n}{L}\PY{p}{[}\PY{p}{:}\PY{n}{median}\PY{p}{]}\PY{p}{,} \PY{n}{item}\PY{p}{)}
+    \PY{k}{else}\PY{p}{:}
+        \PY{k}{return} \PY{n}{bs}\PY{p}{(}\PY{n}{L}\PY{p}{[}\PY{n}{median} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{item}\PY{p}{)}
+\end{Verbatim}
+
+
+
+This code, although correct, is not nearly as efficient as it could be.
+To analyze it, we use the same technique as we will use for all recursive algorithms in this course.
+We will count up \emph{all} the operations that will be performed by the function except the recursive calls.
+Then we will draw the tree of all recursive calls and add up the cost of each call.
+
+
+In this case, the worst-case running time of \texttt{bs} on a list of length $n$ is $n/2$ plus a constant.
+So, the first call costs $n/2$.
+The second costs $n/4$.
+The third costs $n/8$.
+Adding them up gives a number close to $n$.
+So, we are taking linear time to test membership.
+We would be faster to just iterate one time through the list by using the \texttt{in} function (i.e. \texttt{list.\_\_contains\_\_}).
+
+
+If we're going to do faster, we have to avoid all that slicing.
+Let's only pretend to slice the list and instead pass the indices defining the range of the list we want to search.
+Here is a first attempt.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{bs}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{left} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{right} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+    \PY{k}{if} \PY{n}{right} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:} \PY{n}{right} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{L}\PY{p}{)}
+    \PY{k}{if} \PY{n}{right} \PY{o}{\PYZhy{}} \PY{n}{left} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} \PY{k}{return} \PY{k+kc}{False}
+    \PY{k}{if} \PY{n}{right} \PY{o}{\PYZhy{}} \PY{n}{left} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:} \PY{k}{return} \PY{n}{L}\PY{p}{[}\PY{n}{left}\PY{p}{]} \PY{o}{==} \PY{n}{item}
+    \PY{n}{median} \PY{o}{=} \PY{p}{(}\PY{n}{right} \PY{o}{+} \PY{n}{left}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+    \PY{k}{if} \PY{n}{item} \PY{o}{\PYZlt{}} \PY{n}{L}\PY{p}{[}\PY{n}{median}\PY{p}{]}\PY{p}{:}
+        \PY{k}{return} \PY{n}{bs}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{left}\PY{p}{,} \PY{n}{median}\PY{p}{)}
+    \PY{k}{else}\PY{p}{:}
+        \PY{k}{return} \PY{n}{bs}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{n}{item}\PY{p}{,} \PY{n}{median}\PY{p}{,} \PY{n}{right}\PY{p}{)}
+\end{Verbatim}
+
+
+
+Note that we had to do a little work with default parameters so that we can still call this function as \texttt{bs(mylist, myitem)}.
+This involves a check to see if \texttt{right is None} and sets it to be the length of the list if necessary.
+
+
+When we analyze this recursive algorithm just as before, we see that all the operations take constant time, so the total running time will be proportional to the total number of recursive calls.
+The tree of function calls is a single chain of length at most $O(\log n)$.
+\emph{(Why $\log(n)$?  This is the number of times you can cut $n$ in half before it gets down to $1$.)}
+So, we see that the asymptotic running time is $O(\log n)$.
+
+
+In the analysis, we observed that the tree of function calls is a single chain.
+This is called \textbf{linear recursion}.
+Here, we have a special case in which the function directly returns the result of the recursive function call.
+That is called \textbf{tail recursion}.
+
+
+In general, tail recursion can always be replaced by a loop.
+The idea is to simply update the parameter variables and loop rather than making a recursive call.
+Here is the idea in action.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{bs}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+    \PY{n}{left}\PY{p}{,} \PY{n}{right} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{L}\PY{p}{)}
+    \PY{k}{while} \PY{n}{right} \PY{o}{\PYZhy{}} \PY{n}{left} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{:}
+        \PY{n}{median} \PY{o}{=} \PY{p}{(}\PY{n}{right} \PY{o}{+} \PY{n}{left}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+        \PY{k}{if} \PY{n}{item} \PY{o}{\PYZlt{}} \PY{n}{L}\PY{p}{[}\PY{n}{median}\PY{p}{]}\PY{p}{:}
+            \PY{n}{right} \PY{o}{=} \PY{n}{median}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n}{left} \PY{o}{=} \PY{n}{median}
+    \PY{k}{return} \PY{n}{right} \PY{o}{\PYZgt{}} \PY{n}{left} \PY{o+ow}{and} \PY{n}{L}\PY{p}{[}\PY{n}{left}\PY{p}{]} \PY{o}{==} \PY{n}{item}
+\end{Verbatim}
+
+
+
+Note that this solution is simpler to write than our original, and is also probably slightly faster.
+It does require a little more thought to see why it's correct and why it runs in $O(\log n)$ time.
+
+\section{The Ordered List ADT}
+
+\begin{itemize}
+
+\item \texttt{add(item)} - adds \texttt{item} to the list.
+
+\item \texttt{remove(item)} - removes the first occurrence of \texttt{item} from the list. Raise a \texttt{ValueError} if the \texttt{item} is not present.
+
+\item \texttt{\_\_getitem\_\_(index)} - returns the item with the given \texttt{index} in the sorted list.   This is also known as \textbf{selection}.
+
+\item \texttt{\_\_contains\_\_(item)} - returns true if there is an item of the list equal to \texttt{item}.
+
+\item \texttt{\_\_iter\_\_} - returns an iterator over the ordered list that yields the items in sorted order.
+
+\item \texttt{\_\_len\_\_} - returns the length of the ordered list.
+
+\end{itemize}
+
+Here is a very simple implementation of the Ordered List ADT.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{class} \PY{n+nc}{OrderedListSimple}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf}{add}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{remove}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}getitem\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{index}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{p}{[}\PY{n}{index}\PY{p}{]}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}contains\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}len\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}iter\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{k}{return} \PY{n+nb}{iter}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{p}{)}
+\end{Verbatim}
+
+
+
+This is a classic example of the Wrapper pattern.
+The \texttt{list} storing the items is kept private so we can enforce that it stays ordered.
+It looks a bit like a cheat to implement \texttt{add} in this way, but we'll see later as we cover sorting algorithms that this might be an efficient approach after all.
+
+
+The one algorithm in this mix that seems most relevant to improve is the \texttt{\_\_contains\_\_} method.
+Even though, we are just calling out to python's built-in method for checking membership in a list, we have some hoping of improving the efficiency because we know that the list is sorted.
+
+
+Let's replace it with binary search as we implemented it above.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{ds2}\PY{n+nn}{.}\PY{n+nn}{orderedlist} \PY{k+kn}{import} \PY{n}{OrderedListSimple}
+
+\PY{k}{class} \PY{n+nc}{OrderedList}\PY{p}{(}\PY{n}{OrderedListSimple}\PY{p}{)}\PY{p}{:}
+    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}contains\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{item}\PY{p}{)}\PY{p}{:}
+        \PY{n}{left}\PY{p}{,} \PY{n}{right} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{p}{)}
+        \PY{k}{while} \PY{n}{right} \PY{o}{\PYZhy{}} \PY{n}{left} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{:}
+            \PY{n}{median} \PY{o}{=} \PY{p}{(}\PY{n}{right} \PY{o}{+} \PY{n}{left}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+            \PY{k}{if} \PY{n}{item} \PY{o}{\PYZlt{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{p}{[}\PY{n}{median}\PY{p}{]}\PY{p}{:}
+                \PY{n}{right} \PY{o}{=} \PY{n}{median}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{left} \PY{o}{=} \PY{n}{median}
+        \PY{k}{return} \PY{n}{right} \PY{o}{\PYZgt{}} \PY{n}{left} \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}L}\PY{p}{[}\PY{n}{left}\PY{p}{]} \PY{o}{==} \PY{n}{item}
+\end{Verbatim}
+
+
+
+We might also try to use binary search to find the index at which we want to insert a new node in order to speed up \texttt{add}.
+Unfortunately, after finding the index, we still need to spend linear time in the worst-case to insert an item into a list at a particular index.

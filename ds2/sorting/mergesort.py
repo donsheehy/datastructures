@@ -27,4 +27,3 @@ def merge(A, B, L):
             j = j + 1
     # Add any remaining elements once one list is empty
     L[i+j:] = A[i:] + B[j:]
-

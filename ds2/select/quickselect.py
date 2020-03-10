@@ -11,4 +11,3 @@ def quickselect(L, k):
         else:
             left = pivot + 1
     return L[left]
-

@@ -47,7 +47,7 @@ If two items have the same label, then they are in the same set.
 Union just relabels the items in one of the sets.
 In this way, the sets themselves are implicit.
 
-```python {cmd id="_disjointsets.disjointsets_01"}
+```python {cmd id="_disjointsets.disjointsets_01" continue=_disjointsets.disjointsets_00"}
 class DisjointSetsLabels:
     def __init__(self, L):
         self._label = {item : item for item in L}
@@ -65,7 +65,7 @@ class DisjointSetsLabels:
 Maybe this implementation is worse in some ways. It has to iterate through all the labels rather than just the subset that are connected. It does have the advantage that it does away with all the set operations in union. Again, this may not be better.
 We can try to make our union operation much faster by changing fewer labels. In the next one, we will do this. Instead of mapping items to labels, we map them to an item that we'll call its parent. If every node has a single parent and there are no loops, then we get a forest. It is a collection of trees.
 
-```python {cmd  id="_disjointsets.disjointsets_02"}
+```python {cmd  id="_disjointsets.disjointsets_02" continue=_disjointsets.disjointsets_01"}
 class DisjointSetsForest:
     def __init__(self, L):
         self._parent = {item : item for item in L}
@@ -89,7 +89,7 @@ Is this much better? In many cases, it probably is, but not necessarily. I can e
 
 If we want to avoid traversing long paths to many times, we can just go and make them shorter each time we traverse them.  A simple way to do this is just to replace parents with gradnparents as we go up the tree.  This only requires one more line of code.  The affect is that the depth of every node on the path we traverse gets cut in half (plus one).  This means that the longest path can only get traversed $O(log n)$ times before it is compressed down to a single edge.
 
-```python {cmd  id="_disjointsets.disjointsets_03"}
+```python {cmd  id="_disjointsets.disjointsets_03"  continue=_disjointsets.disjointsets_02"}
 # Path Compression halving as we go.  
 # Every node on the path to root is updated to point to its grandparent.
 class DisjointSetsPathCompression:
@@ -114,7 +114,7 @@ Without too much more effort, we can _really_ compress paths to the root by maki
 In the first pass, we just find the root.  In the second pass, we update all the parents to point to the root.
 Here is the updated code.
 
-```python {cmd  id="_disjointsets.disjointsets_04"}
+```python {cmd  id="_disjointsets.disjointsets_04" continue=_disjointsets.disjointsets_03"}
 # Path compression with two passes.
 # Retraverse the path to the root, pointing every node all the way up to the new root.
 class DisjointSetsTwoPassPC:
@@ -146,7 +146,7 @@ If you are really trying to optimize this, you may squeeze a little improvement 
 
 Another way you might try to keep paths short is to be just a little more careful about who gets to be the new root when doing a `union` operation.  The taller tree should be the new root, Then, the height will not increase unless you are merging two trees of the same height.
 
-```python {cmd  id="_disjointsets.disjointsets_05"}
+```python {cmd  id="_disjointsets.disjointsets_05" continue=_disjointsets.disjointsets_04"}
 # Merge by height
 class DisjointSetsMergeByHeight:
     def __init__(self, L):
@@ -173,7 +173,7 @@ class DisjointSetsMergeByHeight:
 
 Instead of looking at the heights of the trees, one could look at the number of nodes in the trees.  If one tree has more nodes, _maybe_ it is also taller.  The advantage over merge by height is that this information is not affected by path compression.  Therefore we can (and will soon) combine these tricks.
 
-```python {cmd  id="_disjointsets.disjointsets_06"}
+```python {cmd  id="_disjointsets.disjointsets_06" continue=_disjointsets.disjointsets_05"}
 # Merge by weight
 class DisjointSetsMergeByWeight:
     def __init__(self, L):
@@ -200,7 +200,7 @@ class DisjointSetsMergeByWeight:
 
 As mentioned before, we can use both heuristics, combining merge by weight and path compression.  it turns out that this is very efficient, both in theory and in practice.  The running time of $n$ operations is (as close as you will ever be able to tell) proportional to $n$.
 
-```python {cmd  id="_disjointsets.disjointsets_07"}
+```python {cmd  id="_disjointsets.disjointsets_07" continue=_disjointsets.disjointsets_06"}
 # Merge by weight and path compression
 class DisjointSets:
     def __init__(self, L):

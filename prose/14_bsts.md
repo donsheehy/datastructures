@@ -98,7 +98,7 @@ One other construct we haven't seen before is the `yield from` operation in the 
 
 Let's see how these methods are implemented.  We start with the initializer and some handy other methods.
 
-```python  {cmd id="_orderedmapping.bstmapping_01" continue="_orderedmapping.bstmapping_00"}
+```python {cmd id="_orderedmapping.bstmapping_01" continue="_orderedmapping.bstmapping_00"}
 class BSTNode:
     def __init__(self, key, value):
         self.key = key
@@ -116,7 +116,7 @@ class BSTNode:
 
 The `get` method uses binary search to find the desired key.
 
-```python  {cmd id="_orderedmapping.bstmapping_02" continue="_orderedmapping.bstmapping_01"}
+```python {cmd id="_orderedmapping.bstmapping_02" continue="_orderedmapping.bstmapping_01"}
     def get(self, key):
         if key == self.key:
             return self
@@ -134,7 +134,7 @@ We could have implemented `__bool__` to make this work, but it suffices to imple
 
 Next, we implement `put`.  It will work by first doing a binary search in the tree.  If it finds the key already in the tree, it overwrites the value (keys in a mapping are unique).  Otherwise, when it gets to the bottom of the tree, it adds a new node.  
 
-```python  {cmd id="_orderedmapping.bstmapping_03" continue="_orderedmapping.bstmapping_02"}
+```python {cmd id="_orderedmapping.bstmapping_03" continue="_orderedmapping.bstmapping_02"}
     def put(self, key, value):
         if key == self.key:
             self.value = value
@@ -164,7 +164,7 @@ The `floor` function is just a slightly fancier version of `get`.
 It also does a binary search, but it has different behavior when the key is not found, depending on whether the last search was to the left or to the right.  Starting from any node, if we search to the right and the result is `None`, then we return the the node itself.
 If we search to the left and the result is `None`, we also return `None`.
 
-```python  {cmd id="_orderedmapping.bstmapping_04" continue="_orderedmapping.bstmapping_03"}
+```python {cmd id="_orderedmapping.bstmapping_04" continue="_orderedmapping.bstmapping_03"}
     def floor(self, key):
         if key == self.key:
             return self
@@ -189,7 +189,7 @@ As mentioned above, binary search trees support inorder traversal.  The result o
 
 Here is an inorder iterator for a binary search tree implemented using recursive generators.  This will be fine in most cases.  There is a slightly more efficient way, but this way is perhaps the most readable.
 
-```python  {cmd id="_orderedmapping.bstmapping_05" continue="_orderedmapping.bstmapping_04"}
+```python {cmd id="_orderedmapping.bstmapping_05" continue="_orderedmapping.bstmapping_04"}
     def __iter__(self):
         if self.left is not None:
             yield from self.left
@@ -234,7 +234,7 @@ As mentioned above, it does a recursive binary search to find the node.
 When it finds the desired key, it swaps it into place and makes another recursive call.
 This swapping step will happen only once and the total running time is linear in the height of the tree.
 
-```python cmd id="_orderedmapping.bstmapping_07" continue="_orderedmapping.bstmapping_06"}
+```python {cmd id="_orderedmapping.bstmapping_07" continue="_orderedmapping.bstmapping_06"}
     def remove(self, key):
         if key == self.key:
             if self.left is None: return self.right

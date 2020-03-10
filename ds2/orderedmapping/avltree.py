@@ -51,4 +51,3 @@ class AVLTreeNode(BalancedBSTNode):
 
 class AVLTree(BalancedBST):
     Node = AVLTreeNode
-

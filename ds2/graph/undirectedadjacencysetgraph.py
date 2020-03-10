@@ -12,4 +12,3 @@ class UndirectedAdjacencySetGraph(AdjacencySetGraph):
     def edges(self):
         E = {frozenset(e) for e in AdjacencySetGraph.edges(self)}
         return iter(E)
-

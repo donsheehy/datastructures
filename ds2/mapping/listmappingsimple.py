@@ -16,4 +16,3 @@ class ListMappingSimple:
             if e.key == key:
                 return e.value
         raise KeyError
-

@@ -12,4 +12,3 @@ class Graph(Digraph):
     def edges(self):
         E = {frozenset(e) for e in Digraph.edges(self)}
         return iter(E)
-

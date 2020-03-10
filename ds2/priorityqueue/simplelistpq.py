@@ -12,4 +12,3 @@ class SimpleListPQ:
         item, priority = min(self._L, key = lambda x : x[1])
         self._L.remove((item, priority))
         return item
-

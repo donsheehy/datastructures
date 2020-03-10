@@ -67,4 +67,3 @@ class HashMapping:
 
     __getitem__ = get
     __setitem__ = put
-

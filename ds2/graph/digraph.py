@@ -42,4 +42,3 @@ class Digraph(AdjacencySetGraph):
                 for n in self.nbrs(b):
                     tovisit.insert((b,n), self.wt(b,n))
         return tree
-
