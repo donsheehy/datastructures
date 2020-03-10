@@ -49,17 +49,17 @@ Tests are run by calling the `unittest.main` function.
 
 Here is an example that tests a particular behavior of a hypothetical `DayOfTheWeek` class.
 
-```python {cmd}
+```python
 import unittest
 from dayoftheweek import DayOfTheWeek
 
 class TestDayOfTheWeek(unittest.TestCase):
     def testinitwithabbreviation(self):
-        d = DayOfTheWeek(‘F’)
-        self.assertEquals(d.name(), ‘Friday’)
+        d = DayOfTheWeek('F')
+        self.assertEquals(d.name(), 'Friday')
 
-        d = DayOfTheWeek(‘Th’)
-        self.assertEquals(d.name(), ‘Thursday’)		
+        d = DayOfTheWeek('Th')
+        self.assertEquals(d.name(), 'Thursday')		
 
 unittest.main()
 ```
@@ -135,7 +135,7 @@ Step away from the computer.  Think about the problem you are trying to solve.  
 - Then write tests that use the code incorrectly to test that your code *fails gracefully*.  Does it give clear error messages?
 - Test the *edge cases*, those tricky cases that may rarely come up.  Try to break your own code.
 - Turn bugs into tests.  A bug or an incorrect behavior can reappear after you fix it.  You want to catch it when it does.  Sometimes you notice a bug when a different test fails.  Write a specific test to reveal the bug, then fix it.
-- Test the public interface.  Usuually you don’t need to or want to test the private methods of a class.  You should treat the test code as a user of the class and it should make no assumptions about private attributes.  This way, if a private gets renamed or refactored, you don’t have to change the tests.
+- Test the public interface.  Usually you don’t need to or want to test the private methods of a class.  You should treat the test code as a user of the class and it should make no assumptions about private attributes.  This way, if a private gets renamed or refactored, you don’t have to change the tests.
 
 ## Testing and Object-Oriented Design
 

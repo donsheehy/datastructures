@@ -262,7 +262,7 @@ We will add it to our `AdjacencySetGraph` class.  As a first exercise, we could 
 Can you guess what will go wrong?
 Here's an example.
 
-```python {cmd continue='connected1'}
+```python {cmd continue="connected1" error_expected}
 G = AdjacencySetGraph({1,2,3}, {(1,2), (2,3)})
 assert(G.connected(1,2))
 assert(G.connected(1,3))
@@ -555,7 +555,7 @@ Thus, the result will be not only the lengths of all the paths, but also an effi
 ```
 
 Let's write a little code to see how this works.
-We'll add a function to write out the path in the tree and then we'll display all the shortest paths found by teh algorithm.
+We'll add a function to write out the path in the tree and then we'll display all the shortest paths found by the algorithm.
 
 ```python {cmd id="shortestpaths" continue="_graph.digraph_02"}
 def path(tree, v):

@@ -141,6 +141,7 @@ Recall that the plus sign can be used to concatenate two \texttt{list} objects.
 [1, 2, 3]
 [4, 5, 6]
 [1, 2, 3, 4, 5, 6]
+
 \end{Verbatim}
 
 
@@ -182,7 +183,8 @@ However, if we are allowed to modify the lists, the concatenation can be accompl
 \end{Verbatim}
 
 \begin{Verbatim}
-0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 \end{Verbatim}
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+\end{Verbatim}
 
 
 We have to be a bit careful about the differences between this concatenation operation and concatenation of regular lists.  With the doubly-linked list, concatenation empties the other list.  It does this so that we don’t have multiple doubly-linked lists with the same \texttt{ListNode}s.    That would be a problem if we tried to edit just one of the lists, because the changes would be reflected in the other list as well, possibly with disastrous consequences.

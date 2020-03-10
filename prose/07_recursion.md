@@ -105,7 +105,7 @@ a(340)
 
 An interesting recursive example con be constructed by creating two lists, each one containing the other.
 
-```python {cmd}
+```python {cmd error_expected}
 A = [2]
 B = [2]
 A.append(A)

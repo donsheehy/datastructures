@@ -39,8 +39,7 @@ class Entry:
         return str(self.key) + " : " + str(self.value)
 ```
 
-```python {cmd id="trivialmapping" continue="_mapping_00"}
-
+```python {cmd id="trivialmapping" continue="_mapping.mapping_00"}
 def mapput(L, key, value):
     for e in L:
         if e.key == key:

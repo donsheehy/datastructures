@@ -308,7 +308,7 @@ In fact, we probably want to test both implementations with the same tests.
 
 If we rename our first Queue implementations `ListQueue`, we might have had the following tests for it.
 
-```python {cmd}
+```python {cmd error_expected}
 import unittest
 from ds2.queue import ListQueue
 
@@ -415,7 +415,7 @@ There is another *important difference* between the `TestQueue` class and our ol
 It just defines some methods that will be **mixed into** `TestListQueue` and `TestLinkedQueue`.
 Here are our new test files.
 
-```python {cmd}
+```python {cmd error_expected}
 # testlistqueue.py
 import unittest
 from ds2.testqueue import TestQueue

@@ -132,7 +132,7 @@ All problems must be broken into smaller problems.
 If those smaller problems are instances of the same problem we started with then maybe recursion or dynamic programming are appropriate.
 
 The next problem we'll solve with dynamic programming is called the longest common subsequence (LCS) problem.
-A **subsequence** of a string `s` is string `t` such that the characters of `t` all appear in `s` in the same order.
+A **subsequence** of a string `s` is a string `t` such that the characters of `t` all appear in `s` in the same order.
 For example `'abc'` is a subsequence of `'xxxxxaxxxbxxxcxxxx'`
 
 The input to the LCS problem is a pair of strings, we'll call them `X` and `Y`.

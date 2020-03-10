@@ -66,24 +66,21 @@ Tests are run by calling the \texttt{unittest.main} function.
 
 Here is an example that tests a particular behavior of a hypothetical \texttt{DayOfTheWeek} class.
 
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{unittest}
 \PY{k+kn}{from} \PY{n+nn}{dayoftheweek} \PY{k+kn}{import} \PY{n}{DayOfTheWeek}
 
 \PY{k}{class} \PY{n+nc}{TestDayOfTheWeek}\PY{p}{(}\PY{n}{unittest}\PY{o}{.}\PY{n}{TestCase}\PY{p}{)}\PY{p}{:}
     \PY{k}{def} \PY{n+nf}{testinitwithabbreviation}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
-        \PY{n}{d} \PY{o}{=} \PY{n}{DayOfTheWeek}\PY{p}{(}\PY{err}{‘}\PY{n}{F}\PY{err}{’}\PY{p}{)}
-        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assertEquals}\PY{p}{(}\PY{n}{d}\PY{o}{.}\PY{n}{name}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{err}{‘}\PY{n}{Friday}\PY{err}{’}\PY{p}{)}
+        \PY{n}{d} \PY{o}{=} \PY{n}{DayOfTheWeek}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assertEquals}\PY{p}{(}\PY{n}{d}\PY{o}{.}\PY{n}{name}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Friday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 
-        \PY{n}{d} \PY{o}{=} \PY{n}{DayOfTheWeek}\PY{p}{(}\PY{err}{‘}\PY{n}{Th}\PY{err}{’}\PY{p}{)}
-        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assertEquals}\PY{p}{(}\PY{n}{d}\PY{o}{.}\PY{n}{name}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{err}{‘}\PY{n}{Thursday}\PY{err}{’}\PY{p}{)}     
+        \PY{n}{d} \PY{o}{=} \PY{n}{DayOfTheWeek}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Th}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assertEquals}\PY{p}{(}\PY{n}{d}\PY{o}{.}\PY{n}{name}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thursday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}     
 
 \PY{n}{unittest}\PY{o}{.}\PY{n}{main}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}
-\end{Verbatim}
 
 
 Notice that even if we have never seen the code for the \texttt{DayOfTheWeek} class, we can get a good sense of its expected behavior from reading the tests.  In this case, we see that it can be instantiated with the abbreviation \texttt{F} and the \texttt{name()} function will return the value "Friday".  It often happens that unit tests like this give the clearest specification of a data structure’s expected behavior.  Moreover, because the tests can be executed, one can be certain that the class really has the expected behavior.  With documentation, one sometimes finds that changes in the code are not reflected in the documentation, but passing tests don’t have this problem.
@@ -188,7 +185,7 @@ Step away from the computer.  Think about the problem you are trying to solve.  
 
 \item Turn bugs into tests.  A bug or an incorrect behavior can reappear after you fix it.  You want to catch it when it does.  Sometimes you notice a bug when a different test fails.  Write a specific test to reveal the bug, then fix it.
 
-\item Test the public interface.  Usuually you don’t need to or want to test the private methods of a class.  You should treat the test code as a user of the class and it should make no assumptions about private attributes.  This way, if a private gets renamed or refactored, you don’t have to change the tests.
+\item Test the public interface.  Usually you don’t need to or want to test the private methods of a class.  You should treat the test code as a user of the class and it should make no assumptions about private attributes.  This way, if a private gets renamed or refactored, you don’t have to change the tests.
 
 \end{itemize}
 \section{Testing and Object-Oriented Design}

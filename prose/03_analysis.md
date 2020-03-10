@@ -436,7 +436,7 @@ This constant also allows us to suppress lower order terms.
 The constant $n_0$ is the threshold after which the inequality is true.
 
 
-# Practical Use of the Big-O and Common Functions
+## Practical Use of the Big-O and Common Functions
 Even though the definition of the big-O notation allows us to compare all kinds of functions, we will usually use it to simplify functions, eliminating extraneous constants and low order terms.
 So, for example, you should write $O(n)$ instead of $O(3n)$ and $O(n^2)$ instead of $O(5n^2 + 3n + 2)$.
 There are several functions that will come up so often that we will want to have them in our vocabulary.
@@ -461,7 +461,7 @@ Let $c = \frac{1}{\log_b(a)}$ and $n_0 = 0$.
 \log_a(n) = \frac{\log_b(n)}{\log_b(a)} \le c \log_b(n) \text{ for all }n>n_0.
 \]
 
-# Practice examples
+## Practice examples
 In each of the following examples, assume the input is a list of length $n$.
 
 ```python

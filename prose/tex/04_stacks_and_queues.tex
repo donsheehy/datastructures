@@ -223,6 +223,14 @@ In the list implementation above, this does happen:
 \end{Verbatim}
 
 \begin{Verbatim}
+
+Traceback (most recent call last):
+  File "liststackerror", line 24, in <module>
+    s.pop()
+  File "liststackerror", line 9, in pop
+    return self._L.pop()
+IndexError: pop from empty list
+
 \end{Verbatim}
 
 
@@ -256,4 +264,19 @@ Instead, give them an error that explains exactly what happened.
 \end{Verbatim}
 
 \begin{Verbatim}
+
+Traceback (most recent call last):
+  File "wrx67pbz9l", line 6, in pop
+    return self._L.pop()
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "wrx67pbz9l", line 13, in <module>
+    s.pop()
+  File "wrx67pbz9l", line 8, in pop
+    raise RuntimeError("pop from empty stack")
+RuntimeError: pop from empty stack
+
 \end{Verbatim}

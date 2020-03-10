@@ -21,15 +21,19 @@ A tree is called a **binary tree** if every node has at most two children.
 We will continue to assume that we are working with ordered trees and so we call the children `left` and `right`.
 We say that a binary tree is a **binary search tree** if for every node `x`, all the keys in the subtree `x.left` are less than the key at `x` and all the keys in the subtree `x.right` are greater than the key of `x`.  This ordering property, also known as **the BST property** is what makes a binary search tree different from any other kind of binary tree.
 
-```python {cmd output="html" hide}
-from drawtrees import draw
-from bstmapping import BSTMapping
+```python {cmd id="bstdrawings" hide}
+from ds2.figure_generation.drawtrees import drawtree
+from ds2.orderedmapping.bstmapping import BSTMapping
+```
 
+```python {cmd continue="bstdrawings" output="none" hide}
 T = BSTMapping()
 for i in [3,1,0,2,5,4,6]:
     T[i] = None
-draw(T, 150)
+drawtree(T, 'bst_example')
 ```
+
+![](./figures/bst_example.png)
 
 The BST property is related to a new kind of tree traversal, that was not possible with other trees.
 Previously we saw *preorder* and *postorder* traversal of trees.
@@ -250,12 +254,8 @@ This swapping step will happen only once and the total running time is linear in
         return self
 ```
 
-```python {cmd id="removal_example0" hide}
-from ds2.figure_generation.drawtrees import drawtree
-from ds2.orderedmapping.bstmapping import BSTMapping
-```
 
-```python {cmd id="removal_example1" continue="removal_example0"}
+```python {cmd id="removal_example1" continue="bstdrawings"}
 T = BSTMapping()
 for i in [3,2,1,6,4,5,9,8,10]:
     T[i] = None

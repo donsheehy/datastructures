@@ -174,7 +174,7 @@ In the case of a stack, it is never correct usage to `pop` from an empty stack.
 Thus, it makes sense that someone using our `Stack` class should have their program crash and see an error message if they attempt to call `pop` when there are no items left on the stack.
 In the list implementation above, this does happen:
 
-```python {cmd id="liststackerror" continue="_stack.liststack_00"}
+```python {cmd id="liststackerror" continue="_stack.liststack_00" error_expected}
 s = ListStack()
 s.push(5)
 s.pop()
@@ -201,7 +201,7 @@ class AnotherStack(ListStack):
             raise RuntimeError("pop from empty stack")
 ```
 
-```python {cmd continue="_stack.anotherstack"}
+```python {cmd continue="_stack.anotherstack" error_expected}
 s = AnotherStack()
 s.push(5)
 s.pop()
