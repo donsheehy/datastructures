@@ -1,6 +1,14 @@
 from ds2.figure_generation.svghelper import SVGEngine
 from ds2.orderedmapping.bstmapping import BSTMapping as Tree
 
+from ds_viz.vizbst import drawtree as drawtocanvas
+from ds_viz.gizehcanvas import Canvas
+
+def drawtree(T, name, height = 200):
+	canvas = Canvas(600, height)
+	drawtocanvas(T, canvas)
+	canvas.surface.write_to_png('figures/' + name + '.png')
+
 def x(node, offset):
 	nodewidth = 40
 	lenleft = len(node.left) if node.left is not None else 0

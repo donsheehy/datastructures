@@ -69,7 +69,7 @@ class BSTMapping(Mapping):
             self._root = BSTNode(key, value)
 
     def __len__(self):
-        return len(self._root) if self._root else 0
+        return len(self._root) if self._root is not None else 0
 
     def _entryiter(self):
         if self._root:
@@ -187,7 +187,7 @@ If we search to the left and the result is `None`, we also return `None`.
 
 As mentioned above, binary search trees support inorder traversal.  The result of an inorder traversal is that the nodes are yielded *in the order of their keys*.
 
-Here is an inorder iterator for a binary search tree implemented using recursive generators.  This will be fine in most cases.
+Here is an inorder iterator for a binary search tree implemented using recursive generators.  This will be fine in most cases.  There is a slightly more efficient way, but this way is perhaps the most readable.
 
 ```python  {cmd id="_orderedmapping.bstmapping_05" continue="_orderedmapping.bstmapping_04"}
     def __iter__(self):
@@ -250,31 +250,40 @@ This swapping step will happen only once and the total running time is linear in
         return self
 ```
 
-```python {cmd id="removal_example1"}
-from ds2.figure_generation.drawtrees import draw
-from ds2.mapping.bstmapping import BSTMapping
+```python {cmd id="removal_example0" hide}
+from ds2.figure_generation.drawtrees import drawtree
+from ds2.orderedmapping.bstmapping import BSTMapping
+```
 
+```python {cmd id="removal_example1" continue="removal_example0"}
 T = BSTMapping()
 for i in [3,2,1,6,4,5,9,8,10]:
     T[i] = None
 ```
 
-```python {cmd continue="removal_example1" output="html"}
-draw(T)
+```python {cmd continue="removal_example1" hide}
+drawtree(T, 'bstremoval_example1')
 ```
 
-```python {cmd id="removal_example2" continue="removal_example1" output="html"}
+![](./figures/bstremoval_example1.png)
+
+
+```python {cmd id="removal_example2" continue="removal_example1"}
 T.remove(6)
 ```
 
-```python {cmd continue="removal_example2" output="html"}
-draw(T)
+```python {cmd continue="removal_example2" hide}
+drawtree(T, 'bstremoval_example2')
 ```
+
+![](./figures/bstremoval_example2.png)
 
 ```python {cmd id="removal_example3" continue="removal_example2" output="html"}
 T.remove(3)
 ```
 
-```python {cmd continue="removal_example3" output="html"}
-draw(T)
+```python {cmd continue="removal_example3" hide}
+drawtree(T, 'bstremoval_example3')
 ```
+
+![](./figures/bstremoval_example3.png)

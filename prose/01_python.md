@@ -3,6 +3,8 @@
 ```python {cmd=true hide output="none" id="type"}
 # This is a hack to allow html escape the output of the type function.
 import builtins
+from ds2.figure_generation.drawlist import drawlist
+
 def type(x):
     return "&lt;" + str(builtins.type(x))[1:-1] + "&gt;"
 ```
@@ -36,7 +38,9 @@ Imagine you are trying to work out some elaborate math problem without a compute
 
 We store information in **variables**.  In Python, a variable is created by an **assignment** statement.  That is a statement of the form:
 
-`variable_name = some_value`
+```python
+variable_name = some_value
+```
 
 The equals sign is *doing* something (assignment) rather than *describing* something (equality).
 The right side of `=` is an expression that gets evaluated first.  Only later does the assignment happen.
@@ -77,7 +81,7 @@ z = [1, 2, 3]
 print(x is y)
 print(x is z)
 print(x == z)
-````
+```
 
 An object cannot change its identity.
 In Python, you also cannot change the type of an object.
@@ -143,12 +147,29 @@ print(n[2])
 **Lists** are ordered sequences of objects.  The objects do not have to be the same type.  They are indicated by square brackets and the **elements** of the list are separated by commas.  You can append an item to the end of a list `L` by using the command `L.append(newitem)`.
 It is possible to index into a list exactly as we did with strings.
 
-```python {cmd continue="type"}
-L = [1,2,3]
+```python {cmd id="listexample01" continue="type"}
+L = [1,2,3,4,5,6]
 print(type(L))
-L.append(400)
-print(L)
 ```
+
+Here is a common visual representation of the list.
+
+```python {cmd continue="listexample01" hide output=none}
+drawlist(L, 'list_example01')
+```
+
+![](./figures/list_example01.png)
+
+
+```python {cmd id="listexample02"  continue="listexample01" output=none}
+L.append(100)
+```
+
+```python {cmd continue="listexample02" hide output=none}
+drawlist(L, 'list_example02')
+```
+
+![](./figures/list_example02.png)
 
 ### Tuples (`tuple`)
 
@@ -201,7 +222,7 @@ There are several operations that can be performed on any of the collections cla
 
 You can find the number of elements in the collection (the **length**) using `len`.
 
-```python
+```python {cmd}
 a = "a string"
 b = ["my", "second", "favorite", "list"]
 c = (1, "tuple")
@@ -209,10 +230,6 @@ d = {'a': 'b', 'b': 2, 'c': False}
 e = {1,2,3,4,4,4,4,2,2,2,1}
 
 print(len(a), len(b), len(c), len(d), len(e))
-```
-
-```
-8 4 2 3 4
 ```
 
 For the sequential types (lists, tuples, and strings), you can **slice** a subsequence of indices using square brackets and a colon as in the following examples.  The range of indices is half open in that the slice will start with the first index and proceed up to but not including the last index.  Negative indices count backwards from the end.  Leaving out the first index is the same as starting at 0.  Leaving out the second index will continue the slice until the end of the sequence.
