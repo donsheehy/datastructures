@@ -18,7 +18,7 @@ help:
 .PHONY: help Makefile github test docs pdf clean
 
 github:
-	@make html
+	@make docs
 	@cp -a docsource/build/html/. docs/
 
 test:
@@ -37,9 +37,9 @@ clean:
 pdf: $(TEX) prose/tex/main.tex
 	cd prose/tex; pdflatex -jobname=fullbook main.tex
 
-%: prose/%.md
-	prosecode tangle $< --srcdir ds2/
-	prosecode weave $< --outfile prose/tex/$@.tex
+# %: prose/%.md
+# 	prosecode tangle $< --srcdir ds2/
+# 	prosecode weave $< --outfile prose/tex/$@.tex
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

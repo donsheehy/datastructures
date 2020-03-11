@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-A Course in Data Structures
-===========================
+A First Course in Data Structures in Python
+===========================================
 by Don Sheehy
 -------------
 
