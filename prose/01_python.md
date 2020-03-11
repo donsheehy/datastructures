@@ -13,6 +13,7 @@ This book is not intended as a first course in programming.
 It will be assumed that the reader has some experience with programming.
 Therefore, it will be assumed that certain concepts are already familiar to them, the most basic of which is a mental model for programming that is sometimes called *Sequence, Selection, and Iteration*.
 
+
 ## Sequence, Selection, and Iteration
 
 A recurring theme in this course is the process of moving from *thinking about* code to *writing* code.  We will try to shape the way we think about programs, the way we write programs, and how we go between the two in *both* directions.  That is, we want to have facility with both direct manipulation of code as well as high-level description of programs.  

@@ -470,7 +470,7 @@ From outside the class, we don't have to know anything about the wrapped class.
 Sometimes, this separation is called a **layer of abstraction**.
 The user of our class does not have to know anything about our implementation in order to use the class.
 
-## The Main Lessons:
+Here are some of the takeaway lessons:
 
   - Use design patterns where appropriate to organize your code and improve readability.
   - The Wrapper Pattern gives a way to provide an alternative interface to (a subset of) the methods in another class.

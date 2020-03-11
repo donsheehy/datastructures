@@ -171,7 +171,7 @@ print("The diary is called ", mydiary.title)
 
 Notice that in this example, the encapsulation of the class is not about security.  Heck, if it’s my diary, I should be able to read it, right?  The reason to respect the private attributes and stick to the public interface is really to help us write working code that continues to work in the future.  Code gets changed all the time.  If you are modifying a class that is being used elsewhere in the code, you have to be careful not to break that code.  If the public interface and its behavior doesn’t change, then one can be confident that the changes don’t affect the other code.  One could change the name of a private variable, say changing `_entries` to `_diaryentries` and be confident that this won’t cause some other code somewhere else to break.
 
-## Inheritance and "is a" relationships
+## Inheritance and *is a* relationships
 
 Whenever we talk about the types of things in our everyday life, it’s possible to talk about them at different levels of generality.  We can talk about a specific basketball player, say Kyrie Irving, or we can talk about professional basketball players, or all basketball players, or people, or living creatures.  The specific player we started with could be said to belong to any of these classes.  The same principle applies to code that we write.  
 

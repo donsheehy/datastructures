@@ -205,7 +205,7 @@ def merge(A, B):
 This iterator looks very different from our previous one.
 First of all, it's not a class, but appears to just be a method.
 This is a slick python way of defining a simple iterator.
-The "method" here has `yield` statements instead of `return` statements.
+The method here has `yield` statements instead of `return` statements.
 Python recognizes this and creates a **generator** object.
 Calling `merge` will return an object of type `generator`.
 A `generator` is an iterator.
@@ -317,7 +317,7 @@ We use a random number generator to pick which element in a list will be the piv
 This is not just a cosmetic change.
 Notice that the following code raises an error.
 
-```python 
+```python
 L = list(reversed(range(1000)))
 
 quicksort(L)
