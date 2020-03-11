@@ -16,20 +16,6 @@ This wonderful plugin allows for realtime preview and instant code execution rig
 I recommend changing the settings to not break on single newlines.
 I *try* to stick to the one-sentence-per-line policy to ease the process of reviewing git diffs.
 
-PYTHONPATH Issues
------------------
-
-One challenge to running the code from two different locations involves python's system path.
-For most code chunks, it's no problem.
-However, for more complex data structures that need to import other modules from other chapters, Python will need to know where to look for the code.
-The simplest fix is to simply add the `code/` directory to your python path.
-I did this with the following line in my `.bash_profile` file.
-
-```
-export PYTHONPATH="/Users/don/Dropbox/work/research/books/datastructures/code:$PYTHONPATH"
-```
-
-This also solves the issue of running tests from the `tests/` folder.
 
 Making Improvements
 -------------------
@@ -48,22 +34,8 @@ There are a couple things to keep mind:
 Building the book
 -----------------
 
-Currently, the books build process has two steps.
+Currently you will not be able to build to book yourself unless you comment out the code blocks that generate figures.
+The figure generation currently depends on some as-yet unreleased libraries.
 
-1. Running the `generatebook.py` script will integrate all the chapters into a single markdown file.  It does a little extra to add chapter numbers and forced page breaks for print layouts.
-
-2. Running `generatebook.js` from node will use mume to process the `fullbook.md` file into html and pdf.  The pdf export requires installing the Chrome Puppeteer node module (and Mume too of course).  This second step is in javascript because Mume is built on node.
-
-To pull the code out of the book into separate `.py` files, you will need to run the `generatecode.py` script.
-
-Drawing figures
----------------
-
-Currently, the book is light on figures.
-I am working to integrate a system where data structures are drawn inline using svgs that get integrated directly into the resulting html.
-
-You may need to install the svgwrite package.
-
-```
-$ pip install svgwrite
-```
+Without those blocks, the build depends on prosecode.
+You can `pip install prosecode` and then use the make targets in the project's Makefile.

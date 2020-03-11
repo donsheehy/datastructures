@@ -1,6 +1,6 @@
 # A Book and a Library
 
-This repository hosts both the book, **A First Course in Data Structures in Python** and the python package **ds2** that is extracted from that book.
+This repository hosts both the book, **A First Course on Data Structures in Python** and the python package **ds2** that is extracted from that book.
 
 The book covers fundamentals of data structures in Python and the library contains fully-tested implementations of the data structures in the book.
 
@@ -10,7 +10,7 @@ As such, there are few inline comments.
 The comments are the book.
 Moreover, the code files are automatically generated from the markdown files that define the book.
 
-# A First Course in Data Structures in Python
+# A First Course on Data Structures in Python
 
 ## by Don Sheehy
 

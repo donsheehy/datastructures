@@ -1,9 +1,4 @@
-.. ds2 documentation master file, created by
-   sphinx-quickstart on Thu Feb 20 13:42:26 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-A First Course in Data Structures in Python
+A First Course on Data Structures in Python
 ===========================================
 by Don Sheehy
 -------------

@@ -3,8 +3,8 @@ SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = docsource
 BUILDDIR      = docsource/build
 MD:= $(wildcard prose/*.md)
-TEX:= $(MD:prose/%.md=tex/generated/%.tex)
-
+GENERATEDTEX:= $(MD:prose/%.md=tex/generated/%.tex)
+TEX = tex/main.tex tex/generated/pygments_macros.tex tex/titlepage.tex
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
@@ -23,7 +23,7 @@ docs:	Makefile
 
 html: docs
 
-tex/pygments_macros.tex :
+tex/generated/pygments_macros.tex :
 	prosecode styledefs --outfile tex/generated/pygments_macros.tex
 
 tex/generated/%.tex: prose/%.md
@@ -31,10 +31,11 @@ tex/generated/%.tex: prose/%.md
 	prosecode weave $< --outfile $@ --execute True
 
 clean:
+	$(foreach mdfile, $(MD), prosecode cleanup $(mdfile) --srcdir ds2/;)
 	rm tex/generated/*
 	rm tex/fullbook.*
 
-weave: $(TEX)
+weave: $(GENERATEDTEX)
 
-pdf: $(TEX) tex/main.tex tex/pygments_macros.tex tex/titlepage.tex
+pdf: $(GENERATEDTEX) $(TEX)
 	cd tex; pdflatex -jobname=fullbook main.tex
