@@ -79,19 +79,6 @@ def merge(A, B, L):
             j = j + 1
 ```
 
-<!-- The same can be done without indices if one is comfortable removing elements from the input lists.
-
-```python
-def merge(A, B, L):
-    C = []
-    while A or B:
-        if not B or (A and A[-1] > B[-1]):
-            C.append(A.pop())
-        else:
-            C.append(B.pop())
-    L[:] = reversed(C)
-``` -->
-
 The complex `if` statement above relies heavily on something called **short-circuited** evaluation of boolean expressions.
 If we have a boolean operation like `or`, and the first operand is `True`, then we don't have to evaluate the second operand to find out that the overall result will be `True`.
 Using this fact, python will not even evaluate the second operand.
@@ -312,7 +299,7 @@ def partition(L, left, right):
     # Return the index of the pivot.
     return pivot
 ```
-```python {cmd continue="_sorting.quicksort_long_03" continue="_sorting.quicksort_long_02"}
+```python {cmd continue="_sorting.quicksort_long_02"}
 # Simple test to see if it works.
 L = [5,2,3,1,4]
 quicksort(L)
@@ -330,7 +317,7 @@ We use a random number generator to pick which element in a list will be the piv
 This is not just a cosmetic change.
 Notice that the following code raises an error.
 
-```python
+```python 
 L = list(reversed(range(1000)))
 
 quicksort(L)

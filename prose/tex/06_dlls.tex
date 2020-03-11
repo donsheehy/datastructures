@@ -127,6 +127,7 @@ There are several operations that are very fast on doubly linked lists compared 
 One of the most useful is the ability to concatenate two lists.
 Recall that the plus sign can be used to concatenate two \texttt{list} objects.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{A} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}
 \PY{n}{B} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}
@@ -136,6 +137,12 @@ Recall that the plus sign can be used to concatenate two \texttt{list} objects.
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{C}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+[1, 2, 3]
+[4, 5, 6]
+[1, 2, 3, 4, 5, 6]
+
+\end{Verbatim}
 
 
 For lists, concatenation creates a new list.
@@ -160,6 +167,7 @@ However, if we are allowed to modify the lists, the concatenation can be accompl
 \end{Verbatim}
 
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{L} \PY{o}{=} \PY{n}{DoublyLinkedList}\PY{p}{(}\PY{p}{)}
 \PY{p}{[}\PY{n}{L}\PY{o}{.}\PY{n}{addlast}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{]}
@@ -174,6 +182,9 @@ However, if we are allowed to modify the lists, the concatenation can be accompl
     \PY{n}{n} \PY{o}{=} \PY{n}{n}\PY{o}{.}\PY{n}{link}
 \end{Verbatim}
 
+\begin{Verbatim}
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+\end{Verbatim}
 
 
 We have to be a bit careful about the differences between this concatenation operation and concatenation of regular lists.  With the doubly-linked list, concatenation empties the other list.  It does this so that we don’t have multiple doubly-linked lists with the same \texttt{ListNode}s.    That would be a problem if we tried to edit just one of the lists, because the changes would be reflected in the other list as well, possibly with disastrous consequences.

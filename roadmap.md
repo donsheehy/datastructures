@@ -1,12 +1,16 @@
 # Roadmap
 
-## Packaging the Code
+## The missing pieces
 
-Not all of the code is properly tangled.
-Also, it's not 100% clear how it ought to be packaged for import.
-Then, the code should be properly tested.
+There are several parts of the text that have not been written.
+A partial list includes:
+- Variations on the OrderedList implementation
+- The WBTree analysis
+- HeapSort and the sorting lower bound
+- Kruskall's MST algorithm
+
 
 ## Figures
 
 The code should generate the figures.
-Basic support for binary trees is available, but not fully packaged.
+Basic support for arrays and binary trees is available, but not fully packaged.

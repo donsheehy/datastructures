@@ -79,6 +79,7 @@ How fast is this code?
 The simplest answer to this question comes from simply running the program and measuring how long it takes.
 We could do this as follows.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{time}
 
@@ -90,6 +91,14 @@ We could do this as follows.
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Time taken for n = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{timetaken}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+Time taken for n =  1000 :  0.07352805137634277
+Time taken for n =  1000 :  0.07301187515258789
+Time taken for n =  1000 :  0.07250690460205078
+Time taken for n =  1000 :  0.07261276245117188
+Time taken for n =  1000 :  0.08496499061584473
+
+\end{Verbatim}
 
 
 
@@ -119,11 +128,22 @@ It runs the given function on lists of the given length and averages the time ta
 We can now look at the average running time as the length of the list gets longer.
 It's not surprising to see that the average time goes up as the length $n$ increases.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{1600}\PY{p}{,} \PY{l+m+mi}{3200}\PY{p}{]}\PY{p}{:}
     \PY{n}{timetrials}\PY{p}{(}\PY{n}{duplicates1}\PY{p}{,} \PY{n}{n}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+average = 0.0009747 for n = 50
+average = 0.0037909 for n = 100
+average = 0.0148923 for n = 200
+average = 0.0626756 for n = 400
+average = 0.2546100 for n = 800
+average = 1.0301520 for n = 1600
+average = 4.0877174 for n = 3200
+
+\end{Verbatim}
 
 
 Let's try to make our code faster.
@@ -143,11 +163,22 @@ Here is what the code would look like.
 \end{Verbatim}
 
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{1600}\PY{p}{,} \PY{l+m+mi}{3200}\PY{p}{]}\PY{p}{:}
     \PY{n}{timetrials}\PY{p}{(}\PY{n}{duplicates2}\PY{p}{,} \PY{n}{n}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+average = 0.0004109 for n = 50
+average = 0.0015085 for n = 100
+average = 0.0057578 for n = 200
+average = 0.0230933 for n = 400
+average = 0.0959069 for n = 800
+average = 0.3923352 for n = 1600
+average = 1.6193102 for n = 3200
+
+\end{Verbatim}
 
 
 There is a python shortcut the kind of loop used in \texttt{duplicates2}.
@@ -162,11 +193,22 @@ This can be very handy.
 \end{Verbatim}
 
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{1600}\PY{p}{,} \PY{l+m+mi}{3200}\PY{p}{]}\PY{p}{:}
     \PY{n}{timetrials}\PY{p}{(}\PY{n}{duplicates3}\PY{p}{,} \PY{n}{n}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+average = 0.0005724 for n = 50
+average = 0.0021363 for n = 100
+average = 0.0082384 for n = 200
+average = 0.0334988 for n = 400
+average = 0.1423156 for n = 800
+average = 0.5797988 for n = 1600
+average = 2.3626383 for n = 3200
+
+\end{Verbatim}
 
 
 This last optimization reduces the number of lines of code and may be desirable for code readability, but it doesn't improve the speed.
@@ -210,6 +252,7 @@ If there are duplicates, they will be adjacent after sorting.
 \end{Verbatim}
 
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{1600}\PY{p}{,} \PY{l+m+mi}{3200}\PY{p}{]}\PY{p}{:}
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Quadratic: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{end}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
@@ -221,6 +264,37 @@ If there are duplicates, they will be adjacent after sorting.
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+Quadratic: average = 0.0005705 for n = 50
+Sorting:   average = 0.0000348 for n = 50
+Sets:      average = 0.0000120 for n = 50
+---------------------------
+Quadratic: average = 0.0021248 for n = 100
+Sorting:   average = 0.0000611 for n = 100
+Sets:      average = 0.0000197 for n = 100
+---------------------------
+Quadratic: average = 0.0083676 for n = 200
+Sorting:   average = 0.0001168 for n = 200
+Sets:      average = 0.0000314 for n = 200
+---------------------------
+Quadratic: average = 0.0335097 for n = 400
+Sorting:   average = 0.0002501 for n = 400
+Sets:      average = 0.0000648 for n = 400
+---------------------------
+Quadratic: average = 0.1395828 for n = 800
+Sorting:   average = 0.0005246 for n = 800
+Sets:      average = 0.0001158 for n = 800
+---------------------------
+Quadratic: average = 0.5639758 for n = 1600
+Sorting:   average = 0.0010543 for n = 1600
+Sets:      average = 0.0002747 for n = 1600
+---------------------------
+Quadratic: average = 2.3069439 for n = 3200
+Sorting:   average = 0.0021444 for n = 3200
+Sets:      average = 0.0004871 for n = 3200
+---------------------------
+
+\end{Verbatim}
 
 
 Some key ideas:
@@ -252,11 +326,20 @@ Below is a program that adds up the first $k$ positive integers and returns both
 \end{Verbatim}
 
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sum: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{, time taken: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{sumk}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+Sum: 50005000, time taken: 0.000438
+Sum: 50005000, time taken: 0.000431
+Sum: 50005000, time taken: 0.000423
+Sum: 50005000, time taken: 0.000437
+Sum: 50005000, time taken: 0.000432
+
+\end{Verbatim}
 
 
 Notice that we see some variation in the time required.
@@ -274,6 +357,7 @@ For now, let's run the code several times and take the average to smooth them ou
 \end{Verbatim}
 
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{timetrials}\PY{p}{(}\PY{n}{sumk}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{)}
 \PY{n}{timetrials}\PY{p}{(}\PY{n}{sumk}\PY{p}{,} \PY{l+m+mi}{100000}\PY{p}{)}
@@ -281,6 +365,13 @@ For now, let's run the code several times and take the average to smooth them ou
 \PY{n}{timetrials}\PY{p}{(}\PY{n}{sumk}\PY{p}{,} \PY{l+m+mi}{10000000}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+average = 0.0004265 for k = 10000
+average = 0.0044590 for k = 100000
+average = 0.0448953 for k = 1000000
+average = 0.4484323 for k = 10000000
+
+\end{Verbatim}
 
 
 Seeing the times for different values of \texttt{k} reveals a rather unsuprising pattern.
@@ -305,6 +396,7 @@ it suffices to observe that you can add the numbers in pairs, matching $i$ with 
 There are $k/2$ such pairs and each adds up to $k+1$.
 Let's use this formula to rewrite our \texttt{sumk} function and time it.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{time}
 
@@ -321,6 +413,14 @@ Let's use this formula to rewrite our \texttt{sumk} function and time it.
 \PY{n}{timetrials}\PY{p}{(}\PY{n}{sumk2}\PY{p}{,} \PY{l+m+mi}{100000000}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+average = 0.0000002 for k = 10000
+average = 0.0000002 for k = 100000
+average = 0.0000001 for k = 1000000
+average = 0.0000002 for k = 10000000
+average = 0.0000003 for k = 100000000
+
+\end{Verbatim}
 
 
 This is much much faster.
@@ -338,6 +438,7 @@ A single line of code can do a lot of stuff.
 Here's a one line function that does all kinds of stuff.
 It creates a list of 200 items and sums all the entries for each of value of i from 0 to k-1 and returns a list of the results.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{f001}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
     \PY{k}{return} \PY{p}{[}\PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{]}
@@ -345,6 +446,10 @@ It creates a list of 200 items and sums all the entries for each of value of i f
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{f001}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+[100, 300, 500, 700, 900, 1100, 1300, 1500, 1700]
+
+\end{Verbatim}
 
 
 Instead, we will want to count operations a little more carefully.
@@ -352,7 +457,7 @@ The unit we will use to describe the \textbf{running time} of an algorithm is th
 This is not exactly a unit of time, but at some level, the atomic operations that we will describe can all be performed in a small number of clock cycles on your CPU and so correspond to a real amount of time.
 
 
-\emph{(Please don't say "runtime" as a replacement for "running time".  These are not the same thing!)}
+\emph{(Please don't say \textbf{runtime} as a replacement for \textbf{running time}.  These are not the same thing!)}
 
 
 Atomic operations include
@@ -647,7 +752,7 @@ There are several functions that will come up so often that we will want to have
 
 \item \textbf{Linear Functions}, $O(n)$
 
-\item \textbf{"n Log n"}, $O(n\log n)$
+\item \textbf{n Log n}, $O(n\log n)$
 
 \item \textbf{Quadratic Functions}, $O(n^2)$
 

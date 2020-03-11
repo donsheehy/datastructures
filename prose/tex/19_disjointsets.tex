@@ -81,8 +81,11 @@ In this way, the sets themselves are implicit.
 
 
 
-Maybe this implementation is worse in some ways. It has to iterate through all the labels rather than just the subset that are connected. It does have the advantage that it does away with all the set operations in union. Again, this may not be better.
-We can try to make our union operation much faster by changing fewer labels. In the next one, we will do this. Instead of mapping items to labels, we map them to an item that we'll call its parent. If every node has a single parent and there are no loops, then we get a forest. It is a collection of trees.
+Maybe this implementation is worse in some ways. It has to iterate through all the labels rather than just the subset that are connected.
+It does have the advantage that it does away with all the set operations in union. Again, this may not be better.
+We can try to make our union operation much faster by changing fewer labels. In the next one, we will do this.
+Instead of mapping items to labels, we map them to an item that we'll call its parent.
+If every node has a single parent and there are no loops, then we get a forest. It is a collection of trees.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{class} \PY{n+nc}{DisjointSetsForest}\PY{p}{:}
@@ -106,10 +109,10 @@ We can try to make our union operation much faster by changing fewer labels. In 
 
 Is this much better? In many cases, it probably is, but not necessarily. I can easily construct an example where this code will take a long time. For example, I could force the forest to be a path. Then, calling the \texttt{\_root} method can take time proportional to the number of items. If we're going to improve our worst-case running time, then we'll improve on those examples. We'll have to keep the paths short if possible.
 
-\chapter{Path Compression}
+\section{Path Compression}
 
 
-If we want to avoid traversing long paths to many times, we can just go and make them shorter each time we traverse them.  A simple way to do this is just to replace parents with gradnparents as we go up the tree.  This only requires one more line of code.  The affect is that the depth of every node on the path we traverse gets cut in half (plus one).  This means that the longest path can only get traversed $O(log n)$ times before it is compressed down to a single edge.
+If we want to avoid traversing long paths too many times, we can just go and make them shorter each time we traverse them.  A simple way to do this is just to replace parents with gradnparents as we go up the tree.  This only requires one more line of code.  The affect is that the depth of every node on the path we traverse gets cut in half (plus one).  This means that the longest path can only get traversed $O(log n)$ times before it is compressed down to a single edge.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Path Compression halving as we go.  }
@@ -168,7 +171,7 @@ Here is the updated code.
 
 If you are really trying to optimize this, you may squeeze a little improvement by removing the redundancy involved in calling \texttt{\_root} twice for each item in the \texttt{union} method (once in \texttt{find} and again in the \texttt{if} statement).
 
-\chapter{Merge by Height}
+\section{Merge by Height}
 
 
 Another way you might try to keep paths short is to be just a little more careful about who gets to be the new root when doing a \texttt{union} operation.  The taller tree should be the new root, Then, the height will not increase unless you are merging two trees of the same height.
@@ -197,7 +200,7 @@ Another way you might try to keep paths short is to be just a little more carefu
 \end{Verbatim}
 
 
-\chapter{Merge By Weight}
+\section{Merge By Weight}
 
 
 Instead of looking at the heights of the trees, one could look at the number of nodes in the trees.  If one tree has more nodes, \emph{maybe} it is also taller.  The advantage over merge by height is that this information is not affected by path compression.  Therefore we can (and will soon) combine these tricks.
@@ -226,7 +229,7 @@ Instead of looking at the heights of the trees, one could look at the number of 
 \end{Verbatim}
 
 
-\chapter{Combining Heuristics}
+\section{Combining Heuristics}
 
 
 As mentioned before, we can use both heuristics, combining merge by weight and path compression.  it turns out that this is very efficient, both in theory and in practice.  The running time of $n$ operations is (as close as you will ever be able to tell) proportional to $n$.

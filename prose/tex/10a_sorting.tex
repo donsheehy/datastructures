@@ -22,6 +22,7 @@ After a little, thought, you will probably come up with some code that looks lik
 \end{Verbatim}
 
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{A} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is sorted:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{issorted}\PY{p}{(}\PY{n}{A}\PY{p}{)}\PY{p}{)}
@@ -30,6 +31,11 @@ After a little, thought, you will probably come up with some code that looks lik
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{B}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is sorted:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{issorted}\PY{p}{(}\PY{n}{B}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+[1, 2, 3, 4, 5] is sorted: True
+[1, 4, 5, 7, 2] is sorted: False
+
+\end{Verbatim}
 
 
 This is much better than the following, more explicit code.
@@ -66,12 +72,17 @@ Instead of returning False when we find two elements out of order, we'll just fi
 
 The main problem with this code is that \emph{it doesn't sort the list}.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
 \PY{n}{dumbersort}\PY{p}{(}\PY{n}{L}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{L}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+[4, 3, 2, 1, 5]
+
+\end{Verbatim}
 
 
 We should probably do it twice \emph{or more}.  We could even repeat the algorithm until it works.
@@ -83,12 +94,17 @@ We should probably do it twice \emph{or more}.  We could even repeat the algorit
 \end{Verbatim}
 
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
 \PY{n}{dumbsort}\PY{p}{(}\PY{n}{L}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{L}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+[1, 2, 3, 4, 5]
+
+\end{Verbatim}
 
 
 Will it ever get the list sorted?  
@@ -114,12 +130,17 @@ At this point, we would test the code and think about refactoring.  Remember the
 \end{Verbatim}
 
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{alist} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{100000}\PY{p}{,}\PY{l+m+mi}{54}\PY{p}{,}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{93}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{77}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{,}\PY{l+m+mi}{44}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{]}
 \PY{n}{bubblesort}\PY{p}{(}\PY{n}{alist}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{alist}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+[17, 20, 26, 30, 31, 44, 54, 55, 77, 93, 100000]
+
+\end{Verbatim}
 
 
 At this point, we have a correct algorithm and it's quite easy to bound its running time.  It's $O(n^2)$, a quadratic time algorithm.
@@ -221,6 +242,7 @@ When working with your own classes, you may want to sort elements.  To do so, yo
 
 In the following example, the elements are sorted by decreasing value of \texttt{b}.  Then, the list is sorted again, but the key function is supplied give a different comparator.  Notice that the parameter is the function itself and not the evaluation of the function.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{random} \PY{k+kn}{import} \PY{n}{randrange}
 
@@ -250,12 +272,29 @@ In the following example, the elements are sorted by decreasing value of \texttt
     \PY{n+nb}{print}\PY{p}{(}\PY{n}{foo}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+(71, 86, 39)
+(38, 76, 97)
+(39, 75, 12)
+(95, 37, 68)
+(12, 11, 10)
+(96, 11, 50)
+--------
+(12, 11, 10)
+(38, 76, 97)
+(39, 75, 12)
+(71, 86, 39)
+(95, 37, 68)
+(96, 11, 50)
+
+\end{Verbatim}
 
 
 If the key function returns a tuple, it will sort by the first element and break ties with subsequent elements.  This kind of sorting is called lexicographic because it is how you would sort words in alphabetical order.
 
 
 Here is an example of sorting strings by their length (longest to shortest) using the alphabetical order (ignoring case) to break ties.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{strings} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{here are Some sample strings to be sorted}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
@@ -264,4 +303,9 @@ Here is an example of sorting strings by their length (longest to shortest) usin
     \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)}
 
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{sorted}\PY{p}{(}\PY{n}{strings}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{mykey}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+['strings', 'sample', 'sorted', 'here', 'Some', 'are', 'be', 'to']
+
 \end{Verbatim}

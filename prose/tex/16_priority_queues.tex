@@ -127,6 +127,7 @@ The \texttt{findmin} would be much faster if the list were sorted.  Then we coul
 
 I used a nice feature of the python \texttt{sort} method, a named parameter called \texttt{reversed} which, as one might guess, reverses the sorting order.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{S} \PY{o}{=} \PY{n}{SortedListPQ}\PY{p}{(}\PY{p}{)}
 \PY{n}{S}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ham}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
@@ -135,6 +136,10 @@ I used a nice feature of the python \texttt{sort} method, a named parameter call
 \PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n}{S}\PY{o}{.}\PY{n}{removemin}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+['cheese', 'bread', 'ham']
+
+\end{Verbatim}
 
 
 The asymptotic running time of both \texttt{findmin} and \texttt{removemin} is reduced to constant-time.  The \texttt{insert} method no longer runs in constant time, because it sorts.  This means that the running time will depend on the time it takes to sort.  In this case, assuming no other methods rearrange the (private!) \texttt{\_entries} attribute, there will be only one entry out of sorted order, the one we just appended.  In this case, a good implementation of insertion sort would run in linear time (it only has to insert one item before everything is sorted).  Although, for code brevity, we called out to python's \texttt{sort} method, (which could take $O(n \log n)$-time) this is really a linear-time operation).
@@ -368,6 +373,7 @@ The full code including the \texttt{\_heapify} method is given below.  This full
 
 We can use the code above to implement a \texttt{MaxHeap}, that is a priority queue of items ordered by \emph{decreasing} value.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{maxheap} \PY{o}{=} \PY{n}{PriorityQueue}\PY{p}{(}\PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}
 
@@ -377,4 +383,9 @@ We can use the code above to implement a \texttt{MaxHeap}, that is a priority qu
 
 \PY{c+c1}{\PYZsh{} These should print in decreasing order.}
 \PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n}{maxheap}\PY{o}{.}\PY{n}{removemin}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
 \end{Verbatim}

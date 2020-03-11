@@ -7,6 +7,7 @@ This will make it easier to reason about the code and think through its correctn
 
 A \textbf{class} is a data type.  In python \emph{type} and \emph{class} are (mostly) synonymous.  An \textbf{object} is an \textbf{instance} of a class.  For example, python has a \texttt{list} class.  If I make a list called \texttt{mylist}.  Then, \texttt{mylist} is an object of type \texttt{list}.  
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{mylist} \PY{o}{=} \PY{p}{[}\PY{p}{]}
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{mylist}\PY{p}{)}\PY{p}{)}
@@ -14,9 +15,16 @@ A \textbf{class} is a data type.  In python \emph{type} and \emph{class} are (mo
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{mylist}\PY{p}{,} \PY{n+nb}{str}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+<class 'list'>
+True
+False
+
+\end{Verbatim}
 
 
 There are all kinds of classes built into python.  Some you might not expect.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{foo}\PY{p}{(}\PY{p}{)}\PY{p}{:}
@@ -25,9 +33,14 @@ There are all kinds of classes built into python.  Some you might not expect.
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{foo}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+<class 'function'>
+
+\end{Verbatim}
 
 
 For the advanced students, here is a more exotic example called a generator.  In python you can \texttt{yield} instead of \texttt{return}.  If so, the result will be something called a generator and not a function.  This powerful idea shows up a lot in python, but we won't really be able to get our head around it until we understand how classes are able to package up data and code.  
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{mygenerator}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
@@ -38,11 +51,17 @@ For the advanced students, here is a more exotic example called a generator.  In
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{mygenerator}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+<class 'function'>
+<class 'generator'>
+
+\end{Verbatim}
 
 \section{A simple example}
 
 
 One of the first ways that we learn about to combine multiple pieces of information into a single object is in calculus or linear algebra, with the introduction of vectors.  We can think of a 2-dimensional vector as a pair of numbers.  If we are trying to write some code that works with 2-dimensional vectors, we could just use tuples.  It's not too hard to define some basic functions that work with vectors.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{u} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
@@ -69,9 +88,17 @@ One of the first ways that we learn about to combine multiple pieces of informat
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{isvertical}\PY{p}{(}\PY{n}{subtract}\PY{p}{(}\PY{n}{v}\PY{p}{,} \PY{n}{u}\PY{p}{)}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+5.0
+(6, 10)
+(3, 4, 3, 6)
+True
+
+\end{Verbatim}
 
 
 This could be fine if that's all we wanted to do, but as we fill out the code, things will start to get messier.  For example, suppose we want to make sure that the inputs to these functions really are tuples that contain two numbers.  We might add some code to every method to check for this error or recover otherwise, but this is not great, because we really just want to operate on vectors.  Moreover, we might want to \texttt{add} other types of things besides vectors.  This would probably require us to make the add function much more complicated, or rename it something more descriptive such as \texttt{vectoradd}.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{class} \PY{n+nc}{Vector}\PY{p}{:}
@@ -88,6 +115,11 @@ This could be fine if that's all we wanted to do, but as we fill out the code, t
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+5.0
+13.0
+
+\end{Verbatim}
 
 
 A function defined in a class is called a \textbf{method}.  It is a standard convention to use \texttt{self} as the name of the first parameter to a method.  This parameter is object that will generally be operated on by the method.  When, calling the method, you don't have to pass a parameter explicitly for \texttt{self}.  Instead, the dot notation fills in this parameter for you.  That is \texttt{u.norm()} is translated into \texttt{vector.norm(u)}.  
@@ -97,6 +129,7 @@ The \texttt{\_\_init\_\_} method is called a \textbf{initializer}.  Methods like
 
 
 We will use another magic method to implement addition.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{class} \PY{n+nc}{Vector}\PY{p}{:}
@@ -118,12 +151,17 @@ We will use another magic method to implement addition.
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{u} \PY{o}{+} \PY{n}{v}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+<__main__.Vector object at 0x104c7de10>
+
+\end{Verbatim}
 
 
 That output is pretty weird.  It's telling me that u + v is a vector object at some memory address, but doesn't tell me what vector it is.  We need to implement \texttt{\_\_str\_\_} in order to print the vector nicely.  This magic method is called by the print function to convert its parameters into a string.  It is not obvious how a string ought to be printed for a given class.  We have to specify it ourselves.
 
 
 In the example below, I added a \texttt{\_\_str\_\_} method as well as some type checking on the inputs.  The result will guarantee that a vector has two floats as coordinates.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{class} \PY{n+nc}{Vector}\PY{p}{:}
@@ -152,6 +190,10 @@ In the example below, I added a \texttt{\_\_str\_\_} method as well as some type
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{u} \PY{o}{+} \PY{n}{v}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+(6.000000, 10.000000)
+
+\end{Verbatim}
 
 \section{Encapsulation and the Public Interface of a Class}
 
@@ -178,12 +220,17 @@ The second meaning of encapsulation emphasizes the boundary between the inside a
 
 In the example above, the \texttt{addentry} method is public.  Anyone can add an entry.  However, the \texttt{\_lastentry} method is private.  One should not call this method from outside of the \texttt{Diary} class. (Again, you can, but you shouldn’t.)  The \texttt{title} is also public, but the list \texttt{\_entries} is private.  The collection of all public attributes (in this case, \texttt{addentry} and \texttt{title}) constitute the \textbf{public interface} of the class.  This is what a user of the class should interact with.  For example, one can use the class above as follows.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{mydiary} \PY{o}{=} \PY{n}{Diary}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Don’t read this!!!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \PY{n}{mydiary}\PY{o}{.}\PY{n}{addentry}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{It was a good day.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The diary is called }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mydiary}\PY{o}{.}\PY{n}{title}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+The diary is called  Don’t read this!!!
+
+\end{Verbatim}
 
 
 Notice that in this example, the encapsulation of the class is not about security.  Heck, if it’s my diary, I should be able to read it, right?  The reason to respect the private attributes and stick to the public interface is really to help us write working code that continues to work in the future.  Code gets changed all the time.  If you are modifying a class that is being used elsewhere in the code, you have to be careful not to break that code.  If the public interface and its behavior doesn’t change, then one can be confident that the changes don’t affect the other code.  One could change the name of a private variable, say changing \texttt{\_entries} to \texttt{\_diaryentries} and be confident that this won’t cause some other code somewhere else to break.
@@ -338,10 +385,16 @@ Consider the case where we want a class to behave like a \texttt{list}.  For exa
 
 Here, the magic method \texttt{\_\_getitem\_\_} will allow us to use the square bracket notation with our class.  As with other magic methods, we don’t call it directly.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{L} \PY{o}{=} \PY{n}{MyLimitedList}\PY{p}{(}\PY{p}{)}
 \PY{n}{L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
 \PY{n}{L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
 \PY{n}{L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{L}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+100
+
 \end{Verbatim}

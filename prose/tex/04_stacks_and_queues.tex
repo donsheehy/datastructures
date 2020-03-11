@@ -214,6 +214,7 @@ In the case of a stack, it is never correct usage to \texttt{pop} from an empty 
 Thus, it makes sense that someone using our \texttt{Stack} class should have their program crash and see an error message if they attempt to call \texttt{pop} when there are no items left on the stack.
 In the list implementation above, this does happen:
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{s} \PY{o}{=} \PY{n}{ListStack}\PY{p}{(}\PY{p}{)}
 \PY{n}{s}\PY{o}{.}\PY{n}{push}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
@@ -221,6 +222,16 @@ In the list implementation above, this does happen:
 \PY{n}{s}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+
+Traceback (most recent call last):
+  File "liststackerror", line 24, in <module>
+    s.pop()
+  File "liststackerror", line 9, in pop
+    return self._L.pop()
+IndexError: pop from empty list
+
+\end{Verbatim}
 
 
 If we look at the error message, it even seems pretty good.
@@ -244,9 +255,28 @@ Instead, give them an error that explains exactly what happened.
 \end{Verbatim}
 
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{s} \PY{o}{=} \PY{n}{AnotherStack}\PY{p}{(}\PY{p}{)}
 \PY{n}{s}\PY{o}{.}\PY{n}{push}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
 \PY{n}{s}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
 \PY{n}{s}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+
+Traceback (most recent call last):
+  File "s73tkk42qg", line 6, in pop
+    return self._L.pop()
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "s73tkk42qg", line 13, in <module>
+    s.pop()
+  File "s73tkk42qg", line 8, in pop
+    raise RuntimeError("pop from empty stack")
+RuntimeError: pop from empty stack
+
 \end{Verbatim}

@@ -127,6 +127,7 @@ As with any collection, we might want some other methods such as \texttt{\_\_len
 
 The standard behavior for iterators in dictionaries is to iterate over the keys.  Alternative iterators are provided to iterate over the values or to iterate over the key-value pairs as tuples.  For a \texttt{dict} object this is done as follows.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{d} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
 
@@ -140,6 +141,15 @@ The standard behavior for iterators in dictionaries is to iterate over the keys.
     \PY{n+nb}{print}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{v}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+key1
+key2
+value1
+value2
+key1 value1
+key2 value2
+
+\end{Verbatim}
 
 
 We'll add the same kind of functionality to our Mapping ADT.  So, the \textbf{extended Mapping ADT} includes the following methods (with get and put renamed for python magic).

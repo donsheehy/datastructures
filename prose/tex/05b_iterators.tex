@@ -32,6 +32,7 @@ That’s easy enough, but there is an easier syntax for doing this.  It’s call
 
 This is a very common idiom used in all kinds of programs.  You can do comprehensions with other types of collections too.  For example the following \textbf{set comprehension} is equivalent to a for loop construction as follows.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{S} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{\PYZcb{}}
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{S}\PY{p}{)}
@@ -42,6 +43,11 @@ This is a very common idiom used in all kinds of programs.  You can do comprehen
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{S}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+{(4, 5), (6, 7), (5, 6)}
+{(4, 5), (6, 7), (5, 6)}
+
+\end{Verbatim}
 
 
 Both snippets of code produce the same set of pairs.
@@ -50,6 +56,7 @@ Both snippets of code produce the same set of pairs.
 
 
 More complicated comprehensions are possible.  If you want to have nested loops, that is possible; just keep the loops in the same order you would write them if you were writing them out the long way.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{n}{j} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{]}
@@ -64,6 +71,11 @@ More complicated comprehensions are possible.  If you want to have nested loops,
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{L}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+[2, 3, 4, 5, 6, 3, 4, 5, 6, 7, 4, 5, 6, 7, 8, 5, 6, 7, 8, 9, 6, 7, 8, 9, 10]
+[2, 3, 4, 5, 6, 3, 4, 5, 6, 7, 4, 5, 6, 7, 8, 5, 6, 7, 8, 9, 6, 7, 8, 9, 10]
+
+\end{Verbatim}
 
 \section{Iterators}
 
@@ -92,10 +104,14 @@ Any object for which we can call \texttt{iter} is called \textbf{iterable}.  It 
 
 Once you have an iterator, you can access the items by calling the \texttt{next} function as follows.  Internally, Python calls the \texttt{\_\_next\_\_} method on the iterator.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{item} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{myiterator}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+
+\end{Verbatim}
 
 
 Any iterable for which you can call \texttt{next} in this way is an iterator.  Again, this is duck typing at work.  If the class has an \texttt{\_\_iter\_\_} and \texttt{\_\_next\_\_} method, then it is an iterator.
@@ -103,14 +119,19 @@ Any iterable for which you can call \texttt{next} in this way is an iterator.  A
 
 If there are no more items, the \texttt{next} function will raise the \texttt{StopIteration} exception.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{emptyiterator} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
 \PY{n+nb}{next}\PY{p}{(}\PY{n}{emptyiterator}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+
+\end{Verbatim}
 
 
 When you use these collections in a \texttt{for} loop, the first thing Python does is call \texttt{iter} on them to get an iterator.   You can rewrite a \texttt{for} loop with a \texttt{while} loop as follows.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}
@@ -129,6 +150,21 @@ When you use these collections in a \texttt{for} loop, the first thing Python do
     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+1
+1
+2
+3
+5
+8
+1
+1
+2
+3
+5
+8
+
+\end{Verbatim}
 
 
 Everyone agrees that the \texttt{for} loop is much prettier and easier to understand.  However, the \texttt{while} loop version doesn’t hide anything (or at least not as much).  You should never write a \texttt{while} loop like the one above, but you should understand it.  That is how you’ll know what is really happening in a \texttt{for} loop and someday it will help you track down a bug.  It’s also how you would understand the running time of a \texttt{for} loop.
@@ -136,15 +172,26 @@ Everyone agrees that the \texttt{for} loop is much prettier and easier to unders
 
 In Python, an iterator is required to also be iterable.  That is, I should be able to call \texttt{iter} on an iterator and get an iterator; usually this just gives me back the same iterator.  This is very useful, because it means that there is no problem if I try to loop over an iterator.  The following code works.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{]}
 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{L}\PY{p}{)}\PY{p}{:}
     \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+1
+2
+3
+5
+7
+11
+
+\end{Verbatim}
 
 
 You should think of the iterator as a separate object from the object it is iterating over.  It keeps track of where it is in the list.  This is why you can have multiple iterators over the same collection at the same time.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{]}
@@ -153,6 +200,18 @@ You should think of the iterator as a separate object from the object it is iter
         \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+3 3
+3 5
+3 8
+5 3
+5 5
+5 8
+8 3
+8 5
+8 8
+
+\end{Verbatim}
 
 
 The builtin function \texttt{iter} calls the \texttt{\_\_iter\_\_} magic method on the object.  The builtin function \texttt{next} calls the \texttt{\_\_next\_\_} method.  So, you can create your own iterators objects and your own iterable objects by implementing these methods.  We’ll see examples a little later.
@@ -164,6 +223,7 @@ A \textbf{generator} is an easy way to write your own iterators in Python.  It l
 
 
 Because a generator is an iterator, you can imagine that calling \texttt{next} should execute the function until the first value is yielded, and then it pauses.  Calling next again will cause the execution to continue from where it left off.  If the function returns, then \texttt{StopIteration} will be raised.  
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{mygen}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
@@ -179,6 +239,16 @@ Because a generator is an iterator, you can imagine that calling \texttt{next} s
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{next}\PY{p}{(}\PY{n}{myiterator}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+1
+2
+4
+8
+1
+2
+4
+
+\end{Verbatim}
 
 
 Above we have a simple generator.  It is used in a \texttt{for} loop and it is also used explicitly with the \texttt{next} function.  You should understand the function call \texttt{mygen()} as returning an iterator.  The type of the iterator object is \texttt{generator}.  Because we’ve already seen that the generator is an iterator, we know this means that \texttt{\_\_iter\_\_} and \texttt{\_\_next\_\_} are defined on the generator and so we can call \texttt{iter} and \texttt{next} respectively.
@@ -188,6 +258,7 @@ Above we have a simple generator.  It is used in a \texttt{for} loop and it is a
 
 It very often happens that we want to create our
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{class} \PY{n+nc}{MyCollection}\PY{p}{:}
     \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}iter\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
@@ -195,6 +266,11 @@ It very often happens that we want to create our
             \PY{k}{yield} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1000}
 
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{MyCollection}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{start}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+[(10, 1000), (11, 1001), (12, 1002), (13, 1003), (14, 1004)]
+
 \end{Verbatim}
 
 
@@ -210,6 +286,10 @@ It very often happens that we want to create our
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{mymax}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+5
+
+\end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{mysum}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:}
@@ -219,6 +299,7 @@ It very often happens that we want to create our
         \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{item}
     \PY{k}{return} \PY{n+nb}{sum}
 \end{Verbatim}
+
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -233,6 +314,12 @@ It very often happens that we want to create our
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{up}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{k}{lambda} \PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{:} \PY{n}{a} \PY{k}{if} \PY{n}{a} \PY{o}{\PYZgt{}} \PY{n}{b} \PY{k}{else} \PY{n}{b}\PY{p}{)}\PY{p}{)}
 
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{up}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{k}{lambda} \PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{:} \PY{n}{a}\PY{o}{+}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+5
+15
+
 \end{Verbatim}
 
 
@@ -257,8 +344,21 @@ It very often happens that we want to create our
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{myall}\PY{p}{(}\PY{n}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{6} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{L}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+5
+15
+False
+True
+
+\end{Verbatim}
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{itertools} \PY{k+kn}{import} \PY{n}{permutations}
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{w}\PY{p}{)} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{permutations}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wow}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}
+{'wow', 'wwo', 'oww'}
+
 \end{Verbatim}

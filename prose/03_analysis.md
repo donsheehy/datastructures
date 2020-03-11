@@ -300,7 +300,7 @@ Instead, we will want to count operations a little more carefully.
 The unit we will use to describe the **running time** of an algorithm is the number of atomic operations.
 This is not exactly a unit of time, but at some level, the atomic operations that we will describe can all be performed in a small number of clock cycles on your CPU and so correspond to a real amount of time.
 
-*(Please don't say "runtime" as a replacement for "running time".  These are not the same thing!)*
+_(Please don't say **runtime** as a replacement for **running time**.  These are not the same thing!)_
 
 Atomic operations include
  - arithmetic and boolean operations
@@ -444,7 +444,7 @@ There are several functions that will come up so often that we will want to have
  - **Constant Functions**, $O(1)$
  - **Logarithmic Functions**, $O(\log n)$
  - **Linear Functions**, $O(n)$
- - **"n Log n"**, $O(n\log n)$
+ - **n Log n**, $O(n\log n)$
  - **Quadratic Functions**, $O(n^2)$
  - **Polynomial Functions**, $O(n^k)$ for some constant $k$.
  - **Exponential Functions**, $O(2^n)$ (this is different from $2^{O(n)}$)

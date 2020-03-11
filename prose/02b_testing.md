@@ -33,7 +33,7 @@ The `assert` statement will raise an error if the predicate that follows it is `
 
 The line `if __name__ == '__main__':` makes sure that the tests will not run when the module is imported from somewhere else.
 
-For some, learning to test their code runs into a substantial psychological block.  They feel that testing the code will reveal its flaws and thus reveal the programmer’s flaws.  If you feel the slightest hesitation to testing your own code, you should practice the OGAE protocol.  It stands for, "Oh Good, An Error!".  Every time you get an error, you say this with honest enthusiasm.  The computer has just done you a huge favor by identifying something wrong, and it has done so in the safety of your room or office.  You can fix it before it becomes any bigger.
+For some, learning to test their code runs into a substantial psychological block.  They feel that testing the code will reveal its flaws and thus reveal the programmer’s flaws.  If you feel the slightest hesitation to testing your own code, you should practice the OGAE protocol.  It stands for, **Oh Good, An Error!**.  Every time you get an error, you say this with honest enthusiasm.  The computer has just done you a huge favor by identifying something wrong, and it has done so in the safety of your room or office.  You can fix it before it becomes any bigger.
 
 ## Unit Testing with `unittest`
 
@@ -44,7 +44,7 @@ To make the process go smoothly, there is a standard package  called `unittest` 
 To use the `unittest` package, you will want to import the package in your test file.
 Then, import the code you want to test.
 The actual tests will be methods in a class that extends the `unittest.TestCase` class.
-Every test method must start with the word "test".  If it doesn’t start with "test", then it will not run.
+Every test method must start with the word `'test'`.  If it doesn’t start with `'test'`, then it will not run.
 Tests are run by calling the `unittest.main` function.
 
 Here is an example that tests a particular behavior of a hypothetical `DayOfTheWeek` class.
@@ -64,7 +64,7 @@ class TestDayOfTheWeek(unittest.TestCase):
 unittest.main()
 ```
 
-Notice that even if we have never seen the code for the `DayOfTheWeek` class, we can get a good sense of its expected behavior from reading the tests.  In this case, we see that it can be instantiated with the abbreviation `F` and the `name()` function will return the value "Friday".  It often happens that unit tests like this give the clearest specification of a data structure’s expected behavior.  Moreover, because the tests can be executed, one can be certain that the class really has the expected behavior.  With documentation, one sometimes finds that changes in the code are not reflected in the documentation, but passing tests don’t have this problem.
+Notice that even if we have never seen the code for the `DayOfTheWeek` class, we can get a good sense of its expected behavior from reading the tests.  In this case, we see that it can be instantiated with the abbreviation `F` and the `name()` function will return the value `'Friday'`.  It often happens that unit tests like this give the clearest specification of a data structure’s expected behavior.  Moreover, because the tests can be executed, one can be certain that the class really has the expected behavior.  With documentation, one sometimes finds that changes in the code are not reflected in the documentation, but passing tests don’t have this problem.
 
 ## Test-Driven Development
 
@@ -81,7 +81,7 @@ The TDD mantra is **Red-Green-Refactor**.  It refers to three phases of the test
 - **Green:** You get the tests to pass by changing the code.
 - **Refactor:** You clean up the code, removing duplication.
 
-The terms "Red" and "Green" refer to many testing fameworks that show failed tests in red and passing tests in green.
+The terms *Red* and *Green* refer to many testing fameworks that show failed tests in red and passing tests in green.
 
 **Refactoring** is the process of cleaning up code, most often referring to the process of removing duplication.  Duplication in code, whether it comes from copy-and-paste or just repeating logic can be a source of many errors.  If you duplicate code with a bug, now you have two bugs.  If you find the bug, you will have to find it twice.
 
@@ -129,7 +129,7 @@ The refactored code is also easier to read.
 
 ## What to Test
 
-Step away from the computer.  Think about the problem you are trying to solve.  Think about the methods you are writing.  Ask yourself, *"What should happen when I run this code?"*. Also ask yourself, *"How do I want to use this code?"*
+Step away from the computer.  Think about the problem you are trying to solve.  Think about the methods you are writing.  Ask yourself, *What should happen when I run this code?*. Also ask yourself, *How do I want to use this code?*
 
 - Write tests that use the code the way it ought to be used.
 - Then write tests that use the code incorrectly to test that your code *fails gracefully*.  Does it give clear error messages?
@@ -141,7 +141,7 @@ Step away from the computer.  Think about the problem you are trying to solve.  
 
 In object-oriented design, we divide the code into classes.  These classes have certain relationships sometimes induced by inheritance or composition.  The classes have public methods.  We call these public methods the **interface** to the class.
 
-To start a design, we look at the problem and identify nouns (classes) and verbs (methods).  In our description, we express what *should* happen.  Often these expectations are expressed in "if...then" language, i.e., "if I call this method with these parameters, then this will happen.". A unit test will encode this expectation.  It will check that the actual behavior of the code matches the expected behavior.
+To start a design, we look at the problem and identify nouns (classes) and verbs (methods).  In our description, we express what *should* happen.  Often these expectations are expressed in `if...then` language, i.e., _**If** I call this method with these parameters, **then** this will happen._ A unit test will encode this expectation.  It will check that the actual behavior of the code matches the expected behavior.
 
 When writing a class, it helps focus our attention and reduce the number of things to think about if we assume each class works the way it is supposed to.  We try to make this true by testing each class individually.  Then, when we compose classes into more complex classes, we can have more confidence that any errors we find are in the new class and not somewhere lurking in the previously written classes.  
 

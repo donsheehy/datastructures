@@ -105,6 +105,7 @@ This limit is usually around 1000.
 To think clearly about recursion, it helps to have an idea of how recursion works on a real computer.
 It is easiest to first understand how all function calls work and then it should be clear that there is no technical difference in making a recursive function call compared to any other function call.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
     \PY{n}{var} \PY{o}{=} \PY{n}{k} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}
@@ -117,6 +118,10 @@ It is easiest to first understand how all function calls work and then it should
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+15
+
+\end{Verbatim}
 
 
 The following code gives a \texttt{RecursionError} even though none of the functions call themselves directly.
@@ -140,6 +145,7 @@ The error is really just signaling that the call stack reached its limit.
 
 An interesting recursive example con be constructed by creating two lists, each one containing the other.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{A} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
 \PY{n}{B} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
@@ -148,6 +154,14 @@ An interesting recursive example con be constructed by creating two lists, each 
 \PY{n}{A} \PY{o}{==} \PY{n}{B}
 \end{Verbatim}
 
+\begin{Verbatim}
+
+Traceback (most recent call last):
+  File "eblsm3pahf", line 5, in <module>
+    A == B
+RecursionError: maximum recursion depth exceeded in comparison
+
+\end{Verbatim}
 
 
 In this case, the recursive function is \texttt{list.\_\_eq\_\_}, the method that compares two lists when you use \texttt{==}.  It compares the list by checking if the elements are equal.  The lists \texttt{A} and \texttt{B} each have length 2.  The first elements match.  The second element of each list is another list.  To compare them, there is another call to \texttt{list.\_\_eq\_\_}.  This is a repeat of the first call and the process repeats until the recursion limit is reached.
@@ -158,6 +172,7 @@ In this case, the recursive function is \texttt{list.\_\_eq\_\_}, the method tha
 Here is a classic example of a recursively defined function.
 It was originally named for Leonardo Fibonacci who studied it in the context of predicting the growth of rabbit populations.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{fib}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
     \PY{k}{if} \PY{n}{k} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:} \PY{k}{return} \PY{n}{k}
@@ -166,6 +181,10 @@ It was originally named for Leonardo Fibonacci who studied it in the context of 
 \PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n}{fib}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377]
+
+\end{Verbatim}
 
 
 This works, but it starts to get really slow, even for small values of \texttt{k}.
@@ -175,6 +194,7 @@ For example, I tried to run it for \texttt{k = 40} and gave up on it.
 This is a case that we will encounter many times in this course.
 Once we embrace recursion as a way to think about breaking problems into smaller pieces, we may find very short recursive algorithms, but for one reason or another, we may want to rewrite them without recursion.
 Here's a version that uses a loop instead.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{fib}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
@@ -186,6 +206,10 @@ Here's a version that uses a loop instead.
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{fib}\PY{p}{(}\PY{l+m+mi}{400}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+176023680645013966468226945392411250770384383304492191886725992896575345044216019675
+
+\end{Verbatim}
 
 
 This is much better!
@@ -240,6 +264,7 @@ We can just do the division directly rather than repeatedly subtracting the smal
 The result is a slight change to the base case and replacing the subtraction with the modulus operation.
 Here is the revised code.
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{gcd}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
     \PY{k}{if} \PY{n}{a} \PY{o}{\PYZgt{}} \PY{n}{b}\PY{p}{:}
@@ -253,6 +278,12 @@ Here is the revised code.
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GCD of 19 and 515 is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{gcd}\PY{p}{(}\PY{l+m+mi}{515} \PY{p}{,}\PY{l+m+mi}{19}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+GCD of 12 and 513 is 3
+GCD of 19 and 513 is 19
+GCD of 19 and 515 is 1
+
+\end{Verbatim}
 
 
 Incidentally, if \texttt{a} and \texttt{b} are allowed to be arbitrary numbers, you might try find examples where the gcd algorithm gets caught in an infinite recursion.  In this way, you might discover the irrational numbers.  If \texttt{a} and \texttt{b} are rational, then the algorithm is also guaranteed to terminate.

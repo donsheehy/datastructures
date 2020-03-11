@@ -29,7 +29,7 @@ docs:	Makefile
 
 prose/tex/%.tex: prose/%.md
 	prosecode tangle $< --srcdir ds2/
-	prosecode weave $< --outfile $@
+	prosecode weave $< --outfile $@ --execute True
 
 clean:
 	rm prose/tex/fullbook.*

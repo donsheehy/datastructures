@@ -13,6 +13,7 @@ Here is an implementation.  \emph{(Notice the relationship to Euclid's GCD algor
 
 \section{A Greedy Algorithm}
 
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{greedyMC}\PY{p}{(}\PY{n}{coinvalueList}\PY{p}{,} \PY{n}{change}\PY{p}{)}\PY{p}{:}
     \PY{n}{coinvalueList}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
@@ -30,6 +31,12 @@ Here is an implementation.  \emph{(Notice the relationship to Euclid's GCD algor
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{greedyMC}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{63}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+6
+15
+7
+
+\end{Verbatim}
 
 
 Clearly, this does not work.
@@ -40,6 +47,7 @@ The greedy solution does not work here.
 Let's try recursion instead.
 
 \section{A Recursive Algorithm}
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{recMC}\PY{p}{(}\PY{n}{coinValueList}\PY{p}{,} \PY{n}{change}\PY{p}{)}\PY{p}{:}
@@ -58,6 +66,11 @@ Let's try recursion instead.
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{recMC}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{63}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+3
+3
+
+\end{Verbatim}
 
 
 This works, but it's very slow.  A natural thing to try here is to \textbf{memoize} solutions from previous recursive calls.
@@ -65,6 +78,7 @@ This way, we don't repeat work by computing the number of coins for a specific a
 Don't forget to pass along the dictionary of known results when making recursive calls.
 
 \section{A Memoized Version}
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{memoMC}\PY{p}{(}\PY{n}{coinValueList}\PY{p}{,} \PY{n}{change}\PY{p}{,} \PY{n}{knownResults}\PY{p}{)}\PY{p}{:}
@@ -89,6 +103,12 @@ Don't forget to pass along the dictionary of known results when making recursive
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{knownresults}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+6
+3
+{25: 1, 26: 2, 21: 1, 10: 1, 11: 2, 5: 1, 6: 2, 1: 1, 12: 3, 7: 3, 13: 4, 8: 4, 14: 5, 9: 5, 15: 2, 16: 3, 27: 3, 22: 2, 17: 4, 28: 4, 23: 3, 18: 5, 29: 5, 24: 4, 19: 6, 30: 2, 20: 2, 31: 2, 32: 3, 33: 4, 34: 5, 35: 2, 36: 3, 37: 4, 38: 5, 39: 6, 40: 3, 41: 3, 42: 2, 43: 3, 44: 4, 45: 3, 46: 2, 47: 3, 48: 4, 49: 5, 50: 2, 51: 3, 52: 3, 53: 4, 54: 5, 55: 3, 56: 3, 57: 4, 58: 5, 59: 6, 60: 3, 61: 4, 62: 4, 63: 3}
+
+\end{Verbatim}
 
 
 This is much faster and now can work with much larger instances.
@@ -107,6 +127,7 @@ In each step, the next best answer can be found by trying each coin, subtracting
 
 Finally, we can repackage this into a dynamic programming algorithm.
 The idea is to explicitly fill in the table of all values, using previously computed values to compute new values.
+
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{dpMakeChange}\PY{p}{(}\PY{n}{coinValueList}\PY{p}{,} \PY{n}{change}\PY{p}{)}\PY{p}{:}
@@ -129,6 +150,11 @@ The idea is to explicitly fill in the table of all values, using previously comp
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{dpMakeChange}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{21}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
+\begin{Verbatim}
+3
+4
+
+\end{Verbatim}
 
 
 A major difference between the dynamic programming approach and the memoized recursion approach is that the dynamic program builds the results \emph{from the bottom up}, while the recursive version works top down, starting work on the largest problem first and working down to the smaller problems as needed.
