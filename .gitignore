@@ -7,7 +7,10 @@ experimental
 *.synctex.gz
 *.fdb_latexmk
 *.aux
-examples/src/
+
+tex/generated
+tex/fullbook.*
+figures/*.png
 
 # Mac stuff
 .DS_Store

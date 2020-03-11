@@ -294,8 +294,9 @@ for i in range(10):
 
 ## Other Forms of Control Flow
 
-**Control flow** refers to the commands in a language that affect the order or what operations are executed.
-The `for` loops from the previous section are classic examples if this.  The other basic forms of control flow are `if` statements, `while` loops,  `try` blocks, and function calls.  We’ll cover each briefly and refer the reader to the python documentation for more detailed info.
+**Control flow** refers to the commands in a language that affect the order in which operations are executed.
+The `for` loops from the previous section is a classic examples of this.  
+The other basic forms of control flow are `if` statements, `while` loops,  `try` blocks, and function calls.  We’ll cover each briefly.
 
 An `if` statement in its simplest form evaluates an expression and tries to interpret it as a boolean.  This expression is referred to as a predicate.  If the predicate evaluates to `True`, then a block of code is executed.  Otherwise, the code is not executed.  This is the *selection* of sequence, selection, and iteration.  Here is an example.
 
