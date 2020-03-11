@@ -1,4 +1,8 @@
 experimental
+tex/generated
+tex/fullbook.*
+figures/*.png
+archive
 
 # LaTeX stuff
 *.fls
@@ -7,10 +11,6 @@ experimental
 *.synctex.gz
 *.fdb_latexmk
 *.aux
-
-tex/generated
-tex/fullbook.*
-figures/*.png
 
 # Mac stuff
 .DS_Store

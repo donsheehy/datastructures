@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ds2",
-    version="0.1.0",
+    version="0.2.0",
     author="Donald R. Sheehy",
     author_email="don.r.sheehy@gmail.com",
     description="Don Sheehy's Data Structures",

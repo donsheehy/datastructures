@@ -16,8 +16,6 @@ You can download and install the code as a python package from the github reposi
 
 `Click here to download the full book in PDF <https://donsheehy.github.io/datastructures/fullbook.pdf>`_
 
-`Click here to access the full book in HTML <https://donsheehy.github.io/datastructures/fullbook.html>`_
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
