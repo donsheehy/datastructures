@@ -9,17 +9,14 @@ TEX = tex/main.tex tex/generated/pygments_macros.tex tex/titlepage.tex
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile github test docs pdf clean weave
-
-github:
-	@make docs
-	@cp -a docsource/build/html/. docs/
+.PHONY: help Makefile test docs pdf clean weave
 
 test:
 	nosetests --with-coverage
 
 docs:	Makefile
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@cp -a docsource/build/html/. docs/
 
 html: docs
 

@@ -5,7 +5,11 @@ by Don Sheehy
 
 There is a book and a library of data structures, `ds2`.
 
-You can download and install the code as a python package from the github repository.
+You can download and install the code as a python package from the github repositoryor by simply running
+
+.. code-block::
+
+  pip install ds2
 
 `Here is the full source of the book on github. <https://github.com/donsheehy/datastructures>`_
 
