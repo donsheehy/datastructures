@@ -5,8 +5,8 @@
 import builtins
 from ds2.figure_generation.drawlist import drawlist
 
-def type(x):
-    return "&lt;" + str(builtins.type(x))[1:-1] + "&gt;"
+# def type(x):
+    # return "&lt;" + str(builtins.type(x))[1:-1] + "&gt;"
 ```
 
 This book is not intended as a first course in programming.
@@ -159,7 +159,7 @@ Here is a common visual representation of the list.
 drawlist(L, 'list_example01')
 ```
 
-![](./figures/list_example01.png)
+![](../figures/list_example01.png)
 
 
 ```python {cmd id="listexample02"  continue="listexample01" output=none}
@@ -170,7 +170,7 @@ L.append(100)
 drawlist(L, 'list_example02')
 ```
 
-![](./figures/list_example02.png)
+![](../figures/list_example02.png)
 
 ### Tuples (`tuple`)
 

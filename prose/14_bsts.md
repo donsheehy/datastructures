@@ -33,7 +33,7 @@ for i in [3,1,0,2,5,4,6]:
 drawtree(T, 'bst_example')
 ```
 
-![](./figures/bst_example.png)
+![](../figures/bst_example.png)
 
 The BST property is related to a new kind of tree traversal, that was not possible with other trees.
 Previously we saw *preorder* and *postorder* traversal of trees.
@@ -265,7 +265,7 @@ for i in [3,2,1,6,4,5,9,8,10]:
 drawtree(T, 'bstremoval_example1')
 ```
 
-![](./figures/bstremoval_example1.png)
+![](../figures/bstremoval_example1.png)
 
 
 ```python {cmd id="removal_example2" continue="removal_example1"}
@@ -276,7 +276,7 @@ T.remove(6)
 drawtree(T, 'bstremoval_example2')
 ```
 
-![](./figures/bstremoval_example2.png)
+![](../figures/bstremoval_example2.png)
 
 ```python {cmd id="removal_example3" continue="removal_example2" output="html"}
 T.remove(3)
@@ -286,4 +286,4 @@ T.remove(3)
 drawtree(T, 'bstremoval_example3')
 ```
 
-![](./figures/bstremoval_example3.png)
+![](../figures/bstremoval_example3.png)

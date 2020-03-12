@@ -2,7 +2,7 @@
 
 We're going to discuss a versatile and  fundamental data structure called a **priority queue**.  It will resemble a queue except that items all have a priority and will come out ordered by their priority rather than their order of insertion.
 
-By this point, we know enough about different data structures that we will be able to implement this data structure in several different ways.  Eventually, we will introduce a data structure called a **heap** that will give good performance in many respects, but it won't be
+By this point, we know enough about different data structures that we will be able to implement this data structure in several different ways.  Eventually, we will introduce a data structure called a **heap** that will give good performance in many respects.
 
 ## The Priority Queue ADT
 
