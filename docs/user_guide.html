@@ -85,10 +85,8 @@
 <li class="toctree-l1"><a class="reference internal" href="about.html">About this book</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">A User’s Guide to this Book</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#running-code">Running Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pythonpath-issues">PYTHONPATH Issues</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#making-improvements">Making Improvements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-the-book">Building the book</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#drawing-figures">Drawing figures</a></li>
 </ul>
 </li>
 </ul>
@@ -169,18 +167,6 @@ This wonderful plugin allows for realtime preview and instant code execution rig
 <p>I recommend changing the settings to not break on single newlines.
 I <em>try</em> to stick to the one-sentence-per-line policy to ease the process of reviewing git diffs.</p>
 </div>
-<div class="section" id="pythonpath-issues">
-<h2>PYTHONPATH Issues<a class="headerlink" href="#pythonpath-issues" title="Permalink to this headline">¶</a></h2>
-<p>One challenge to running the code from two different locations involves python’s system path.
-For most code chunks, it’s no problem.
-However, for more complex data structures that need to import other modules from other chapters, Python will need to know where to look for the code.
-The simplest fix is to simply add the <cite>code/</cite> directory to your python path.
-I did this with the following line in my <cite>.bash_profile</cite> file.</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">export</span> <span class="pre">PYTHONPATH=&quot;/Users/don/Dropbox/work/research/books/datastructures/code:$PYTHONPATH&quot;</span>
-<span class="pre">`</span></code></p>
-<p>This also solves the issue of running tests from the <cite>tests/</cite> folder.</p>
-</div>
 <div class="section" id="making-improvements">
 <h2>Making Improvements<a class="headerlink" href="#making-improvements" title="Permalink to this headline">¶</a></h2>
 <p>All of the source for this book is available on github.
@@ -196,21 +182,10 @@ If you find a bug, you can fork the repository, fix the bug, and make a pull req
 </div>
 <div class="section" id="building-the-book">
 <h2>Building the book<a class="headerlink" href="#building-the-book" title="Permalink to this headline">¶</a></h2>
-<p>Currently, the books build process has two steps.</p>
-<ol class="arabic simple">
-<li><p>Running the <cite>generatebook.py</cite> script will integrate all the chapters into a single markdown file.  It does a little extra to add chapter numbers and forced page breaks for print layouts.</p></li>
-<li><p>Running <cite>generatebook.js</cite> from node will use mume to process the <cite>fullbook.md</cite> file into html and pdf.  The pdf export requires installing the Chrome Puppeteer node module (and Mume too of course).  This second step is in javascript because Mume is built on node.</p></li>
-</ol>
-<p>To pull the code out of the book into separate <cite>.py</cite> files, you will need to run the <cite>generatecode.py</cite> script.</p>
-</div>
-<div class="section" id="drawing-figures">
-<h2>Drawing figures<a class="headerlink" href="#drawing-figures" title="Permalink to this headline">¶</a></h2>
-<p>Currently, the book is light on figures.
-I am working to integrate a system where data structures are drawn inline using svgs that get integrated directly into the resulting html.</p>
-<p>You may need to install the svgwrite package.</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">svgwrite</span>
-<span class="pre">`</span></code></p>
+<p>Currently you will not be able to build to book yourself unless you comment out the code blocks that generate figures.
+The figure generation currently depends on some as-yet unreleased libraries.</p>
+<p>Without those blocks, the build depends on prosecode.
+You can <cite>pip install prosecode</cite> and then use the make targets in the project’s Makefile.</p>
 </div>
 </div>
 
