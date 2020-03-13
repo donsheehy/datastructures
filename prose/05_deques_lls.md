@@ -357,44 +357,43 @@ For example, suppose we realize that our code has issues if we try to `dequeue` 
 If we decide on the right behavior, we will enforce it with a test.
 Do we also copy the test to the other (copied) test file?
 What if one implementation is fixed and the other is not?
+When we copy and paste code, we invariably copy and paste bugs.
+What was one bug, becomes two bugs.
 
 This is a standard situation where inheritance is called for.
 We wanted to copy a bunch of methods to be included in two different classes (`TestListQueue` and `TestLinkedQueue`).
 Instead we want them to *share* the methods.
-So, we **refactor** the code, by **extracting a superclass**.
+So, we **refactor** the code, by **factoring out a superclass**.
 Our new class will be called `TestQueue`.
 Both `TestListQueue` and `TestLinkedQueue` will extend `TestQueue`.
 Remember extending means inheriting from.
 
-```python {cmd id="testqueue"}
+```python {cmd id="_test.testqueue"}
 # testqueue.py
 class TestQueue:
-    def newQueue():
-        raise NotImplementedError
-
     def testinit(self):
-        q = self.newQueue()
+        q = self.Queue()
 
     def testaddandremoveoneitem(self):
-        q = self.newQueue()
+        q = self.Queue()
         q.enqueue(3)
         self.assertEqual(q.dequeue(), 3)
 
     def testalternatingaddremove(self):
-        q = self.newQueue()
+        q = self.Queue()
         for i in range(1000):
             q.enqueue(i)
             self.assertEqual(q.dequeue(), i)
 
     def testmanyoperations(self):
-        q = self.newQueue()
+        q = self.Queue()
         for i in range(1000):
             q.enqueue(2 * i + 3)
         for i in range(1000):
             self.assertEqual(q.dequeue(), 2 * i + 3)
 
     def testlength(self):
-        q = self.newQueue()
+        q = self.Queue()
         self.assertEqual(len(q), 0)
         for i in range(10):
             q.enqueue(i)
@@ -408,46 +407,77 @@ class TestQueue:
 ```
 
 The new class looks almost exactly the same as our old `TestListQueue` class exactly for a couple small changes.
-Instead of creating a new `ListQueue` object in each test, we call a method called `newQueue`.
-In this class, that method is *not implemented* and you can see it will raise an error telling you so if you were to try to call it.
-This method will be overwritten in the extending class to provide the right kind of Queue object.
+Instead of creating a new `ListQueue` object in each test, we create a `self.Queue` object.
+This may seem strange for two reasons: first, we don't have this class; and second, it is attached to `self` which is the `TestQueue` object.
+When we implement the specific tests for each class, we will assign the variable `Queue` to be the class corresponding to the particular implementation we want to test.
+
 There is another *important difference* between the `TestQueue` class and our old `TestListQueue` class---the `TestQueue` class does not extend `unittest.TestCase`.
 It just defines some methods that will be **mixed into** `TestListQueue` and `TestLinkedQueue`.
 Here are our new test files.
 
-```python {cmd error_expected}
+```python {cmd id="_test.testlistqueue" error_expected}
 # testlistqueue.py
 import unittest
-from ds2.testqueue import TestQueue
+from ds2.test.testqueue import TestQueue
 from ds2.queue import ListQueue
 
 class TestListQueue(unittest.TestCase, TestQueue):
-    def newQueue(self):
-        return ListQueue()
+    Queue = ListQueue
 
 if __name__ == '__main__':
     unittest.main()
 ```
 
-```python {cmd}
+```python {cmd id="_test.testlinkedqueue" error_expected}
 # testlinkedqueue.py
 import unittest
-from ds2.testqueue import TestQueue
+from ds2.test.testqueue import TestQueue
 from ds2.queue import LinkedQueue
 
 class TestListQueue(unittest.TestCase, TestQueue):
-    def newQueue(self):
-        return LinkedQueue()
+    Queue = LinkedQueue
 
 if __name__ == '__main__':
     unittest.main()
 ```
+
 
 The classes, `TestListQueue` and `TestLinkedQueue`, extend both `unittest.TestCase` *and* `TestQueue`.
 This is called **multiple inheritance**.
 In other languages like C++ that support multiple inheritance, it is considered a bad design decision.
 However, in python, it is appropriate to use it for this kind of **mix in**.
 The only thing to remember is that the golden rule of inheritance should still be observed: **inheritance mean 'is a'**.
+
+
+If you wanted to add specific tests to one of these implementations, but not the other, you could do so in the subclasses.
+However, if you had many implementations that all should pass the same tests, you might try something like the following pattern.
+It creates the test class in a function.
+This way, adding tests for a new implementation only takes one line.
+
+```python {cmd id="_test.testbothqueues" error_expected}
+# testbothqueues.py
+import unittest
+from ds2.test.testqueue import TestQueue
+from ds2.queue import ListQueue, LinkedQueue
+
+def _test(queue_class):
+    class QueueTests(unittest.TestCase, TestQueue):
+        Queue = queue_class
+    return QueueTests
+
+TestLinkedQueue = _test(LinkedQueue)
+TestListQueue = _test(ListQueue)
+# TestYetAnotherQueue = _test(YetAnotherQueue)
+# TestCrazyOtherQueue = _test(CrazyOtherQueue)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+Notice that ten tests were executed, five for each implementation.
+This is the pattern used extensively in the tests for the code in this book.
+You are encouraged to look at the code on github and especially the tests.
+
 
 ## The Main Lessons:
 

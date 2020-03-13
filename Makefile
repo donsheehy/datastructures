@@ -9,7 +9,7 @@ TEX = tex/main.tex tex/generated/pygments_macros.tex tex/titlepage.tex
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile test docs pdf clean weave
+.PHONY: help Makefile test docs pdf clean weave tangle
 
 test:
 	nosetests --with-coverage
@@ -25,7 +25,10 @@ tex/generated/pygments_macros.tex :
 
 tex/generated/%.tex: prose/%.md
 	prosecode tangle $< --srcdir ds2/
-	prosecode weave $< --outfile $@ --execute True
+	prosecode weave $< --outfile $@ --execute
+
+tangle:
+	$(foreach mdfile, $(MD), prosecode tangle $(mdfile) --srcdir ds2/;)
 
 clean:
 	$(foreach mdfile, $(MD), prosecode cleanup $(mdfile) --srcdir ds2/;)
