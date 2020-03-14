@@ -3,6 +3,7 @@ SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = docsource
 BUILDDIR      = docsource/build
 MD:= $(wildcard prose/*.md)
+TANGLED:= $(MD:prose/%.md=ds2/.tangled%)
 GENERATEDTEX:= $(MD:prose/%.md=tex/generated/%.tex)
 TEX = tex/main.tex tex/generated/pygments_macros.tex tex/titlepage.tex
 # Put it first so that "make" without argument is like "make help".
@@ -24,11 +25,13 @@ tex/generated/pygments_macros.tex :
 	prosecode styledefs --outfile tex/generated/pygments_macros.tex
 
 tex/generated/%.tex: prose/%.md
-	prosecode tangle $< --srcdir ds2/
 	prosecode weave $< --outfile $@ --execute
 
-tangle:
-	$(foreach mdfile, $(MD), prosecode tangle $(mdfile) --srcdir ds2/;)
+ds2/.tangled% : prose/%.md
+	prosecode tangle $< --srcdir ds2/
+	@touch $@
+
+tangle: $(TANGLED)
 
 clean:
 	$(foreach mdfile, $(MD), prosecode cleanup $(mdfile) --srcdir ds2/;)

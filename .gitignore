@@ -3,6 +3,7 @@ tex/generated
 tex/fullbook.*
 figures/*.png
 archive
+ds2/.tangled*
 
 # LaTeX stuff
 *.fls
