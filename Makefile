@@ -12,7 +12,7 @@ help:
 
 .PHONY: help Makefile test docs pdf clean weave tangle
 
-test:
+test: tangle
 	nosetests --with-coverage
 
 docs:	Makefile
