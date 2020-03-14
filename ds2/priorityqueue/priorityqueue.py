@@ -9,10 +9,13 @@ class Entry:
         return self.priority < other.priority
 
 class PriorityQueue:
-    def __init__(self, entries = None, key = lambda x: x):
-        if entries is None: entries = []
+    def __init__(self,
+                 items = (),
+                 entries = (),
+                 key = lambda x: x):
         self._key = key
         self._entries = [Entry(i, p) for i, p in entries]
+        self._entries.extend([Entry(i, key(i)) for i in items])
         self._itemmap = {entry.item : index
                          for index, entry in enumerate(self._entries)}
         self._heapify()
@@ -85,3 +88,12 @@ class PriorityQueue:
         for i in reversed(range(n)):
             self._downheap(i)
 
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if len(self) > 0:
+            return self.removemin()
+        else:
+            raise StopIteration

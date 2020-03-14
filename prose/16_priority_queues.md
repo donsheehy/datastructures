@@ -235,10 +235,13 @@ The full code including the `_heapify` method is given below.  This full version
 
 ```python {cmd id="_priorityqueue.priorityqueue_01" continue="_priorityqueue.priorityqueue_00"}
 class PriorityQueue:
-    def __init__(self, entries = None, key = lambda x: x):
-        if entries is None: entries = []
+    def __init__(self,
+                 items = (),
+                 entries = (),
+                 key = lambda x: x):
         self._key = key
         self._entries = [Entry(i, p) for i, p in entries]
+        self._entries.extend([Entry(i, key(i)) for i in items])
         self._itemmap = {entry.item : index
                          for index, entry in enumerate(self._entries)}
         self._heapify()
@@ -324,4 +327,52 @@ for i in range(n):
 
 # These should print in decreasing order.
 print([maxheap.removemin() for i in range(n)])
+```
+
+
+
+## Iterating over a Priority Queue
+
+For many operations that use a priority queue, one wants to get the items one at a time, possibly add new items and then repeat until there is nothing left.
+This is a little strange compared to other iterators that we've seen, because it will modify the data structure.
+In fact, it will destroy it.
+For this reason, we don't want to create an iterator object for the priority queue.
+We want the priority queue itself to be an iterator.
+
+Recall that in order to be an iterator, the object must have both an `__iter__` method and a `__next__` method.
+The `__iter__` method is supposed to return an iterator, which in this case, is just the priority queue itself.
+
+```python {cmd id="_priorityqueue.priorityqueue_02" continue="_priorityqueue.priorityqueue_01"}
+    def __iter__(self):
+        return self
+```
+
+The `__next__` method will return the next item, assuming there is one.
+It also should raise `StopIteration` if there is nothing left.
+This will signal the end of a `for` loop for example.
+
+```python {cmd id="_priorityqueue.priorityqueue_03" continue="_priorityqueue.priorityqueue_02"}
+    def __next__(self):
+        if len(self) > 0:
+            return self.removemin()
+        else:
+            raise StopIteration
+```
+
+
+## Heapsort
+
+```python {cmd id="_sorting.heapsort"}
+from ds2.priorityqueue import PriorityQueue
+
+def heapsort(L):
+    H = PriorityQueue(L)
+    L[:] = [item for item in H]
+```
+
+```python {cmd continue="_sorting.heapsort"}
+L = [3,2,4,1, 6, 5]
+print("before heapsort:", L)
+heapsort(L)
+print("after heapsort: ", L)
 ```

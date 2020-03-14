@@ -9,3 +9,4 @@ from ds2.sorting.mergesort_iter import mergesort as mergesort_iter
 from ds2.sorting.quicksort import quicksort
 from ds2.sorting.quicksort_long import quicksort as quicksort_long
 from ds2.sorting.quicksort_long import quicksorted
+from ds2.sorting.heapsort import heapsort

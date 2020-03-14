@@ -9,7 +9,8 @@ from ds2.sorting import (dumbsort,
                         mergesort_iter,
                         quicksort,
                         quicksort_long,
-                        quicksorted
+                        quicksorted,
+                        heapsort,
                         )
 
 class SortingTests:
@@ -57,6 +58,7 @@ TestMergeSort = _test(mergesort)
 TestMergeSortIter = _test(mergesort_iter)
 TestQuickSort = _test(quicksort)
 TestQuickSortLong = _test(quicksort_long)
+TestHeapSort = _test(heapsort)
 
 class TestQuickSorted(unittest.TestCase):
     def testsmallexample(self):

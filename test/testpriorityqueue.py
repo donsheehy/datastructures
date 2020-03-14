@@ -55,8 +55,8 @@ class TestPriorityQueue(unittest.TestCase, PQTests):
     PQ = PriorityQueue
 
     def testinitwihtentries(self):
-        P = self.PQ([('a', 3), ('b', 6), ('c', 4)])
-        P = self.PQ((i,i) for i in reversed(range(100)))
+        P = self.PQ(entries = [('a', 3), ('b', 6), ('c', 4)])
+        P = self.PQ(entries = ((i,i) for i in reversed(range(100))))
         for i in range(100):
             self.assertEqual(P.removemin(), i)
 
