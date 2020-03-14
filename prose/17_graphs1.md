@@ -303,12 +303,16 @@ print('It works now!')
 
 # Graph Search
 
+```python {cmd id="graph"}
+from ds2.graph import AdjacencySetGraph as Graph
+```
+
 Now that we have a vocabulary for dealing with graphs, we can revisit some previous topics.
 For example, a tree can now be viewed as a graph with edges directed from parents to children.
 Given a graph that represents a rooted tree, we could rewrite our preorder traversal using the Graph ADT.
 Let's say we just want to print all the vertices.
 
-```python {cmd id="graphprintall1"}
+```python {cmd id="graphprintall1" continue="graph"}
 def printall(G, v):
     print(v)
     for n in G.nbrs(v):
@@ -316,8 +320,6 @@ def printall(G, v):
 ```
 
 ```python {cmd continue="graphprintall1"}
-from ds2.graph import AdjacencySetGraph as Graph
-
 G = Graph({1,2,3,4}, {(1,2), (1,3), (1,4)})
 printall(G, 1)
 ```
@@ -329,7 +331,7 @@ We will take the same approach as Hansel and Gretel: we're going to leave bread 
 The easiest way to do this is to just keep around a set that stores the vertices that have been already visited in the search.
 Thus, our `printall` method becomes the following.
 
-```python {cmd id="graphprintall2"}
+```python {cmd id="graphprintall2" continue="graph"}
 def printall(G, v, visited):
     visited.add(v)
     print(v)
@@ -339,8 +341,6 @@ def printall(G, v, visited):
 ```
 
 ```python {cmd continue="graphprintall2"}
-from ds2.graph import AdjacencySetGraph as Graph
-
 G = Graph({1,2,3,4}, {(1,2), (2,3), (3,4), (4,1)})
 printall(G, 1, set())
 ```
@@ -359,17 +359,23 @@ It will always prioritize moving "outward" in the direction of new vertices, bac
 The `printall` method above prints the vertices in a **depth-first order**.
 Below is the general form of this algorithm.
 
-```python {cmd id="graphdfs_01" continue="_graph.adjacencysetgraph_02"}
-    def dfs(self, v):
-        visited = {v}
-        self._dfs(v, visited)
-        return visited
+```python {cmd id="graphdfs_01" continue="graph"}
+def dfs(G, v):
+    visited = {v}
+    _dfs(G, v, visited)
+    return visited
 
-    def _dfs(self, v, visited):
-        for n in self.nbrs(v):
-            if n not in visited:
-                visited.add(n)
-                self._dfs(n, visited)
+def _dfs(G, v, visited):
+    for n in G.nbrs(v):
+        if n not in visited:
+            visited.add(n)
+            _dfs(G, n, visited)
+```
+
+```python {cmd continue="graphdfs_01"}
+G = Graph({1,2,3,4}, {(1,2), (2,3), (3,4), (4,2)})
+print('reachable from 1:', dfs(G, 1))
+print('reachable from 2:', dfs(G, 2))
 ```
 
 With this code, it will be easy to check if two vertices are connected.
@@ -377,14 +383,14 @@ For example, one could write the following.
 
 ```python {cmd id="graphconnected_01" continue="graphdfs_01"}
 def connected(G, u, v):
-    return v in G.dfs(u)
+    return v in dfs(G, u)
 ```
 
 We can try this code on a small example to see.
 Notice that it is operating on a directed graph.
 
 ```python {cmd continue="graphconnected_01"}
-G = AdjacencySetGraph({1,2,3,4}, {(1,2), (2,3), (3,4), (4,2)})
+G = Graph({1,2,3,4}, {(1,2), (2,3), (3,4), (4,2)})
 
 print("1 is connected to 4:", connected(G, 1, 4))
 print("4 is connected to 3:", connected(G, 4, 3))
@@ -401,17 +407,23 @@ The resulting tree is called the **depth-first search tree**.
 It requires only a small change to generate it.
 We use the convention that the starting vertex maps to `None`.
 
-```python {cmd id="graphdfs_02" continue="_graph.adjacencysetgraph_02"}
-    def dfs(self, v):
-        tree = {v: None}
-        self._dfs(v, tree)
-        return tree
+```python {cmd id="graphdfs_02" continue="graph"}
+def dfs(G, v):
+    tree = {v: None}
+    _dfs(G, v, tree)
+    return tree
 
-    def _dfs(self, v, tree):
-        for n in self.nbrs(v):
-            if n not in tree:
-                tree[n] = v
-                self._dfs(n, tree)
+def _dfs(G, v, tree):
+    for n in G.nbrs(v):
+        if n not in tree:
+            tree[n] = v
+            _dfs(G, n, tree)
+```
+
+```python {cmd continue="graphdfs_02"}
+G = Graph({1,2,3,4}, {(1,2), (2,3), (3,4), (4,2)})
+print('dfs tree from 1:', dfs(G, 1))
+print('dfs tree from 2:', dfs(G, 2))
 ```
 
 ## Removing the Recursion
@@ -423,17 +435,30 @@ This is not just an academic exercise.
 By removing the recursion, we will reveal the structure of the algorithm in a way that will allow us to generalize it to other algorithms.
 Here's the code.
 
-```python {cmd id="_graph.adjacencysetgraph_03" continue="_graph.adjacencysetgraph_02"}
-    def dfs(self, v):
-        tree = {}
-        tovisit = [(None, v)]
-        while tovisit:
-            a,b = tovisit.pop()
-            if b not in tree:
-                tree[b] = a
-                for n in self.nbrs(b):
-                    tovisit.append((b,n))
-        return tree
+```python {cmd id="_graph.graphsearch_00" hide}
+from ds2.queue import ListQueue as Queue
+from ds2.priorityqueue import PriorityQueue
+from ds2.graph import Graph
+
+```
+
+```python {cmd id="_graph.graphsearch_01" continue="_graph.graphsearch_00"}
+def dfs(self, v):
+    tree = {}
+    tovisit = [(None, v)]
+    while tovisit:
+        a,b = tovisit.pop()
+        if b not in tree:
+            tree[b] = a
+            for n in self.nbrs(b):
+                tovisit.append((b,n))
+    return tree
+```
+
+```python {cmd continue="_graph.graphsearch_01"}
+G = Graph({1,2,3,4}, {(1,2), (2,3), (3,4), (4,2)})
+print('dfs tree from 1:', dfs(G, 1))
+print('dfs tree from 2:', dfs(G, 2))
 ```
 
 ## Breadth-First Search
@@ -441,24 +466,31 @@ Here's the code.
 We get another important traversal by replacing the stack with a queue.
 In this case, the search prioritizes breadth over depth, resulting in a **breadth-first search** of **BFS**.
 
-```python {cmd id="_graph.adjacencysetgraph_04" continue="_graph.adjacencysetgraph_03"}
-    def bfs(self, v):
-        tree = {}
-        tovisit = Queue()
-        tovisit.enqueue((None, v))
-        while tovisit:
-            a,b = tovisit.dequeue()
-            if b not in tree:
-                tree[b] = a
-                for n in self.nbrs(b):
-                    tovisit.enqueue((b,n))
-        return tree
+```python {cmd id="_graph.graphsearch_02" continue="_graph.graphsearch_01"}
+def bfs(G, v):
+    tree = {}
+    tovisit = Queue()
+    tovisit.enqueue((None, v))
+    while tovisit:
+        a,b = tovisit.dequeue()
+        if b not in tree:
+            tree[b] = a
+            for n in G.nbrs(b):
+                tovisit.enqueue((b,n))
+    return tree
 ```
+
+```python {cmd continue="_graph.graphsearch_02"}
+G = Graph({1,2,3,4}, {(1,2), (2,3), (3,4), (4,2)})
+print('bfs tree from 1:', bfs(G, 1))
+print('bfs tree from 2:', bfs(G, 2))
+```
+
 
 A wonderful property of breadth-first search is that the paths encoded in the resulting **breadth-first search tree** are the shortest paths from each vertex to the starting vertex.
 Thus, BFS can be used to find the shortest path connecting pairs of vertices in a graph.
 
-```python {cmd id="graphdistance_01" continue="_graph.adjacencysetgraph_04"}
+```python {cmd id="_graph.graphsearch_03" continue="_graph.graphsearch_02"}
 def distance(G, u, v):
     tree = G.bfs(u)
     if v not in tree:
@@ -470,8 +502,8 @@ def distance(G, u, v):
     return edgecount
 ```
 
-```python {cmd continue="graphdistance_01"}
-G = AdjacencySetGraph({1,2,3,4,5}, {(1,2), (2,3), (3,4), (4,5)})
+```python {cmd continue="_graph.graphsearch_03"}
+G = Graph({1,2,3,4,5}, {(1,2), (2,3), (3,4), (4,5)})
 print("distance from 1 to 5:", distance(G, 1, 5))
 print("distance from 2 to 5:", distance(G, 2, 5))
 print("distance from 3 to 4:", distance(G, 3, 4))
@@ -537,27 +569,29 @@ So, if we use this edge, the shortest path to `v` will go through `u`.
 In this way, the tree will encode all the shortest paths from the start vertex.
 Thus, the result will be not only the lengths of all the paths, but also an efficient encoding of the paths themselves.
 
-```python {cmd id="_graph.digraph_01" continue="_graph.digraph_00"}
-    def dijkstra(self, v):
-        tree = {}
-        D = {v: 0}
-        tovisit = PriorityQueue()
-        tovisit.insert((None,v), 0)
-        while tovisit:
-            a,b = tovisit.removemin()
-            if b not in tree:
-                tree[b] = a
-                if a is not None:
-                    D[b] = D[a] + self.wt(a,b)
-                for n in self.nbrs(b):
-                    tovisit.insert((b,n), D[b] + self.wt(b,n))
-        return tree, D
+
+
+```python {cmd id="_graph.graphsearch_04" continue="_graph.graphsearch_03"}
+def dijkstra(G, v):
+    tree = {}
+    D = {v: 0}
+    tovisit = PriorityQueue()
+    tovisit.insert((None,v), 0)
+    while tovisit:
+        a,b = tovisit.removemin()
+        if b not in tree:
+            tree[b] = a
+            if a is not None:
+                D[b] = D[a] + G.wt(a,b)
+            for n in G.nbrs(b):
+                tovisit.insert((b,n), D[b] + G.wt(b,n))
+    return tree, D
 ```
 
 Let's write a little code to see how this works.
 We'll add a function to write out the path in the tree and then we'll display all the shortest paths found by the algorithm.
 
-```python {cmd id="shortestpaths" continue="_graph.digraph_02"}
+```python {cmd id="shortestpaths" continue="_graph.graphsearch_04"}
 def path(tree, v):
     path = []
     while v is not None:
@@ -566,13 +600,13 @@ def path(tree, v):
     return ' --> '.join(path)
 
 def shortestpaths(G, v):
-    tree, D = G.dijkstra(v)
+    tree, D = dijkstra(G, v)
     for v in G.vertices():
         print('Vertex', v, ':', path(tree, v), ", distance = ", D[v])
 ```
 
 ```python {cmd continue="shortestpaths"}
-G = Digraph({1,2,3}, {(1,2, 4.6), (2, 3, 9.2), (1, 3, 3.1)})
+G = Graph({1,2,3}, {(1,2, 4.6), (2, 3, 9.2), (1, 3, 3.1)})
 shortestpaths(G, 1)
 print('------------------------')
 # Adding an edge creates a shortcut to vertex 2.
@@ -606,24 +640,24 @@ This is a contradiction, because we assumed that we started with the MST.
 So, in light of our previous graph algorithms, we can try to always add the lightest edge from the visited vertices to an unvisited vertex.
 This can easily be encoded in a priority queue.
 
-```python {cmd id="_graph.digraph_02", continue="_graph.digraph_01"}
-    def prim(self):
-        v = next(iter(self.vertices()))
-        tree = {}
-        tovisit = PriorityQueue()
-        tovisit.insert((None, v), 0)
-        while tovisit:
-            a,b = tovisit.removemin()
-            if b not in tree:
-                tree[b] = a
-                for n in self.nbrs(b):
-                    tovisit.insert((b,n), self.wt(b,n))
-        return tree
+```python {cmd id="_graph.graphsearch_05", continue="_graph.graphsearch_04"}
+def prim(G):
+    v = next(iter(G.vertices()))
+    tree = {}
+    tovisit = PriorityQueue()
+    tovisit.insert((None, v), 0)
+    while tovisit:
+        a,b = tovisit.removemin()
+        if b not in tree:
+            tree[b] = a
+            for n in G.nbrs(b):
+                tovisit.insert((b,n), G.wt(b,n))
+    return tree
 ```
 
 The following example clearly shows that the minimum spanning tree and the shortest path tree are not the same.
 
-```python {cmd id="msts" continue="_graph.graph_00"}
+```python {cmd id="msts" continue="_graph.graphsearch_05"}
 G = Graph({1,2,3,4,5}, {(1, 2, 1),
                         (2, 3, 1),
                         (1, 3, 2),
@@ -631,8 +665,8 @@ G = Graph({1,2,3,4,5}, {(1, 2, 1),
                         (3, 5, 3),
                         (4, 5, 2),
                        })
-mst = G.prim()
-sp, D = G.dijkstra(1)
+mst = prim(G)
+sp, D = dijkstra(G, 1)
 print(mst)
 print(sp)
 ```
@@ -658,23 +692,25 @@ If we find that `D[n] > D[u] + G.wt(u,n)`, then it would be a shorter path to `n
 
 Here's the code.
 
-```python {cmd id="dijkstra2" continue="_graph.digraph_02"}
-    def dijkstra2(self, v):
-        tree = {v: None}
-        D = {u: float('inf') for u in self.vertices()}
-        D[v] = 0
-        tovisit = PriorityQueue([(u, D[u]) for u in self.vertices()])
-        while tovisit:
-            u = tovisit.removemin()
-            for n in self.nbrs(u):
-                if D[u] + self.wt(u,n) < D[n]:
-                    D[n] = D[u] + self.wt(u,n)
-                    tree[n] = u
-                    tovisit.changepriority(n, D[n])
-        return tree, D
+```python {cmd id="_graph.graphsearch_06" continue="_graph.graphsearch_05"}
+def dijkstra2(G, v):
+    tree = {v: None}
+    D = {u: float('inf') for u in G.vertices()}
+    D[v] = 0
+    tovisit = PriorityQueue([(u, D[u]) for u in G.vertices()])
+    while tovisit:
+        u = tovisit.removemin()
+        for n in G.nbrs(u):
+            if D[u] + G.wt(u,n) < D[n]:
+                D[n] = D[u] + G.wt(u,n)
+                tree[n] = u
+                tovisit.changepriority(n, D[n])
+    return tree, D
 ```
 
-```python {cmd continue="dijkstra2"}
+```python {cmd continue="_graph.graphsearch_06"}
+from ds2.graph import Digraph
+
 V = {1,2,3,4,5}
 E = {(1,2,1),
      (2,3,2),
@@ -683,7 +719,7 @@ E = {(1,2,1),
      (2,5,2)
     }
 G = Digraph(V, E)
-tree, D = G.dijkstra2(1)
+tree, D = dijkstra2(G, 1)
 print(tree, D)
 ```
 
