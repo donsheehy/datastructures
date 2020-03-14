@@ -165,7 +165,7 @@ The `put` method also keeps track of the length, i.e. the number of entries in e
 ### The `floor` function
 
 The `floor` function is just a slightly fancier version of `get`.
-It also does a binary search, but it has different behavior when the key is not found, depending on whether the last search was to the left or to the right.  Starting from any node, if we search to the right and the result is `None`, then we return the the node itself.
+It also does a binary search, but it has different behavior when the key is not found, depending on whether the last search was to the left or to the right.  Starting from any node, if we search to the right and the result is `None`, then we return the node itself.
 If we search to the left and the result is `None`, we also return `None`.
 
 ```python {cmd id="_orderedmapping.bstmapping_04" continue="_orderedmapping.bstmapping_03"}
