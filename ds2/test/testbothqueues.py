@@ -1,12 +1,12 @@
 # testbothqueues.py
 import unittest
-from ds2.test.testqueue import TestQueue
+from ds2.test.testqueue import QueueTests
 from ds2.queue import ListQueue, LinkedQueue
 
 def _test(queue_class):
-    class QueueTests(unittest.TestCase, TestQueue):
+    class QueueTestCase(unittest.TestCase, QueueTests):
         Queue = queue_class
-    return QueueTests
+    return QueueTestCase
 
 TestLinkedQueue = _test(LinkedQueue)
 TestListQueue = _test(ListQueue)

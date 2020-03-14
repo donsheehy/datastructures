@@ -370,7 +370,7 @@ Remember extending means inheriting from.
 
 ```python {cmd id="_test.testqueue"}
 # testqueue.py
-class TestQueue:
+class QueueTests:
     def testinit(self):
         q = self.Queue()
 
@@ -418,10 +418,10 @@ Here are our new test files.
 ```python {cmd id="_test.testlistqueue" error_expected}
 # testlistqueue.py
 import unittest
-from ds2.test.testqueue import TestQueue
+from ds2.test.testqueue import QueueTests
 from ds2.queue import ListQueue
 
-class TestListQueue(unittest.TestCase, TestQueue):
+class TestListQueue(unittest.TestCase, QueueTests):
     Queue = ListQueue
 
 if __name__ == '__main__':
@@ -431,10 +431,10 @@ if __name__ == '__main__':
 ```python {cmd id="_test.testlinkedqueue" error_expected}
 # testlinkedqueue.py
 import unittest
-from ds2.test.testqueue import TestQueue
+from ds2.test.testqueue import QueueTests
 from ds2.queue import LinkedQueue
 
-class TestListQueue(unittest.TestCase, TestQueue):
+class TestListQueue(unittest.TestCase, QueueTests):
     Queue = LinkedQueue
 
 if __name__ == '__main__':
@@ -457,13 +457,13 @@ This way, adding tests for a new implementation only takes one line.
 ```python {cmd id="_test.testbothqueues" error_expected}
 # testbothqueues.py
 import unittest
-from ds2.test.testqueue import TestQueue
+from ds2.test.testqueue import QueueTests
 from ds2.queue import ListQueue, LinkedQueue
 
 def _test(queue_class):
-    class QueueTests(unittest.TestCase, TestQueue):
+    class QueueTestCase(unittest.TestCase, QueueTests):
         Queue = queue_class
-    return QueueTests
+    return QueueTestCase
 
 TestLinkedQueue = _test(LinkedQueue)
 TestListQueue = _test(ListQueue)

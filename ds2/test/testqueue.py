@@ -1,5 +1,5 @@
 # testqueue.py
-class TestQueue:
+class QueueTests:
     def testinit(self):
         q = self.Queue()
 

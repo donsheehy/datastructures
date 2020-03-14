@@ -1,9 +1,9 @@
 # testlinkedqueue.py
 import unittest
-from ds2.test.testqueue import TestQueue
+from ds2.test.testqueue import QueueTests
 from ds2.queue import LinkedQueue
 
-class TestListQueue(unittest.TestCase, TestQueue):
+class TestListQueue(unittest.TestCase, QueueTests):
     Queue = LinkedQueue
 
 if __name__ == '__main__':

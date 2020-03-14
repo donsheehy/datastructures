@@ -181,7 +181,7 @@ s.pop()
 s.pop()
 ```
 
-If we look at the error message, it even seems pretty good.
+If we look at the error message, it seems pretty good.
 It says we tried to `pop from empty list`.
 But if you look at the code, you might ask, "What list?"
 We know how the `ListStack` class is implemented, and the name even gives a hint at its implementation, so we might guess what's going on, but the user does have to search up the stack trace a little to see the line of their own code that caused the problem.
