@@ -40,9 +40,7 @@ As the data are stored as tuples, we have to use an index to pull out the priori
 
 We'll make a class that stores the entries, each will have an `item` and a `priority` as attributes. We'll make the entries comparable by implementing `__lt__` and thus the comparison of entries will always just compare their priorities.
 
-```python {cmd id="_priorityqueue.priorityqueue_00"}
-# priorityqueue.py
-
+```python {cmd id="_priorityqueue.entry"}
 class Entry:
     def __init__(self, item, priority):
         self.priority = priority
@@ -117,7 +115,7 @@ The data structure we'll use for an efficient priority queue is called a **heap*
 
 Matters are complicated by two other vocabulary issues.  First, there are many different kinds of heaps.  We'll study just one example, the so-called binary heap.  Second, the usual word used for the *priority* in a heap is "key".  This can be confusing, because unlike *keys* in mapping data structures, there is no requirement that priorities be unique.  We will stick with the word "priority" despite the usual conventions in order to keep these ideas separate.
 
-We can think of a binary heap as a binary tree that is arranged so that smaller priorities are above larger priorities.  The name is apt as any good heap of stuff should have the big things on the bottom and small things on the top.  For any tree with nodes that have priorities, we say that the **tree is heap-ordered** if for every node, the priority of its children are at least as large as the the priority of the node itself.  This naturally implies that the minimum priority is at the root.
+We can think of a binary heap as a binary tree that is arranged so that smaller priorities are above larger priorities.  The name is apt as any good heap of stuff should have the big things on the bottom and small things on the top.  For any tree with nodes that have priorities, we say that the **tree is heap-ordered** if for every node, the priority of its children are at least as large as the priority of the node itself.  This naturally implies that the minimum priority is at the root.
 
 ## Storing a tree in a list
 
@@ -129,7 +127,10 @@ We will maintain the invariant that after each operation, the list of entries is
 
 Similarly, there is a `_downheap` operation that will repeatedly swap an entry with its child until it's heap-ordered.  This operation is useful in the next section for building a heap from scratch.
 
-```python {cmd id="_priorityqueue.heappq"}
+The main operation used in these methods to rearrange the heap is to swap two items using a method called `_swap`.
+
+
+```python {cmd id="_priorityqueue.heappq_01"}
 from ds2.priorityqueue import Entry
 
 class HeapPQ:
@@ -148,11 +149,15 @@ class HeapPQ:
         right = 2 * i + 2
         return range(left, min(len(self._entries), right + 1))
 
+    def _swap(self, a, b):
+        L = self._entries
+        L[a], L[b] = L[b], L[a]
+
     def _upheap(self, i):
         L = self._entries
         parent = self._parent(i)
         if i > 0 and L[i] < L[parent]:
-            L[i], L[parent] = L[parent], L[i]
+            self._swap(i, parent)
             self._upheap(parent)
 
     def findmin(self):
@@ -172,11 +177,14 @@ class HeapPQ:
         if children:
             child = min(children, key = lambda x: L[x])
             if L[child] < L[i]:
-                L[i], L[child] = L[child], L[i]
+                self._swap(i, child)
                 self._downheap(child)
+
+    def __len__(self):
+        return len(self._entries)
 ```
 
-## Building a Heap from scratch
+## Building a Heap from scratch, `_heapify`
 
 Just using the public interface, one could easily construct a `HeapPQ` from a list of item-priority pairs.  For example, the following code would work just fine.
 
@@ -191,25 +199,25 @@ The `insert` method takes $O(\log n)$ time, so the total running time for this a
 
 Perhaps surprisingly, we can construct the `HeapPQ` in linear time.  We call this **heapifying a list**.  We will exploit the `_downheap` method that we have already written.  The code is deceptively simple.
 
-```python
-def _heapify(self):
-    n = len(self._entries)
-    for i in reversed(range(n)):
-        self._downheap(i)
+```python {cmd id="_priorityqueue.heappq_01" continue="_priorityqueue.heappq_01"}
+    def _heapify(self):
+        n = len(self._entries)
+        for i in reversed(range(n)):
+            self._downheap(i)
 ```
 
-Look at the difference between the `heapify` code above and the `_heapify_slower` code below.  The former works from the end and "downheaps" every entry and the latter starts at the beginning and "upheaps" every entry.  Both are correct, but one is faster.
+Look at the difference between the `heapify` code above and the `_heapify_slower` code below.  The former works from the end and `downheap`s every entry and the latter starts at the beginning and `upheap`s every entry.  Both are correct, but one is faster.
 
-```python
-def _heapify_slower(self):
-    n = len(self._entries)
-    for i in range(n):
-        self._upheap(i)
+```python {cmd id="heapify1" continue="_priorityqueue.heappq_01"}
+    def _heapify_slower(self):
+        n = len(self._entries)
+        for i in range(n):
+            self._upheap(i)
 ```
 
 They may seem to be the same, but they are not.  To see why, we have to look a little closer at the running time of `_upheap` and `_downheap`.  Consider the tree perspective of the list.  For `_upheap`, the running time depends on the depth of the starting node.  For `_downheap`, the running time depends on the height of the subtree rooted at the starting node.  Looking at a complete binary tree, half of the nodes are leaves and so `_downheap` will take constant time and `_upheap` will take $O(\log n)$ time.  Thus, `_heapify_slower` will take at least $\frac{n}{2}\log_2 n = O(n \log n)$ time.  
 
-On the other hand, to analyze `_heapify`, we have to add up the heights of all the nodes in a complete binary tree.  Formally, this will be $n\sum_{i=1}^{\log_2 n}i/2^i$.  There is a cute trick to bound this sum.  Simply observe that if from every node in the tree, we take a path that goes left on the first step and right for every step thereafter, no two paths will overlap.  This means that the the sum of the lengths of these paths (which is also to the sum of the heights) is at most the total number of edges, $n-1$.  Thus, `_heapify` runs in $O(n)$ time.
+On the other hand, to analyze `_heapify`, we have to add up the heights of all the nodes in a complete binary tree.  Formally, this will be $n\sum_{i=1}^{\log_2 n}i/2^i$.  There is a cute trick to bound this sum.  Simply observe that if from every node in the tree, we take a path that goes left on the first step and right for every step thereafter, no two paths will overlap.  This means that the sum of the lengths of these paths (which is also to the sum of the heights) is at most the total number of edges, $n-1$.  Thus, `_heapify` runs in $O(n)$ time.
 
 ## Implicit and Changing Priorities
 
@@ -223,18 +231,25 @@ We will allow an optional parameter to `__init__` to specify the key function.
 The default value of this function will be a function that takes an item and simply returns that same item.
 This way, if no key function is given and no priority is given, the priority will be equal to the item.
 
-There is another "standard" operation on priority queues.  It is called `changepriority`.  It does what it says, reducing the priority of an entry.  
-This is very simple to implement in our current code if the index of the entry to change is known.  
+There is another standard operation on priority queues.  It is called `changepriority`.  It does what it says, changing the priority of an entry.
+This is very simple to implement in our current code if the index of the entry to change is known.
 It would suffice to change the priority of the entry and call `_upheap` and `_downheap` on that index.
 If it needs to move up the heap to recover the heap order invariant, the `_upheap` method will do that.
 If it needs to move down the heap, the `_upheap` method will leave it where it is, and the `_downheap` method will move it down the heap until the heap ordering is recovered.
 
-However, the usual way to reduce the priority is to specify the item and its new priority.  This requires that we can find the index of an item.  We'll do this by storing a dictionary that maps items to indices.  We'll have to update this dictionary every time we rearrange the items.  To make sure this happens correctly, we will add a method for swapping entries and use this whenever we make a swap.  
+However, the usual way to change the priority is to specify the item and its new priority.  This requires us to know the index of an item.
+We'll do this by storing a dictionary that maps items to indices.
+We'll have to update this dictionary every time we rearrange the items.  To make sure this happens correctly, we will add a method for swapping entries and use this whenever we make a swap.  
 
-The full code including the `_heapify` method is given below.  This full version of the priority queue will be very useful for some graph algorithms that we will see soon.
+We will add the ability to initialize the heap with a collection using `_heapify`, setting a `key` function if desired.
+The default parameter for initializing will just be a list of items.
+If instead, one wants to initialize the heap with a collection of `(item, priority)`-pairs, we will use a keyword argument `entries`.
+This full version of the priority queue will be very useful for some graph algorithms that we will see soon.
 
-```python {cmd id="_priorityqueue.priorityqueue_01" continue="_priorityqueue.priorityqueue_00"}
-class PriorityQueue:
+```python {cmd id="_priorityqueue.priorityqueue_01"}
+from ds2.priorityqueue import Entry, HeapPQ
+
+class PriorityQueue(HeapPQ):
     def __init__(self,
                  items = (),
                  entries = (),
@@ -254,13 +269,6 @@ class PriorityQueue:
         self._itemmap[item] = index
         self._upheap(index)
 
-    def _parent(self, i):
-        return (i - 1) // 2
-
-    def _children(self, i):
-        left, right = 2 * i + 1, 2 * i + 2
-        return range(left, min(len(self._entries), right + 1))
-
     def _swap(self, a, b):
         L = self._entries
         va = L[a].item
@@ -268,13 +276,6 @@ class PriorityQueue:
         self._itemmap[va] = b
         self._itemmap[vb] = a
         L[a], L[b] = L[b], L[a]
-
-    def _upheap(self, i):
-        L = self._entries
-        parent = self._parent(i)
-        if i > 0 and L[i] < L[parent]:
-            self._swap(i,parent)
-            self._upheap(parent)
 
     def changepriority(self, item, priority = None):
         if priority is None:
@@ -285,9 +286,6 @@ class PriorityQueue:
         self._upheap(i)
         self._downheap(i)
 
-    def findmin(self):
-        return self._entries[0].item
-
     def removemin(self):
         L = self._entries
         item = L[0].item
@@ -296,24 +294,6 @@ class PriorityQueue:
         L.pop()
         self._downheap(0)
         return item
-
-    def _downheap(self, i):
-        L = self._entries
-        children = self._children(i)
-        if children:
-            child = min(children, key = lambda x: L[x])
-            if L[child] < L[i]:
-                self._swap(i, child)
-                self._downheap(child)
-
-    def __len__(self):
-        return len(self._entries)
-
-    def _heapify(self):
-        n = len(self._entries)
-        for i in reversed(range(n)):
-            self._downheap(i)
-
 ```
 
 We can use the code above to implement a `MaxHeap`, that is a priority queue of items ordered by *decreasing* value.
@@ -362,6 +342,11 @@ This will signal the end of a `for` loop for example.
 
 ## Heapsort
 
+We can use a priority queue to sort a list.
+We just put all the items into a priority queue and then pull them out again in sorted order.
+This method of sorting is traditionally called `heapsort` though it will work with any priority queue.
+
+
 ```python {cmd id="_sorting.heapsort"}
 from ds2.priorityqueue import PriorityQueue
 
@@ -376,3 +361,8 @@ print("before heapsort:", L)
 heapsort(L)
 print("after heapsort: ", L)
 ```
+
+Is this efficient?
+The initialization of the `PriorityQueue` takes only $O(n)$ using our `_heapify` method.
+However, the iteration is going to cost us $O(\log n)$ time per item.
+Thus, the running time will be $O(n\log n)$ just as in `mergesort` or `quicksort`.

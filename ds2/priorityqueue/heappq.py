@@ -16,11 +16,15 @@ class HeapPQ:
         right = 2 * i + 2
         return range(left, min(len(self._entries), right + 1))
 
+    def _swap(self, a, b):
+        L = self._entries
+        L[a], L[b] = L[b], L[a]
+
     def _upheap(self, i):
         L = self._entries
         parent = self._parent(i)
         if i > 0 and L[i] < L[parent]:
-            L[i], L[parent] = L[parent], L[i]
+            self._swap(i, parent)
             self._upheap(parent)
 
     def findmin(self):
@@ -40,5 +44,13 @@ class HeapPQ:
         if children:
             child = min(children, key = lambda x: L[x])
             if L[child] < L[i]:
-                L[i], L[child] = L[child], L[i]
+                self._swap(i, child)
                 self._downheap(child)
+
+    def __len__(self):
+        return len(self._entries)
+
+    def _heapify(self):
+        n = len(self._entries)
+        for i in reversed(range(n)):
+            self._downheap(i)
