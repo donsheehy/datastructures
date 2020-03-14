@@ -274,8 +274,7 @@ def dijkstra(G, v):
     D = {v: 0}
     tovisit = PriorityQueue()
     tovisit.insert((None,v), 0)
-    while tovisit:
-        a,b = tovisit.removemin()
+    for a,b in tovisit:
         if b not in tree:
             tree[b] = a
             if a is not None:
@@ -343,8 +342,7 @@ def prim(G):
     tree = {}
     tovisit = PriorityQueue()
     tovisit.insert((None, v), 0)
-    while tovisit:
-        a,b = tovisit.removemin()
+    for a, b in tovisit:
         if b not in tree:
             tree[b] = a
             for n in G.nbrs(b):
@@ -395,8 +393,7 @@ def dijkstra2(G, v):
     D = {u: float('inf') for u in G.vertices()}
     D[v] = 0
     tovisit = PriorityQueue(entries = [(u, D[u]) for u in G.vertices()])
-    while tovisit:
-        u = tovisit.removemin()
+    for u in tovisit:        
         for n in G.nbrs(u):
             if D[u] + G.wt(u,n) < D[n]:
                 D[n] = D[u] + G.wt(u,n)
