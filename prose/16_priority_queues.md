@@ -94,7 +94,7 @@ class SortedListPQ:
         return self._entries.pop().item
 ```
 
-I used a nice feature of the python `sort` method, a named parameter called `reversed` which, as one might guess, reverses the sorting order.
+I used a nice feature of the Python `sort` method, a named parameter called `reversed` which, as one might guess, reverses the sorting order.
 
 
 ```python {cmd continue="_priorityqueue.sortedlistpq"}
@@ -105,7 +105,7 @@ S.insert("bread", 2)
 print([S.removemin() for i in [1,2,3]])
 ```
 
-The asymptotic running time of both `findmin` and `removemin` is reduced to constant-time.  The `insert` method no longer runs in constant time, because it sorts.  This means that the running time will depend on the time it takes to sort.  In this case, assuming no other methods rearrange the (private!) `_entries` attribute, there will be only one entry out of sorted order, the one we just appended.  In this case, a good implementation of insertion sort would run in linear time (it only has to insert one item before everything is sorted).  Although, for code brevity, we called out to python's `sort` method, (which could take $O(n \log n)$-time) this is really a linear-time operation).
+The asymptotic running time of both `findmin` and `removemin` is reduced to constant-time.  The `insert` method no longer runs in constant time, because it sorts.  This means that the running time will depend on the time it takes to sort.  In this case, assuming no other methods rearrange the (private!) `_entries` attribute, there will be only one entry out of sorted order, the one we just appended.  In this case, a good implementation of insertion sort would run in linear time (it only has to insert one item before everything is sorted).  Although, for code brevity, we called out to Python's `sort` method, (which could take $O(n \log n)$-time) this is really a linear-time operation).
 
 What we have with our two list implementations of the priority queue ADT is **tradeoff** between two operations.  In one case, we have fast `insert` and slow `removemin` and in the other we have slow `insert` and fast `removemin`.  Our goal will be to get all of the operations pretty fast.  We may not achieve constant time for all, but logarithmic-time is achievable.
 

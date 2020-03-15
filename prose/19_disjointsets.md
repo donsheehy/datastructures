@@ -1,7 +1,7 @@
 # (Disjoint) Sets
 
 The chapter on mappings explains how we might hope to get constant time operations for many set operations.
-It also makes clear why one cannot create a set of sets in python (at least, not directly).
+It also makes clear why one cannot create a set of sets in Python (at least, not directly).
 The elements of a set must be hashable because they are stored in a hash table.
 If you have sets that will not change, you can use the immutable `frozenset` data structure to store the sets and achieve many of of the benefits of `set`, while also being hashable.
 

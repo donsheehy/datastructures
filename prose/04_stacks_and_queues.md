@@ -23,7 +23,7 @@ This is important both as a definition, but also as a guiding design idea in obj
 > **The ADT should be independent of all concerns about its implementation.**
 
 You may have noticed that the two questions ADTs answer are related to the definition of **encapsulation** we gave in our earlier discussion of object-oriented programming.
-As such, when we implement data structures in python, we will package them as classes.
+As such, when we implement data structures in Python, we will package them as classes.
 
 ## The Stack ADT
    - **push** - add a new item to the stack.
@@ -157,7 +157,7 @@ class ListQueue(ListQueueFakeDelete):
 
 So, it looks like we lost all the benefits of our lazy update, because now we have a `dequeue` method that sometimes takes linear time.  However, we don't do that *every* time.  How expensive is it really?  If we do all our `enqueue` operations first, and then dequeue all our items afterwards, then some items at the end of the list get moved (i.e. copied to a new memory location during the slicing operation) many times.  The first half of the items don't get moved at all.  The next quarter of the list (from $1/2$ to $3/4$) gets moved exactly one time.  The next eighth of the list moves exactly twice.  Of $n$ total items, there are $n/2^i$ items that get moved $i-1$ times.  Thus the total number of moves for $n$ items is at most $n\sum_{i=1}^{\log n} \frac{i-1}{2^i} < n$.  So, "on average",  the cost per item is constant.  
 
-This kind of lazy update is very important.  In fact, it's how python is able to do `list.pop` quickly.  Technically, `pop()` can also take linear time for some calls but on average, the cost is constant per operation.  The same idea makes `append` fast.  In that case, python allocates extra space for the list and every time it fills up, the list is copied to a bigger area, that roughly doubles in size.
+This kind of lazy update is very important.  In fact, it's how Python is able to do `list.pop` quickly.  Technically, `pop()` can also take linear time for some calls but on average, the cost is constant per operation.  The same idea makes `append` fast.  In that case, Python allocates extra space for the list and every time it fills up, the list is copied to a bigger area, that roughly doubles in size.
 
 ## Dealing with errors
 
@@ -166,7 +166,7 @@ This is also considered part of the semantics of the class and it affects how we
 We would like to write error-free code.
 We'd like to make it so that it always works no matter how it gets misused, but sometimes, an error message is the correct behavior.
 
-In python we **raise an error** the way one might throw an egg.
+In Python, we **raise an error** the way one might throw an egg.
 Either someone gently catches it or it crashes.
 Depending on the situation, either might be the right thing to do.
 

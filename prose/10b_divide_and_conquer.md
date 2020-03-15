@@ -63,7 +63,7 @@ def merge(A, B, L):
 That last line might look a little strange.
 The right side of the assignment is concatenating the remaining elements from the two lists (of which one should be empty).
 Then, this list is assigned into a slice.
-In its wonderfulness, python allows you to assign into a slice the same way you would assign into an index.
+In its wonderfulness, Python allows you to assign into a slice the same way you would assign into an index.
 
 We could also use some more logic in the loop to avoid this last step, though I have found students disagree as to which approach is simpler.
 
@@ -81,12 +81,12 @@ def merge(A, B, L):
 
 The complex `if` statement above relies heavily on something called **short-circuited** evaluation of boolean expressions.
 If we have a boolean operation like `or`, and the first operand is `True`, then we don't have to evaluate the second operand to find out that the overall result will be `True`.
-Using this fact, python will not even evaluate the second operand.
+Using this fact, Python will not even evaluate the second operand.
 Similarly, if we have an `and` expression and the first operand is `False`, then the second operand is never evaluated.
 The key to remember is that the order does matter here.
 The expression `(i < len(A) and A[i] < B[j]) or j == len(B)` is logically equivalent, but if we use this  expression instead, it will raise an IndexError when `j == len(B)`.
 
-Short-circuit evaluation is *not* part of python magic, it's a standard feature in most programming languages.
+Short-circuit evaluation is *not* part of Python magic, it's a standard feature in most programming languages.
 
 ### An Analysis
 
@@ -112,11 +112,11 @@ So, we have $\log n$ levels, each costing $O(n)$, and thus, the total cost is $O
 ### Merging Iterators
 
 The merge operation is another example of using some structure on our data (that two lists are themselves sorted) to perform some operation quickly (find the minimum overall element in constant time).
-However, after you've written enough python, you might start to feel like you are doing something wrong if you are messing around with a lot of indices.
+However, after you've written enough Python, you might start to feel like you are doing something wrong if you are messing around with a lot of indices.
 When possible, it is much nicer to use iterators.
 We'll use this problem as an example to motivate some deeper study into iterators.
 
-Recall that an object is an **Iterable** in python if it has a method called `__iter__` that returns an iterator,
+Recall that an object is an **Iterable** in Python if it has a method called `__iter__` that returns an iterator,
 and an **Iterator** is a object that has an `__iter__` method and a `__next__` method.
 These magic methods are called *from the outside* as `iter(my_iterable)` and `next(my_iterator)`.
 They are most commonly used by the `for` keyword either in for loops or in **generator expressions** as in comprehensions.
@@ -146,13 +146,13 @@ L = [2 * x for x in iterator2]
 
 Iterators are a fundamental pattern in object-oriented programming and they appear in other programming languages with slightly different methods.
 For example, some programming languages have iterators that support a `hasnext` method that can tell in advance whether there is another item to iterate over.
-In a standard python iterator, you simply try to get the next item and it will raise `StopIteration` if there isn't one.
-This is an example of python's *easier to ask forgiveness than permission (EAFP)* approach.
+In a standard Python iterator, you simply try to get the next item and it will raise `StopIteration` if there isn't one.
+This is an example of Python's *easier to ask forgiveness than permission (EAFP)* approach.
 Checking in advance is like asking for permission.
 However, such a method can be handy.
 With it, one might also want a method called `peek` that will return the next item without advancing past it.
 
-Here is how one might implement these methods in python.
+Here is how one might implement these methods in Python.
 The `BufferedIterator` class below is built from any iterator.
 It stays one step of the iteration ahead of the user and stores the next item in a buffer.
 
@@ -204,7 +204,7 @@ def merge(A, B):
 
 This iterator looks very different from our previous one.
 First of all, it's not a class, but appears to just be a method.
-This is a slick python way of defining a simple iterator.
+This is a slick Python way of defining a simple iterator.
 The method here has `yield` statements instead of `return` statements.
 Python recognizes this and creates a **generator** object.
 Calling `merge` will return an object of type `generator`.

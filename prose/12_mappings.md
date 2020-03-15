@@ -3,13 +3,13 @@
 A **mapping** is an association between two sets of things.  It associates a value to a key.  We  refer to these associated pairs as **key-value pairs**.
 Keys must be unique, so that there can only be one value associated with a given key.
 
-The standard built-in data type in python for mappings is the dictionary (`dict`).
-This kind of mapping is used by python itself to associate names of variables (strings) with objects.
+The standard built-in data type in Python for mappings is the dictionary (`dict`).
+This kind of mapping is used by Python itself to associate names of variables (strings) with objects.
 In the notation for dictionaries, we would write `d[some_key] = some_value`.
 This either creates a new key-value pair if `some_key` was not already in the dictionary, or it overwrites the existing pair with key `some_key`.
 
 Not all programming languages come with a built-in data type for mappings.
-We're going to pretend for a short time that we don't have a python dictionary available to us and go through the process of implementing one ourselves.  This will allow us to resolve one of the major unsolved mysteries from earlier in the course:
+We're going to pretend for a short time that we don't have a Python dictionary available to us and go through the process of implementing one ourselves.  This will allow us to resolve one of the major unsolved mysteries from earlier in the course:
 
 > Why does accessing or assigning a value in a dictionary take only constant time?
 
@@ -22,7 +22,7 @@ It supports the following methods.
 
   - **`put(k, v)`** - Add the key-value pair `(k,v)` to the mapping.
 
-These are the two main operations.  They are what make a mapping, and are generally implemented as `__getitem__` and `__setitem__` in python in order to support the familiar square bracket notation.  We will put off anything more elaborate for now.  When we get into some implementations, we will put some other conditions on the keys.
+These are the two main operations.  They are what make a mapping, and are generally implemented as `__getitem__` and `__setitem__` in Python in order to support the familiar square bracket notation.  We will put off anything more elaborate for now.  When we get into some implementations, we will put some other conditions on the keys.
 
 ## A minimal implementation
 
@@ -110,7 +110,7 @@ for k, v in d.items():
     print(k, v)
 ```
 
-We'll add the same kind of functionality to our Mapping ADT.  So, the **extended Mapping ADT** includes the following methods (with get and put renamed for python magic).
+We'll add the same kind of functionality to our Mapping ADT.  So, the **extended Mapping ADT** includes the following methods (with get and put renamed for Python magic).
 
   - `__getitem__(k)`** - return the value associate to the key `k`.  Usually an error (`KeyError`) is raised if the given key is not present.
 
@@ -191,7 +191,7 @@ Our goal is to to get the same kind of constant-time operations as in the `dict`
 We're going to store a list of `ListMappings`.
 For any key `k`,  we want to compute the index of the *right* `ListMapping` for `k`.  We often call these `ListMapping`s *buckets*.  This term goes back to the idea that you can quickly group items into buckets.  Then, when looking for something in a bucket, you can check all the items in there assuming there aren’t too many.
 
-This means, we want an integer, i.e. the index into our list of buckets.  A **hash function** takes a key and returns an integer.  Most classes in python implement a method called `__hash__` that does just this.  We can use it to implement a simple mapping scheme that improves on the `ListMapping`.  
+This means, we want an integer, i.e. the index into our list of buckets.  A **hash function** takes a key and returns an integer.  Most classes in Python implement a method called `__hash__` that does just this.  We can use it to implement a simple mapping scheme that improves on the `ListMapping`.  
 
 ```python {cmd id="_mapping.hashmappingsimple"}
 from ds2.mapping import ListMapping

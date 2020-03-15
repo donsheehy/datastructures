@@ -415,7 +415,7 @@ if __name__ == '__main__':
     somefunction()
 ```
 
-In the preceding code, the message is printed only when the module is executed as a script.  It is not printed (i.e. the `somefunction` function is not called) if the module is being imported.  This is a very common python idiom.
+In the preceding code, the message is printed only when the module is executed as a script.  It is not printed (i.e. the `somefunction` function is not called) if the module is being imported.  This is a very common Python idiom.
 
 One caveat is that modules are only executed the first time they are imported.  If, for example, we import the same module twice, it will only be executed once.  At that point, the namespace exists and can be accessed for the second one.  This also avoids any infinite loops you might try to construct by having two modules, each of which imports the other.
 

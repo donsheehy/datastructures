@@ -122,7 +122,7 @@ for n in [50, 100, 200, 400, 800, 1600, 3200]:
     timetrials(duplicates2, n)
 ```
 
-There is a python shortcut the kind of loop used in `duplicates2`.
+There is a Python shortcut the kind of loop used in `duplicates2`.
 The `any` function takes an iterable collection of booleans and returns `True` if any of the booleans are true.
 You can make an iterable collection in an expression in the same way one does for comprehensions.
 This can be very handy.
@@ -310,7 +310,7 @@ Atomic operations include
  - calling a function
  - returning from a function
 
-Below, there is listings of the asymptotic running time of the most common operations on the standard python collections classes.
+Below, there is listings of the asymptotic running time of the most common operations on the standard Python collections classes.
 You should familiarize yourself with these listings.
 In particular, you should be aware of which operations on collections produce a new copy of the collection.
 For example, concatenation and slicing both produce a new collection and thus the running times are proportional to the length of the newly created collection.
@@ -384,7 +384,7 @@ Notice, that *the exact constant of proportionality is not important for these f
 The *size of the input* refers to the number of bits needed to encode it.
 As we will be ignoring constant factors, we could just as easily refer to the number of words (a word is 64 bits) needed to encode it.
 An integer or a float is generally stored in one word.
-Technically, we can store some really big numbers in a python integer which would require many more words, but as a convention, we will assume that ints and floats fit in a constant number of bits.
+Technically, we can store some really big numbers in a Python integer which would require many more words, but as a convention, we will assume that ints and floats fit in a constant number of bits.
 This is necessary to assume that arithmetic takes constant time.
 
 ## Focus on the Worst Case

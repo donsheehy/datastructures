@@ -10,7 +10,7 @@ def type(x):
 A primary goal of **object-oriented programming** is to make it possible to write code that is close to the way you think about the things your code represents.
 This will make it easier to reason about the code and think through its correctness.
 
-A **class** is a data type.  In python *type* and *class* are (mostly) synonymous.  An **object** is an **instance** of a class.  For example, python has a `list` class.  If I make a list called `mylist`.  Then, `mylist` is an object of type `list`.  
+A **class** is a data type.  In Python, *type* and *class* are (mostly) synonymous.  An **object** is an **instance** of a class.  For example, Python has a `list` class.  If I make a list called `mylist`.  Then, `mylist` is an object of type `list`.  
 
 ```python {cmd id="j32a915x" continue="type02"}
 mylist = []
@@ -19,7 +19,7 @@ print(isinstance(mylist, list))
 print(isinstance(mylist, str))
 ```
 
-There are all kinds of classes built into python.  Some you might not expect.
+There are all kinds of classes built into Python.  Some you might not expect.
 
 ```python {cmd id="j32a89ox" continue="type02"}
 def foo():
@@ -28,7 +28,7 @@ def foo():
 print(type(foo))
 ```
 
-For the advanced students, here is a more exotic example called a generator.  In python you can `yield` instead of `return`.  If so, the result will be something called a generator and not a function.  This powerful idea shows up a lot in python, but we won't really be able to get our head around it until we understand how classes are able to package up data and code.  
+For the advanced students, here is a more exotic example called a generator.  In Python you can `yield` instead of `return`.  If so, the result will be something called a generator and not a function.  This powerful idea shows up a lot in Python, but we won't really be able to get our head around it until we understand how classes are able to package up data and code.  
 
 ```python {cmd id="j32a5vrk" continue="type02"}
 def mygenerator(n):
@@ -87,7 +87,7 @@ print(Vector(5,12).norm())
 
 A function defined in a class is called a **method**.  It is a standard convention to use `self` as the name of the first parameter to a method.  This parameter is object that will generally be operated on by the method.  When, calling the method, you don't have to pass a parameter explicitly for `self`.  Instead, the dot notation fills in this parameter for you.  That is `u.norm()` is translated into `vector.norm(u)`.  
 
-The `__init__` method is called a **initializer**.  Methods like this one that start and end with two underscores are sometimes called the **magic methods** or also **dunder methods**.  You should not make up your own methods starting and ending with two underscores.  That's how python sets them apart so you don't actually call your own methods the same thing.  Also, dunder methods are usually not called explicitly, but instead provide some other means of calling them.  In the case of a initializer, calling the name of the class as a function invokes the initializer.  You've seen this before, such as in `float("3.14159")`.
+The `__init__` method is called a **initializer**.  Methods like this one that start and end with two underscores are sometimes called the **magic methods** or also **dunder methods**.  You should not make up your own methods starting and ending with two underscores.  That's how Python sets them apart so you don't actually call your own methods the same thing.  Also, dunder methods are usually not called explicitly, but instead provide some other means of calling them.  In the case of a initializer, calling the name of the class as a function invokes the initializer.  You've seen this before, such as in `float("3.14159")`.
 
 We will use another magic method to implement addition.
 
@@ -249,7 +249,7 @@ Software engineers use the acronym **DRY**, to mean **Don’t Repeat Yourself**.
 
 ## Duck Typing
 
-Inheritance is considered a staple of object-oriented programming, and it’s important to understand it.  That said, it’s not nearly as useful in Python as it is in other languages.  The reason is that python has built-in (parametric) **polymorphism**.   That means we can pass any type of object we want to a function.  For example, suppose we have a class to store collections of polygons as follows.
+Inheritance is considered a staple of object-oriented programming, and it’s important to understand it.  That said, it’s not nearly as useful in Python as it is in other languages.  The reason is that Python has built-in (parametric) **polymorphism**.   That means we can pass any type of object we want to a function.  For example, suppose we have a class to store collections of polygons as follows.
 
 ```python
 class PolygonCollection:

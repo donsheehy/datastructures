@@ -4,7 +4,7 @@ The **graph** is a fundamental mathematical object in computer science.  Graphs 
 
 A good mental model to start with is a road map of a country.  There are cities and roads connecting those cities.  Graphs are ideal for describing such situations where there are items and connections between them.
 
-Formally, a graph is a pair $(V, E)$ where $V$ is any set and $E$ is a set of pairs of elements of $V$.  We call $V$ the **vertex set** and $E$ the **edge set**.  Just using the definition of a graph and the standard python collections, we could store a graph as follows.
+Formally, a graph is a pair $(V, E)$ where $V$ is any set and $E$ is a set of pairs of elements of $V$.  We call $V$ the **vertex set** and $E$ the **edge set**.  Just using the definition of a graph and the standard Python collections, we could store a graph as follows.
 
 ```python
 G = ({1,2,3,4}, {(1,2), (1,3), (1,4)})
@@ -164,7 +164,7 @@ print("neighbors of 3:", list(G.nbrs(3)))
 Let's do a very simple example to make sure it works as we expect it to.
 
 One design decision that may seem rather strange is that we do not have a class for vertices or edges.
-As of now, we are exploiting the **polymorphism** of python, which allows us to use any (hashable) type for the vertex set.
+As of now, we are exploiting the **polymorphism** of Python, which allows us to use any (hashable) type for the vertex set.
 Recall that polymorphism (in this context) is the ability to call the same function on different types of objects.
 This can be very convenient as it allows one to put a graph structure on top of any set.
 

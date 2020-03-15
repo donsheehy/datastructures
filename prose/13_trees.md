@@ -11,7 +11,7 @@ The nodes that do not have any children are called **leaves** or **leaf nodes**.
 
 There are many many examples of hierarchical (tree-like) structures:
 
-  - Class Hierarchies (assuming single inheritance).  The subclass is the child and the superclasses is the parent.  The python class `object` is the root.
+  - Class Hierarchies (assuming single inheritance).  The subclass is the child and the superclasses is the parent.  The Python class `object` is the root.
   - File folders or directories on a computer can be nested inside other directories.  The parent-child relationship encode containment.
   - The tree of recursive function calls in the execution of a divide-and-conquer algorithm.  The leaves are those calls where the base case executes.
 
@@ -162,7 +162,7 @@ print(str(T))
 ```
 
 To "see" the tree structure in this print out, you find the parent of a node by finding the lowest line above that node that is not at the same indentation level.
-This is a task that you have some training for; it is how you visually parse python file to understand their block structure.
+This is a task that you have some training for; it is how you visually parse Python file to understand their block structure.
 
 
 Although the code above seems to work, it does something terrible.
@@ -255,7 +255,7 @@ It is only a slight change in the code, but it results in a different output.
 
 ## If you want to get fancy...
 
-It was considered a great achievement in python to be able to do this kind of traversal with a generator.  Recursive generators seem a little mysterious, especially at first.  However, if you break down this code and walk through it by hand, it will help you have a better understanding of how generators work.
+It was considered a great achievement in Python to be able to do this kind of traversal with a generator.  Recursive generators seem a little mysterious, especially at first.  However, if you break down this code and walk through it by hand, it will help you have a better understanding of how generators work.
 
 ```python {cmd id="_tree.tree_05" continue="_tree.tree_04"}
     def preorder(self):

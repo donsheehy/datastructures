@@ -119,7 +119,7 @@ The `list` storing the items is kept private so we can enforce that it stays ord
 It looks a bit like a cheat to implement `add` in this way, but we'll see later as we cover sorting algorithms that this might be an efficient approach after all.
 
 The one algorithm in this mix that seems most relevant to improve is the `__contains__` method.
-Even though, we are just calling out to python's built-in method for checking membership in a list, we have some hoping of improving the efficiency because we know that the list is sorted.
+Even though, we are just calling out to Python's built-in method for checking membership in a list, we have some hoping of improving the efficiency because we know that the list is sorted.
 
 Let's replace it with binary search as we implemented it above.
 

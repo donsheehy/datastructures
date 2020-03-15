@@ -185,8 +185,6 @@ If we search to the left and the result is `None`, we also return `None`.
                 return self
 ```
 
-<!-- To parse the expressions above, it's helpful to remember that boolean operations on objects can evaluate to objects.  In particular `False or myobject` evaluates to `myobject`.  Use the python interactive shell to try out some other examples and to see how `and` behaves. -->
-
 ### Iteration
 
 As mentioned above, binary search trees support inorder traversal.  The result of an inorder traversal is that the nodes are yielded *in the order of their keys*.

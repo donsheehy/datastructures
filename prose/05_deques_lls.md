@@ -46,7 +46,7 @@ Instead, we'll store some more information with each item that we can use to ext
 ## Linked Lists
 
 Linked lists are a simple data structure for storing a sequential collection.
-Unlike a standard python list, it will allow us to insert at the beginning quickly.
+Unlike a standard Python list, it will allow us to insert at the beginning quickly.
 The idea is to store the items in individual objects called **nodes**.
 A special node is the head of the list.
 Each node stores a reference to the next node in the list.
@@ -445,7 +445,7 @@ if __name__ == '__main__':
 The classes, `TestListQueue` and `TestLinkedQueue`, extend both `unittest.TestCase` *and* `TestQueue`.
 This is called **multiple inheritance**.
 In other languages like C++ that support multiple inheritance, it is considered a bad design decision.
-However, in python, it is appropriate to use it for this kind of **mix in**.
+However, in Python, it is appropriate to use it for this kind of **mix in**.
 The only thing to remember is that the golden rule of inheritance should still be observed: **inheritance mean 'is a'**.
 
 
