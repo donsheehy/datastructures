@@ -231,3 +231,41 @@ class DisjointSets:
             self._parent[self._root(b)] = self._root(a)
             self._weight[a] += self._weight[b]
 ```
+
+## Kruskall's Algorithm
+
+It is natural to think about the `union` and `find` operations in terms of graphs.
+That is, you can think of union as adding an edge to a graph and find as answering if two vertices are connected.
+This is a useful perspective and it naturally leads to an algorithm for computing minimum spanning trees.
+The idea is simple, sort the edges by weight.
+Then try to add in the edges, one at a time, as long as the edge doesn't form a cycle.
+The result will be an MST.
+
+```python {cmd id="_graph.kruskall"}
+from ds2.disjointsets import DisjointSets
+
+def kruskall(G):
+    V = list(G.vertices())
+    UF = DisjointSets(V)
+    edges = sorted(G.edges(), key = lambda e :G.wt(*e))
+    T = Graph(V, set())
+    for u, v in edges:
+        if not UF.find(u, v):
+            UF.union(u, v)
+            T.addedge(u, v)
+    return T
+```
+
+```python {cmd continue="_graph.kruskall"}
+from ds2.graph import Graph
+
+G = Graph({1,2,3,4,5},
+          {(1,2,1),
+           (1,3,4),
+           (2,3,2),
+           (2,4,4),
+           (5,3,1),
+         })
+MST = kruskall(G)         
+print(list(MST.edges()))
+```
