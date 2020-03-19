@@ -37,6 +37,7 @@ clean:
 	$(foreach mdfile, $(MD), prosecode cleanup $(mdfile) --srcdir ds2/;)
 	rm tex/generated/*
 	rm tex/fullbook.*
+	rm ds2/.tangled*
 
 weave: $(GENERATEDTEX)
 

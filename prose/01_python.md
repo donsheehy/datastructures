@@ -2,8 +2,7 @@
 
 ```python {cmd=true hide output="none" id="type"}
 # This is a hack to allow html escape the output of the type function.
-import builtins
-from ds2.figure_generation.drawlist import drawlist
+# import builtins
 
 # def type(x):
     # return "&lt;" + str(builtins.type(x))[1:-1] + "&gt;"
@@ -155,22 +154,24 @@ print(type(L))
 
 Here is a common visual representation of the list.
 
-```python {cmd continue="listexample01" hide output=none}
-drawlist(L, 'list_example01')
-```
 
-![](../figures/list_example01.png)
+```python {cmd figure id="figures.list01" output="html"  continue="listexample01"}
+from ds2.figs import *
+
+drawlist(L, 'list01')
+```
 
 
 ```python {cmd id="listexample02"  continue="listexample01" output=none}
 L.append(100)
 ```
 
-```python {cmd continue="listexample02" hide output=none}
-drawlist(L, 'list_example02')
+```python {cmd figure id="figures.list02" output="html"  continue="listexample02"}
+from ds2.figs import *
+
+drawlist(L, 'list02')
 ```
 
-![](../figures/list_example02.png)
 
 ### Tuples (`tuple`)
 

@@ -22,7 +22,7 @@ We will continue to assume that we are working with ordered trees and so we call
 We say that a binary tree is a **binary search tree** if for every node `x`, all the keys in the subtree `x.left` are less than the key at `x` and all the keys in the subtree `x.right` are greater than the key of `x`.  This ordering property, also known as **the BST property** is what makes a binary search tree different from any other kind of binary tree.
 
 ```python {cmd id="bstdrawings" hide}
-from ds2.figure_generation.drawtrees import drawtree
+from ds2.figs import drawbst
 from ds2.orderedmapping.bstmapping import BSTMapping
 ```
 
@@ -259,29 +259,22 @@ for i in [3,2,1,6,4,5,9,8,10]:
     T[i] = None
 ```
 
-```python {cmd continue="removal_example1" hide}
-drawtree(T, 'bstremoval_example1')
+```python {cmd figure id="figures.bstremoval_example1" continue="removal_example1" hide  output="html"}
+drawbst(T, 'bstremoval_example1')
 ```
-
-![](../figures/bstremoval_example1.png)
-
 
 ```python {cmd id="removal_example2" continue="removal_example1"}
 T.remove(6)
 ```
 
-```python {cmd continue="removal_example2" hide}
-drawtree(T, 'bstremoval_example2')
+```python {cmd figure id="figures.bstremoval_example2" continue="removal_example2" hide output="html"}
+drawbst(T, 'bstremoval_example2')
 ```
-
-![](../figures/bstremoval_example2.png)
 
 ```python {cmd id="removal_example3" continue="removal_example2" output="html"}
 T.remove(3)
 ```
 
-```python {cmd continue="removal_example3" hide}
-drawtree(T, 'bstremoval_example3')
+```python {cmd figure id="figures.bstremoval_example3" continue="removal_example3" hide output="html"}
+drawbst(T, 'bstremoval_example3')
 ```
-
-![](../figures/bstremoval_example3.png)
