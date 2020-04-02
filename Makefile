@@ -13,7 +13,7 @@ help:
 .PHONY: help Makefile test docs pdf clean weave tangle
 
 test: tangle
-	nosetests --with-coverage
+	nosetests -w test/ --with-coverage
 
 docs:	Makefile
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)

@@ -8,15 +8,9 @@ sphinxcontrib-bibtex = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
 ds2 = {editable = true,path = "."}
-coverage = "*"
-svgwrite = "*"
 nose = "*"
 ds-viz = {editable = true,path = "./../../../code/ds_viz"}
 prosecode = {editable = true,path = "./../../../code/prosecode"}
-markdown = "*"
-pygments = "*"
-gizeh = "*"
-python-markdown-math = "*"
 
 [packages]
 

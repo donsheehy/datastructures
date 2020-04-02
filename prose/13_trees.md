@@ -35,10 +35,11 @@ The **height** of a tree is the maximum depth of any node in the tree.
 
 ## A recursive view of trees
 
-A tree can be defined recursively as a root with $0$ or more children, each of which is tree.
+A tree can be defined recursively as a root with zero or more children, each of which is tree.
+Also, the root of a tree stores some data.
 This will be convenient at first and will be important later on as we think about doing more elaborate algorithms on trees, many of which are easiest to describe recursively.
 Be warned however, that our object-oriented instincts will later kick in as we separate the notions of trees and nodes.
-Having two different kinds of things will lead us to use two different classes to represent them.
+Having two different kinds of things will lead us to use two different classes to represent them (but not yet).
 
 We can use lists to represent a hierarchical structure by making lists of lists.
 To make this a little more useful, we will also store some data in each node of the tree.
