@@ -1,5 +1,5 @@
-from ds_viz.canvas import svg_plus_pdf
-from ds_viz.datastructures import VizList, VizBST
+from dsviz.canvas import svg_plus_pdf
+from dsviz.datastructures import VizList, VizBST
 
 def figpath(name):
     return '../figures/' + name

@@ -9,7 +9,7 @@ sphinx = "*"
 sphinx-rtd-theme = "*"
 ds2 = {editable = true,path = "."}
 nose = "*"
-ds-viz = {editable = true,path = "./../../../code/ds_viz"}
+ds-viz = {editable = true,path = "./../../../code/dsviz"}
 prosecode = {editable = true,path = "./../../../code/prosecode"}
 
 [packages]
