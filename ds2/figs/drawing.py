@@ -1,9 +1,10 @@
 from dsviz.canvas import svg_plus_pdf
 from dsviz.datastructures import VizList, VizBST, VizTree
 from ds2.tree import Tree
+import os.path
 
 def figpath(name):
-    return '../figures/' + name
+    return os.path.join('../figures', name)
 
 def drawbst(T, name):
     vizT = VizBST(T._root, (5,5))

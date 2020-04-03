@@ -25,7 +25,7 @@ tex/generated/pygments_macros.tex :
 	prosecode styledefs --outfile tex/generated/pygments_macros.tex
 
 tex/generated/%.tex: prose/%.md
-	prosecode weave $< --outfile $@ --execute
+	prosecode weave --execute --outfile $@ $<  
 
 ds2/.tangled% : prose/%.md
 	prosecode tangle $< --srcdir ds2/
@@ -41,5 +41,5 @@ clean:
 
 weave: $(GENERATEDTEX)
 
-pdf: $(GENERATEDTEX) $(TEX)
+pdf: tangle $(GENERATEDTEX) $(TEX)
 	cd tex; pdflatex -jobname=fullbook main.tex
