@@ -1,6 +1,15 @@
 # Trees
+```python {cmd id="treedrawings" hide}
+from ds2.figs import drawtree
+from ds2.tree import Tree
+```
 
-**Trees** data types are ideal for representing hierarchical structure.
+```python {cmd id="figures.tree_example1" continue="treedrawings" output="html" hide}
+T = Tree([1, [2, [3], [4]], [5],[6],[7,[8],[9], [10,[11]]]])
+drawtree(T, 'tree_example1')
+```
+
+A **Tree** is a data type that is ideal for representing hierarchical structure.
 Trees are composed of **nodes** and nodes have $0$ or more **children** or **child nodes**.
 A node is called the **parent** of its children.
 Each node has (at most) one parent.
@@ -33,6 +42,10 @@ Given a tree $T$ and a node $n$ in that tree, the **subtree rooted at $n$** is t
 The **depth** of a node is the length of the path to the node from the root.
 The **height** of a tree is the maximum depth of any node in the tree.
 
+This is a lot of definitions to ingest all at once.
+It will help to draw some examples and identify check that you can apply the definitions to the examples, i.e. identify the parent, children, descendants, and ancestors of a node.
+
+
 ## A recursive view of trees
 
 A tree can be defined recursively as a root with zero or more children, each of which is tree.
@@ -55,13 +68,18 @@ This is a tree with `'a'` stored in the root.
 The root has 3 children storing respectively, `'p'`, `'n'`, and `'t'`.
 Here is a slightly bigger example that contains the previous example as a subtree.
 
-```python
+```python {cmd continue="treedrawings" id="tree_example3"}
 T = ['c', ['a', ['p'], ['n'], ['t']], ['o', ['n']]]
 ```
 
+```python {cmd figure continue="tree_example3" id="figures.tree_example3" hide output=html}
+drawtree(T, 'tree_example3')
+```
+
+
 We can print all the nodes in such a tree with the following code.
 
-```python
+```python {cmd continue="tree_example3"}
 def printtree(T):
     print(T[0])
     for child in range(1, len(T)):
@@ -73,15 +91,18 @@ printtree(T)
 Whenever I see code like that above, I want to replace it with something that can work with any iterable collection.
 This would involve getting rid of all the indices and using an iterator.  Here's the equivalent code that uses an iterator.
 
-```python
+```python {cmd continue="tree_example3"}
 def printtree(T):
     iterator = iter(T)
     print(next(iterator))
     for child in iterator:
         printtree(child)
+
+printtree(T)
 ```
 
-Here we use the iterator to extract the first list item, then loop through the rest of the children.  
+Here we use the iterator to extract the first list item, then loop through the rest of the children.
+So, when we get to the `for` loop, the iterator has already yielded the first value and it will start with the second, i.e., the first child.
 
 
 ## A Tree ADT

@@ -156,7 +156,7 @@ Here is a common visual representation of the list.
 
 
 ```python {cmd figure id="figures.list01" output="html"  continue="listexample01"}
-from ds2.figs import *
+from ds2.figs import drawlist
 
 drawlist(L, 'list01')
 ```
@@ -166,8 +166,8 @@ drawlist(L, 'list01')
 L.append(100)
 ```
 
-```python {cmd figure id="figures.list02" output="html"  continue="listexample02"}
-from ds2.figs import *
+```python {cmd figure id="figures.list02" output="html"  continue="listexample02" hide}
+from ds2.figs import drawlist
 
 drawlist(L, 'list02')
 ```

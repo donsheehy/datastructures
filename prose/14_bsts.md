@@ -26,14 +26,21 @@ from ds2.figs import drawbst
 from ds2.orderedmapping.bstmapping import BSTMapping
 ```
 
-```python {cmd continue="bstdrawings" output="none" hide}
+```python {cmd figure continue="bstdrawings" id="figures.bst_example1" hide output=html}
 T = BSTMapping()
 for i in [3,1,0,2,5,4,6]:
     T[i] = None
-drawtree(T, 'bst_example')
+drawbst(T, 'bst_example1')
 ```
 
-![](../figures/bst_example.png)
+The same set of nodes can be arranged into a different binary search tree.
+
+```python {cmd figure continue="bstdrawings" id="figures.bst_example2" hide output=html}
+T = BSTMapping()
+for i in [1,3,0,2,4,5,6]:
+    T[i] = None
+drawbst(T, 'bst_example2')
+```
 
 The BST property is related to a new kind of tree traversal, that was not possible with other trees.
 Previously we saw *preorder* and *postorder* traversal of trees.
@@ -42,6 +49,8 @@ The preorder traversal visits the root of each subtree before to visiting any of
 The postorder traversal visits all the descendants before visiting the root.
 The new traversal we introduce here is called **inorder traversal** and it visits all the nodes in the left child prior to visiting the root and then visits all the nodes in the right child after visiting the root.
 This order results in a traversal of the nodes *in sorted order according to the ordering of the keys*.
+
+As a result, different BSTs with the same nodes, will have the same inorder traversal.
 
 ## A Minimal implementation
 
