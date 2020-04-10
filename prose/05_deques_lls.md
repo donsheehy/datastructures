@@ -119,8 +119,9 @@ class LinkedList:
             currentnode = self._head
             while currentnode.link.link is not None:
                 currentnode = currentnode.link
+            item = currentnode.link.data
             currentnode.link = None
-            return currentnode.data
+            return item
 ```
 
 ```python {cmd hide continue="linkedlist_A"}
