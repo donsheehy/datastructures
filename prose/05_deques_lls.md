@@ -162,7 +162,7 @@ class LinkedList:
 
     def addlast(self, item):
         if self._head is None:
-            self.add(item)
+            self.addfirst(item)
         else:
             self._tail.link = ListNode(item)
             self._tail = self._tail.link
