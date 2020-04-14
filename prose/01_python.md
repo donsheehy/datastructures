@@ -1,13 +1,5 @@
 # Basic Python
 
-```python {cmd=true hide output="none" id="type"}
-# This is a hack to allow html escape the output of the type function.
-# import builtins
-
-# def type(x):
-    # return "&lt;" + str(builtins.type(x))[1:-1] + "&gt;"
-```
-
 This book is not intended as a first course in programming.
 It will be assumed that the reader has some experience with programming.
 Therefore, it will be assumed that certain concepts are already familiar to them, the most basic of which is a mental model for programming that is sometimes called *Sequence, Selection, and Iteration*.
@@ -60,7 +52,7 @@ Every object has a **type**.  The type often determines what you can do with the
 
 The difference between a variable and the **object** it represents can get lost in our common speech because the variable is usually acting as the *name* of the object.  There are some times when it's useful to be clear about the difference, in particular when copying objects.  You might want to try some examples of copying objects from one variable to another.  Does changing one of them affect the other?
 
-```python {cmd=true id="j4htmm25" continue="type"}
+```python {cmd}
 x = 5
 y = 3.2
 z = True
@@ -73,7 +65,7 @@ You should think of an object as having three things: an *identity*, a *type*, a
 Its identity cannot change.  It can be used to see if two objects are actually the same object with the `is` keyword.
 For example, consider the following code.
 
-```python {cmd=true}
+```python {cmd}
 x = [1, 2, 3]
 y = x
 z = [1, 2, 3]
@@ -88,7 +80,7 @@ In Python, you also cannot change the type of an object.
 You can reassign a variable to point to different object of a different type, but that's not the same thing.
 There are several functions that may seem to be changing the types of objects, but they are really just creating a new object from the old.
 
-```python {cmd id="j4htp29r" continue="type"}
+```python {cmd}
 x = 2
 print("x =", x)
 print("float(x) =", float(x))
@@ -101,7 +93,7 @@ print("Now, x has type", type(x))
 
 You can do more elaborate things as well.
 
-```python {cmd id="j4htrk52" continue="type"}
+```python {cmd}
 numstring = "3.1415926"
 y = float(numstring)
 print("y has type", type(y))
@@ -131,7 +123,7 @@ The next five most important types in Python are strings, lists, tuples, diction
 
 **Strings** are sequences of characters and can be used to store text of all kinds.  Note that you can **concatenate** strings to create a new string using the plus sign.  You can also access individual characters using square brackets and an **index**.  The name of the class for strings is `str`.  You can often turn other objects into strings.
 
-```python {cmd continue="type"}
+```python {cmd}
 s = "Hello, "
 t = "World."
 u = s + t
@@ -147,15 +139,17 @@ print(n[2])
 **Lists** are ordered sequences of objects.  The objects do not have to be the same type.  They are indicated by square brackets and the **elements** of the list are separated by commas.  You can append an item to the end of a list `L` by using the command `L.append(newitem)`.
 It is possible to index into a list exactly as we did with strings.
 
-```python {cmd id="listexample01" continue="type"}
+```python {cmd id="listexample01"}
 L = [1,2,3,4,5,6]
+```
+
+```python {cmd continue="listexample01"}
 print(type(L))
 ```
 
 Here is a common visual representation of the list.
 
-
-```python {cmd figure id="figures.list01" output="html"  continue="listexample01"}
+```python {cmd figure id="figures.list01" output="html"  continue="listexample01" hide}
 from ds2.figs import drawlist
 
 drawlist(L, 'list01')
@@ -172,34 +166,93 @@ from ds2.figs import drawlist
 drawlist(L, 'list02')
 ```
 
+You access items by their **index**.
+The indices start at $0$.
+Negative indices count backwards from the end of the list.
+
+```python {cmd continue="listexample02"}
+print("The first item is", L[0])
+print("The second item is", L[1])
+print("The last item is", L[-1])
+print("The second to last item is", L[-2])
+```
+
+You can also overwrite values in a list using regular assignment statements.
+
+```python {cmd id="listexample03" continue="listexample02"}
+L[2] = 'skip'
+L[3] = 'a'
+L[4] = 'few'
+L[-2] = 99
+```
+
+```python {cmd figure id="figure.list03" continue="listexample03" output="html"}
+from ds2.figs import drawlist
+
+drawlist(L, 'list03')
+```
+
 
 ### Tuples (`tuple`)
 
 **Tuples** are also ordered sequences of objects, but unlike lists, they are immutable.  You can access the items but you can’t change what items are in the tuple after you create it.  For example, trying to `append` raises an exception.
 
-```python {cmd id="j4htlbaj" continue="type"}
+```python {cmd id="tupleexample01"}
 t = (1, 2, "skip a few", 99, 100)
+```
+
+```python {cmd continue="tupleexample01"}
 print(type(t))
 print(t)
 print(t[4])
+```
+
+Here's what happens when you try to append.
+
+```python {cmd error_expected continue="tupleexample01"}
 t.append(101)
+```
+
+Here's what happens when you try to assign a value to an item.
+
+```python {cmd error_expected continue="tupleexample01"}
+t[4] = 99.5
+```
+
+Note that it would be the same for strings.
+
+```python {cmd error_expected continue="tupleexample01"}
+s = 'ooooooooo'
+s[4] = 'x'
 ```
 
 ### Dictionaries (`dict`)
 
-**Dictionaries** store *key-value* pairs.  That is, every element of a dictionary has two parts, a **key** and a **value**.  If you have the key, you can get the value.  The name comes from the idea that in a real dictionary (book), a word (the key) allows you to find its definition (the value).  Notice that the keys can be different types, but they must be immutable types such as atomic types, tuples, or strings.  The reason for this requirement is that we will determine where to store something using the key.  If the key changes, we will look in the wrong place when it's time to look it up again.
+**Dictionaries** store *key-value* pairs.  That is, every element of a dictionary has two parts, a **key** and a **value**.  If you have the key, you can get the value.  The name comes from the idea that in a real dictionary (book), a word (the key) allows you to find its definition (the value).  
+
+The syntax for accessing and assigning values is the same as for lists.
+
+```python  {cmd}
+d = dict()
+d[5] = 'five'
+d[2] = 'two'
+d['pi'] = 3.1415926
+
+print(d)
+print(d['pi'])
+```
+
+Keys can be different types, but they must be immutable types such as atomic types, tuples, or strings.  The reason for this requirement is that we will determine where to store something using the key.  If the key changes, we will look in the wrong place when it's time to look it up again.
 
 Dictionaries are also known as maps,  **mappings**, or hash tables.  We will go deep into how these are constructed later in the course.
 A dictionary doesn't have a fixed order.
 
-```python  {cmd}
-d = dict()
-d[2] = "two"
-d[5] = "five"
-d["pi"] = 3.1415926
+If you assign to a key that's not in the dictionary, it simply creates a new item.
+If you try to access a key that's not in the dictionary, you will get a `KeyError`.
 
-print(d)
-print(d["pi"])
+```python {cmd error_expected}
+D = {'a': 'one', 'b': 'two'}
+D['c']
 ```
 
 ### Sets (`set`)
@@ -208,7 +261,7 @@ print(d["pi"])
 
 Be careful that empty braces `{}` indicates an empty dictionary and not an empty set.  Here is an example of a newly created set.  Some items are added.  Notice that the duplicates have no effect on the value as its printed.
 
-```python {cmd continue="type"}
+```python {cmd}
 s = {2,1}
 print(type(s))
 s.add(3)
@@ -217,6 +270,9 @@ s.add(2)
 s.add(2)
 print(s)
 ```
+
+Be careful, `{}` is an empty dictionary.
+If you want an empty set, you would write `set()`.
 
 ## Some common things to do with collections
 
@@ -284,19 +340,19 @@ for value in mydict.values():
     print(value)
 ```
 
-There is class called `range` to represent a sequence of numbers that behaves like a collection.
+There is a class called `range` to represent a sequence of numbers that behaves like a collection.
 It is often used in for loops as follows.
 
-```python
+```python {cmd}
 for i in range(10):
     j = 10 * i + 1
-    print(j,)
+    print(j, end=' ')
 ```
 
 ## Other Forms of Control Flow
 
 **Control flow** refers to the commands in a language that affect the order in which operations are executed.
-The `for` loops from the previous section is a classic examples of this.  
+The `for` loops from the previous section is a classic examples of this.
 The other basic forms of control flow are `if` statements, `while` loops,  `try` blocks, and function calls.  We’ll cover each briefly.
 
 An `if` statement in its simplest form evaluates an expression and tries to interpret it as a boolean.  This expression is referred to as a predicate.  If the predicate evaluates to `True`, then a block of code is executed.  Otherwise, the code is not executed.  This is the *selection* of sequence, selection, and iteration.  Here is an example.
@@ -323,7 +379,7 @@ A `while` loop also has a predicate.  It is evaluated at the top of a block of c
 ```python {cmd}
 x = 1
 while x < 128:
-    print(x)
+    print(x, end=' ')
     x = x * 2
 ```
 
@@ -408,7 +464,6 @@ print("Notice that it will print something different when imported?")
 Here is how we use the `__name__` attribute to check how the program is being run.
 
 ```python {cmd}
-
 def somefunction():
     print("Real important stuff here.")
 

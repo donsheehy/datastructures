@@ -10,7 +10,7 @@ TEX = tex/main.tex tex/generated/pygments_macros.tex tex/titlepage.tex
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile test docs pdf clean weave tangle
+.PHONY: help Makefile test docs pdf clean weave tangle count
 
 test: tangle
 	nosetests -w test/ --with-coverage
@@ -25,7 +25,7 @@ tex/generated/pygments_macros.tex :
 	prosecode styledefs --outfile tex/generated/pygments_macros.tex
 
 tex/generated/%.tex: prose/%.md
-	prosecode weave --execute --outfile $@ $<  
+	prosecode weave --execute --outfile $@ $<
 
 ds2/.tangled% : prose/%.md
 	prosecode tangle $< --srcdir ds2/
@@ -43,3 +43,7 @@ weave: $(GENERATEDTEX)
 
 pdf: tangle $(GENERATEDTEX) $(TEX)
 	cd tex; pdflatex -jobname=fullbook main.tex
+
+count: tangle $(GENERATEDTEX) $(TEX)
+	printf '%s  ' "$$(date "+%Y-%m-%d")" >> writinglog.txt
+	cd tex; texcount main.tex -1 -inc -sum >> ../writinglog.txt

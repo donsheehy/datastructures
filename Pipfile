@@ -9,7 +9,7 @@ sphinx = "*"
 sphinx-rtd-theme = "*"
 nose = "*"
 prosecode = "*"
-dsviz = "*"
+ds2viz = "*"
 
 [packages]
 ds2 = {editable = true,path = "."}

@@ -1,5 +1,5 @@
-from dsviz.canvas import svg_plus_pdf
-from dsviz.datastructures import VizList, VizBST, VizTree
+from ds2viz.canvas import svg_plus_pdf
+from ds2viz.datastructures import VizList, VizBST, VizTree
 from ds2.tree import Tree
 import os.path
 
