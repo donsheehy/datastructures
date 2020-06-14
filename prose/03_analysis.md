@@ -86,8 +86,9 @@ import time
 
 def timetrials(func, n, trials = 10):
     totaltime = 0
-    start = time.time()
+    #start = time.time()
     for i in range(trials):
+        start = time.time() # it should be here
         func(list(range(n)))
         totaltime += time.time() - start
     print("average =%10.7f for n = %d" % (totaltime/trials, n))
