@@ -169,7 +169,7 @@ def duplicates6(L):
     return False
 
 def duplicates7(L):
-    return len(L) == len(set(L))
+    return len(L) != len(set(L))
 
 def duplicates8(L):
     s = set()
