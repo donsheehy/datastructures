@@ -178,12 +178,10 @@ print(X)
 ```
 
 When working with your own classes, you may want to sort elements.  To do so, you only need to be able to compare elements.
-
-In the following example, the elements are sorted by decreasing value of `b`.  Then, the list is sorted again, but the key function is supplied give a different comparator.  Notice that the parameter is the function itself and not the evaluation of the function.
+In the following example, we define a class `Foo` that provides its own comparator by defining the magic method `__lt__`.
+In this case, it orders `Foo` objects by their `b` attibute.
 
 ```python {cmd}
-from random import randrange
-
 class Foo:
     def __init__(self, a, b, c):
         self.a = a
@@ -198,19 +196,36 @@ class Foo:
 
     def geta(self):
         return self.a
+```
+
+Now, we can generate a list of random `Foo` instances.
+
+```python{cmd id="sort_key_example" continue}
+from random import randrange
 
 L = [Foo(randrange(100),randrange(100), randrange(100)) for i in range(6)]
+```
+
+When we sort this list, i.e., by calling `L.sort()`, the comparison uses `Foo.__lt__` to determine the order.
+So the result should be sorted by the `b` attribute.
+
+```python {cmd continue}
 L.sort()
 for foo in L:
     print(foo)
+```
 
-print("--------")
+If we pass a key function to `sort`, the resulting ordering will have `x` before `y` if `key(x) < key(y)`.
+Below, we use `Foo.geta` as the key function, so the result should be ordered by the value of the `a` attribute.
+Notice that the argument is the function itself (i.e., its name) and not the evaluation of the function.
 
-for foo in sorted(L, key = Foo.geta):
+```python {cmd continue="sort_key_example"}
+L.sort(key = Foo.geta)
+for foo in L:
     print(foo)
 ```
 
-If the key function returns a tuple, it will sort by the first element and break ties with subsequent elements.  This kind of sorting is called lexicographic because it is how you would sort words in alphabetical order.
+If the key function returns a tuple, it will sort by the first element and break ties with subsequent elements.  This kind of sorting is called **lexicographic** because it is how you would sort words in alphabetical order.
 
 Here is an example of sorting strings by their length (longest to shortest) using the alphabetical order (ignoring case) to break ties.
 
