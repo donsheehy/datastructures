@@ -112,9 +112,11 @@ for k, v in d.items():
 
 We'll add the same kind of functionality to our Mapping ADT.  So, the **extended Mapping ADT** includes the following methods (with get and put renamed for Python magic).
 
-  - `__getitem__(k)`** - return the value associate to the key `k`.  Usually an error (`KeyError`) is raised if the given key is not present.
+  - `__getitem__(k)` - return the value associate to the key `k`.  Usually an error (`KeyError`) is raised if the given key is not present.
 
   - `__setitem__(k, v)` - Add the key-value pair `(k,v)` to the mapping.
+
+  - `remove(k)` - Remove the entry with key `k` if it exists.
 
   - `__len__` - return the number of keys in the dictionary.
 
@@ -150,6 +152,11 @@ class ListMapping:
             return e.value
         else:
             raise KeyError
+
+    def remove(self, key):
+        e = self._entry(key)
+        if e is not None:
+            self._entries.remove(e)
 
     def _entry(self, key):
         for e in self._entries:
@@ -247,6 +254,10 @@ class HashMapping:
     def get(self, key):
         m = self._bucket(key)
         return m[key]
+
+    def remove(self, key):
+        m = self._bucket(key)
+        m.remove(key)
 
     def __contains__(self, key):
         m = self._bucket(key)
