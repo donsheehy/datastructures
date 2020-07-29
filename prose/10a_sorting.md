@@ -179,7 +179,7 @@ print(X)
 
 When working with your own classes, you may want to sort elements.  To do so, you only need to be able to compare elements.
 
-In the following example, the elements are sorted by decreasing value of `b`.  Then, the list is sorted again, but the key function is supplied give a different comparator.  Notice that the parameter is the function itself and not the evaluation of the function.
+In the following example, the elements are sorted by decreasing values of `b`: Python uses `__lt__` as the default comparator for sorting, so `Foo.__lt__` is used to sort objects of type `Foo`.  Then the list is sorted again, but a different comparator is used: `geta` is supplied as the key function, and the object returned by `geta` determines which `__lt__` attribute is used to sort. `Foo.geta` returns `a`, an integer, so `int.__lt__` is used.  Notice that the parameter `key` is a function which returns an object and not the evaluation of that function (e.g. `Foo.geta`, not `Foo.geta()`).
 
 ```python {cmd}
 from random import randrange
@@ -200,13 +200,13 @@ class Foo:
         return self.a
 
 L = [Foo(randrange(100),randrange(100), randrange(100)) for i in range(6)]
-L.sort()
+L.sort()    # sorts with the default function Foo.__lt__ (i.e. by decreasing b)
 for foo in L:
     print(foo)
 
 print("--------")
 
-for foo in sorted(L, key = Foo.geta):
+for foo in sorted(L, key = Foo.geta): # sorts according to the object returned by geta (i.e. by increasing a)
     print(foo)
 ```
 
