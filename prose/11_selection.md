@@ -81,7 +81,7 @@ Instead, we'll analyze the **expected running time**. The word **expected** come
 
 Given a list of $n$ numbers, the partition function will pick a random element to serve as the *pivot*.
 We say a pivot is *good* if it lands in the range of indices from $n/4$ to $3n/4$.
-So, choosing randomly, there is a 50% chance of picking a good pivot.
+So, choosing randomly, there is a 50 percent chance of picking a good pivot.
 
 With each recursive call, we get a smaller list.  Let's say that $n_i$ is the size of the list on the $i$th recursive call, so $n = n_0 > n_1 > \cdots > n_k$, where $k$ is the (unknown) number of recursive calls.  There is a $1/2$ probability of a good pivot at any step, so the expected value of $n_i$ can be bounded as follows.
 

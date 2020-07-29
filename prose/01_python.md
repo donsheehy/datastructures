@@ -186,7 +186,7 @@ L[4] = 'few'
 L[-2] = 99
 ```
 
-```python {cmd figure id="figure.list03" continue="listexample03" output="html"}
+```python {cmd figure id="figures.list03" continue="listexample03" output="html"}
 from ds2.figs import drawlist
 
 drawlist(L, 'list03')
