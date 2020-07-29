@@ -86,8 +86,9 @@ import time
 
 def timetrials(func, n, trials = 10):
     totaltime = 0
-    start = time.time()
+    #start = time.time()
     for i in range(trials):
+        start = time.time() # it should be here
         func(list(range(n)))
         totaltime += time.time() - start
     print("average =%10.7f for n = %d" % (totaltime/trials, n))
@@ -169,7 +170,7 @@ def duplicates6(L):
     return False
 
 def duplicates7(L):
-    return len(L) == len(set(L))
+    return len(L) != len(set(L))
 
 def duplicates8(L):
     s = set()
