@@ -20,6 +20,10 @@ class HashMapping:
         m = self._bucket(key)
         return m[key]
 
+    def remove(self, key):
+        m = self._bucket(key)
+        m.remove(key)
+
     def __contains__(self, key):
         m = self._bucket(key)
         return key in m

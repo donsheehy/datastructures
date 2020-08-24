@@ -18,6 +18,11 @@ class ListMapping:
         else:
             raise KeyError
 
+    def remove(self, key):
+        e = self._entry(key)
+        if e is not None:
+            self._entries.remove(e)
+
     def _entry(self, key):
         for e in self._entries:
             if e.key == key:
