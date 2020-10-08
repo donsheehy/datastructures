@@ -131,6 +131,8 @@ class OrderedList(OrderedListSimple):
         left, right = 0, len(self._L)
         while right - left > 1:
             median = (right + left) // 2
+            if self._L[median] == item:
+                return True
             if item < self._L[median]:
                 right = median
             else:
