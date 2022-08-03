@@ -318,11 +318,11 @@ For example, we could remove an arbitrary item by using the same approach as in 
 Instead of working with index `0` (the top of the heap), we instead find the index of the item to remove.
 The following code gives the factored version of both `removemin` and `remove`.
 
-```python {cmd id="_priorityqueue.priorityqueue_03" continue="_priorityqueue.priorityqueue_02"}
+```python {cmd id="_priorityqueue.priorityqueue_02" continue="_priorityqueue.priorityqueue_01"}
     def _remove_at_index(self, index):
         L = self._entries
         self._swap(index, len(L) - 1)
-        del self._itemmap[L[-1]]
+        del self._itemmap[L[-1].item]
         L.pop()
         self._downheap(index)
 
@@ -351,7 +351,7 @@ We want the priority queue itself to be an iterator.
 Recall that in order to be an iterator, the object must have both an `__iter__` method and a `__next__` method.
 The `__iter__` method is supposed to return an iterator, which in this case, is just the priority queue itself.
 
-```python {cmd id="_priorityqueue.priorityqueue_02" continue="_priorityqueue.priorityqueue_01"}
+```python {cmd id="_priorityqueue.priorityqueue_03" continue="_priorityqueue.priorityqueue_02"}
     def __iter__(self):
         return self
 ```
