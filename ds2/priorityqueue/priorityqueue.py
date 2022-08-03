@@ -50,7 +50,7 @@ class PriorityQueue(HeapPQ):
         return item
 
     def remove(self, item):
-        self.remove_at_index(self._itemmap[item])
+        self._remove_at_index(self._itemmap[item])
 
     def __iter__(self):
         return self

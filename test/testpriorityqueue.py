@@ -87,5 +87,17 @@ class TestPriorityQueue(unittest.TestCase, PQTests):
         for i in reversed(range(100)):
             self.assertEqual(P.removemin(), i)
 
+    def testremove(self):
+        P = self.PQ()
+        for i in range(10):
+            P.insert(i)
+        P.remove(3)
+        P.remove(1)
+        self.assertEqual(0, P.removemin())
+        self.assertEqual(2, P.removemin())
+        self.assertEqual(4, P.removemin())
+        self.assertEqual(5, len(P))
+
+
 if __name__ == '__main__':
     unittest.main()

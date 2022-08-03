@@ -13,7 +13,7 @@ help:
 .PHONY: help Makefile test docs pdf clean weave tangle count
 
 test: tangle
-	nosetests -w test/ --with-coverage
+	cd test; python -m unittest discover
 
 docs:	Makefile
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
