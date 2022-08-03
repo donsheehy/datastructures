@@ -285,7 +285,9 @@ class PriorityQueue(HeapPQ):
         # Assuming the tree is heap ordered, only one will have an effect.
         self._upheap(i)
         self._downheap(i)
+```
 
+```python {cmd id="removemin" continue="_priorityqueue.priorityqueue_02"}
     def removemin(self):
         L = self._entries
         item = L[0].item
@@ -298,7 +300,7 @@ class PriorityQueue(HeapPQ):
 
 We can use the code above to implement a `MaxHeap`, that is a priority queue of items ordered by *decreasing* value.
 
-```python {cmd continue="_priorityqueue.priorityqueue_01"}
+```python {cmd continue="removemin"}
 maxheap = PriorityQueue(key = lambda x: -x)
 
 n = 10
@@ -309,7 +311,34 @@ for i in range(n):
 print([maxheap.removemin() for i in range(n)])
 ```
 
+## Random Access
 
+Storing the map from items to their indices allows some other operations on the heap.
+For example, we could remove an arbitrary item by using the same approach as in `removemin`.
+Instead of working with index `0` (the top of the heap), we instead find the index of the item to remove.
+The following code gives the factored version of both `removemin` and `remove`.
+
+```python {cmd id="_priorityqueue.priorityqueue_03" continue="_priorityqueue.priorityqueue_02"}
+    def _remove_at_index(self, index):
+        L = self._entries
+        self._swap(index, len(L) - 1)
+        del self._itemmap[L[-1]]
+        L.pop()
+        self._downheap(index)
+
+    def removemin(self):
+        item = self._entries[0].item
+        self._remove_at_index(0)
+        return item
+
+    def remove(self, item):
+        self.remove_at_index(self._itemmap[item])
+```
+
+Note that in some cases, we could do this using the public interface.
+For example, if the priorities are numbers, then changing the priority to negative infinity (`float('-inf')`) followed by a `removemin()` operation *might* remove the desired entry.
+This assumes there aren't other entries with priority negative infinity.
+It's better to not try to be too clever.
 
 ## Iterating over a Priority Queue
 
@@ -331,7 +360,7 @@ The `__next__` method will return the next item, assuming there is one.
 It also should raise `StopIteration` if there is nothing left.
 This will signal the end of a `for` loop for example.
 
-```python {cmd id="_priorityqueue.priorityqueue_03" continue="_priorityqueue.priorityqueue_02"}
+```python {cmd id="_priorityqueue.priorityqueue_04" continue="_priorityqueue.priorityqueue_03"}
     def __next__(self):
         if len(self) > 0:
             return self.removemin()

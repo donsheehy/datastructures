@@ -7,13 +7,14 @@ Therefore, it will be assumed that certain concepts are already familiar to them
 
 ## Sequence, Selection, and Iteration
 
-A recurring theme in this course is the process of moving from *thinking about* code to *writing* code.  We will try to shape the way we think about programs, the way we write programs, and how we go between the two in *both* directions.  That is, we want to have facility with both direct manipulation of code as well as high-level description of programs.  
+A recurring theme in this course is the process of moving from *thinking about* code to *writing* code.  We will try to shape the way we think about programs, the way we write programs, and how we go between the two in *both* directions.  That is, we want to have facility with both direct manipulation of code as well as high-level description of programs.
 A nice model for thinking about (imperative) programming is called Sequence-Selection-Iteration.  It refers to:
+
 1. **Sequence**: Performing operations one at a time in a specified order.
 2. **Selection**: Using conditional statements such as `if` to select which operations to execute.
 3. **Iteration**: Repeating some operations using loops or recursion.
 
-In any given programming language, there are usually several mechanisms for selection and iteration, while sequencing is just the default behavior.  
+In any given programming language, there are usually several mechanisms for selection and iteration, while sequencing is just the default behavior.
 In fact, you usually have to have special constructions in a language to do something other than performing the given operations in the given order.
 
 ## Expressions and Evaluation
@@ -26,7 +27,8 @@ For example, `5 * (3 + abs(-12) / 3)` contains four different functions.  Parent
 
 ## Variables, Types,  and State
 
-Imagine you are trying to work out some elaborate math problem without a computer.   It helps to have paper.  You write things down, so that you can use them later.  It's the same in programming.  It often happens that you compute something and want to keep it until later when you will use it.  We often refer to stored information as **state**.  
+Imagine you are trying to work out some elaborate math problem without a computer.
+It helps to have paper.  You write things down, so that you can use them later.  It's the same in programming.  It often happens that you compute something and want to keep it until later when you will use it.  We often refer to stored information as **state**.  
 
 We store information in **variables**.  In Python, a variable is created by an **assignment** statement.  That is a statement of the form:
 
@@ -383,7 +385,13 @@ while x < 128:
     x = x * 2
 ```
 
-A `try` block is the way to catch and recover from errors while a program is running.  If you have some code that may cause an error, but you don’t want it to crash your program, you can put the code in a `try` block.  Then, you can *catch* the error (also known as an **exception**) and deal with it.  A simple example might be a case where you want to convert some number to a `float`.  Many types of objects can be converted to `float`, but many cannot.  If we simply try to do the conversion and it works, everything is fine.  Otherwise, if there is a `ValueError`, we can do something else instead.  
+A `try` block is the way to catch and recover from errors while a program is running.
+If you have some code that may cause an error, but you don’t want it to crash your program, you can put the code in a `try` block.
+Then, you can *catch* the error (also known as an **exception**) and deal with it.
+A simple example might be a case where you want to convert some number to a `float`.
+Many types of objects can be converted to `float`, but many cannot.
+If we simply try to do the conversion and it works, everything is fine.
+Otherwise, if there is a `ValueError`, we can do something else instead.
 
 ```python {cmd}
 x = "not a number"
@@ -447,7 +455,12 @@ print(twofunctions.g(4)) # Will print 15
 
 The `import` brings the module name into the current namespace.  I can then use it to identify the functions from the module.  
 
-There is very little magic in an import.  In some sense, it’s just telling the current program about the results of another program.  Because the import (usually) results in the module being executed, it’s good practice to change the behavior of a script depending on whether it is being run directly, or being run as part of an import.  It is possible to check by looking at the `__name__` attribute of the module.  If you run the module directly (i.e. as a script), then the `__name__` variable is automatically set to `__main__`.  If the module is being imported, the `__name__` defaults to the module name.  This is easily seen from the following experiment.
+There is very little magic in an import.
+In some sense, it’s just telling the current program about the results of another program.
+Because the import (usually) results in the module being executed, it’s good practice to change the behavior of a script depending on whether it is being run directly, or being run as part of an import.
+It is possible to check by looking at the `__name__` attribute of the module.
+If you run the module directly (i.e. as a script), then the `__name__` variable is automatically set to `__main__`.
+If the module is being imported, the `__name__` defaults to the module name.  This is easily seen from the following experiment.
 
 ```python {cmd}
 # File: mymodule.py
