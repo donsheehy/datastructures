@@ -77,7 +77,7 @@ class BSTMapping(Mapping):
 
     def put(self, key, value):
         if self._root:
-            self.root = self._root.put(key, value)
+            self._root.put(key, value)
         else:
             self._root = BSTNode(key, value)
 
